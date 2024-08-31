@@ -56,7 +56,6 @@ class KnowledgeBase(Base):
 # 定义数据库模型初始化函数
 def initialize_database(username: str, password: str, hostname: str, database_name: str):
     try:
-        # 构建数据库URL
         database_url = f"mysql+pymysql://{username}:{password}@{hostname}/{database_name}?charset=utf8mb4"
         engine = create_engine(database_url, echo=True)
 
@@ -64,36 +63,44 @@ def initialize_database(username: str, password: str, hostname: str, database_na
         from sqlalchemy import text
         from sqlalchemy.exc import SQLAlchemyError
         from sqlalchemy.inspection import inspect
-        # 开启一个新的session来执行SQL
         Session = sessionmaker(bind=engine)
         session = Session()
-
-        # 创建所有表
         Base.metadata.create_all(engine)
 
-        # 开启事务修改数据库和表设置
         session.execute(
             text("ALTER DATABASE {} CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci".format(database_name)))
         session.commit()
 
-        # 使用inspect来检查表是否存在
         inspector = inspect(engine)
 
-        # 修改表字符集
-        for table_name in ['threads', 'agents', 'knowledge_bases']:  # 添加了 'knowledge_bases'
-            if inspector.has_table(table_name, schema="mategen"):
-                session.execute(
-                    text(f"ALTER TABLE {table_name} CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci"))
+        # 删除知识库表的外键
+        if inspector.has_table("knowledge_bases", schema="mategen"):
+            session.execute(text("ALTER TABLE knowledge_bases DROP FOREIGN KEY knowledge_bases_ibfk_1"))
+            session.commit()
 
-        # 删除旧的外键（如果存在）
+        # 删除线程表的外键
         if inspector.has_table("threads", schema="mategen"):
             session.execute(text("ALTER TABLE threads DROP FOREIGN KEY threads_ibfk_1"))
             session.commit()
 
+        # 修改表字符集
+        tables_to_modify = ['threads', 'agents', 'knowledge_bases']
+        for table_name in tables_to_modify:
+            if inspector.has_table(table_name, schema="mategen"):
+                session.execute(
+                    text(f"ALTER TABLE {table_name} CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci"))
+                session.commit()
+
         # 重新添加外键
         if inspector.has_table("threads", schema="mategen"):
-            session.execute(
-                text("ALTER TABLE threads ADD CONSTRAINT threads_ibfk_1 FOREIGN KEY (agent_id) REFERENCES agents(id)"))
+            session.execute(text(
+                "ALTER TABLE threads ADD CONSTRAINT threads_ibfk_1 FOREIGN KEY (agent_id) REFERENCES agents(id)"))
+            session.commit()
+
+        # 重新添加知识库表的外键
+        if inspector.has_table("knowledge_bases", schema="mategen"):
+            session.execute(text(
+                "ALTER TABLE knowledge_bases ADD CONSTRAINT knowledge_bases_ibfk_1 FOREIGN KEY (thread_id) REFERENCES threads(id)"))
             session.commit()
 
         return True
