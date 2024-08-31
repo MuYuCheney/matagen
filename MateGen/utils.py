@@ -335,3 +335,22 @@ def find_kb_name_by_description(session: Session, knowledge_base_name: str) -> s
         # 打印异常信息并记录
         logging.error(f"Failed to find knowledge_base_description due to: {e}")
         return None
+
+
+def get_knowledge_base_info(session: Session):
+    # 查询 KnowledgeBase 表中所有的 knowledge_base_name 和 vector_store_id
+    knowledge_base_info = session.query(KnowledgeBase.knowledge_base_name, KnowledgeBase.vector_store_id).all()
+
+    # 返回一个包含字典的列表，每个字典包含 knowledge_base_name 和 vector_store_id
+    return [{'knowledge_base_name': info.knowledge_base_name, 'vector_store_id': info.vector_store_id} for info in knowledge_base_info]
+
+
+def get_vector_store_id_by_name(session: Session, knowledge_base_name: str):
+    # 根据 knowledge_base_name 查询对应的 vector_store_id
+    knowledge_base_entry = session.query(KnowledgeBase.vector_store_id).filter(KnowledgeBase.knowledge_base_name == knowledge_base_name).first()
+
+    # 检查是否找到对应的记录
+    if knowledge_base_entry:
+        return knowledge_base_entry.vector_store_id
+    else:
+        return None  # 没有找到匹配项时返回 None

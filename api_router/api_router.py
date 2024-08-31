@@ -109,48 +109,7 @@ def mount_app_routes(app: FastAPI):
     3.
     """
 
-    @app.post("/api/upload", tags=["Knowledge"],  summary="上传文件,在进行知识库解析前,先调用此函数上传全部文件")
-    async def upload_files(
-            folderName: str = Form(...),  # 接收文件夹名称
-            files: List[UploadFile] = File(...)  # 接收多个文件
-    ):
-        uploaded_files = []
 
-        try:
-            # 生成指定文件夹路径
-            folder_path = os.path.join(UPLOAD_FOLDER, folderName)
-            os.makedirs(folder_path, exist_ok=True)
-
-            for file in files:
-                # 文件存储路径
-                file_location = os.path.join(folder_path, file.filename)
-
-                with open(file_location, "wb") as buffer:
-                    shutil.copyfileobj(file.file, buffer)
-
-                uploaded_files.append(file.filename)
-            return {"status": 200, "data": {"message": "所有文件上传服务器成功",
-                                            "files": uploaded_files,
-                                            "folder": folderName}}
-
-        except Exception as e:
-            return JSONResponse(content={"message": str(e)}, status_code=500)
-
-    @app.post("/api/create_knowledge", tags=["Knowledge"],
-              summary="新建一个本地知识库，并执行向量化操作")
-    def create_knowledge(request: KnowledgeBaseCreateRequest, thread_id: str = Query(..., description="thread_id")):
-        # 这里要根据chunking_strategy策略设定RAG的切分策略，默认是自动
-        vector_id = create_knowledge_base(client=global_openai_instance,
-                                          knowledge_base_name=request.knowledge_base_name,
-                                          chunking_strategy=request.chunking_strategy,
-                                          max_chunk_size_tokens=request.max_chunk_size_tokens,
-                                          chunk_overlap_tokens=request.chunk_overlap_tokens,
-                                          thread_id=thread_id)
-        if vector_id is not None:
-            return {"status": 200, "data": {"message": "已成功完成",
-                                            "vector_id": vector_id}}
-        else:
-            raise HTTPException(status_code=400, detail="知识库无法创建，请再次确认知识库文件夹中存在格式合规的文件")
 
     @app.get("/api/check_initialization", tags=["Initialization"],
              summary="检查当前用户是否第一次启动项目，如果是，跳转到项目初始化页面")
@@ -268,8 +227,13 @@ def mount_app_routes(app: FastAPI):
                 return {"status": 200,
                         "data": {"message": "当前会话状态的 MateGen 实例重新初始化成功", "thread_id": thread_id}}
             else:
+
+                from MateGen.utils import SessionLocal, get_knowledge_base_info
+                db_session = SessionLocal()
+
+                knowledge_bases = get_knowledge_base_info(db_session)[-1]["knowledge_base_name"]
+
                 # 默认选择第一个知识库
-                knowledge_bases = print_and_select_knowledge_base()[-1]["name"]
                 mate_gen_instance = MateGenClass(
                     thread=thread_id,
                     api_key=api_key,
@@ -286,69 +250,74 @@ def mount_app_routes(app: FastAPI):
         finally:
             db_session.close()
 
-    @app.post("/api/set_knowledge_base_url", tags=["Knowledge"],
-              summary="设置本地知识库的根目录")
-    def set_base_url(url_data: UrlModel, agent_id: str = Query(..., description="assis id")):
-        # 因为Json会转义 \ , 这里手动进行转换
-        from MateGen.utils import SessionLocal, update_knowledge_base_path
 
-        db_session = SessionLocal()
-        corrected_path = url_data.url.replace('\\', '\\\\')
-        if update_knowledge_base_path(db_session, agent_id, corrected_path):
+    @app.post("/api/upload", tags=["Knowledge"],  summary="上传文件,在进行知识库解析前,先调用此函数上传全部文件")
+    async def upload_files(
+            folderName: str = Form(...),  # 接收文件夹名称
+            files: List[UploadFile] = File(...)  # 接收多个文件
+    ):
+        uploaded_files = []
 
-            return {"status": 200, "data": {"message": f"知识库路径已更新为:{url_data.url}",
-                                            "knowledge_base_url": url_data.url}}
-        else:
-            raise HTTPException(status_code=400, detail="无效的知识库地址，正确的路径实例：E:\\work")
-
-    @app.post("/api/create_knowledge_base_folder", tags=["Knowledge"],
-              summary="在本地知识库的根目录下，创建知识库文件夹")
-    def create_knowledge_folder(sub_folder_name: str = Body(..., embed=True)):
         try:
-            folder_path = create_knowledge_base_folder(sub_folder_name)
-            return {"status": 200, "data": {"message": f"成功设置 {folder_path} 为知识库主目录",
-                                            "folder_path": folder_path}}
+            # 生成指定文件夹路径
+            folder_path = os.path.join(UPLOAD_FOLDER, folderName)
+            os.makedirs(folder_path, exist_ok=True)
+
+            for file in files:
+                # 文件存储路径
+                file_location = os.path.join(folder_path, file.filename)
+
+                with open(file_location, "wb") as buffer:
+                    shutil.copyfileobj(file.file, buffer)
+
+                uploaded_files.append(file.filename)
+            return {"status": 200, "data": {"message": "所有文件上传服务器成功",
+                                            "files": uploaded_files,
+                                            "folder": folderName}}
+
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            return JSONResponse(content={"message": str(e)}, status_code=500)
 
-
+    @app.post("/api/create_knowledge", tags=["Knowledge"],
+              summary="新建一个本地知识库，并执行向量化操作")
+    def create_knowledge(request: KnowledgeBaseCreateRequest, thread_id: str = Query(..., description="thread_id")):
+        # 这里要根据chunking_strategy策略设定RAG的切分策略，默认是自动
+        vector_id = create_knowledge_base(client=global_openai_instance,
+                                          knowledge_base_name=request.knowledge_base_name,
+                                          chunking_strategy=request.chunking_strategy,
+                                          max_chunk_size_tokens=request.max_chunk_size_tokens,
+                                          chunk_overlap_tokens=request.chunk_overlap_tokens,
+                                          thread_id=thread_id)
+        if vector_id is not None:
+            return {"status": 200, "data": {"message": "已成功完成",
+                                            "vector_id": vector_id}}
+        else:
+            raise HTTPException(status_code=400, detail="知识库无法创建，请再次确认知识库文件夹中存在格式合规的文件")
 
     @app.get("/api/get_all_knowledge", tags=["Knowledge"],
              summary="获取所有的本地知识库列表")
     def get_all_knowledge():
+        from MateGen.utils import SessionLocal, get_knowledge_base_info
+        db_session = SessionLocal()
         try:
-            knowledge_bases = print_and_select_knowledge_base()
-            if not knowledge_bases:
+            knowledge_bases = get_knowledge_base_info(db_session)
+            if knowledge_bases == []:
                 return {"status": 404, "data": [], "message": "没有找到知识库，请先创建。"}
             return {"status": 200, "data": knowledge_bases}
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))
 
-    @app.get("/api/get_vector_db_id", tags=["Knowledge"],
-             summary="根据知识库的名称，获取其对应的向量数据库ID")
-    def api_get_vector_db_id(request: KbNameRequest):
-        vector_db_id = get_vector_db_id(request.knowledge_base_name)
-        if vector_db_id is None:
-            raise HTTPException(status_code=404,
-                                detail="Vector database ID not found for the given knowledge base name.")
-        return {"status": 200, "vector_db_id": vector_db_id}
-
-    @app.post("/api/update_knowledge_base_description", tags=["Knowledge"], summary="更新某个知识库的描述")
-    def api_update_knowledge_base_description(request: KnowledgeBaseDescriptionUpdateRequest):
-        try:
-            # 调用之前定义的函数
-            if update_knowledge_base_description(request.sub_folder_name, request.description):
-                return {"status": 200, "data": {"message": f"《{request.sub_folder_name}》知识库的描述已更新"}}
-        except FileNotFoundError:
-            raise HTTPException(status_code=404, detail="找不到指定的 JSON 文件")
-        except Exception as e:
-            raise HTTPException(status_code=500, detail=f"更新失败: {str(e)}")
-
     @app.get("/api/all_knowledge_base", tags=["Knowledge"], summary="根据向量数据库id获取到上传的所有本地文件")
     def get_knowledge_base_all(request: KbNameRequest):
+
+        from MateGen.utils import SessionLocal, get_vector_store_id_by_name
+        db_session = SessionLocal()
+
+        vector_store_id = get_vector_store_id_by_name(db_session, request.knowledge_base_name)
+
         # 根据输入的 知识库名称，先获取到对应的 向量库id
         vector_store_files = global_openai_instance.beta.vector_stores.files.list(
-            vector_store_id=get_vector_db_id(request.knowledge_base_name)
+            vector_store_id=vector_store_id
         )
 
         # 遍历列表，提取并格式化所需信息
@@ -363,7 +332,7 @@ def mount_app_routes(app: FastAPI):
 
         return {"status": 200, "data": formatted_files}
 
-    @app.delete("/api/delete_all_files", tags=["Files"], summary="删除所有文件")
+    @app.delete("/api/delete_all_files", tags=["Knowledge"], summary="删除所有文件(待进一步确认)")
     def api_delete_all_files():
         vector_stores = global_openai_instance.beta.vector_stores.list()
         # TODO
@@ -496,7 +465,7 @@ def mount_app_routes(app: FastAPI):
             raise HTTPException(status_code=500, detail=str(e))
 
     from python_interface import execute_python_code
-    @app.post("/api/execute_code", tags=["Execution"],
+    @app.post("/api/execute_code", tags=["Python Execution"],
               summary="从指定会话窗口跳转到Python环境并执行代码")
     def execute_code(request: CodeExecutionRequest = Body(...)):
 
@@ -543,29 +512,6 @@ def mount_app_routes(app: FastAPI):
             return {"results": output}
         except Exception as e:
             raise HTTPException(status_code=500, detail=f"An error occurred while executing SQL: {str(e)}")
-
-    # @app.post("/api/enhanced_initialize", tags=["Initialization"],
-    #           summary="用于开启增强模式的 MateGen 实例初始化")
-    # def initialize_knowledge_mate_gen(
-    #         api_key: str = Body(..., description="API key required for operation"),
-    #         enhanced_mode: bool = Body(True, description="Enable enhanced mode"),
-    #         knowledge_base_chat: bool = Body(False, description="Enable knowledge base chat"),
-    #         kaggle_competition_guidance: bool = Body(False, description="Enable Kaggle competition guidance"),
-    #         competition_name: str = Body(None, description="Name of the Kaggle competition if guidance is enabled"),
-    #         knowledge_base_name: str = Body(None, description="Name of the knowledge_base_chat is enabled"),
-    #         openai_ins: OpenAI = Depends(get_openai_instance)
-    # ):
-    #     try:
-    #         global global_instance, global_openai_instance
-    #         mate_gen = get_mate_gen(api_key, enhanced_mode, knowledge_base_chat, kaggle_competition_guidance,
-    #                                 competition_name, knowledge_base_name)
-    #         global_instance = mate_gen
-    #         global_openai_instance = openai_ins
-    #         # 这里根据初始化结果返回相应的信息
-    #         return {"status": 200, "data": "MateGen 实例初始化成功"}
-    #     except Exception as e:
-    #
-    #         raise HTTPException(status_code=500, detail=str(e))
 
 
 def run_api(host, port, **kwargs):

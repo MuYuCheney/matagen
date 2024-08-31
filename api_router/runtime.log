@@ -4812,3 +4812,88 @@ CREATE TABLE knowledge_bases (
 2024-08-31 08:53:07 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/vector_stores/vs_x35kSvArm8HbAGfPK1NSYQcT/file_batches/vsfb_aee9c80d7567410fa4debde4cf3ef4cc "HTTP/1.1 200 OK"
 2024-08-31 08:53:09 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/vector_stores/vs_x35kSvArm8HbAGfPK1NSYQcT/file_batches/vsfb_aee9c80d7567410fa4debde4cf3ef4cc "HTTP/1.1 200 OK"
 2024-08-31 08:53:09 - root - INFO - 知识库创建完成！
+2024-08-31 10:58:29 - root - INFO - 正在初始化MateGen，请稍后...
+2024-08-31 10:58:30 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-08-31 10:58:30 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-08-31 10:58:31 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads "HTTP/1.1 200 OK"
+2024-08-31 10:58:31 - root - INFO - 已完成初始化，MateGen可随时调用！
+2024-08-31 11:02:24 - root - INFO - 正在初始化MateGen，请稍后...
+2024-08-31 11:02:26 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-08-31 11:02:26 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-08-31 11:02:26 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads "HTTP/1.1 200 OK"
+2024-08-31 11:02:26 - root - INFO - 已完成初始化，MateGen可随时调用！
+2024-08-31 11:02:36 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/vector_stores/vs_f5ZE00OEN7thjZDTm2V2C4ek/files "HTTP/1.1 200 OK"
+2024-08-31 11:03:40 - root - INFO - 正在创建知识库，请稍后...
+2024-08-31 11:03:40 - root - INFO - 当前知识库的本地路径是：..\uploads\muyu_test300
+2024-08-31 11:03:41 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/vector_stores "HTTP/1.1 200 OK"
+2024-08-31 11:03:41 - root - INFO - 正在创建知识库的向量存储，请稍后...
+2024-08-31 11:03:42 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/vector_stores "HTTP/1.1 200 OK"
+2024-08-31 11:03:42 - root - INFO - file_paths ： ['..\\uploads\\muyu_test300\\1706.03762v7.pdf', '..\\uploads\\muyu_test300\\README.zh.md']
+2024-08-31 11:03:43 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/files "HTTP/1.1 200 OK"
+2024-08-31 11:03:45 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/files "HTTP/1.1 200 OK"
+2024-08-31 11:03:46 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/vector_stores/vs_GOTHPjOQHgQh65EqrjjYQrPz/file_batches "HTTP/1.1 200 OK"
+2024-08-31 11:03:46 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/vector_stores/vs_GOTHPjOQHgQh65EqrjjYQrPz/file_batches/vsfb_a46c112e4253489380e2b562674c30c0 "HTTP/1.1 200 OK"
+2024-08-31 11:03:47 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/vector_stores/vs_GOTHPjOQHgQh65EqrjjYQrPz/file_batches/vsfb_a46c112e4253489380e2b562674c30c0 "HTTP/1.1 200 OK"
+2024-08-31 11:03:48 - root - INFO - 知识库创建完成！
+2024-08-31 11:04:00 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/vector_stores/vs_GOTHPjOQHgQh65EqrjjYQrPz/files "HTTP/1.1 200 OK"
+2024-08-31 11:06:40 - root - INFO - 正在初始化MateGen，请稍后...
+2024-08-31 11:06:41 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-08-31 11:06:41 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-08-31 11:06:42 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads "HTTP/1.1 200 OK"
+2024-08-31 11:06:42 - root - INFO - 已完成初始化，MateGen可随时调用！
+2024-08-31 11:06:55 - root - INFO - 正在初始化MateGen，请稍后...
+2024-08-31 11:06:56 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-08-31 11:06:56 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-08-31 11:06:57 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads "HTTP/1.1 200 OK"
+2024-08-31 11:06:57 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/assistants/asst_OAEerZAXS82rv5wKcH0QLuuo "HTTP/1.1 200 OK"
+2024-08-31 11:06:58 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/assistants/asst_OAEerZAXS82rv5wKcH0QLuuo "HTTP/1.1 200 OK"
+2024-08-31 11:06:58 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/vector_stores/vs_GOTHPjOQHgQh65EqrjjYQrPz "HTTP/1.1 200 OK"
+2024-08-31 11:06:58 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/assistants/asst_OAEerZAXS82rv5wKcH0QLuuo "HTTP/1.1 200 OK"
+2024-08-31 11:06:59 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/assistants/asst_OAEerZAXS82rv5wKcH0QLuuo "HTTP/1.1 200 OK"
+2024-08-31 11:06:59 - root - INFO - 已完成初始化，MateGen可随时调用！
+2024-08-31 11:08:10 - root - INFO - 正在初始化MateGen，请稍后...
+2024-08-31 11:08:11 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-08-31 11:08:11 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-08-31 11:08:11 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/assistants/asst_OAEerZAXS82rv5wKcH0QLuuo "HTTP/1.1 200 OK"
+2024-08-31 11:08:11 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/assistants/asst_OAEerZAXS82rv5wKcH0QLuuo "HTTP/1.1 200 OK"
+2024-08-31 11:08:12 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/vector_stores/vs_GOTHPjOQHgQh65EqrjjYQrPz "HTTP/1.1 200 OK"
+2024-08-31 11:08:12 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/assistants/asst_OAEerZAXS82rv5wKcH0QLuuo "HTTP/1.1 200 OK"
+2024-08-31 11:08:13 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/assistants/asst_OAEerZAXS82rv5wKcH0QLuuo "HTTP/1.1 200 OK"
+2024-08-31 11:08:13 - root - INFO - 已完成初始化，MateGen可随时调用！
+2024-08-31 11:11:06 - root - INFO - 正在初始化MateGen，请稍后...
+2024-08-31 11:11:07 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-08-31 11:11:07 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-08-31 11:11:08 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads "HTTP/1.1 200 OK"
+2024-08-31 11:11:08 - root - INFO - 已完成初始化，MateGen可随时调用！
+2024-08-31 11:11:21 - root - INFO - Updated thread thread_hIEjGLXLk9V5AbPTQKsmSTBJ with new conversation name: 你好，请你介绍
+2024-08-31 11:11:23 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads/thread_hIEjGLXLk9V5AbPTQKsmSTBJ/messages "HTTP/1.1 200 OK"
+2024-08-31 11:11:24 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads/thread_hIEjGLXLk9V5AbPTQKsmSTBJ/runs "HTTP/1.1 200 OK"
+2024-08-31 11:11:24 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/threads/thread_hIEjGLXLk9V5AbPTQKsmSTBJ/runs/run_mpdQGw3b9aAWYUZ6CCOa987x "HTTP/1.1 200 OK"
+2024-08-31 11:11:25 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/threads/thread_hIEjGLXLk9V5AbPTQKsmSTBJ/runs/run_mpdQGw3b9aAWYUZ6CCOa987x "HTTP/1.1 200 OK"
+2024-08-31 11:11:27 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/threads/thread_hIEjGLXLk9V5AbPTQKsmSTBJ/runs/run_mpdQGw3b9aAWYUZ6CCOa987x "HTTP/1.1 200 OK"
+2024-08-31 11:11:28 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/threads/thread_hIEjGLXLk9V5AbPTQKsmSTBJ/runs/run_mpdQGw3b9aAWYUZ6CCOa987x "HTTP/1.1 200 OK"
+2024-08-31 11:11:29 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads/thread_hIEjGLXLk9V5AbPTQKsmSTBJ/runs "HTTP/1.1 200 OK"
+2024-08-31 11:12:00 - root - INFO - Updated thread thread_hIEjGLXLk9V5AbPTQKsmSTBJ with new conversation name: 帮我介绍一下机
+2024-08-31 11:12:01 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads/thread_hIEjGLXLk9V5AbPTQKsmSTBJ/messages "HTTP/1.1 200 OK"
+2024-08-31 11:12:03 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads/thread_hIEjGLXLk9V5AbPTQKsmSTBJ/runs "HTTP/1.1 200 OK"
+2024-08-31 11:12:03 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/threads/thread_hIEjGLXLk9V5AbPTQKsmSTBJ/runs/run_hhriDLs0KKMm6gHb00iNmOEN "HTTP/1.1 200 OK"
+2024-08-31 11:12:04 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/threads/thread_hIEjGLXLk9V5AbPTQKsmSTBJ/runs/run_hhriDLs0KKMm6gHb00iNmOEN "HTTP/1.1 200 OK"
+2024-08-31 11:12:06 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/threads/thread_hIEjGLXLk9V5AbPTQKsmSTBJ/runs/run_hhriDLs0KKMm6gHb00iNmOEN "HTTP/1.1 200 OK"
+2024-08-31 11:12:07 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/threads/thread_hIEjGLXLk9V5AbPTQKsmSTBJ/runs/run_hhriDLs0KKMm6gHb00iNmOEN "HTTP/1.1 200 OK"
+2024-08-31 11:12:09 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/threads/thread_hIEjGLXLk9V5AbPTQKsmSTBJ/runs/run_hhriDLs0KKMm6gHb00iNmOEN "HTTP/1.1 200 OK"
+2024-08-31 11:12:10 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads/thread_hIEjGLXLk9V5AbPTQKsmSTBJ/runs "HTTP/1.1 200 OK"
+2024-08-31 11:12:36 - root - INFO - Updated thread thread_hIEjGLXLk9V5AbPTQKsmSTBJ with new conversation name: 决策树如何构建
+2024-08-31 11:12:37 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads/thread_hIEjGLXLk9V5AbPTQKsmSTBJ/messages "HTTP/1.1 200 OK"
+2024-08-31 11:12:37 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads/thread_hIEjGLXLk9V5AbPTQKsmSTBJ/runs "HTTP/1.1 200 OK"
+2024-08-31 11:12:38 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/threads/thread_hIEjGLXLk9V5AbPTQKsmSTBJ/runs/run_PqRoIMdUJynbGveFmou72owV "HTTP/1.1 200 OK"
+2024-08-31 11:12:39 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/threads/thread_hIEjGLXLk9V5AbPTQKsmSTBJ/runs/run_PqRoIMdUJynbGveFmou72owV "HTTP/1.1 200 OK"
+2024-08-31 11:12:41 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/threads/thread_hIEjGLXLk9V5AbPTQKsmSTBJ/runs/run_PqRoIMdUJynbGveFmou72owV "HTTP/1.1 200 OK"
+2024-08-31 11:12:42 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/threads/thread_hIEjGLXLk9V5AbPTQKsmSTBJ/runs/run_PqRoIMdUJynbGveFmou72owV "HTTP/1.1 200 OK"
+2024-08-31 11:12:43 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/threads/thread_hIEjGLXLk9V5AbPTQKsmSTBJ/runs/run_PqRoIMdUJynbGveFmou72owV "HTTP/1.1 200 OK"
+2024-08-31 11:12:45 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/threads/thread_hIEjGLXLk9V5AbPTQKsmSTBJ/runs/run_PqRoIMdUJynbGveFmou72owV "HTTP/1.1 200 OK"
+2024-08-31 11:12:47 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/threads/thread_hIEjGLXLk9V5AbPTQKsmSTBJ/runs/run_PqRoIMdUJynbGveFmou72owV "HTTP/1.1 200 OK"
+2024-08-31 11:12:47 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/threads/thread_hIEjGLXLk9V5AbPTQKsmSTBJ/messages "HTTP/1.1 200 OK"
+2024-08-31 11:13:44 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/threads/thread_qcONtBsZw0rv2oI3KUTudo31/messages "HTTP/1.1 200 OK"
+2024-08-31 11:13:55 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/threads/thread_8VTtjhqbAhl4Exv3VK5EXmYH/messages "HTTP/1.1 200 OK"
+2024-08-31 11:14:01 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/threads/thread_eytC17Xwkxb2BT0j6ZRdYpnx/messages "HTTP/1.1 200 OK"
+2024-08-31 11:14:06 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/threads/thread_hIEjGLXLk9V5AbPTQKsmSTBJ/messages "HTTP/1.1 200 OK"

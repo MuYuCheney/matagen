@@ -522,6 +522,30 @@ def mount_app_routes(app: FastAPI):
     #
     #         raise HTTPException(status_code=500, detail=str(e))
 
+    @app.post("/api/set_knowledge_base_url", tags=["Knowledge"],
+              summary="设置本地知识库的根目录")
+    def set_base_url(url_data: UrlModel, agent_id: str = Query(..., description="assis id")):
+        # 因为Json会转义 \ , 这里手动进行转换
+        from MateGen.utils import SessionLocal, update_knowledge_base_path
+
+        db_session = SessionLocal()
+        corrected_path = url_data.url.replace('\\', '\\\\')
+        if update_knowledge_base_path(db_session, agent_id, corrected_path):
+
+            return {"status": 200, "data": {"message": f"知识库路径已更新为:{url_data.url}",
+                                            "knowledge_base_url": url_data.url}}
+        else:
+            raise HTTPException(status_code=400, detail="无效的知识库地址，正确的路径实例：E:\\work")
+
+    @app.post("/api/create_knowledge_base_folder", tags=["Knowledge"],
+              summary="在本地知识库的根目录下，创建知识库文件夹")
+    def create_knowledge_folder(sub_folder_name: str = Body(..., embed=True)):
+        try:
+            folder_path = create_knowledge_base_folder(sub_folder_name)
+            return {"status": 200, "data": {"message": f"成功设置 {folder_path} 为知识库主目录",
+                                            "folder_path": folder_path}}
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))
 
 def run_api(host, port, **kwargs):
     if kwargs.get("ssl_keyfile") and kwargs.get("ssl_certfile"):

@@ -162,19 +162,23 @@ def create_knowledge_base(client,
         vector_id = vector_store.id
 
     try:
-        # Docker
-        file_path = f'/app/uploads/{knowledge_base_name}'
-        file_paths = get_specific_files(file_path)
-        # # windows
-        # file_paths = get_specific_files(base_path)
+        # # Docker
+        # file_path = f'/app/uploads/{knowledge_base_name}'
+        # file_paths = get_specific_files(file_path)
+        # windows
+        file_paths = get_specific_files(base_path)
         logging.info(f"file_paths ： {file_paths}")
         file_streams = [open(path, "rb") for path in file_paths]
         client.beta.vector_stores.file_batches.upload_and_poll(
             vector_store_id=vector_id, files=file_streams
         )
-        print(f"开始")
-        knowledge_base_description = get_formatted_file_list(knowledge_base_name)
-        print(f"knowledge_base_description:{knowledge_base_description}")
+
+        # # Docker
+        # knowledge_base_description = get_formatted_file_list(knowledge_base_name)
+
+        # Windows
+        knowledge_base_description = get_formatted_file_list(base_path)
+
         from MateGen.utils import (SessionLocal, add_knowledge_base)
 
         db_session = SessionLocal()
@@ -361,45 +365,35 @@ class MateGenClass:
              question=None,
              chat_stream=False):
 
-        print(f"self.vector_id = {self.vector_id}")
-        # if self.knowledge_base_chat == True and self.vector_id == None:
-        #     # if not is_folder_not_empty(self.base_path):
-        #     #
-        #     #     return {
-        #     #         "data": f"知识库文件夹：{self.base_path}为空，请选择关闭知识库问答功能并继续对话，或者退出对话，在指定文件夹内放置文件之后再进行知识库问答对话。"}
-        #     #
-        #     # else:
-        #     #     self.upload_knowledge_base(knowledge_base_name=self.knowledge_base_name)
-        #
-        #     print(f"self.vector_id = {self.vector_id}")
-        #     if self.vector_id != None:
-        #         if wait_for_vector_store_ready(vs_id=self.vector_id, client=self.client):
-        #             asi = self.client.beta.assistants.retrieve(self.s3)
-        #             instructions = asi.instructions
-        #             instructions = remove_knowledge_base_info(instructions)
-        #
-        #             from MateGen.utils import (SessionLocal,
-        #                                        get_thread_from_db,
-        #                                        store_agent_info,
-        #                                        store_thread_info,
-        #                                        update_conversation_name,
-        #                                        find_vector_store_id_by_name,
-        #                                        find_kb_name_by_description
-        #                                        )
-        #
-        #             db_session = SessionLocal()
-        #
-        #             knowledge_base_description = find_kb_name_by_description(db_session, self.knowledge_base_name)
-        #             db_session.close()
-        #
-        #             new_instructions = instructions + knowledge_base_description
-        #             asi = self.client.beta.assistants.update(
-        #                 self.s3,
-        #                 instructions=new_instructions,
-        #                 tool_resources={"file_search": {"vector_store_ids": [self.vector_id]}}
-        #             )
-        #     else:
-        #         return {"data": "知识库创建失败"}
+        if self.knowledge_base_chat == True and self.vector_id != None:
+
+            if wait_for_vector_store_ready(vs_id=self.vector_id, client=self.client):
+                asi = self.client.beta.assistants.retrieve(self.s3)
+                instructions = asi.instructions
+                instructions = remove_knowledge_base_info(instructions)
+
+                from MateGen.utils import (SessionLocal,
+                                           get_thread_from_db,
+                                           store_agent_info,
+                                           store_thread_info,
+                                           update_conversation_name,
+                                           find_vector_store_id_by_name,
+                                           find_kb_name_by_description
+                                           )
+
+                db_session = SessionLocal()
+
+                knowledge_base_description = find_kb_name_by_description(db_session, self.knowledge_base_name)
+                db_session.close()
+
+                new_instructions = instructions + knowledge_base_description
+                asi = self.client.beta.assistants.update(
+                    self.s3,
+                    instructions=new_instructions,
+                    tool_resources={"file_search": {"vector_store_ids": [self.vector_id]}}
+                )
+            else:
+                return {"data": "知识库调取失败"}
 
         if question != None:
             from MateGen.utils import update_conversation_name
@@ -1813,11 +1807,12 @@ def get_specific_files(folder_path):
 
 def get_formatted_file_list(folder_path):
 
-    file_path = f'/app/uploads/{folder_path}'
-    file_paths = get_specific_files(file_path)
+    # # Docker
+    # file_path = f'/app/uploads/{folder_path}'
+    # file_paths = get_specific_files(file_path)
 
-    # # 获取指定文件夹内的特定文件类型的文件路径
-    # file_paths = get_specific_files(folder_path)
+    # 获取指定文件夹内的特定文件类型的文件路径
+    file_paths = get_specific_files(folder_path)
 
     # 提取文件名并去掉扩展名
     file_names = [os.path.splitext(os.path.basename(file_path))[0] for file_path in file_paths]
