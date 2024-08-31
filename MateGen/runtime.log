@@ -1,0 +1,48 @@
+2024-08-22 11:54:49 - root - INFO - 正在初始化MateGen，请稍后...
+2024-08-22 11:54:49 - root - INFO - 正在初始化MateGen，请稍后...
+2024-08-22 11:54:51 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-08-22 11:54:51 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-08-22 11:54:51 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-08-22 11:54:51 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-08-22 11:54:51 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/threads/thread_S5kmGO3YLH7ePT2FVqDwHS6E "HTTP/1.1 200 OK"
+2024-08-22 11:54:51 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/threads/thread_S5kmGO3YLH7ePT2FVqDwHS6E "HTTP/1.1 200 OK"
+2024-08-22 11:54:52 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/assistants/asst_TzMD4RVBRvPiA358BAXTOLri "HTTP/1.1 200 OK"
+2024-08-22 11:54:52 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/assistants/asst_TzMD4RVBRvPiA358BAXTOLri "HTTP/1.1 200 OK"
+2024-08-22 11:54:52 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/assistants/asst_TzMD4RVBRvPiA358BAXTOLri "HTTP/1.1 200 OK"
+2024-08-22 11:54:52 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/assistants/asst_TzMD4RVBRvPiA358BAXTOLri "HTTP/1.1 200 OK"
+2024-08-22 11:54:52 - root - INFO - 已完成初始化，MateGen可随时调用！
+2024-08-22 11:54:52 - root - INFO - 已完成初始化，MateGen可随时调用！
+2024-08-22 12:03:28 - root - INFO - 正在初始化MateGen，请稍后...
+2024-08-22 12:03:28 - root - INFO - 正在初始化MateGen，请稍后...
+2024-08-22 12:03:30 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-08-22 12:03:30 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-08-22 12:03:30 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-08-22 12:03:30 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-08-22 12:03:30 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/threads/thread_S5kmGO3YLH7ePT2FVqDwHS6E "HTTP/1.1 200 OK"
+2024-08-22 12:03:30 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/threads/thread_S5kmGO3YLH7ePT2FVqDwHS6E "HTTP/1.1 200 OK"
+2024-08-22 12:03:31 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/assistants/asst_TzMD4RVBRvPiA358BAXTOLri "HTTP/1.1 200 OK"
+2024-08-22 12:03:31 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/assistants/asst_TzMD4RVBRvPiA358BAXTOLri "HTTP/1.1 200 OK"
+2024-08-22 12:03:31 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/assistants/asst_TzMD4RVBRvPiA358BAXTOLri "HTTP/1.1 200 OK"
+2024-08-22 12:03:31 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/assistants/asst_TzMD4RVBRvPiA358BAXTOLri "HTTP/1.1 200 OK"
+2024-08-22 12:03:31 - root - INFO - 已完成初始化，MateGen可随时调用！
+2024-08-22 12:03:31 - root - INFO - 已完成初始化，MateGen可随时调用！
+2024-08-22 12:03:43 - root - INFO - 正在初始化MateGen，请稍后...
+2024-08-22 12:03:43 - root - INFO - 正在初始化MateGen，请稍后...
+2024-08-22 12:03:44 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-08-22 12:03:44 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-08-22 12:03:44 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-08-22 12:03:44 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-08-22 12:03:44 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/threads/thread_S5kmGO3YLH7ePT2FVqDwHS6E "HTTP/1.1 200 OK"
+2024-08-22 12:03:44 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/threads/thread_S5kmGO3YLH7ePT2FVqDwHS6E "HTTP/1.1 200 OK"
+2024-08-22 12:03:45 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/assistants/asst_TzMD4RVBRvPiA358BAXTOLri "HTTP/1.1 200 OK"
+2024-08-22 12:03:45 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/assistants/asst_TzMD4RVBRvPiA358BAXTOLri "HTTP/1.1 200 OK"
+2024-08-22 12:03:45 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/assistants/asst_TzMD4RVBRvPiA358BAXTOLri "HTTP/1.1 200 OK"
+2024-08-22 12:03:45 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/assistants/asst_TzMD4RVBRvPiA358BAXTOLri "HTTP/1.1 200 OK"
+2024-08-22 12:03:46 - root - INFO - 已完成初始化，MateGen可随时调用！
+2024-08-22 12:03:46 - root - INFO - 已完成初始化，MateGen可随时调用！
+2024-08-31 05:16:53 - root - INFO - 正在初始化MateGen，请稍后...
+2024-08-31 05:16:53 - root - INFO - 正在初始化MateGen，请稍后...
+2024-08-31 05:16:54 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 401 Unauthorized"
+2024-08-31 05:16:54 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 401 Unauthorized"
+2024-08-31 05:16:54 - root - INFO - API-KEY未通过验证，请添加客服小可爱微信：littlelion_1215领取限量免费测试API-KEY，或按需购买token。
+2024-08-31 05:16:54 - root - INFO - API-KEY未通过验证，请添加客服小可爱微信：littlelion_1215领取限量免费测试API-KEY，或按需购买token。

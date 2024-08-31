@@ -1,0 +1,1307 @@
+2024-08-26 06:05:11 - root - INFO - Failed to initialize database: (pymysql.err.OperationalError) (2003, "Can't connect to MySQL server on 'localhost' ([Errno 111] Connection refused)")
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2024-08-26 06:05:27 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-08-26 06:05:27 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-26 06:05:27 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-08-26 06:05:27 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-26 06:05:27 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-08-26 06:05:27 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-26 06:05:27 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-26 06:05:27 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-08-26 06:05:27 - root - INFO - Database initialized successfully.
+2024-08-26 06:09:01 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-08-26 06:09:01 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-26 06:09:01 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-08-26 06:09:01 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-26 06:09:01 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-08-26 06:09:01 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-26 06:09:01 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-26 06:09:01 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-08-26 06:09:01 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-26 06:09:01 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-08-26 06:09:01 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-26 06:09:01 - sqlalchemy.engine.Engine - INFO - 
+CREATE TABLE agents (
+	id VARCHAR(255) NOT NULL, 
+	api_key VARCHAR(255) NOT NULL, 
+	created_at DATETIME DEFAULT now(), 
+	PRIMARY KEY (id), 
+	UNIQUE (api_key)
+)
+
+
+2024-08-26 06:09:01 - sqlalchemy.engine.Engine - INFO - [no key 0.00020s] {}
+2024-08-26 06:09:01 - sqlalchemy.engine.Engine - INFO - 
+CREATE TABLE threads (
+	id VARCHAR(255) NOT NULL, 
+	agent_id VARCHAR(255), 
+	conversation_name VARCHAR(255), 
+	run_mode VARCHAR(255), 
+	created_at DATETIME DEFAULT now(), 
+	PRIMARY KEY (id), 
+	FOREIGN KEY(agent_id) REFERENCES agents (id)
+)
+
+
+2024-08-26 06:09:01 - sqlalchemy.engine.Engine - INFO - [no key 0.00018s] {}
+2024-08-26 06:09:01 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-08-26 06:40:12 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-08-26 06:40:12 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-26 06:40:12 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-08-26 06:40:12 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-26 06:40:12 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-08-26 06:40:12 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-26 06:40:12 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-26 06:40:12 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-08-26 06:40:12 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-26 06:40:12 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-08-26 06:40:12 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-26 06:40:12 - sqlalchemy.engine.Engine - INFO - 
+CREATE TABLE agents (
+	id VARCHAR(255) NOT NULL, 
+	api_key VARCHAR(255) NOT NULL, 
+	created_at DATETIME DEFAULT now(), 
+	PRIMARY KEY (id), 
+	UNIQUE (api_key)
+)
+
+
+2024-08-26 06:40:12 - sqlalchemy.engine.Engine - INFO - [no key 0.00019s] {}
+2024-08-26 06:40:12 - sqlalchemy.engine.Engine - INFO - 
+CREATE TABLE threads (
+	id VARCHAR(255) NOT NULL, 
+	agent_id VARCHAR(255), 
+	conversation_name VARCHAR(255), 
+	run_mode VARCHAR(255), 
+	created_at DATETIME DEFAULT now(), 
+	PRIMARY KEY (id), 
+	FOREIGN KEY(agent_id) REFERENCES agents (id)
+)
+
+
+2024-08-26 06:40:12 - sqlalchemy.engine.Engine - INFO - [no key 0.00024s] {}
+2024-08-26 06:40:12 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-08-26 06:46:31 - root - INFO - 正在初始化MateGen，请稍后...
+2024-08-26 06:46:32 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-08-26 06:46:32 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-08-26 06:46:32 - root - INFO - 首次使用MateGen，正在进行Agent基础设置...
+2024-08-26 06:46:35 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/assistants "HTTP/1.1 200 OK"
+2024-08-26 06:46:36 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads "HTTP/1.1 200 OK"
+2024-08-26 06:46:36 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/assistants/asst_ypwnVhRgYtQ5oS0oZpr6U9bS "HTTP/1.1 200 OK"
+2024-08-26 06:46:37 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/assistants/asst_ypwnVhRgYtQ5oS0oZpr6U9bS "HTTP/1.1 200 OK"
+2024-08-26 06:46:37 - root - INFO - 已完成初始化，MateGen可随时调用！
+2024-08-26 06:56:49 - root - INFO - 正在初始化MateGen，请稍后...
+2024-08-26 06:56:51 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-08-26 06:56:51 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-08-26 06:56:51 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads "HTTP/1.1 200 OK"
+2024-08-26 06:56:52 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/assistants/asst_ypwnVhRgYtQ5oS0oZpr6U9bS "HTTP/1.1 200 OK"
+2024-08-26 06:56:52 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/assistants/asst_ypwnVhRgYtQ5oS0oZpr6U9bS "HTTP/1.1 200 OK"
+2024-08-26 06:56:52 - root - INFO - 已完成初始化，MateGen可随时调用！
+2024-08-26 07:02:04 - root - INFO - 正在初始化MateGen，请稍后...
+2024-08-26 07:02:06 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-08-26 07:02:06 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-08-26 07:02:06 - root - INFO - 首次使用MateGen，正在进行Agent基础设置...
+2024-08-26 07:02:10 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/assistants "HTTP/1.1 200 OK"
+2024-08-26 07:02:10 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads "HTTP/1.1 200 OK"
+2024-08-26 07:03:11 - root - INFO - 正在初始化MateGen，请稍后...
+2024-08-26 07:03:12 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-08-26 07:03:12 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-08-26 07:03:13 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads "HTTP/1.1 200 OK"
+2024-08-26 07:06:56 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-08-26 07:06:56 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-26 07:06:56 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-08-26 07:06:56 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-26 07:06:56 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-08-26 07:06:56 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-26 07:06:56 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-26 07:06:56 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-08-26 07:06:56 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-26 07:06:56 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-08-26 07:06:56 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-26 07:06:56 - sqlalchemy.engine.Engine - INFO - 
+CREATE TABLE agents (
+	id VARCHAR(255) NOT NULL, 
+	api_key VARCHAR(255) NOT NULL, 
+	created_at DATETIME DEFAULT now(), 
+	PRIMARY KEY (id), 
+	UNIQUE (api_key)
+)
+
+
+2024-08-26 07:06:56 - sqlalchemy.engine.Engine - INFO - [no key 0.00031s] {}
+2024-08-26 07:06:56 - sqlalchemy.engine.Engine - INFO - 
+CREATE TABLE threads (
+	id VARCHAR(255) NOT NULL, 
+	agent_id VARCHAR(255), 
+	conversation_name VARCHAR(255), 
+	run_mode VARCHAR(255), 
+	created_at DATETIME DEFAULT now(), 
+	PRIMARY KEY (id), 
+	FOREIGN KEY(agent_id) REFERENCES agents (id)
+)
+
+
+2024-08-26 07:06:56 - sqlalchemy.engine.Engine - INFO - [no key 0.00023s] {}
+2024-08-26 07:06:56 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-08-26 07:07:18 - root - INFO - 正在初始化MateGen，请稍后...
+2024-08-26 07:07:19 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-08-26 07:07:19 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-08-26 07:07:19 - root - INFO - 首次使用MateGen，正在进行Agent基础设置...
+2024-08-26 07:07:24 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/assistants "HTTP/1.1 200 OK"
+2024-08-26 07:07:24 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads "HTTP/1.1 200 OK"
+2024-08-26 07:07:24 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/assistants/asst_zKGDw0zWtyD8bbTt0ojIcPtr "HTTP/1.1 200 OK"
+2024-08-26 07:07:25 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/assistants/asst_zKGDw0zWtyD8bbTt0ojIcPtr "HTTP/1.1 200 OK"
+2024-08-26 07:07:25 - root - INFO - 已完成初始化，MateGen可随时调用！
+2024-08-26 07:12:41 - sqlalchemy.pool.impl.QueuePool - ERROR - Exception during reset or similar
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 986, in _finalize_fairy
+    fairy._reset(
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 1432, in _reset
+    pool._dialect.do_rollback(self)
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 699, in do_rollback
+    dbapi_connection.rollback()
+  File "/usr/local/lib/python3.11/site-packages/pymysql/connections.py", line 493, in rollback
+    self._read_ok_packet()
+  File "/usr/local/lib/python3.11/site-packages/pymysql/connections.py", line 453, in _read_ok_packet
+    pkt = self._read_packet()
+          ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/pymysql/connections.py", line 744, in _read_packet
+    packet_header = self._read_bytes(4)
+                    ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/pymysql/connections.py", line 798, in _read_bytes
+    raise err.OperationalError(
+pymysql.err.OperationalError: (2013, 'Lost connection to MySQL server during query')
+2024-08-26 07:12:41 - sqlalchemy.pool.impl.QueuePool - ERROR - Exception during reset or similar
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 986, in _finalize_fairy
+    fairy._reset(
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 1432, in _reset
+    pool._dialect.do_rollback(self)
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 699, in do_rollback
+    dbapi_connection.rollback()
+  File "/usr/local/lib/python3.11/site-packages/pymysql/connections.py", line 493, in rollback
+    self._read_ok_packet()
+  File "/usr/local/lib/python3.11/site-packages/pymysql/connections.py", line 453, in _read_ok_packet
+    pkt = self._read_packet()
+          ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/pymysql/connections.py", line 744, in _read_packet
+    packet_header = self._read_bytes(4)
+                    ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/pymysql/connections.py", line 798, in _read_bytes
+    raise err.OperationalError(
+pymysql.err.OperationalError: (2013, 'Lost connection to MySQL server during query')
+2024-08-26 07:12:41 - sqlalchemy.pool.impl.QueuePool - ERROR - Exception during reset or similar
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 986, in _finalize_fairy
+    fairy._reset(
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 1432, in _reset
+    pool._dialect.do_rollback(self)
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 699, in do_rollback
+    dbapi_connection.rollback()
+  File "/usr/local/lib/python3.11/site-packages/pymysql/connections.py", line 493, in rollback
+    self._read_ok_packet()
+  File "/usr/local/lib/python3.11/site-packages/pymysql/connections.py", line 453, in _read_ok_packet
+    pkt = self._read_packet()
+          ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/pymysql/connections.py", line 744, in _read_packet
+    packet_header = self._read_bytes(4)
+                    ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/pymysql/connections.py", line 798, in _read_bytes
+    raise err.OperationalError(
+pymysql.err.OperationalError: (2013, 'Lost connection to MySQL server during query')
+2024-08-26 07:13:16 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-08-26 07:13:16 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-26 07:13:16 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-08-26 07:13:16 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-26 07:13:16 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-08-26 07:13:16 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-26 07:13:16 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-26 07:13:16 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-08-26 07:13:16 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-26 07:13:16 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-08-26 07:13:16 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-26 07:13:16 - sqlalchemy.engine.Engine - INFO - 
+CREATE TABLE agents (
+	id VARCHAR(255) NOT NULL, 
+	api_key VARCHAR(255) NOT NULL, 
+	created_at DATETIME DEFAULT now(), 
+	PRIMARY KEY (id), 
+	UNIQUE (api_key)
+)
+
+
+2024-08-26 07:13:16 - sqlalchemy.engine.Engine - INFO - [no key 0.00017s] {}
+2024-08-26 07:13:16 - sqlalchemy.engine.Engine - INFO - 
+CREATE TABLE threads (
+	id VARCHAR(255) NOT NULL, 
+	agent_id VARCHAR(255), 
+	conversation_name VARCHAR(255), 
+	run_mode VARCHAR(255), 
+	created_at DATETIME DEFAULT now(), 
+	PRIMARY KEY (id), 
+	FOREIGN KEY(agent_id) REFERENCES agents (id)
+)
+
+
+2024-08-26 07:13:16 - sqlalchemy.engine.Engine - INFO - [no key 0.00021s] {}
+2024-08-26 07:13:16 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-08-26 07:13:30 - root - INFO - 正在初始化MateGen，请稍后...
+2024-08-26 07:13:31 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-08-26 07:13:31 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-08-26 07:13:31 - root - INFO - 首次使用MateGen，正在进行Agent基础设置...
+2024-08-26 07:13:34 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/assistants "HTTP/1.1 200 OK"
+2024-08-26 07:13:35 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads "HTTP/1.1 200 OK"
+2024-08-26 07:13:35 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/assistants/asst_x49q0JcDTnZL196bYDuaOREb "HTTP/1.1 200 OK"
+2024-08-26 07:13:36 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/assistants/asst_x49q0JcDTnZL196bYDuaOREb "HTTP/1.1 200 OK"
+2024-08-26 07:13:36 - root - INFO - 已完成初始化，MateGen可随时调用！
+2024-08-26 07:13:43 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads/thread_rCh8MwBdRbzQKfnUxVmrRGl3/messages "HTTP/1.1 200 OK"
+2024-08-26 07:13:44 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads/thread_rCh8MwBdRbzQKfnUxVmrRGl3/runs "HTTP/1.1 200 OK"
+2024-08-26 07:13:44 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/threads/thread_rCh8MwBdRbzQKfnUxVmrRGl3/runs/run_zFr7ng8QBV1kqvqtum4fz3Sy "HTTP/1.1 200 OK"
+2024-08-26 07:13:45 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/threads/thread_rCh8MwBdRbzQKfnUxVmrRGl3/runs/run_zFr7ng8QBV1kqvqtum4fz3Sy "HTTP/1.1 200 OK"
+2024-08-26 07:13:46 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/threads/thread_rCh8MwBdRbzQKfnUxVmrRGl3/messages "HTTP/1.1 200 OK"
+2024-08-26 07:16:35 - root - INFO - 正在初始化MateGen，请稍后...
+2024-08-26 07:16:37 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-08-26 07:16:37 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-08-26 07:16:37 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads "HTTP/1.1 200 OK"
+2024-08-26 07:16:37 - root - INFO - 正在创建知识库文件夹
+2024-08-26 07:16:37 - root - INFO - 当前问答知识库文件夹路径：/root/knowledge_base/muyu_test1，请在文件夹中放置知识库文件。
+2024-08-26 07:16:37 - root - INFO - 目前支持PDF、Word、PPT、md等格式读取与检索。
+2024-08-26 07:16:37 - root - INFO - 已完成初始化，MateGen可随时调用！
+2024-08-26 07:55:58 - root - INFO - 正在初始化MateGen，请稍后...
+2024-08-26 07:56:00 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-08-26 07:56:00 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-08-26 07:56:00 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads "HTTP/1.1 200 OK"
+2024-08-26 07:56:00 - root - INFO - 正在创建知识库文件夹
+2024-08-26 07:56:00 - root - INFO - 当前问答知识库文件夹路径：/root/knowledge_base/muyu_test1，请在文件夹中放置知识库文件。
+2024-08-26 07:56:00 - root - INFO - 目前支持PDF、Word、PPT、md等格式读取与检索。
+2024-08-26 07:56:00 - root - INFO - 已完成初始化，MateGen可随时调用！
+2024-08-26 07:57:42 - root - INFO - 正在初始化MateGen，请稍后...
+2024-08-26 07:57:43 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-08-26 07:57:43 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-08-26 07:57:43 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads "HTTP/1.1 200 OK"
+2024-08-26 07:57:44 - root - INFO - 正在创建知识库文件夹
+2024-08-26 07:57:44 - root - INFO - 当前问答知识库文件夹路径：/root/knowledge_base/muyu_test1，请在文件夹中放置知识库文件。
+2024-08-26 07:57:44 - root - INFO - 目前支持PDF、Word、PPT、md等格式读取与检索。
+2024-08-26 07:57:44 - root - INFO - 已完成初始化，MateGen可随时调用！
+2024-08-26 07:58:14 - root - INFO - 正在初始化MateGen，请稍后...
+2024-08-26 07:58:14 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-08-26 07:58:14 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-08-26 07:58:15 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/assistants/asst_x49q0JcDTnZL196bYDuaOREb "HTTP/1.1 200 OK"
+2024-08-26 07:58:15 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/assistants/asst_x49q0JcDTnZL196bYDuaOREb "HTTP/1.1 200 OK"
+2024-08-26 07:58:15 - root - INFO - 已完成初始化，MateGen可随时调用！
+2024-08-29 08:07:59 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-08-29 08:07:59 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-29 08:07:59 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-08-29 08:07:59 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-29 08:07:59 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-08-29 08:07:59 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-29 08:07:59 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-29 08:07:59 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-08-29 08:07:59 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-29 08:07:59 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-08-29 08:07:59 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-29 08:07:59 - sqlalchemy.engine.Engine - INFO - 
+CREATE TABLE agents (
+	id VARCHAR(255) NOT NULL, 
+	api_key VARCHAR(255) NOT NULL, 
+	created_at DATETIME DEFAULT now(), 
+	PRIMARY KEY (id), 
+	UNIQUE (api_key)
+)
+
+
+2024-08-29 08:07:59 - sqlalchemy.engine.Engine - INFO - [no key 0.00026s] {}
+2024-08-29 08:07:59 - sqlalchemy.engine.Engine - INFO - 
+CREATE TABLE threads (
+	id VARCHAR(255) NOT NULL, 
+	agent_id VARCHAR(255), 
+	conversation_name VARCHAR(255), 
+	run_mode VARCHAR(255), 
+	created_at DATETIME DEFAULT now(), 
+	PRIMARY KEY (id), 
+	FOREIGN KEY(agent_id) REFERENCES agents (id)
+)
+
+
+2024-08-29 08:07:59 - sqlalchemy.engine.Engine - INFO - [no key 0.00043s] {}
+2024-08-29 08:07:59 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-08-29 08:12:06 - root - INFO - 正在初始化MateGen，请稍后...
+2024-08-29 08:12:08 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-08-29 08:12:08 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-08-29 08:12:08 - root - INFO - 首次使用MateGen，正在进行Agent基础设置...
+2024-08-29 08:12:11 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/assistants "HTTP/1.1 200 OK"
+2024-08-29 08:12:11 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads "HTTP/1.1 200 OK"
+2024-08-29 08:12:12 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/assistants/asst_whBqEnqJJVxuDjmBECDfqGdp "HTTP/1.1 200 OK"
+2024-08-29 08:12:13 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/assistants/asst_whBqEnqJJVxuDjmBECDfqGdp "HTTP/1.1 200 OK"
+2024-08-29 08:12:13 - root - INFO - 已完成初始化，MateGen可随时调用！
+2024-08-29 08:12:25 - root - INFO - 正在初始化MateGen，请稍后...
+2024-08-29 08:12:26 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-08-29 08:12:26 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-08-29 08:12:26 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads "HTTP/1.1 200 OK"
+2024-08-29 08:12:26 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/assistants/asst_whBqEnqJJVxuDjmBECDfqGdp "HTTP/1.1 200 OK"
+2024-08-29 08:12:27 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/assistants/asst_whBqEnqJJVxuDjmBECDfqGdp "HTTP/1.1 200 OK"
+2024-08-29 08:12:27 - root - INFO - 已完成初始化，MateGen可随时调用！
+2024-08-29 08:13:49 - root - INFO - 正在初始化MateGen，请稍后...
+2024-08-29 08:13:50 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-08-29 08:13:50 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-08-29 08:13:50 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads "HTTP/1.1 200 OK"
+2024-08-29 08:13:51 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/assistants/asst_whBqEnqJJVxuDjmBECDfqGdp "HTTP/1.1 200 OK"
+2024-08-29 08:13:52 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/assistants/asst_whBqEnqJJVxuDjmBECDfqGdp "HTTP/1.1 200 OK"
+2024-08-29 08:13:52 - root - INFO - 已完成初始化，MateGen可随时调用！
+2024-08-29 08:16:05 - root - INFO - 正在初始化MateGen，请稍后...
+2024-08-29 08:16:06 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-08-29 08:16:06 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-08-29 08:16:07 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads "HTTP/1.1 200 OK"
+2024-08-29 08:16:07 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/assistants/asst_whBqEnqJJVxuDjmBECDfqGdp "HTTP/1.1 200 OK"
+2024-08-29 08:16:08 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/assistants/asst_whBqEnqJJVxuDjmBECDfqGdp "HTTP/1.1 200 OK"
+2024-08-29 08:16:08 - root - INFO - 已完成初始化，MateGen可随时调用！
+2024-08-29 08:16:52 - root - INFO - 正在初始化MateGen，请稍后...
+2024-08-29 08:16:54 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-08-29 08:16:54 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-08-29 08:16:54 - root - INFO - 首次使用MateGen，正在进行Agent基础设置...
+2024-08-29 08:16:57 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/assistants "HTTP/1.1 200 OK"
+2024-08-29 08:16:57 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads "HTTP/1.1 200 OK"
+2024-08-29 08:18:02 - root - INFO - 正在初始化MateGen，请稍后...
+2024-08-29 08:18:03 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-08-29 08:18:03 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-08-29 08:18:04 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads "HTTP/1.1 200 OK"
+2024-08-29 08:19:20 - root - INFO - 正在初始化MateGen，请稍后...
+2024-08-29 08:19:21 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-08-29 08:19:21 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-08-29 08:19:21 - root - INFO - 首次使用MateGen，正在进行Agent基础设置...
+2024-08-29 08:19:24 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/assistants "HTTP/1.1 200 OK"
+2024-08-29 08:19:25 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads "HTTP/1.1 200 OK"
+2024-08-29 08:20:57 - root - INFO - 正在初始化MateGen，请稍后...
+2024-08-29 08:20:58 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-08-29 08:20:58 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-08-29 08:20:58 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads "HTTP/1.1 200 OK"
+2024-08-29 08:20:58 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/assistants/asst_9dZwDP70mI8mvyJIQz0BINFZ "HTTP/1.1 200 OK"
+2024-08-29 08:20:59 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/assistants/asst_9dZwDP70mI8mvyJIQz0BINFZ "HTTP/1.1 200 OK"
+2024-08-29 08:20:59 - root - INFO - 已完成初始化，MateGen可随时调用！
+2024-08-29 08:22:05 - root - INFO - 正在初始化MateGen，请稍后...
+2024-08-29 08:22:06 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-08-29 08:22:06 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-08-29 08:22:06 - root - INFO - 首次使用MateGen，正在进行Agent基础设置...
+2024-08-29 08:22:08 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/assistants "HTTP/1.1 200 OK"
+2024-08-29 08:22:09 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads "HTTP/1.1 200 OK"
+2024-08-29 08:22:09 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/assistants/asst_qPSm5GmGKazWXfyYxhYZPC2d "HTTP/1.1 200 OK"
+2024-08-29 08:22:09 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/assistants/asst_qPSm5GmGKazWXfyYxhYZPC2d "HTTP/1.1 200 OK"
+2024-08-29 08:22:09 - root - INFO - 已完成初始化，MateGen可随时调用！
+2024-08-29 08:29:27 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-08-29 08:29:27 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-29 08:29:27 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-08-29 08:29:27 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-29 08:29:27 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-08-29 08:29:27 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-29 08:29:27 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-29 08:29:27 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-08-29 08:29:27 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-29 08:29:27 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-08-29 08:29:27 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-29 08:29:27 - sqlalchemy.engine.Engine - INFO - 
+CREATE TABLE agents (
+	id VARCHAR(255) NOT NULL, 
+	api_key VARCHAR(255) NOT NULL, 
+	created_at DATETIME DEFAULT now(), 
+	PRIMARY KEY (id), 
+	UNIQUE (api_key)
+)
+
+
+2024-08-29 08:29:27 - sqlalchemy.engine.Engine - INFO - [no key 0.00055s] {}
+2024-08-29 08:29:27 - sqlalchemy.engine.Engine - INFO - 
+CREATE TABLE threads (
+	id VARCHAR(255) NOT NULL, 
+	agent_id VARCHAR(255), 
+	conversation_name VARCHAR(255), 
+	run_mode VARCHAR(255), 
+	created_at DATETIME DEFAULT now(), 
+	PRIMARY KEY (id), 
+	FOREIGN KEY(agent_id) REFERENCES agents (id)
+)
+
+
+2024-08-29 08:29:27 - sqlalchemy.engine.Engine - INFO - [no key 0.00025s] {}
+2024-08-29 08:29:27 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-08-29 08:29:36 - root - INFO - 正在初始化MateGen，请稍后...
+2024-08-29 08:29:37 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-08-29 08:29:37 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-08-29 08:29:37 - root - INFO - 首次使用MateGen，正在进行Agent基础设置...
+2024-08-29 08:29:40 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/assistants "HTTP/1.1 200 OK"
+2024-08-29 08:29:40 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads "HTTP/1.1 200 OK"
+2024-08-29 08:29:41 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/assistants/asst_S9FvBsvQ8LnPyUc3pgIgPy0v "HTTP/1.1 200 OK"
+2024-08-29 08:29:41 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/assistants/asst_S9FvBsvQ8LnPyUc3pgIgPy0v "HTTP/1.1 200 OK"
+2024-08-29 08:29:41 - root - INFO - 已完成初始化，MateGen可随时调用！
+2024-08-29 08:30:32 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-08-29 08:30:32 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-29 08:30:32 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-08-29 08:30:32 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-29 08:30:32 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-08-29 08:30:32 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-29 08:30:32 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-29 08:30:32 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-08-29 08:30:32 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-29 08:30:32 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-08-29 08:30:32 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-29 08:30:32 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-08-29 08:30:53 - root - INFO - 正在初始化MateGen，请稍后...
+2024-08-29 08:30:54 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-08-29 08:30:54 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-08-29 08:30:54 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads "HTTP/1.1 200 OK"
+2024-08-29 08:30:55 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/assistants/asst_S9FvBsvQ8LnPyUc3pgIgPy0v "HTTP/1.1 200 OK"
+2024-08-29 08:30:55 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/assistants/asst_S9FvBsvQ8LnPyUc3pgIgPy0v "HTTP/1.1 200 OK"
+2024-08-29 08:30:55 - root - INFO - 已完成初始化，MateGen可随时调用！
+2024-08-29 08:35:51 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-08-29 08:35:51 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-29 08:35:51 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-08-29 08:35:51 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-29 08:35:51 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-08-29 08:35:51 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-29 08:35:51 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-29 08:35:51 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-08-29 08:35:51 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-29 08:35:51 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-08-29 08:35:51 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-29 08:35:51 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-08-29 08:35:59 - root - INFO - 正在初始化MateGen，请稍后...
+2024-08-29 08:36:00 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-08-29 08:36:00 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-08-29 08:36:00 - root - INFO - 首次使用MateGen，正在进行Agent基础设置...
+2024-08-29 08:36:03 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/assistants "HTTP/1.1 200 OK"
+2024-08-29 08:36:03 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads "HTTP/1.1 200 OK"
+2024-08-29 08:36:03 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/assistants/asst_Ruj7Yjg7IW4ul86wn99wuMuH "HTTP/1.1 200 OK"
+2024-08-29 08:36:04 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/assistants/asst_Ruj7Yjg7IW4ul86wn99wuMuH "HTTP/1.1 200 OK"
+2024-08-29 08:36:04 - root - INFO - 已完成初始化，MateGen可随时调用！
+2024-08-29 08:36:11 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads/thread_vEzT8hCW69uK04KqftpyRaYM/messages "HTTP/1.1 200 OK"
+2024-08-29 08:36:11 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads/thread_vEzT8hCW69uK04KqftpyRaYM/runs "HTTP/1.1 200 OK"
+2024-08-29 08:36:12 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/threads/thread_vEzT8hCW69uK04KqftpyRaYM/runs/run_xTeMQoXrY77THXbkKqQDxfk9 "HTTP/1.1 200 OK"
+2024-08-29 08:36:13 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/threads/thread_vEzT8hCW69uK04KqftpyRaYM/runs/run_xTeMQoXrY77THXbkKqQDxfk9 "HTTP/1.1 200 OK"
+2024-08-29 08:36:15 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/threads/thread_vEzT8hCW69uK04KqftpyRaYM/runs/run_xTeMQoXrY77THXbkKqQDxfk9 "HTTP/1.1 200 OK"
+2024-08-29 08:36:15 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/threads/thread_vEzT8hCW69uK04KqftpyRaYM/messages "HTTP/1.1 200 OK"
+2024-08-29 08:48:10 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-08-29 08:48:10 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-29 08:48:10 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-08-29 08:48:10 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-29 08:48:10 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-08-29 08:48:10 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-29 08:48:10 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-29 08:48:10 - sqlalchemy.engine.Engine - INFO - ALTER DATABASE mategen CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci
+2024-08-29 08:48:10 - sqlalchemy.engine.Engine - INFO - [generated in 0.00026s] {}
+2024-08-29 08:48:10 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-08-29 08:48:10 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-29 08:48:10 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads DROP FOREIGN KEY threads_ibfk_1
+2024-08-29 08:48:10 - sqlalchemy.engine.Engine - INFO - [generated in 0.00020s] {}
+2024-08-29 08:48:10 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-08-29 08:51:46 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-08-29 08:51:46 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-29 08:51:46 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-08-29 08:51:46 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-29 08:51:46 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-08-29 08:51:46 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-29 08:51:46 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-29 08:51:46 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-08-29 08:51:46 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-29 08:51:46 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-08-29 08:51:46 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-29 08:51:46 - sqlalchemy.engine.Engine - INFO - 
+CREATE TABLE agents (
+	id VARCHAR(255) NOT NULL, 
+	api_key VARCHAR(255) NOT NULL, 
+	created_at DATETIME DEFAULT now(), 
+	PRIMARY KEY (id), 
+	UNIQUE (api_key)
+)
+
+
+2024-08-29 08:51:46 - sqlalchemy.engine.Engine - INFO - [no key 0.00017s] {}
+2024-08-29 08:51:46 - sqlalchemy.engine.Engine - INFO - 
+CREATE TABLE threads (
+	id VARCHAR(255) NOT NULL, 
+	agent_id VARCHAR(255), 
+	conversation_name VARCHAR(255), 
+	run_mode VARCHAR(255), 
+	created_at DATETIME DEFAULT now(), 
+	PRIMARY KEY (id), 
+	FOREIGN KEY(agent_id) REFERENCES agents (id)
+)
+
+
+2024-08-29 08:51:46 - sqlalchemy.engine.Engine - INFO - [no key 0.00026s] {}
+2024-08-29 08:51:46 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-08-29 08:51:46 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-29 08:51:46 - sqlalchemy.engine.Engine - INFO - ALTER DATABASE mategen CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci
+2024-08-29 08:51:46 - sqlalchemy.engine.Engine - INFO - [generated in 0.00020s] {}
+2024-08-29 08:51:46 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-08-29 08:54:12 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-08-29 08:54:12 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-29 08:54:12 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-08-29 08:54:12 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-29 08:54:12 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-08-29 08:54:12 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-29 08:54:12 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-29 08:54:12 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-08-29 08:54:12 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-29 08:54:12 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-08-29 08:54:12 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-29 08:54:12 - sqlalchemy.engine.Engine - INFO - 
+CREATE TABLE agents (
+	id VARCHAR(255) NOT NULL, 
+	api_key VARCHAR(255) NOT NULL, 
+	created_at DATETIME DEFAULT now(), 
+	PRIMARY KEY (id), 
+	UNIQUE (api_key)
+)
+
+
+2024-08-29 08:54:12 - sqlalchemy.engine.Engine - INFO - [no key 0.00067s] {}
+2024-08-29 08:54:12 - sqlalchemy.engine.Engine - INFO - 
+CREATE TABLE threads (
+	id VARCHAR(255) NOT NULL, 
+	agent_id VARCHAR(255), 
+	conversation_name VARCHAR(255), 
+	run_mode VARCHAR(255), 
+	created_at DATETIME DEFAULT now(), 
+	PRIMARY KEY (id), 
+	FOREIGN KEY(agent_id) REFERENCES agents (id)
+)
+
+
+2024-08-29 08:54:12 - sqlalchemy.engine.Engine - INFO - [no key 0.00038s] {}
+2024-08-29 08:54:12 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-08-29 08:54:12 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-29 08:54:12 - sqlalchemy.engine.Engine - INFO - ALTER DATABASE mategen CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci
+2024-08-29 08:54:12 - sqlalchemy.engine.Engine - INFO - [generated in 0.00031s] {}
+2024-08-29 08:54:12 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-08-29 08:54:12 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-29 08:54:12 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-08-29 08:54:12 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-29 08:54:12 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-08-29 08:54:12 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-29 08:54:12 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads DROP FOREIGN KEY threads_ibfk_1
+2024-08-29 08:54:12 - sqlalchemy.engine.Engine - INFO - [generated in 0.00035s] {}
+2024-08-29 08:54:12 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-08-29 08:54:12 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-29 08:54:12 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-08-29 08:54:12 - sqlalchemy.engine.Engine - INFO - [generated in 0.00035s] {}
+2024-08-29 08:54:12 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-29 08:54:12 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-08-29 08:54:12 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-29 08:54:12 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-08-29 08:54:12 - sqlalchemy.engine.Engine - INFO - ALTER TABLE agents CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-08-29 08:54:12 - sqlalchemy.engine.Engine - INFO - [generated in 0.00026s] {}
+2024-08-29 08:54:12 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-08-29 08:54:12 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-29 08:54:12 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads ADD CONSTRAINT threads_ibfk_1 FOREIGN KEY (agent_id) REFERENCES agents(id)
+2024-08-29 08:54:12 - sqlalchemy.engine.Engine - INFO - [generated in 0.00028s] {}
+2024-08-29 08:54:12 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-08-29 08:54:22 - root - INFO - 正在初始化MateGen，请稍后...
+2024-08-29 08:54:24 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-08-29 08:54:24 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-08-29 08:54:24 - root - INFO - 首次使用MateGen，正在进行Agent基础设置...
+2024-08-29 08:54:26 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/assistants "HTTP/1.1 200 OK"
+2024-08-29 08:54:26 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads "HTTP/1.1 200 OK"
+2024-08-29 08:54:27 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/assistants/asst_em2PbzAsNZCfqlzkzJOuZbHd "HTTP/1.1 200 OK"
+2024-08-29 08:54:27 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/assistants/asst_em2PbzAsNZCfqlzkzJOuZbHd "HTTP/1.1 200 OK"
+2024-08-29 08:54:27 - root - INFO - 已完成初始化，MateGen可随时调用！
+2024-08-29 08:54:32 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads/thread_QspMLlKXVhBwAd7pMWZx301b/messages "HTTP/1.1 200 OK"
+2024-08-29 08:54:32 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads/thread_QspMLlKXVhBwAd7pMWZx301b/runs "HTTP/1.1 200 OK"
+2024-08-29 08:54:33 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/threads/thread_QspMLlKXVhBwAd7pMWZx301b/runs/run_TTSS6bDZm9MjnBUBK8rbvdGQ "HTTP/1.1 200 OK"
+2024-08-29 08:54:34 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/threads/thread_QspMLlKXVhBwAd7pMWZx301b/runs/run_TTSS6bDZm9MjnBUBK8rbvdGQ "HTTP/1.1 200 OK"
+2024-08-29 08:54:34 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/threads/thread_QspMLlKXVhBwAd7pMWZx301b/messages "HTTP/1.1 200 OK"
+2024-08-29 08:54:47 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads/thread_QspMLlKXVhBwAd7pMWZx301b/messages "HTTP/1.1 200 OK"
+2024-08-29 08:54:48 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads/thread_QspMLlKXVhBwAd7pMWZx301b/runs "HTTP/1.1 200 OK"
+2024-08-29 08:54:48 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/threads/thread_QspMLlKXVhBwAd7pMWZx301b/runs/run_E9LDB3O4zG4LJQ2t5E5ZHixU "HTTP/1.1 200 OK"
+2024-08-29 08:54:50 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/threads/thread_QspMLlKXVhBwAd7pMWZx301b/runs/run_E9LDB3O4zG4LJQ2t5E5ZHixU "HTTP/1.1 200 OK"
+2024-08-29 08:54:51 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/threads/thread_QspMLlKXVhBwAd7pMWZx301b/runs/run_E9LDB3O4zG4LJQ2t5E5ZHixU "HTTP/1.1 200 OK"
+2024-08-29 08:54:52 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/threads/thread_QspMLlKXVhBwAd7pMWZx301b/runs/run_E9LDB3O4zG4LJQ2t5E5ZHixU "HTTP/1.1 200 OK"
+2024-08-29 08:54:54 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/threads/thread_QspMLlKXVhBwAd7pMWZx301b/runs/run_E9LDB3O4zG4LJQ2t5E5ZHixU "HTTP/1.1 200 OK"
+2024-08-29 08:54:54 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/threads/thread_QspMLlKXVhBwAd7pMWZx301b/messages "HTTP/1.1 200 OK"
+2024-08-29 09:07:39 - root - INFO - 正在初始化MateGen，请稍后...
+2024-08-29 09:07:41 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-08-29 09:07:41 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-08-29 09:07:41 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads "HTTP/1.1 200 OK"
+2024-08-29 09:07:42 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/assistants/asst_em2PbzAsNZCfqlzkzJOuZbHd "HTTP/1.1 200 OK"
+2024-08-29 09:07:42 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/assistants/asst_em2PbzAsNZCfqlzkzJOuZbHd "HTTP/1.1 200 OK"
+2024-08-29 09:07:42 - root - INFO - 已完成初始化，MateGen可随时调用！
+2024-08-29 09:13:06 - root - INFO - 正在初始化MateGen，请稍后...
+2024-08-29 09:13:08 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-08-29 09:13:08 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-08-29 09:13:08 - root - INFO - 首次使用MateGen，正在进行Agent基础设置...
+2024-08-29 09:13:11 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/assistants "HTTP/1.1 200 OK"
+2024-08-29 09:13:11 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads "HTTP/1.1 200 OK"
+2024-08-29 09:13:38 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-08-29 09:13:38 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-29 09:13:38 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-08-29 09:13:38 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-29 09:13:38 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-08-29 09:13:38 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-29 09:13:38 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-29 09:13:38 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-08-29 09:13:38 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-29 09:13:38 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-08-29 09:13:38 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-29 09:13:38 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-08-29 09:13:38 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-29 09:13:38 - sqlalchemy.engine.Engine - INFO - ALTER DATABASE mategen CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci
+2024-08-29 09:13:38 - sqlalchemy.engine.Engine - INFO - [generated in 0.00029s] {}
+2024-08-29 09:13:38 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-08-29 09:13:38 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-29 09:13:38 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-08-29 09:13:38 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-29 09:13:38 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-08-29 09:13:38 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-29 09:13:38 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads DROP FOREIGN KEY threads_ibfk_1
+2024-08-29 09:13:38 - sqlalchemy.engine.Engine - INFO - [generated in 0.00029s] {}
+2024-08-29 09:13:38 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-08-29 09:13:38 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-29 09:13:38 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-08-29 09:13:38 - sqlalchemy.engine.Engine - INFO - [generated in 0.00019s] {}
+2024-08-29 09:13:38 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-29 09:13:38 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-08-29 09:13:38 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-29 09:13:38 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-08-29 09:13:38 - sqlalchemy.engine.Engine - INFO - ALTER TABLE agents CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-08-29 09:13:38 - sqlalchemy.engine.Engine - INFO - [generated in 0.00019s] {}
+2024-08-30 06:52:17 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-08-30 06:52:17 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-30 06:52:17 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-08-30 06:52:17 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-30 06:52:17 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-08-30 06:52:17 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-30 06:52:17 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-30 06:52:17 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-08-30 06:52:17 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-30 06:52:17 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-08-30 06:52:17 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-30 06:52:17 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-08-30 06:52:17 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-30 06:52:17 - sqlalchemy.engine.Engine - INFO - ALTER DATABASE mategen CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci
+2024-08-30 06:52:17 - sqlalchemy.engine.Engine - INFO - [generated in 0.00029s] {}
+2024-08-30 06:52:17 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-08-30 06:52:17 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-30 06:52:17 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-08-30 06:52:17 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-30 06:52:17 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-08-30 06:52:17 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-30 06:52:17 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads DROP FOREIGN KEY threads_ibfk_1
+2024-08-30 06:52:17 - sqlalchemy.engine.Engine - INFO - [generated in 0.00039s] {}
+2024-08-30 06:52:17 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-08-30 06:52:17 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-30 06:52:17 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-08-30 06:52:17 - sqlalchemy.engine.Engine - INFO - [generated in 0.00048s] {}
+2024-08-30 06:52:17 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-30 06:52:17 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-08-30 06:52:17 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-30 06:52:17 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-08-30 06:52:17 - sqlalchemy.engine.Engine - INFO - ALTER TABLE agents CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-08-30 06:52:17 - sqlalchemy.engine.Engine - INFO - [generated in 0.00022s] {}
+2024-08-30 06:52:17 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-08-30 06:52:18 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-30 06:52:18 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads ADD CONSTRAINT threads_ibfk_1 FOREIGN KEY (agent_id) REFERENCES agents(id)
+2024-08-30 06:52:18 - sqlalchemy.engine.Engine - INFO - [generated in 0.00033s] {}
+2024-08-30 06:52:18 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-08-30 06:52:28 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-08-30 06:52:28 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-30 06:52:28 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-08-30 06:52:28 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-30 06:52:28 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-08-30 06:52:28 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-30 06:52:28 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-30 06:52:28 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-08-30 06:52:28 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-30 06:52:28 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-08-30 06:52:28 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-30 06:52:28 - sqlalchemy.engine.Engine - INFO - 
+CREATE TABLE agents (
+	id VARCHAR(255) NOT NULL, 
+	api_key VARCHAR(255) NOT NULL, 
+	created_at DATETIME DEFAULT now(), 
+	PRIMARY KEY (id), 
+	UNIQUE (api_key)
+)
+
+
+2024-08-30 06:52:28 - sqlalchemy.engine.Engine - INFO - [no key 0.00019s] {}
+2024-08-30 06:52:28 - sqlalchemy.engine.Engine - INFO - 
+CREATE TABLE threads (
+	id VARCHAR(255) NOT NULL, 
+	agent_id VARCHAR(255), 
+	conversation_name VARCHAR(255), 
+	run_mode VARCHAR(255), 
+	created_at DATETIME DEFAULT now(), 
+	PRIMARY KEY (id), 
+	FOREIGN KEY(agent_id) REFERENCES agents (id)
+)
+
+
+2024-08-30 06:52:28 - sqlalchemy.engine.Engine - INFO - [no key 0.00022s] {}
+2024-08-30 06:52:28 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-08-30 06:52:28 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-30 06:52:28 - sqlalchemy.engine.Engine - INFO - ALTER DATABASE mategen CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci
+2024-08-30 06:52:28 - sqlalchemy.engine.Engine - INFO - [generated in 0.00019s] {}
+2024-08-30 06:52:28 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-08-30 06:52:28 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-30 06:52:28 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-08-30 06:52:28 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-30 06:52:28 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-08-30 06:52:28 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-30 06:52:28 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads DROP FOREIGN KEY threads_ibfk_1
+2024-08-30 06:52:28 - sqlalchemy.engine.Engine - INFO - [generated in 0.00026s] {}
+2024-08-30 06:52:28 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-08-30 06:52:28 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-30 06:52:28 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-08-30 06:52:28 - sqlalchemy.engine.Engine - INFO - [generated in 0.00023s] {}
+2024-08-30 06:52:28 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-30 06:52:28 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-08-30 06:52:28 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-30 06:52:28 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-08-30 06:52:28 - sqlalchemy.engine.Engine - INFO - ALTER TABLE agents CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-08-30 06:52:28 - sqlalchemy.engine.Engine - INFO - [generated in 0.00018s] {}
+2024-08-30 06:52:28 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-08-30 06:52:28 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-30 06:52:28 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads ADD CONSTRAINT threads_ibfk_1 FOREIGN KEY (agent_id) REFERENCES agents(id)
+2024-08-30 06:52:28 - sqlalchemy.engine.Engine - INFO - [generated in 0.00023s] {}
+2024-08-30 06:52:28 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-08-30 06:52:49 - root - INFO - 正在初始化MateGen，请稍后...
+2024-08-30 06:52:51 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-08-30 06:52:51 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-08-30 06:52:51 - root - INFO - 首次使用MateGen，正在进行Agent基础设置...
+2024-08-30 06:52:53 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/assistants "HTTP/1.1 200 OK"
+2024-08-30 06:52:54 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads "HTTP/1.1 200 OK"
+2024-08-30 06:52:54 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/assistants/asst_MJQ68CPJWXZ8FcF2tER8Qdvw "HTTP/1.1 200 OK"
+2024-08-30 06:52:55 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/assistants/asst_MJQ68CPJWXZ8FcF2tER8Qdvw "HTTP/1.1 200 OK"
+2024-08-30 06:52:55 - root - INFO - 已完成初始化，MateGen可随时调用！
+2024-08-30 06:53:10 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads/thread_lIOFxB99a53qkb38WWbaa3Ke/messages "HTTP/1.1 200 OK"
+2024-08-30 06:53:11 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads/thread_lIOFxB99a53qkb38WWbaa3Ke/runs "HTTP/1.1 200 OK"
+2024-08-30 06:53:11 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/threads/thread_lIOFxB99a53qkb38WWbaa3Ke/runs/run_rzImMrTwteCDrYrOjjfLsUvd "HTTP/1.1 200 OK"
+2024-08-30 06:53:13 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/threads/thread_lIOFxB99a53qkb38WWbaa3Ke/runs/run_rzImMrTwteCDrYrOjjfLsUvd "HTTP/1.1 200 OK"
+2024-08-30 06:53:14 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/threads/thread_lIOFxB99a53qkb38WWbaa3Ke/runs/run_rzImMrTwteCDrYrOjjfLsUvd "HTTP/1.1 200 OK"
+2024-08-30 06:53:16 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/threads/thread_lIOFxB99a53qkb38WWbaa3Ke/runs/run_rzImMrTwteCDrYrOjjfLsUvd "HTTP/1.1 200 OK"
+2024-08-30 06:53:17 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads/thread_lIOFxB99a53qkb38WWbaa3Ke/runs "HTTP/1.1 200 OK"
+2024-08-30 06:56:13 - root - INFO - 正在初始化MateGen，请稍后...
+2024-08-30 06:56:14 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-08-30 06:56:14 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-08-30 06:56:14 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads "HTTP/1.1 200 OK"
+2024-08-30 06:56:14 - root - INFO - 正在创建知识库文件夹
+2024-08-30 06:56:14 - root - INFO - 当前问答知识库文件夹路径：/root/knowledge_base/muyu_test1，请在文件夹中放置知识库文件。
+2024-08-30 06:56:14 - root - INFO - 目前支持PDF、Word、PPT、md等格式读取与检索。
+2024-08-30 06:56:14 - root - INFO - 已完成初始化，MateGen可随时调用！
+2024-08-30 07:33:02 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-08-30 07:33:02 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-30 07:33:02 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-08-30 07:33:02 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-30 07:33:02 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-08-30 07:33:02 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-30 07:33:02 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-30 07:33:02 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-08-30 07:33:02 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-30 07:33:02 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-08-30 07:33:02 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-30 07:33:02 - sqlalchemy.engine.Engine - INFO - 
+CREATE TABLE agents (
+	id VARCHAR(255) NOT NULL, 
+	api_key VARCHAR(255) NOT NULL, 
+	knowledge_base VARCHAR(255) NOT NULL, 
+	created_at DATETIME DEFAULT now(), 
+	PRIMARY KEY (id), 
+	UNIQUE (api_key), 
+	UNIQUE (knowledge_base)
+)
+
+
+2024-08-30 07:33:02 - sqlalchemy.engine.Engine - INFO - [no key 0.00033s] {}
+2024-08-30 07:33:02 - sqlalchemy.engine.Engine - INFO - 
+CREATE TABLE threads (
+	id VARCHAR(255) NOT NULL, 
+	agent_id VARCHAR(255), 
+	conversation_name VARCHAR(255), 
+	run_mode VARCHAR(255), 
+	created_at DATETIME DEFAULT now(), 
+	PRIMARY KEY (id), 
+	FOREIGN KEY(agent_id) REFERENCES agents (id)
+)
+
+
+2024-08-30 07:33:02 - sqlalchemy.engine.Engine - INFO - [no key 0.00035s] {}
+2024-08-30 07:33:02 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-08-30 07:33:02 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-30 07:33:02 - sqlalchemy.engine.Engine - INFO - SELECT DEFAULT_CHARACTER_SET_NAME, DEFAULT_COLLATION_NAME FROM information_schema.SCHEMATA WHERE SCHEMA_NAME = %(db)s
+2024-08-30 07:33:02 - sqlalchemy.engine.Engine - INFO - [generated in 0.00034s] {'db': 'mategen'}
+2024-08-30 07:33:02 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-30 07:33:02 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-08-30 07:33:02 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-30 07:33:02 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-08-30 07:33:02 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-30 07:33:02 - sqlalchemy.engine.Engine - INFO - SHOW CREATE TABLE `threads`
+2024-08-30 07:33:02 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-30 07:33:02 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-08-30 07:33:02 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads DROP FOREIGN KEY threads_ibfk_1
+2024-08-30 07:33:02 - sqlalchemy.engine.Engine - INFO - [generated in 0.00020s] {}
+2024-08-30 07:33:02 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-08-30 07:33:02 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-30 07:33:02 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-08-30 07:33:02 - sqlalchemy.engine.Engine - INFO - [generated in 0.00018s] {}
+2024-08-30 07:33:02 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-08-30 07:33:02 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-30 07:33:02 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads ADD CONSTRAINT threads_ibfk_1 FOREIGN KEY (agent_id) REFERENCES agents(id)
+2024-08-30 07:33:02 - sqlalchemy.engine.Engine - INFO - [generated in 0.00024s] {}
+2024-08-30 07:33:02 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-08-30 07:33:02 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-30 07:33:02 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-08-30 07:33:02 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-30 07:33:02 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-08-30 07:33:02 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-30 07:33:02 - sqlalchemy.engine.Engine - INFO - SHOW CREATE TABLE `agents`
+2024-08-30 07:33:02 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-30 07:33:02 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-08-30 07:33:02 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-30 07:33:02 - sqlalchemy.engine.Engine - INFO - ALTER TABLE agents CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-08-30 07:33:02 - sqlalchemy.engine.Engine - INFO - [generated in 0.00020s] {}
+2024-08-30 07:33:02 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-08-30 08:57:16 - root - INFO - 正在初始化MateGen，请稍后...
+2024-08-30 08:57:17 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-08-30 08:57:17 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-08-30 08:57:17 - root - INFO - 首次使用MateGen，正在进行Agent基础设置...
+2024-08-30 08:57:20 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/assistants "HTTP/1.1 200 OK"
+2024-08-30 08:57:20 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads "HTTP/1.1 200 OK"
+2024-08-30 09:00:40 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-08-30 09:00:40 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-30 09:00:40 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-08-30 09:00:40 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-30 09:00:40 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-08-30 09:00:40 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-30 09:00:40 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-30 09:00:40 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-08-30 09:00:40 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-30 09:00:40 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-08-30 09:00:40 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-30 09:00:40 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-08-30 09:00:40 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-30 09:00:40 - sqlalchemy.engine.Engine - INFO - ALTER DATABASE mategen CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci
+2024-08-30 09:00:40 - sqlalchemy.engine.Engine - INFO - [generated in 0.00069s] {}
+2024-08-30 09:01:40 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-08-30 09:01:40 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-30 09:01:40 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-08-30 09:01:40 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-30 09:01:40 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-08-30 09:01:40 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-30 09:01:40 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-30 09:01:40 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-08-30 09:01:40 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-30 09:01:40 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-08-30 09:01:40 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-30 09:01:40 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-08-30 09:01:40 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-30 09:01:40 - sqlalchemy.engine.Engine - INFO - ALTER DATABASE mategen CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci
+2024-08-30 09:01:40 - sqlalchemy.engine.Engine - INFO - [generated in 0.00047s] {}
+2024-08-30 09:01:40 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-08-30 09:01:40 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-30 09:01:40 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-08-30 09:01:40 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-30 09:01:40 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-08-30 09:01:40 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-30 09:01:40 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads DROP FOREIGN KEY threads_ibfk_1
+2024-08-30 09:01:40 - sqlalchemy.engine.Engine - INFO - [generated in 0.00037s] {}
+2024-08-30 09:01:40 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-08-30 09:01:40 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-30 09:01:40 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-08-30 09:01:40 - sqlalchemy.engine.Engine - INFO - [generated in 0.00032s] {}
+2024-08-30 09:01:40 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-30 09:01:40 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-08-30 09:01:40 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-30 09:01:40 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-08-30 09:01:40 - sqlalchemy.engine.Engine - INFO - ALTER TABLE agents CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-08-30 09:01:40 - sqlalchemy.engine.Engine - INFO - [generated in 0.00021s] {}
+2024-08-30 09:01:40 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-08-30 09:01:40 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-30 09:01:40 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads ADD CONSTRAINT threads_ibfk_1 FOREIGN KEY (agent_id) REFERENCES agents(id)
+2024-08-30 09:01:40 - sqlalchemy.engine.Engine - INFO - [generated in 0.00036s] {}
+2024-08-30 09:01:40 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-08-30 09:02:37 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-08-30 09:02:37 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-30 09:02:37 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-08-30 09:02:37 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-30 09:02:37 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-08-30 09:02:37 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-30 09:02:37 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-30 09:02:37 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-08-30 09:02:37 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-30 09:02:37 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-08-30 09:02:37 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-30 09:02:37 - sqlalchemy.engine.Engine - INFO - 
+CREATE TABLE agents (
+	id VARCHAR(255) NOT NULL, 
+	api_key VARCHAR(255) NOT NULL, 
+	knowledge_base VARCHAR(255) NOT NULL, 
+	created_at DATETIME DEFAULT now(), 
+	PRIMARY KEY (id), 
+	UNIQUE (api_key), 
+	UNIQUE (knowledge_base)
+)
+
+
+2024-08-30 09:02:37 - sqlalchemy.engine.Engine - INFO - [no key 0.00024s] {}
+2024-08-30 09:02:37 - sqlalchemy.engine.Engine - INFO - 
+CREATE TABLE threads (
+	id VARCHAR(255) NOT NULL, 
+	agent_id VARCHAR(255), 
+	conversation_name VARCHAR(255), 
+	run_mode VARCHAR(255), 
+	created_at DATETIME DEFAULT now(), 
+	PRIMARY KEY (id), 
+	FOREIGN KEY(agent_id) REFERENCES agents (id)
+)
+
+
+2024-08-30 09:02:37 - sqlalchemy.engine.Engine - INFO - [no key 0.00035s] {}
+2024-08-30 09:02:37 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-08-30 09:02:37 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-30 09:02:37 - sqlalchemy.engine.Engine - INFO - ALTER DATABASE mategen CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci
+2024-08-30 09:02:37 - sqlalchemy.engine.Engine - INFO - [generated in 0.00019s] {}
+2024-08-30 09:02:37 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-08-30 09:02:37 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-30 09:02:37 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-08-30 09:02:37 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-30 09:02:37 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-08-30 09:02:37 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-30 09:02:37 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads DROP FOREIGN KEY threads_ibfk_1
+2024-08-30 09:02:37 - sqlalchemy.engine.Engine - INFO - [generated in 0.00025s] {}
+2024-08-30 09:02:37 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-08-30 09:02:37 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-30 09:02:37 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-08-30 09:02:37 - sqlalchemy.engine.Engine - INFO - [generated in 0.00030s] {}
+2024-08-30 09:02:37 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-30 09:02:37 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-08-30 09:02:37 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-30 09:02:37 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-08-30 09:02:37 - sqlalchemy.engine.Engine - INFO - ALTER TABLE agents CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-08-30 09:02:37 - sqlalchemy.engine.Engine - INFO - [generated in 0.00018s] {}
+2024-08-30 09:02:37 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-08-30 09:02:37 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-30 09:02:37 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads ADD CONSTRAINT threads_ibfk_1 FOREIGN KEY (agent_id) REFERENCES agents(id)
+2024-08-30 09:02:37 - sqlalchemy.engine.Engine - INFO - [generated in 0.00021s] {}
+2024-08-30 09:02:37 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-08-30 09:03:03 - root - INFO - 正在初始化MateGen，请稍后...
+2024-08-30 09:03:04 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-08-30 09:03:04 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-08-30 09:03:04 - root - INFO - 首次使用MateGen，正在进行Agent基础设置...
+2024-08-30 09:03:07 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/assistants "HTTP/1.1 200 OK"
+2024-08-30 09:03:08 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads "HTTP/1.1 200 OK"
+2024-08-30 09:03:08 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/assistants/asst_Ej125zJzDWq66LMrLryVArRk "HTTP/1.1 200 OK"
+2024-08-30 09:03:08 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/assistants/asst_Ej125zJzDWq66LMrLryVArRk "HTTP/1.1 200 OK"
+2024-08-30 09:03:08 - root - INFO - 已完成初始化，MateGen可随时调用！
+2024-08-30 09:05:14 - root - INFO - 正在初始化MateGen，请稍后...
+2024-08-30 09:05:15 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-08-30 09:05:15 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-08-30 09:05:15 - root - INFO - 首次使用MateGen，正在进行Agent基础设置...
+2024-08-30 09:05:18 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/assistants "HTTP/1.1 200 OK"
+2024-08-30 09:05:18 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads "HTTP/1.1 200 OK"
+2024-08-30 09:05:46 - root - INFO - 正在初始化MateGen，请稍后...
+2024-08-30 09:05:48 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-08-30 09:05:48 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-08-30 09:05:48 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads "HTTP/1.1 200 OK"
+2024-08-30 09:10:36 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-08-30 09:10:36 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-30 09:10:36 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-08-30 09:10:36 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-30 09:10:36 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-08-30 09:10:36 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-30 09:10:36 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-30 09:10:36 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-08-30 09:10:36 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-30 09:10:36 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-08-30 09:10:36 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-30 09:10:36 - sqlalchemy.engine.Engine - INFO - 
+CREATE TABLE agents (
+	id VARCHAR(255) NOT NULL, 
+	api_key VARCHAR(255) NOT NULL, 
+	created_at DATETIME DEFAULT now(), 
+	PRIMARY KEY (id), 
+	UNIQUE (api_key)
+)
+
+
+2024-08-30 09:10:36 - sqlalchemy.engine.Engine - INFO - [no key 0.00022s] {}
+2024-08-30 09:10:36 - sqlalchemy.engine.Engine - INFO - 
+CREATE TABLE threads (
+	id VARCHAR(255) NOT NULL, 
+	agent_id VARCHAR(255), 
+	conversation_name VARCHAR(255), 
+	run_mode VARCHAR(255), 
+	created_at DATETIME DEFAULT now(), 
+	PRIMARY KEY (id), 
+	FOREIGN KEY(agent_id) REFERENCES agents (id)
+)
+
+
+2024-08-30 09:10:36 - sqlalchemy.engine.Engine - INFO - [no key 0.00019s] {}
+2024-08-30 09:10:36 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-08-30 09:10:36 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-30 09:10:36 - sqlalchemy.engine.Engine - INFO - ALTER DATABASE mategen CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci
+2024-08-30 09:10:36 - sqlalchemy.engine.Engine - INFO - [generated in 0.00019s] {}
+2024-08-30 09:10:36 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-08-30 09:10:36 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-30 09:10:36 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-08-30 09:10:36 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-30 09:10:36 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-08-30 09:10:36 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-30 09:10:36 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads DROP FOREIGN KEY threads_ibfk_1
+2024-08-30 09:10:36 - sqlalchemy.engine.Engine - INFO - [generated in 0.00018s] {}
+2024-08-30 09:10:36 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-08-30 09:10:36 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-30 09:10:36 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-08-30 09:10:36 - sqlalchemy.engine.Engine - INFO - [generated in 0.00021s] {}
+2024-08-30 09:10:36 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-30 09:10:36 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-08-30 09:10:36 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-30 09:10:36 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-08-30 09:10:36 - sqlalchemy.engine.Engine - INFO - ALTER TABLE agents CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-08-30 09:10:36 - sqlalchemy.engine.Engine - INFO - [generated in 0.00019s] {}
+2024-08-30 09:10:36 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-08-30 09:10:36 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-30 09:10:36 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads ADD CONSTRAINT threads_ibfk_1 FOREIGN KEY (agent_id) REFERENCES agents(id)
+2024-08-30 09:10:36 - sqlalchemy.engine.Engine - INFO - [generated in 0.00021s] {}
+2024-08-30 09:10:36 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-08-30 09:22:16 - root - INFO - 正在初始化MateGen，请稍后...
+2024-08-30 09:22:18 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-08-30 09:22:18 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-08-30 09:22:18 - root - INFO - 首次使用MateGen，正在进行Agent基础设置...
+2024-08-30 09:22:20 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/assistants "HTTP/1.1 200 OK"
+2024-08-30 09:22:20 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads "HTTP/1.1 200 OK"
+2024-08-30 09:22:21 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/assistants/asst_2jsbhKdMMsgNJCGtkCsraPfW "HTTP/1.1 200 OK"
+2024-08-30 09:22:21 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/assistants/asst_2jsbhKdMMsgNJCGtkCsraPfW "HTTP/1.1 200 OK"
+2024-08-30 09:22:21 - root - INFO - 已完成初始化，MateGen可随时调用！
+2024-08-30 09:22:41 - root - INFO - 正在初始化MateGen，请稍后...
+2024-08-30 09:22:42 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-08-30 09:22:42 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-08-30 09:22:43 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads "HTTP/1.1 200 OK"
+2024-08-30 09:22:43 - root - INFO - 正在创建知识库文件夹
+2024-08-30 09:22:43 - root - INFO - 当前问答知识库文件夹路径：/root/knowledge_base/D:\Work\knowledge_base\muyu_test1，请在文件夹中放置知识库文件。
+2024-08-30 09:22:43 - root - INFO - 目前支持PDF、Word、PPT、md等格式读取与检索。
+2024-08-30 09:22:43 - root - INFO - 已完成初始化，MateGen可随时调用！
+2024-08-30 09:26:54 - root - INFO - 正在初始化MateGen，请稍后...
+2024-08-30 09:26:55 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-08-30 09:26:55 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-08-30 09:26:56 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads "HTTP/1.1 200 OK"
+2024-08-30 09:26:56 - root - INFO - 正在创建知识库文件夹
+2024-08-30 09:26:56 - root - INFO - 当前问答知识库文件夹路径：/root/knowledge_base/muyu_test1，请在文件夹中放置知识库文件。
+2024-08-30 09:26:56 - root - INFO - 目前支持PDF、Word、PPT、md等格式读取与检索。
+2024-08-30 09:26:56 - root - INFO - 已完成初始化，MateGen可随时调用！
+2024-08-30 10:18:55 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-08-30 10:18:55 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-30 10:18:55 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-08-30 10:18:55 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-30 10:18:55 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-08-30 10:18:55 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-30 10:18:55 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-30 10:18:55 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-08-30 10:18:55 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-30 10:18:55 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-08-30 10:18:55 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-30 10:18:55 - sqlalchemy.engine.Engine - INFO - 
+CREATE TABLE agents (
+	id VARCHAR(255) NOT NULL, 
+	api_key VARCHAR(255) NOT NULL, 
+	knowledge_base_path VARCHAR(255) NOT NULL, 
+	created_at DATETIME DEFAULT now(), 
+	PRIMARY KEY (id), 
+	UNIQUE (api_key), 
+	UNIQUE (knowledge_base_path)
+)
+
+
+2024-08-30 10:18:55 - sqlalchemy.engine.Engine - INFO - [no key 0.00028s] {}
+2024-08-30 10:18:55 - sqlalchemy.engine.Engine - INFO - 
+CREATE TABLE threads (
+	id VARCHAR(255) NOT NULL, 
+	agent_id VARCHAR(255), 
+	conversation_name VARCHAR(255), 
+	run_mode VARCHAR(255), 
+	created_at DATETIME DEFAULT now(), 
+	PRIMARY KEY (id), 
+	FOREIGN KEY(agent_id) REFERENCES agents (id)
+)
+
+
+2024-08-30 10:18:55 - sqlalchemy.engine.Engine - INFO - [no key 0.00027s] {}
+2024-08-30 10:18:55 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-08-30 10:18:55 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-30 10:18:55 - sqlalchemy.engine.Engine - INFO - ALTER DATABASE mategen CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci
+2024-08-30 10:18:55 - sqlalchemy.engine.Engine - INFO - [generated in 0.00028s] {}
+2024-08-30 10:18:55 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-08-30 10:18:55 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-30 10:18:55 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-08-30 10:18:55 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-30 10:18:55 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-08-30 10:18:55 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-30 10:18:55 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads DROP FOREIGN KEY threads_ibfk_1
+2024-08-30 10:18:55 - sqlalchemy.engine.Engine - INFO - [generated in 0.00033s] {}
+2024-08-30 10:18:55 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-08-30 10:18:55 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-30 10:18:55 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-08-30 10:18:55 - sqlalchemy.engine.Engine - INFO - [generated in 0.00021s] {}
+2024-08-30 10:18:55 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-30 10:18:55 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-08-30 10:18:55 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-30 10:18:55 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-08-30 10:18:55 - sqlalchemy.engine.Engine - INFO - ALTER TABLE agents CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-08-30 10:18:55 - sqlalchemy.engine.Engine - INFO - [generated in 0.00018s] {}
+2024-08-30 10:18:55 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-08-30 10:18:55 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-30 10:18:55 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads ADD CONSTRAINT threads_ibfk_1 FOREIGN KEY (agent_id) REFERENCES agents(id)
+2024-08-30 10:18:55 - sqlalchemy.engine.Engine - INFO - [generated in 0.00017s] {}
+2024-08-30 10:18:55 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-08-30 10:21:39 - root - INFO - 正在初始化MateGen，请稍后...
+2024-08-30 10:21:40 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-08-30 10:21:40 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-08-30 10:21:40 - root - INFO - 首次使用MateGen，正在进行Agent基础设置...
+2024-08-30 10:21:43 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/assistants "HTTP/1.1 200 OK"
+2024-08-30 10:21:43 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads "HTTP/1.1 200 OK"
+2024-08-30 10:21:44 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/assistants/asst_9rhyynnIYo8FSiWGTAwHFUqs "HTTP/1.1 200 OK"
+2024-08-30 10:21:44 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/assistants/asst_9rhyynnIYo8FSiWGTAwHFUqs "HTTP/1.1 200 OK"
+2024-08-30 10:21:44 - root - INFO - 已完成初始化，MateGen可随时调用！
+2024-08-30 10:23:07 - root - INFO - 正在初始化MateGen，请稍后...
+2024-08-30 10:23:08 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-08-30 10:23:08 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-08-30 10:23:08 - root - INFO - 首次使用MateGen，正在进行Agent基础设置...
+2024-08-30 10:23:11 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/assistants "HTTP/1.1 200 OK"
+2024-08-30 10:23:11 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads "HTTP/1.1 200 OK"
+2024-08-30 10:23:51 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-08-30 10:23:51 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-30 10:23:51 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-08-30 10:23:51 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-30 10:23:51 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-08-30 10:23:51 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-30 10:23:51 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-30 10:23:51 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-08-30 10:23:51 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-30 10:23:51 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-08-30 10:23:51 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-30 10:23:51 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-08-30 10:23:51 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-30 10:23:51 - sqlalchemy.engine.Engine - INFO - ALTER DATABASE mategen CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci
+2024-08-30 10:23:51 - sqlalchemy.engine.Engine - INFO - [generated in 0.00022s] {}
+2024-08-30 10:23:51 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-08-30 10:23:51 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-30 10:23:51 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-08-30 10:23:51 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-30 10:23:51 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-08-30 10:23:51 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-30 10:23:51 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads DROP FOREIGN KEY threads_ibfk_1
+2024-08-30 10:23:51 - sqlalchemy.engine.Engine - INFO - [generated in 0.00019s] {}
+2024-08-30 10:23:51 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-08-30 10:23:51 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-30 10:23:51 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-08-30 10:23:51 - sqlalchemy.engine.Engine - INFO - [generated in 0.00023s] {}
+2024-08-30 10:23:51 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-08-30 10:23:51 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-08-30 10:23:51 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-08-30 10:23:51 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-08-30 10:23:51 - sqlalchemy.engine.Engine - INFO - ALTER TABLE agents CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-08-30 10:23:51 - sqlalchemy.engine.Engine - INFO - [generated in 0.00022s] {}
+2024-08-30 10:24:19 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-08-30 10:24:19 - sqlalchemy.pool.impl.QueuePool - ERROR - Exception during reset or similar
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 986, in _finalize_fairy
+    fairy._reset(
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 1432, in _reset
+    pool._dialect.do_rollback(self)
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 699, in do_rollback
+    dbapi_connection.rollback()
+  File "/usr/local/lib/python3.11/site-packages/pymysql/connections.py", line 493, in rollback
+    self._read_ok_packet()
+  File "/usr/local/lib/python3.11/site-packages/pymysql/connections.py", line 453, in _read_ok_packet
+    pkt = self._read_packet()
+          ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/pymysql/connections.py", line 744, in _read_packet
+    packet_header = self._read_bytes(4)
+                    ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/pymysql/connections.py", line 798, in _read_bytes
+    raise err.OperationalError(
+pymysql.err.OperationalError: (2013, 'Lost connection to MySQL server during query')
+2024-08-30 10:25:00 - root - INFO - 正在初始化MateGen，请稍后...
+2024-08-30 10:25:02 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-08-30 10:25:02 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-08-30 10:25:02 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads "HTTP/1.1 200 OK"
+2024-08-30 10:25:02 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/assistants/asst_QD7HfGPw1Y4SDpdC20dPijaI "HTTP/1.1 200 OK"
+2024-08-30 10:25:03 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/assistants/asst_QD7HfGPw1Y4SDpdC20dPijaI "HTTP/1.1 200 OK"
+2024-08-30 10:25:03 - root - INFO - 已完成初始化，MateGen可随时调用！
+2024-08-30 10:28:14 - root - INFO - 正在初始化MateGen，请稍后...
+2024-08-30 10:28:15 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-08-30 10:28:15 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-08-30 10:28:15 - root - INFO - 首次使用MateGen，正在进行Agent基础设置...
+2024-08-30 10:28:17 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/assistants "HTTP/1.1 200 OK"
+2024-08-30 10:28:18 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads "HTTP/1.1 200 OK"
+2024-08-30 10:28:18 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/assistants/asst_K14Ys1w88VTCGfWkMezEUvxy "HTTP/1.1 200 OK"
+2024-08-30 10:28:19 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/assistants/asst_K14Ys1w88VTCGfWkMezEUvxy "HTTP/1.1 200 OK"
+2024-08-30 10:28:19 - root - INFO - 已完成初始化，MateGen可随时调用！
+2024-08-30 10:56:26 - root - INFO - 正在初始化MateGen，请稍后...
+2024-08-30 10:56:27 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-08-30 10:56:27 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-08-30 10:56:27 - root - INFO - 首次使用MateGen，正在进行Agent基础设置...
+2024-08-30 10:56:30 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/assistants "HTTP/1.1 200 OK"
+2024-08-30 10:56:30 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads "HTTP/1.1 200 OK"
+2024-08-30 10:56:31 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/assistants/asst_8oPwWGvHVEtNgMYoXykk3XrW "HTTP/1.1 200 OK"
+2024-08-30 10:56:31 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/assistants/asst_8oPwWGvHVEtNgMYoXykk3XrW "HTTP/1.1 200 OK"
+2024-08-30 10:56:31 - root - INFO - 已完成初始化，MateGen可随时调用！
+2024-08-30 10:58:37 - root - INFO - 正在创建知识库，请稍后...
+2024-08-30 10:58:37 - root - INFO - 当前知识库的本地路径是：auto
+2024-08-30 10:59:14 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/vector_stores "HTTP/1.1 502 Bad Gateway"
+2024-08-30 10:59:14 - openai._base_client - INFO - Retrying request to /vector_stores in 0.908765 seconds
+2024-08-30 10:59:46 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/vector_stores "HTTP/1.1 200 OK"
+2024-08-30 10:59:47 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/vector_stores/vs_y6FizMmRYPTdfwJCsvGKXu4o/files "HTTP/1.1 200 OK"
+2024-08-30 10:59:47 - httpx - INFO - HTTP Request: DELETE https://ai.devtool.tech/proxy/v1/vector_stores/vs_y6FizMmRYPTdfwJCsvGKXu4o/files/file-exSHjW3e5zNhhcolKY7jlryX "HTTP/1.1 200 OK"
+2024-08-30 10:59:48 - httpx - INFO - HTTP Request: DELETE https://ai.devtool.tech/proxy/v1/files/file-exSHjW3e5zNhhcolKY7jlryX "HTTP/1.1 200 OK"
+2024-08-30 10:59:48 - root - INFO - 正在创建知识库的向量存储，请稍后...
+2024-08-30 11:01:12 - root - INFO - 正在初始化MateGen，请稍后...
+2024-08-30 11:01:14 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-08-30 11:01:14 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-08-30 11:01:14 - root - INFO - 首次使用MateGen，正在进行Agent基础设置...
+2024-08-30 11:01:16 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/assistants "HTTP/1.1 200 OK"
+2024-08-30 11:01:17 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads "HTTP/1.1 200 OK"
+2024-08-30 11:01:17 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/assistants/asst_yORBhfzppitpjUE7h85hJbCR "HTTP/1.1 200 OK"
+2024-08-30 11:01:18 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/assistants/asst_yORBhfzppitpjUE7h85hJbCR "HTTP/1.1 200 OK"
+2024-08-30 11:01:18 - root - INFO - 已完成初始化，MateGen可随时调用！
+2024-08-30 11:01:24 - root - INFO - 正在创建知识库，请稍后...
+2024-08-30 11:01:24 - root - INFO - 当前知识库的本地路径是：muyu_test1!!gqRLwV92gYTUfgy7y0UPT3BlbkFJhUiioXGfDg17VNJeBd0u
+2024-08-30 11:01:52 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/vector_stores "HTTP/1.1 200 OK"
+2024-08-30 11:01:52 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/vector_stores/vs_y6FizMmRYPTdfwJCsvGKXu4o/files "HTTP/1.1 200 OK"
+2024-08-30 11:01:52 - root - INFO - 正在创建知识库的向量存储，请稍后...
+2024-08-30 11:04:45 - root - INFO - 正在初始化MateGen，请稍后...
+2024-08-30 11:04:47 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-08-30 11:04:47 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-08-30 11:04:47 - root - INFO - 首次使用MateGen，正在进行Agent基础设置...
+2024-08-30 11:04:51 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/assistants "HTTP/1.1 200 OK"
+2024-08-30 11:04:51 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads "HTTP/1.1 200 OK"
+2024-08-30 11:04:51 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/assistants/asst_EnvkxFbMWMzgiJ0PkNTBlYPX "HTTP/1.1 200 OK"
+2024-08-30 11:04:52 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/assistants/asst_EnvkxFbMWMzgiJ0PkNTBlYPX "HTTP/1.1 200 OK"
+2024-08-30 11:04:52 - root - INFO - 已完成初始化，MateGen可随时调用！
+2024-08-30 11:04:55 - root - INFO - 正在创建知识库，请稍后...
+2024-08-30 11:04:55 - root - INFO - 当前知识库的本地路径是：muyu_test1!!gqRLwV92gYTUfgy7y0UPT3BlbkFJhUiioXGfDg17VNJeBd0u
+2024-08-30 11:05:15 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/vector_stores "HTTP/1.1 200 OK"
+2024-08-30 11:05:15 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/vector_stores/vs_y6FizMmRYPTdfwJCsvGKXu4o/files "HTTP/1.1 200 OK"
+2024-08-30 11:05:15 - root - INFO - 正在创建知识库的向量存储，请稍后...
+2024-08-30 11:05:52 - root - INFO - 正在创建知识库，请稍后...
+2024-08-30 11:05:52 - root - INFO - 当前知识库的本地路径是：muyu_test9!!gqRLwV92gYTUfgy7y0UPT3BlbkFJhUiioXGfDg17VNJeBd0u
+2024-08-30 11:06:17 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/vector_stores "HTTP/1.1 200 OK"
+2024-08-30 11:06:17 - root - INFO - 正在创建知识库的向量存储，请稍后...
+2024-08-30 11:16:42 - root - INFO - 正在初始化MateGen，请稍后...
+2024-08-30 11:16:44 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-08-30 11:16:44 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-08-30 11:16:45 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads "HTTP/1.1 200 OK"
+2024-08-30 11:16:45 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/assistants/asst_TzMD4RVBRvPiA358BAXTOLri "HTTP/1.1 200 OK"
+2024-08-30 11:16:46 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/assistants/asst_TzMD4RVBRvPiA358BAXTOLri "HTTP/1.1 200 OK"
+2024-08-30 11:16:46 - root - INFO - 已完成初始化，MateGen可随时调用！
+2024-08-30 11:17:50 - root - INFO - 正在初始化MateGen，请稍后...
+2024-08-30 11:17:51 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-08-30 11:17:51 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-08-30 11:17:51 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads "HTTP/1.1 200 OK"
+2024-08-30 11:17:51 - root - INFO - 正在创建知识库文件夹
+2024-08-30 11:17:51 - root - INFO - 当前问答知识库文件夹路径：/root/knowledge_base/muyu_test1，请在文件夹中放置知识库文件。
+2024-08-30 11:17:51 - root - INFO - 目前支持PDF、Word、PPT、md等格式读取与检索。
+2024-08-30 11:17:51 - root - INFO - 已完成初始化，MateGen可随时调用！
+2024-08-30 11:18:08 - root - INFO - 正在创建知识库，请稍后...
+2024-08-30 11:18:08 - root - INFO - 当前知识库的本地路径是：muyu_test1!!gqRLwV92gYTUfgy7y0UPT3BlbkFJhUiioXGfDg17VNJeBd0u
+2024-08-30 11:18:22 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/vector_stores "HTTP/1.1 200 OK"
+2024-08-30 11:18:23 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/vector_stores/vs_y6FizMmRYPTdfwJCsvGKXu4o/files "HTTP/1.1 200 OK"
+2024-08-30 11:18:23 - root - INFO - 正在创建知识库的向量存储，请稍后...
