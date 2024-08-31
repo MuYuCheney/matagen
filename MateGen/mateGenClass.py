@@ -128,7 +128,7 @@ def create_knowledge_base(client,
     logging.info(f"当前知识库的本地路径是：{base_path}")
 
     vector_stores = client.beta.vector_stores.list()
-
+    print(f"vector stores list: {vector_stores}")
     vector_id = None
 
     for vs in vector_stores.data:
@@ -147,10 +147,13 @@ def create_knowledge_base(client,
 
     logging.info("正在创建知识库的向量存储，请稍后...")
 
+    print(f"vector_id:{vector_id}")
 
     if vector_id == None:
         if chunking_strategy == "auto":
+
             vector_store = client.beta.vector_stores.create(name=knowledge_base_name)
+
         else:
             vector_store = client.beta.vector_stores.create(name=knowledge_base_name,
                                                             chunking_strategy="static",
@@ -159,13 +162,19 @@ def create_knowledge_base(client,
         vector_id = vector_store.id
 
     try:
-        file_paths = get_specific_files(base_path)
+        # Docker
+        file_path = f'/app/uploads/{knowledge_base_name}'
+        file_paths = get_specific_files(file_path)
+        # # windows
+        # file_paths = get_specific_files(base_path)
+        logging.info(f"file_paths ： {file_paths}")
         file_streams = [open(path, "rb") for path in file_paths]
         client.beta.vector_stores.file_batches.upload_and_poll(
             vector_store_id=vector_id, files=file_streams
         )
-        knowledge_base_description = get_formatted_file_list(base_path)
-
+        print(f"开始")
+        knowledge_base_description = get_formatted_file_list(knowledge_base_name)
+        print(f"knowledge_base_description:{knowledge_base_description}")
         from MateGen.utils import (SessionLocal, add_knowledge_base)
 
         db_session = SessionLocal()
@@ -175,11 +184,13 @@ def create_knowledge_base(client,
                            knowledge_base_description=knowledge_base_description,
                            thread_id=thread_id
                            )
+
     except Exception as e:
         return None
 
     logging.info("知识库创建完成！")
     return vector_id
+
 
 class MateGenClass:
     def __init__(self,
@@ -298,7 +309,7 @@ class MateGenClass:
                     db_session = SessionLocal()
                     self.vector_id = find_vector_store_id_by_name(db_session, self.knowledge_base_name)
                     db_session.close()
-                # else:
+                    # else:
                     if enhanced_mode:
                         model = 'gpt-4o'
                     else:
@@ -415,7 +426,6 @@ class MateGenClass:
 
         else:
             return {"data": "你好，我是MateGen，你的个人交互式编程助理，有任何问题都可以问我哦~"}
-
 
     def upload_knowledge_base(self, knowledge_base_name=None):
         if knowledge_base_name != None:
@@ -1324,7 +1334,6 @@ def get_knowledge_base_description(sub_folder_name):
         home_dir = str(Path.home())
         base_path = os.path.join(home_dir, 'knowledge_base')
 
-
     # 子文件夹路径
     sub_folder_path = os.path.join(base_path, sub_folder_name)
     sub_json_file = os.path.join(sub_folder_path, f'{sub_folder_name}_vector_id.json')
@@ -1723,9 +1732,6 @@ def check_knowledge_base_name(client, knowledge_base_name):
     return None
 
 
-
-
-
 def update_vector_db_mapping(sub_folder_name, vector_db_id):
     # 确保主目录和子目录及其JSON文件存在
     sub_folder_path = create_knowledge_base_folder(sub_folder_name)
@@ -1804,9 +1810,14 @@ def get_specific_files(folder_path):
     ]
     return file_paths
 
+
 def get_formatted_file_list(folder_path):
-    # 获取指定文件夹内的特定文件类型的文件路径
-    file_paths = get_specific_files(folder_path)
+
+    file_path = f'/app/uploads/{folder_path}'
+    file_paths = get_specific_files(file_path)
+
+    # # 获取指定文件夹内的特定文件类型的文件路径
+    # file_paths = get_specific_files(folder_path)
 
     # 提取文件名并去掉扩展名
     file_names = [os.path.splitext(os.path.basename(file_path))[0] for file_path in file_paths]
@@ -1832,9 +1843,6 @@ def remove_knowledge_base_info(text):
 
     # 如果关键字不存在，返回原始字符串
     return text
-
-
-
 
 
 def clear_folder(folder_path):

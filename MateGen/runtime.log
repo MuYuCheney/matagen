@@ -46,3 +46,9 @@
 2024-08-31 05:16:54 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 401 Unauthorized"
 2024-08-31 05:16:54 - root - INFO - API-KEY未通过验证，请添加客服小可爱微信：littlelion_1215领取限量免费测试API-KEY，或按需购买token。
 2024-08-31 05:16:54 - root - INFO - API-KEY未通过验证，请添加客服小可爱微信：littlelion_1215领取限量免费测试API-KEY，或按需购买token。
+2024-08-31 09:56:42 - root - INFO - 正在初始化MateGen，请稍后...
+2024-08-31 09:56:42 - root - INFO - 正在初始化MateGen，请稍后...
+2024-08-31 09:56:43 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 401 Unauthorized"
+2024-08-31 09:56:43 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 401 Unauthorized"
+2024-08-31 09:56:43 - root - INFO - API-KEY未通过验证，请添加客服小可爱微信：littlelion_1215领取限量免费测试API-KEY，或按需购买token。
+2024-08-31 09:56:43 - root - INFO - API-KEY未通过验证，请添加客服小可爱微信：littlelion_1215领取限量免费测试API-KEY，或按需购买token。

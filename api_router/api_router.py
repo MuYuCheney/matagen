@@ -147,7 +147,7 @@ def mount_app_routes(app: FastAPI):
                                           chunk_overlap_tokens=request.chunk_overlap_tokens,
                                           thread_id=thread_id)
         if vector_id is not None:
-            return {"status": 200, "data": {"message": "已成功完成{}",
+            return {"status": 200, "data": {"message": "已成功完成",
                                             "vector_id": vector_id}}
         else:
             raise HTTPException(status_code=400, detail="知识库无法创建，请再次确认知识库文件夹中存在格式合规的文件")
