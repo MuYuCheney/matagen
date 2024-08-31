@@ -128,7 +128,7 @@ def create_knowledge_base(client,
     logging.info(f"当前知识库的本地路径是：{base_path}")
 
     vector_stores = client.beta.vector_stores.list()
-    print(f"vector stores list: {vector_stores}")
+
     vector_id = None
 
     for vs in vector_stores.data:
@@ -147,7 +147,6 @@ def create_knowledge_base(client,
 
     logging.info("正在创建知识库的向量存储，请稍后...")
 
-    print(f"vector_id:{vector_id}")
 
     if vector_id == None:
         if chunking_strategy == "auto":
@@ -162,22 +161,22 @@ def create_knowledge_base(client,
         vector_id = vector_store.id
 
     try:
-        # # Docker
-        # file_path = f'/app/uploads/{knowledge_base_name}'
-        # file_paths = get_specific_files(file_path)
-        # windows
-        file_paths = get_specific_files(base_path)
+        # Docker
+        file_path = f'/app/uploads/{knowledge_base_name}'
+        file_paths = get_specific_files(file_path)
+        # # windows
+        # file_paths = get_specific_files(base_path)
         logging.info(f"file_paths ： {file_paths}")
         file_streams = [open(path, "rb") for path in file_paths]
         client.beta.vector_stores.file_batches.upload_and_poll(
             vector_store_id=vector_id, files=file_streams
         )
 
-        # # Docker
-        # knowledge_base_description = get_formatted_file_list(knowledge_base_name)
+        # Docker
+        knowledge_base_description = get_formatted_file_list(knowledge_base_name)
 
-        # Windows
-        knowledge_base_description = get_formatted_file_list(base_path)
+        # # Windows
+        # knowledge_base_description = get_formatted_file_list(base_path)
 
         from MateGen.utils import (SessionLocal, add_knowledge_base)
 
@@ -1807,12 +1806,13 @@ def get_specific_files(folder_path):
 
 def get_formatted_file_list(folder_path):
 
-    # # Docker
-    # file_path = f'/app/uploads/{folder_path}'
-    # file_paths = get_specific_files(file_path)
+    # Docker
+    file_path = f'/app/uploads/{folder_path}'
+    file_paths = get_specific_files(file_path)
 
-    # 获取指定文件夹内的特定文件类型的文件路径
-    file_paths = get_specific_files(folder_path)
+    # Windows
+    # #  获取指定文件夹内的特定文件类型的文件路径
+    # file_paths = get_specific_files(folder_path)
 
     # 提取文件名并去掉扩展名
     file_names = [os.path.splitext(os.path.basename(file_path))[0] for file_path in file_paths]

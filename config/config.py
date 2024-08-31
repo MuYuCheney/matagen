@@ -32,12 +32,12 @@ password = "snowball950123"
 # SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{username}:{password}@{hostname}/{database_name}?charset=utf8mb4"
 
 
-# # # Docker Compose 中定义的 MySQL 服务名称
-# hostname = 'db'  # Docker Compose 中定义的 MySQL 服务名称
-# SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{username}:{password}@{hostname}/{database_name}?charset=utf8mb4"
+# # Docker Compose 中定义的 MySQL 服务名称
+hostname = 'db'  # Docker Compose 中定义的 MySQL 服务名称
+SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{username}:{password}@{hostname}/{database_name}?charset=utf8mb4"
 
 # # PC
-hostname = 'localhost'
-password = "snowball2019"
-SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{username}:{password}@{hostname}/{database_name}?charset=utf8mb4"
+# hostname = 'localhost'
+# password = "snowball2019"
+# SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{username}:{password}@{hostname}/{database_name}?charset=utf8mb4"
 
