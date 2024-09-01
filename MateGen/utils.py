@@ -28,7 +28,7 @@ def get_db():
         db.close()
 
 
-def insert_agent_with_fixed_id(session: Session, api_key: str, knowledge_base_path: str):
+def insert_agent_with_fixed_id(session: Session, api_key: str):
     """
     向数据库中插入一条新的代理记录，其中agent_id固定为-1。
     :param session: SQLAlchemy Session 对象，用于数据库操作
@@ -37,13 +37,13 @@ def insert_agent_with_fixed_id(session: Session, api_key: str, knowledge_base_pa
     """
     try:
         # 创建新的代理实例，id固定为"-1"
-        new_agent = SecretModel(id="-1", api_key=api_key, knowledge_base_path=knowledge_base_path)
+        new_agent = SecretModel(id="-1", api_key=api_key)
         session.add(new_agent)
         session.commit()
         return True
     except Exception as e:
         session.rollback()  # 出错时回滚以避免数据不一致
-        return e
+        return False
 
 
 def store_agent_info(session: Session, assis_id: str):

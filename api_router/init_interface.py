@@ -33,18 +33,21 @@ def get_mate_gen(
     from MateGen.utils import SessionLocal, fetch_latest_api_key
     db_session = SessionLocal()
 
-    api_key = fetch_latest_api_key(db_session)
+    if api_key is None:
+        api_key = fetch_latest_api_key(db_session)
 
-    if kaggle_competition_guidance and not competition_name:
-        raise HTTPException(status_code=400,
-                            detail="Competition name is required when Kaggle competition guidance is enabled.")
-    if knowledge_base_chat and not knowledge_base_name:
-        raise HTTPException(status_code=400,
-                            detail="knowledge_base_name is required when knowledge_base_chat is enabled.")
+        if knowledge_base_chat and not knowledge_base_name:
+            raise HTTPException(status_code=400,
+                                detail="knowledge_base_name is required when knowledge_base_chat is enabled.")
 
-    return MateGenClass(api_key, thread, enhanced_mode, knowledge_base_chat, kaggle_competition_guidance,
-                        competition_name,
-                        knowledge_base_name)
+        return MateGenClass(api_key, thread, enhanced_mode, knowledge_base_chat, kaggle_competition_guidance,
+                            competition_name,
+                            knowledge_base_name)
+
+    else:
+        return MateGenClass(api_key, thread, enhanced_mode, knowledge_base_chat, kaggle_competition_guidance,
+                            competition_name,
+                            knowledge_base_name)
 
 
 def get_openai_instance(
@@ -102,3 +105,42 @@ def initialize_mate_gen(mate_gen: MateGenClass = Depends(get_mate_gen),
     except Exception as e:
 
         raise HTTPException(status_code=500, detail=str(e))
+
+
+
+def get_key_valid(api_key):
+    try:
+        original_string = decrypt_string(api_key, key=b'YAboQcXx376HSUKqzkTz8LK1GKs19Skg4JoZH4QUCJc=')
+        if not original_string:
+            return False
+
+        split_strings = original_string.split(' ')
+        if not split_strings or len(split_strings) == 0:
+            return False
+
+        s1 = split_strings[0]
+        if not s1:
+            return False
+
+        BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+        dotenv_path = os.path.join(BASE_DIR, '.env')
+
+        load_dotenv(dotenv_path)
+        base_url = os.getenv('BASE_URL')
+        if not base_url:
+            raise ValueError("BASE_URL not found in the environment variables.")
+        client = OpenAI(api_key=s1, base_url=base_url)
+
+        try:
+            client.beta.assistants.create(
+                instructions="You are a personal math tutor. When asked a question, write and run Python code to answer the question.",
+                name="Math Tutor",
+                tools=[{"type": "code_interpreter"}],
+                model="gpt-4o",
+            )
+            return True
+        except:
+            return False
+
+    except Exception:
+        return False

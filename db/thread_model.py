@@ -14,7 +14,6 @@ class SecretModel(Base):
     __tablename__ = 'agents'
     id = Column(String(255), primary_key=True)  # 考虑将 'id' 重命名为 'assis_id'，如果它直接存储 'assis_id'
     api_key = Column(String(255), unique=True, nullable=False)  # 确保 api_key 是唯一的
-    knowledge_base_path = Column(String(255), unique=True, nullable=False)  # 知识库路径
     created_at = Column(DateTime(timezone=True), server_default=func.now())  # 自动生成创建时间
 
     threads = relationship("ThreadModel", back_populates="agent", cascade="all, delete-orphan")
