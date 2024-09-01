@@ -354,3 +354,4 @@ def get_vector_store_id_by_name(session: Session, knowledge_base_name: str):
         return knowledge_base_entry.vector_store_id
     else:
         return None  # 没有找到匹配项时返回 None
+

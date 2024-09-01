@@ -146,17 +146,16 @@ def mount_app_routes(app: FastAPI):
     # 初始化API，单独做以解决 API_KEY 加密问题
     @app.post("/api/set_api_key", tags=["Initialization"], summary="授权有效的API Key，需要让用户手动填入")
     def save_api_key(api_key: str = Body(..., description="用于问答的密钥", embed=True),
-                     knowledge_base_path: str = Body(..., description="知识库的根目录", embed=True),
+                     # knowledge_base_path: str = Body(..., description="知识库的根目录", embed=True),
                      ):
         from MateGen.utils import SessionLocal, insert_agent_with_fixed_id
         db_session = SessionLocal()
         try:
             # 因为Json会转义 \ , 这里手动进行转换
-            corrected_path = knowledge_base_path.replace('\\', '\\\\')
+            # corrected_path = knowledge_base_path.replace('\\', '\\\\')
             # 存储用户加密后的 API_KEY, Assis ID 设置为-1来标识，否则会被替换成解密后的API Key
-            if insert_agent_with_fixed_id(db_session, api_key, corrected_path):
-                return {"status": 200, "data": {"message": "您输入的 API Key 已生效",
-                                                "kb_path": knowledge_base_path}}
+            if insert_agent_with_fixed_id(db_session, api_key, "root"):
+                return {"status": 200, "data": {"message": "您输入的 API Key 已生效"}}
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))
 
