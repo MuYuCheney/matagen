@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, ForeignKey, DateTime, Text
+from sqlalchemy import Column, String, ForeignKey, DateTime, Text, VARCHAR
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 
@@ -13,7 +13,7 @@ Base = declarative_base()
 class SecretModel(Base):
     __tablename__ = 'agents'
     id = Column(String(255), primary_key=True)  # 考虑将 'id' 重命名为 'assis_id'，如果它直接存储 'assis_id'
-    api_key = Column(String(255), unique=True, nullable=False)  # 确保 api_key 是唯一的
+    api_key = Column(String(768), unique=True, nullable=False)  # 确保 api_key 是唯一的
     created_at = Column(DateTime(timezone=True), server_default=func.now())  # 自动生成创建时间
 
     threads = relationship("ThreadModel", back_populates="agent", cascade="all, delete-orphan")
