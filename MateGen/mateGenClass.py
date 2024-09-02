@@ -118,7 +118,6 @@ def create_knowledge_base_folder(sub_folder_name=None):
 
 def create_knowledge_base(client,
                           knowledge_base_name,
-                          folder_path_base=None,
                           chunking_strategy="auto",
                           max_chunk_size_tokens=800,
                           chunk_overlap_tokens=400,
@@ -147,17 +146,22 @@ def create_knowledge_base(client,
 
     logging.info("正在创建知识库的向量存储，请稍后...")
 
-
     if vector_id == None:
         if chunking_strategy == "auto":
-
             vector_store = client.beta.vector_stores.create(name=knowledge_base_name)
-
         else:
-            vector_store = client.beta.vector_stores.create(name=knowledge_base_name,
-                                                            chunking_strategy="static",
-                                                            max_chunk_size_tokens=max_chunk_size_tokens,
-                                                            chunk_overlap_tokens=chunk_overlap_tokens)
+
+            vector_store = client.beta.vector_stores.create(
+                name=knowledge_base_name,  # 你提供的向量存储名称
+                chunking_strategy={
+                    "type": "static",  # 明确使用 static 切分策略
+                    "static": {  # 在 static 键下提供具体的切分参数
+                        "max_chunk_size_tokens": max_chunk_size_tokens,  # 自定义的最大切分大小
+                        "chunk_overlap_tokens": chunk_overlap_tokens  # 自定义的重叠大小
+                    }
+                }
+            )
+
         vector_id = vector_store.id
 
     try:
@@ -170,11 +174,9 @@ def create_knowledge_base(client,
         # 检测操作系统
         if os.name == 'posix':  # Unix/Linux/MacOS
             file_path = f'/app/uploads/{knowledge_base_name}'
+            file_paths = get_specific_files(file_path)
         elif os.name == 'nt':  # Windows
-            file_path = f'C:\\path\\to\\uploads\\{knowledge_base_name}'
-
-        # 获取特定文件
-        file_paths = get_specific_files(file_path)
+            file_paths = get_specific_files(base_path)
 
         logging.info(f"file_paths ： {file_paths}")
         file_streams = [open(path, "rb") for path in file_paths]
@@ -182,22 +184,24 @@ def create_knowledge_base(client,
             vector_store_id=vector_id, files=file_streams
         )
 
-        # Docker
-        knowledge_base_description = get_formatted_file_list(knowledge_base_name)
-
-        # # Windows
-        # knowledge_base_description = get_formatted_file_list(base_path)
+        if os.name == 'posix':  # Unix/Linux/MacOS
+            knowledge_base_description = get_formatted_file_list(knowledge_base_name)
+        elif os.name == 'nt':  # Windows
+            knowledge_base_description = get_formatted_file_list(base_path)
 
         from MateGen.utils import (SessionLocal, add_knowledge_base)
+
 
         db_session = SessionLocal()
         add_knowledge_base(db_session,
                            vector_store_id=vector_id,
                            knowledge_base_name=knowledge_base_name,
                            knowledge_base_description=knowledge_base_description,
-                           thread_id=thread_id
+                           thread_id=thread_id,
+                           chunking_strategy=chunking_strategy,
+                           max_chunk_size_tokens=max_chunk_size_tokens,
+                           chunk_overlap_tokens=chunk_overlap_tokens
                            )
-
     except Exception as e:
         return None
 

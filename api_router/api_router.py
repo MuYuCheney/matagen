@@ -307,39 +307,43 @@ def mount_app_routes(app: FastAPI):
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))
 
-    @app.get("/api/all_knowledge_base", tags=["Knowledge"], summary="根据向量数据库id获取到上传的所有本地文件")
-    def get_knowledge_base_all(request: KbNameRequest):
-
-        from MateGen.utils import SessionLocal, get_vector_store_id_by_name
+    @app.get("/api/all_knowledge_base", tags=["Knowledge"],
+             summary="根据知识库的id获取到上传的所有本地文件")
+    def get_knowledge_detail(knowledge_id: str = Query(..., description="thread_id")):
+        from MateGen.utils import SessionLocal, get_knowledge_base_name_by_id
         db_session = SessionLocal()
+        try:
+            knowledge_bases = get_knowledge_base_name_by_id(db_session, knowledge_id)
+            return {"status": 200, "data": knowledge_bases}
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))
 
-        vector_store_id = get_vector_store_id_by_name(db_session, request.knowledge_base_name)
+    @app.post("/api/update_knowledge_base", tags=["Knowledge"],
+              summary="init: true : 前端判断是否有文件增删，如果存在文件操作, 需要先上传/upload，再调用 /api/create_knowledge，后端将进行初始化工作，"
+                      "init: false: 如果仅更更改知识库名称，则无需其他操作")
+    def update_knowledge_info(knowledge_new_name: str = Body(..., description="thread_id"),
+                              init: bool = Body(...,
+                                                description="init: true : 前端判断是否有文件增删，如果存在文件操作, 需要先上传/upload，再调用 /api/create_knowledge，后端将进行初始化工作，"
+                                                            "init: false: 如果仅更更改知识库名称，则无需其他操作"),
+                              knowledge_id: str = Query(..., description="知识库id")):
+        from MateGen.utils import SessionLocal, update_knowledge_base_name
+        db_session = SessionLocal()
+        try:
+            if update_knowledge_base_name(db_session, knowledge_id, knowledge_new_name, init):
+                return {"status": 200, "data": {"后台知识库已更新"}}
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))
 
-        # 根据输入的 知识库名称，先获取到对应的 向量库id
-        vector_store_files = global_openai_instance.beta.vector_stores.files.list(
-            vector_store_id=vector_store_id
-        )
 
-        # 遍历列表，提取并格式化所需信息
-        formatted_files = [
-            {
-                "id": file.id,
-                "created_at": file.created_at,
-                "vector_store_id": file.vector_store_id
-            }
-            for file in vector_store_files.data
-        ]
-
-        return {"status": 200, "data": formatted_files}
-
-    @app.delete("/api/delete_all_files", tags=["Knowledge"], summary="删除所有文件(待进一步确认)")
-    def api_delete_all_files():
-        vector_stores = global_openai_instance.beta.vector_stores.list()
-        # TODO
-        # if delete_all_files(global_openai_instance):
-        #     return {"message": "所有文件已被成功删除。"}
-        # else:
-        #     raise HTTPException(status_code=500, detail="无法删除文件，请检查日志了解更多信息。")
+    @app.delete("/api/delete_knowledge/{knowledge_id}", tags=["Knowledge"], summary="删除指定知识库")
+    def api_delete_all_files(knowledge_id: str):
+        from MateGen.utils import SessionLocal, delete_knowledge_base_by_id
+        db_session = SessionLocal()
+        try:
+            if delete_knowledge_base_by_id(db_session, knowledge_id,):
+                return {"status": 200, "data": {"已成功删除数据库。"}}
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))
 
     async def event_generator(question):
         from MateGen.mateGenClass import EventHandler

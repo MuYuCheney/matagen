@@ -216,6 +216,8 @@ def check_and_initialize_db(session: Session) -> str:
 
 from sqlalchemy.exc import SQLAlchemyError
 import logging
+
+
 def update_knowledge_base_path(session: Session, agent_id: str, new_path: str) -> bool:
     """
     更新指定代理的知识库路径。
@@ -249,7 +251,9 @@ from db.thread_model import KnowledgeBase
 
 
 def add_knowledge_base(session: Session, vector_store_id: str, knowledge_base_name: str,
-                       knowledge_base_description: str, thread_id: str) -> bool:
+                       knowledge_base_description: str, thread_id: str,
+                       chunking_strategy: str = "auto", max_chunk_size_tokens: int = 800,
+                       chunk_overlap_tokens: int = 400) -> bool:
     """
     向数据库中添加一个新的知识库条目。
 
@@ -259,6 +263,9 @@ def add_knowledge_base(session: Session, vector_store_id: str, knowledge_base_na
         knowledge_base_name (str): 知识库的名称。
         knowledge_base_description (str): 知识库的描述。
         thread_id (str): 关联的线程ID。
+        chunking_strategy (str): 文本分块策略，默认为"auto"。
+        max_chunk_size_tokens (int): 最大分块大小，默认为800个token。
+        chunk_overlap_tokens (int): 分块重叠的token数，默认为400。
 
     返回:
         bool: 添加是否成功。
@@ -268,8 +275,12 @@ def add_knowledge_base(session: Session, vector_store_id: str, knowledge_base_na
         new_knowledge_base = KnowledgeBase(
             vector_store_id=vector_store_id,
             knowledge_base_name=knowledge_base_name,
+            display_knowledge_base_name=knowledge_base_name,
             knowledge_base_description=knowledge_base_description,
-            thread_id=thread_id
+            thread_id=thread_id,
+            chunking_strategy=chunking_strategy,
+            max_chunk_size_tokens=max_chunk_size_tokens,
+            chunk_overlap_tokens=chunk_overlap_tokens
         )
 
         # 添加到数据库会话并提交
@@ -338,16 +349,30 @@ def find_kb_name_by_description(session: Session, knowledge_base_name: str) -> s
 
 
 def get_knowledge_base_info(session: Session):
-    # 查询 KnowledgeBase 表中所有的 knowledge_base_name 和 vector_store_id
-    knowledge_base_info = session.query(KnowledgeBase.knowledge_base_name, KnowledgeBase.vector_store_id).all()
+    # 查询 KnowledgeBase 表中所有的记录，包括新增字段
+    knowledge_base_info = session.query(
+        KnowledgeBase.display_knowledge_base_name,
+        KnowledgeBase.vector_store_id,
+        KnowledgeBase.chunking_strategy,
+        KnowledgeBase.max_chunk_size_tokens,
+        KnowledgeBase.chunk_overlap_tokens,
+        KnowledgeBase.knowledge_base_description  # 包括描述字段
+    ).all()
 
-    # 返回一个包含字典的列表，每个字典包含 knowledge_base_name 和 vector_store_id
-    return [{'knowledge_base_name': info.knowledge_base_name, 'vector_store_id': info.vector_store_id} for info in knowledge_base_info]
+    # 返回一个包含字典的列表，每个字典包含全部字段
+    return [{
+        'knowledge_base_name': info.display_knowledge_base_name,
+        'vector_store_id': info.vector_store_id,
+        'chunking_strategy': info.chunking_strategy,
+        'max_chunk_size_tokens': info.max_chunk_size_tokens,
+        'chunk_overlap_tokens': info.chunk_overlap_tokens,
+    } for info in knowledge_base_info]
 
 
 def get_vector_store_id_by_name(session: Session, knowledge_base_name: str):
     # 根据 knowledge_base_name 查询对应的 vector_store_id
-    knowledge_base_entry = session.query(KnowledgeBase.vector_store_id).filter(KnowledgeBase.knowledge_base_name == knowledge_base_name).first()
+    knowledge_base_entry = session.query(KnowledgeBase.vector_store_id).filter(
+        KnowledgeBase.knowledge_base_name == knowledge_base_name).first()
 
     # 检查是否找到对应的记录
     if knowledge_base_entry:
@@ -356,3 +381,152 @@ def get_vector_store_id_by_name(session: Session, knowledge_base_name: str):
         return None  # 没有找到匹配项时返回 None
 
 
+def get_knowledge_base_name_by_id(session: Session, knowledge_base_id: str):
+    """
+    根据提供的 ID 查询 KnowledgeBase 表中的名称。
+
+    参数:
+        session (Session): SQLAlchemy会话对象，用于数据库交互。
+        knowledge_base_id (str): 要查询的 KnowledgeBase 的 ID。
+
+    返回:
+        str: 查询到的 KnowledgeBase 的名称，如果没有找到则返回 None。
+    """
+    # 使用 query 方法选择指定的字段，filter 方法来筛选特定的 ID
+    knowledge_base_name = session.query(KnowledgeBase.knowledge_base_name).filter(
+        KnowledgeBase.id == knowledge_base_id
+    ).scalar()  # 使用 scalar，如果没有找到结果会返回 None
+
+    if os.name == 'nt':
+        base_path = os.path.join('..', 'uploads', knowledge_base_name)
+        file_paths = get_all_files(base_path)
+        return file_paths
+
+    if os.name == 'posix':  # Unix/Linux/MacOS
+        file_path = f'/app/uploads/{knowledge_base_name}'
+        file_paths = get_all_files(file_path)
+        return file_paths
+
+
+def get_all_files(folder_path):
+    # 指定需要过滤的文件扩展名
+    file_extensions = ['.md', '.pdf', '.doc', '.docx', '.ppt', '.pptx']
+
+    # 初始化一个字典，用于存储每种扩展名的文件名称列表
+    file_dict = {ext.strip('.'): [] for ext in file_extensions}
+
+    # 遍历文件夹中的所有文件
+    for file in os.listdir(folder_path):
+        full_path = os.path.join(folder_path, file)
+        if os.path.isfile(full_path):
+            # 检查文件扩展名，并添加到相应的列表中
+            for ext in file_extensions:
+                if file.endswith(ext):
+                    file_name = os.path.basename(full_path)  # 提取文件名
+                    file_dict[ext.strip('.')].append(file_name)  # 将文件名添加到字典
+
+    # 移除字典中空的列表
+    file_dict = {key: value for key, value in file_dict.items() if value}
+
+    return file_dict
+
+
+import os
+import shutil
+
+
+def update_knowledge_base_name(session: Session, knowledge_base_id: str, new_name: str, init: bool) -> bool:
+    """
+    根据提供的 ID 更新 KnowledgeBase 表中的知识库名称。
+
+    参数:
+        session (Session): SQLAlchemy会话对象，用于数据库交互。
+        knowledge_base_id (str): 要更新的 KnowledgeBase 的 ID。
+        new_name (str): 新的知识库名称。
+
+    返回:
+        bool: 更新是否成功。
+    """
+    try:
+        if not init:
+            # 找到对应的 KnowledgeBase 条目
+            knowledge_base = session.query(KnowledgeBase).filter(KnowledgeBase.id == knowledge_base_id).one_or_none()
+            if knowledge_base:
+                # 更新名称
+                knowledge_base.display_knowledge_base_name = new_name
+                session.commit()
+                return True
+            else:
+                # 如果找不到对应的条目，返回 False
+                return False
+        else:
+            knowledge_base = session.query(KnowledgeBase).filter(KnowledgeBase.id == knowledge_base_id).one_or_none()
+            root_path = knowledge_base.knowledge_base_name
+
+            if os.name == 'nt':
+                old_path = os.path.join('..', 'uploads', root_path)
+
+            if os.name == 'posix':  # Unix/Linux/MacOS
+                old_path = f'/app/uploads/{root_path}'
+
+            # 删除旧文件夹及其内容
+            if os.path.exists(old_path):
+                shutil.rmtree(old_path)
+
+                # 创建新文件夹
+            new_path = os.path.join('..', 'uploads', new_name) if os.name == 'nt' else f'/app/uploads/{new_name}'
+            os.makedirs(new_path, exist_ok=True)
+
+            # 更新数据库中的名称
+            knowledge_base.knowledge_base_name = new_name
+            session.commit()
+
+            return True
+    except SQLAlchemyError as e:
+        # 如果在过程中发生异常，回滚并记录错误
+        session.rollback()
+        logging.error(f"Failed to update knowledge base name due to: {e}")
+        return False
+
+
+def delete_knowledge_base_by_id(session: Session, knowledge_base_id: str) -> bool:
+    """
+    根据提供的 ID 删除 KnowledgeBase 表中的相应条目。
+
+    参数:
+        session (Session): SQLAlchemy会话对象，用于数据库交互。
+        knowledge_base_id (str): 要删除的 KnowledgeBase 的 ID。
+
+    返回:
+        bool: 删除操作是否成功。
+    """
+    try:
+        # 查找对应的 KnowledgeBase 条目
+        knowledge_base = session.query(KnowledgeBase).filter(KnowledgeBase.id == knowledge_base_id).one_or_none()
+
+        root_path = knowledge_base.knowledge_base_name
+
+        if knowledge_base:
+            # 如果找到了记录，执行删除操作
+            session.delete(knowledge_base)
+            session.commit()
+
+            if os.name == 'nt':
+                old_path = os.path.join('..', 'uploads', root_path)
+
+            if os.name == 'posix':  # Unix/Linux/MacOS
+                old_path = f'/app/uploads/{root_path}'
+
+            # 删除旧文件夹及其内容
+            if os.path.exists(old_path):
+                shutil.rmtree(old_path)
+
+            return True
+        else:
+            # 如果没有找到记录，返回 False
+            return False
+    except SQLAlchemyError as e:
+        # 如果在过程中发生异常，回滚并记录错误
+        session.rollback()
+        logging.error(f"Failed to delete knowledge base due to: {e}")
+        return False

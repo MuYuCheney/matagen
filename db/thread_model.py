@@ -37,18 +37,23 @@ class ThreadModel(Base):
 class KnowledgeBase(Base):
     __tablename__ = 'knowledge_bases'
 
+    id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     # 主键字段
     vector_store_id = Column(String(255), primary_key=True)
+    # 添加关于文本分块的策略
+    chunking_strategy = Column(String(255), default="auto")
+    max_chunk_size_tokens = Column(Integer, default=800)
+    chunk_overlap_tokens = Column(Integer, default=400)
 
     # 知识库的名称
     knowledge_base_name = Column(String(255), nullable=False)
 
+    # 显示的知识库名称
+    display_knowledge_base_name = Column(String(255), nullable=False)
     # 知识库描述
     knowledge_base_description = Column(Text, nullable=True)
-
     # 外键字段，链接到 threads 表的 id 字段
     thread_id = Column(String(255), ForeignKey('threads.id'))
-
     # 建立与 ThreadModel 的关系
     thread = relationship("ThreadModel", back_populates="knowledge_bases")
 
