@@ -1,7 +1,8 @@
-from sqlalchemy import Column, String, ForeignKey, DateTime, Text, VARCHAR
+from sqlalchemy import Column, String, ForeignKey, DateTime, Text, Integer
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
-
+import uuid
+from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import declarative_base
 
 from sqlalchemy import create_engine
@@ -52,6 +53,17 @@ class KnowledgeBase(Base):
     thread = relationship("ThreadModel", back_populates="knowledge_bases")
 
 
+class DbBase(Base):
+    __tablename__ = 'db_configs'
+
+    id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
+    hostname = Column(String(255), nullable=False)
+    port = Column(Integer, nullable=False)
+    username = Column(String(255), nullable=False)
+    password = Column(String(255), nullable=False)
+    database_name = Column(String(255), nullable=False)
+    created_at = Column(DateTime, default=func.now())  # 自动生成创建时间
+
 # 定义数据库模型初始化函数
 def initialize_database(username: str, password: str, hostname: str, database_name: str):
     try:
@@ -83,7 +95,7 @@ def initialize_database(username: str, password: str, hostname: str, database_na
             session.commit()
 
         # 修改表字符集
-        tables_to_modify = ['threads', 'agents', 'knowledge_bases']
+        tables_to_modify = ['threads', 'agents', 'knowledge_bases', "db_configs"]
         for table_name in tables_to_modify:
             if inspector.has_table(table_name, schema="mategen"):
                 session.execute(

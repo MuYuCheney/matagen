@@ -5293,3 +5293,1004 @@ CREATE TABLE knowledge_bases (
 2024-09-01 20:22:18 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/assistants "HTTP/1.1 200 OK"
 2024-09-01 20:22:19 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads "HTTP/1.1 200 OK"
 2024-09-01 20:22:19 - root - INFO - 已完成初始化，MateGen可随时调用！
+2024-09-02 09:44:50 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-02 09:44:50 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 09:44:50 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-02 09:44:50 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 09:44:50 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-02 09:44:50 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 09:44:50 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 09:44:50 - sqlalchemy.engine.Engine - INFO - SHOW DATABASES;
+2024-09-02 09:44:50 - sqlalchemy.engine.Engine - INFO - [generated in 0.00018s] {}
+2024-09-02 09:44:50 - sqlalchemy.engine.Engine - INFO - USE `fufanapi`;
+2024-09-02 09:44:50 - sqlalchemy.engine.Engine - INFO - [generated in 0.00016s] {}
+2024-09-02 09:44:50 - sqlalchemy.engine.Engine - INFO - SHOW TABLES;
+2024-09-02 09:44:50 - sqlalchemy.engine.Engine - INFO - [generated in 0.00012s] {}
+2024-09-02 09:44:50 - sqlalchemy.engine.Engine - INFO - USE `mategen`;
+2024-09-02 09:44:50 - sqlalchemy.engine.Engine - INFO - [generated in 0.00013s] {}
+2024-09-02 09:44:50 - sqlalchemy.engine.Engine - INFO - SHOW TABLES;
+2024-09-02 09:44:50 - sqlalchemy.engine.Engine - INFO - [cached since 0.007375s ago] {}
+2024-09-02 09:44:50 - sqlalchemy.engine.Engine - INFO - USE `test`;
+2024-09-02 09:44:50 - sqlalchemy.engine.Engine - INFO - [generated in 0.00018s] {}
+2024-09-02 09:44:50 - sqlalchemy.engine.Engine - INFO - SHOW TABLES;
+2024-09-02 09:44:50 - sqlalchemy.engine.Engine - INFO - [cached since 0.01448s ago] {}
+2024-09-02 09:44:50 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-02 09:47:10 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-02 09:47:10 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 09:47:10 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-02 09:47:10 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 09:47:10 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-02 09:47:10 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 09:47:10 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 09:47:10 - sqlalchemy.engine.Engine - INFO - USE `mategen`;
+2024-09-02 09:47:10 - sqlalchemy.engine.Engine - INFO - [generated in 0.00015s] {}
+2024-09-02 09:47:10 - sqlalchemy.engine.Engine - INFO - SHOW TABLES;
+2024-09-02 09:47:10 - sqlalchemy.engine.Engine - INFO - [generated in 0.00020s] {}
+2024-09-02 09:47:10 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-02 09:48:13 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-02 09:48:13 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 09:48:13 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-02 09:48:13 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 09:48:13 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-02 09:48:13 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 09:48:13 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 09:48:13 - sqlalchemy.engine.Engine - INFO - USE `mategen`;
+2024-09-02 09:48:13 - sqlalchemy.engine.Engine - INFO - [generated in 0.00016s] {}
+2024-09-02 09:48:13 - sqlalchemy.engine.Engine - INFO - SHOW TABLES;
+2024-09-02 09:48:13 - sqlalchemy.engine.Engine - INFO - [generated in 0.00011s] {}
+2024-09-02 09:48:13 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-02 09:48:25 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-02 09:48:25 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 09:48:25 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-02 09:48:25 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 09:48:25 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-02 09:48:25 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 09:48:25 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 09:48:25 - sqlalchemy.engine.Engine - INFO - USE `mategen`;
+2024-09-02 09:48:25 - sqlalchemy.engine.Engine - INFO - [generated in 0.00014s] {}
+2024-09-02 09:48:25 - sqlalchemy.engine.Engine - INFO - SHOW TABLES;
+2024-09-02 09:48:25 - sqlalchemy.engine.Engine - INFO - [generated in 0.00009s] {}
+2024-09-02 09:48:25 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-02 09:48:41 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-02 09:48:41 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 09:48:41 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-02 09:48:41 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 09:48:41 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-02 09:48:41 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 09:48:41 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 09:48:41 - sqlalchemy.engine.Engine - INFO - USE `mategen`;
+2024-09-02 09:48:41 - sqlalchemy.engine.Engine - INFO - [generated in 0.00015s] {}
+2024-09-02 09:48:41 - sqlalchemy.engine.Engine - INFO - SHOW TABLES;
+2024-09-02 09:48:41 - sqlalchemy.engine.Engine - INFO - [generated in 0.00009s] {}
+2024-09-02 09:48:41 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-02 09:55:46 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-02 09:55:46 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 09:55:46 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-02 09:55:46 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 09:55:46 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-02 09:55:46 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 09:55:46 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 09:55:46 - sqlalchemy.engine.Engine - INFO - USE `mategen`;
+2024-09-02 09:55:46 - sqlalchemy.engine.Engine - INFO - [generated in 0.00017s] {}
+2024-09-02 09:55:46 - sqlalchemy.engine.Engine - INFO - SHOW TABLES;
+2024-09-02 09:55:46 - sqlalchemy.engine.Engine - INFO - [generated in 0.00011s] {}
+2024-09-02 09:55:46 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-02 10:13:59 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-02 10:13:59 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 10:13:59 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-02 10:13:59 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 10:13:59 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-02 10:13:59 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 10:13:59 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 10:13:59 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-09-02 10:13:59 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 10:13:59 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-09-02 10:13:59 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 10:13:59 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`knowledge_bases`
+2024-09-02 10:13:59 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 10:13:59 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`db_configs`
+2024-09-02 10:13:59 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 10:13:59 - sqlalchemy.engine.Engine - INFO - 
+CREATE TABLE db_configs (
+	id UUID NOT NULL, 
+	hostname VARCHAR(255) NOT NULL, 
+	port INTEGER NOT NULL, 
+	username VARCHAR(255) NOT NULL, 
+	password VARCHAR(255) NOT NULL, 
+	database_name VARCHAR(255) NOT NULL, 
+	PRIMARY KEY (id)
+)
+
+
+2024-09-02 10:13:59 - sqlalchemy.engine.Engine - INFO - [no key 0.00019s] {}
+2024-09-02 10:13:59 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-02 10:16:33 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-02 10:16:33 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 10:16:33 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-02 10:16:33 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 10:16:33 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-02 10:16:33 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 10:16:33 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 10:16:33 - sqlalchemy.engine.Engine - INFO - USE `mategen`;
+2024-09-02 10:16:33 - sqlalchemy.engine.Engine - INFO - [generated in 0.00016s] {}
+2024-09-02 10:16:33 - sqlalchemy.engine.Engine - INFO - SHOW TABLES;
+2024-09-02 10:16:33 - sqlalchemy.engine.Engine - INFO - [generated in 0.00009s] {}
+2024-09-02 10:16:33 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-02 10:17:20 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-02 10:17:20 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 10:17:20 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-02 10:17:20 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 10:17:20 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-02 10:17:20 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 10:17:20 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 10:17:20 - sqlalchemy.engine.Engine - INFO - USE `mategen`;
+2024-09-02 10:17:20 - sqlalchemy.engine.Engine - INFO - [generated in 0.00026s] {}
+2024-09-02 10:17:20 - sqlalchemy.engine.Engine - INFO - SHOW TABLES;
+2024-09-02 10:17:20 - sqlalchemy.engine.Engine - INFO - [generated in 0.00011s] {}
+2024-09-02 10:17:20 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-02 10:19:28 - root - INFO - Error inserting database configuration: hostname
+2024-09-02 10:21:52 - root - INFO - Error inserting database configuration: hostname
+2024-09-02 10:22:39 - root - INFO - Error inserting database configuration: Class 'db_interface.DBConfig' is not mapped
+2024-09-02 10:25:44 - root - INFO - Error inserting database configuration: Class 'db_interface.DBConfig' is not mapped
+2024-09-02 10:27:26 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-02 10:27:26 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 10:27:26 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-02 10:27:26 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 10:27:26 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-02 10:27:26 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 10:27:26 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 10:27:26 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-09-02 10:27:26 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 10:27:26 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-09-02 10:27:26 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 10:27:26 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`knowledge_bases`
+2024-09-02 10:27:26 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 10:27:26 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`db_configs`
+2024-09-02 10:27:26 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 10:27:26 - sqlalchemy.engine.Engine - INFO - 
+CREATE TABLE db_configs (
+	id VARCHAR(36) NOT NULL, 
+	hostname VARCHAR(255) NOT NULL, 
+	port INTEGER NOT NULL, 
+	username VARCHAR(255) NOT NULL, 
+	password VARCHAR(255) NOT NULL, 
+	database_name VARCHAR(255) NOT NULL, 
+	PRIMARY KEY (id)
+)
+
+
+2024-09-02 10:27:26 - sqlalchemy.engine.Engine - INFO - [no key 0.00009s] {}
+2024-09-02 10:27:26 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-02 10:27:26 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 10:27:26 - sqlalchemy.engine.Engine - INFO - ALTER DATABASE mategen CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci
+2024-09-02 10:27:26 - sqlalchemy.engine.Engine - INFO - [generated in 0.00013s] {}
+2024-09-02 10:27:26 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-02 10:27:26 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 10:27:26 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`knowledge_bases`
+2024-09-02 10:27:26 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 10:27:26 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-02 10:27:26 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 10:27:26 - sqlalchemy.engine.Engine - INFO - ALTER TABLE knowledge_bases DROP FOREIGN KEY knowledge_bases_ibfk_1
+2024-09-02 10:27:26 - sqlalchemy.engine.Engine - INFO - [generated in 0.00014s] {}
+2024-09-02 10:27:26 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-02 10:27:26 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 10:27:26 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-09-02 10:27:26 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 10:27:26 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-02 10:27:26 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 10:27:26 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads DROP FOREIGN KEY threads_ibfk_1
+2024-09-02 10:27:26 - sqlalchemy.engine.Engine - INFO - [generated in 0.00014s] {}
+2024-09-02 10:27:26 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-02 10:27:26 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 10:27:26 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-02 10:27:26 - sqlalchemy.engine.Engine - INFO - [generated in 0.00014s] {}
+2024-09-02 10:27:26 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-02 10:27:26 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 10:27:26 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-09-02 10:27:26 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 10:27:26 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-02 10:27:26 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 10:27:26 - sqlalchemy.engine.Engine - INFO - ALTER TABLE agents CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-02 10:27:26 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-02 10:27:26 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-02 10:27:26 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 10:27:26 - sqlalchemy.engine.Engine - INFO - ALTER TABLE knowledge_bases CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-02 10:27:26 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-02 10:27:26 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-02 10:27:26 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 10:27:26 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`db_configs`
+2024-09-02 10:27:26 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 10:27:26 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-02 10:27:26 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 10:27:26 - sqlalchemy.engine.Engine - INFO - ALTER TABLE db_configs CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-02 10:27:26 - sqlalchemy.engine.Engine - INFO - [generated in 0.00017s] {}
+2024-09-02 10:27:26 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-02 10:27:26 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 10:27:26 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads ADD CONSTRAINT threads_ibfk_1 FOREIGN KEY (agent_id) REFERENCES agents(id)
+2024-09-02 10:27:26 - sqlalchemy.engine.Engine - INFO - [generated in 0.00010s] {}
+2024-09-02 10:27:26 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-02 10:27:26 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 10:27:26 - sqlalchemy.engine.Engine - INFO - ALTER TABLE knowledge_bases ADD CONSTRAINT knowledge_bases_ibfk_1 FOREIGN KEY (thread_id) REFERENCES threads(id)
+2024-09-02 10:27:26 - sqlalchemy.engine.Engine - INFO - [generated in 0.00015s] {}
+2024-09-02 10:27:26 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-02 10:27:37 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-02 10:27:37 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 10:27:37 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-02 10:27:37 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 10:27:37 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-02 10:27:37 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 10:27:37 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 10:27:37 - sqlalchemy.engine.Engine - INFO - USE `mategen`;
+2024-09-02 10:27:37 - sqlalchemy.engine.Engine - INFO - [generated in 0.00019s] {}
+2024-09-02 10:27:37 - sqlalchemy.engine.Engine - INFO - SHOW TABLES;
+2024-09-02 10:27:37 - sqlalchemy.engine.Engine - INFO - [generated in 0.00010s] {}
+2024-09-02 10:27:37 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-02 10:27:43 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-02 10:27:43 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 10:27:43 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-02 10:27:43 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 10:27:43 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-02 10:27:43 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 10:27:43 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 10:27:43 - sqlalchemy.engine.Engine - INFO - INSERT INTO db_configs (id, hostname, port, username, password, database_name) VALUES (%(id)s, %(hostname)s, %(port)s, %(username)s, %(password)s, %(database_name)s)
+2024-09-02 10:27:43 - sqlalchemy.engine.Engine - INFO - [generated in 0.00013s] {'id': '34ebdf6d-7a81-40c2-ba18-8c8ab1e0fec5', 'hostname': '192.168.110.131', 'port': '3306', 'username': 'root', 'password': 'snowball950123', 'database_name': 'mategen'}
+2024-09-02 10:27:43 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-02 10:27:43 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 10:27:43 - sqlalchemy.engine.Engine - INFO - SELECT db_configs.id AS db_configs_id, db_configs.hostname AS db_configs_hostname, db_configs.port AS db_configs_port, db_configs.username AS db_configs_username, db_configs.password AS db_configs_password, db_configs.database_name AS db_configs_database_name 
+FROM db_configs 
+WHERE db_configs.id = %(pk_1)s
+2024-09-02 10:27:43 - sqlalchemy.engine.Engine - INFO - [generated in 0.00013s] {'pk_1': '34ebdf6d-7a81-40c2-ba18-8c8ab1e0fec5'}
+2024-09-02 11:40:01 - root - INFO - Error inserting database configuration: 400: 数据库连接失败: (pymysql.err.OperationalError) (2003, "Can't connect to MySQL server on '1392.168.110.131' ([Errno 11001] getaddrinfo failed)")
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2024-09-02 11:40:18 - root - INFO - Error inserting database configuration: 400: 数据库连接失败: (pymysql.err.OperationalError) (2003, "Can't connect to MySQL server on '1392.168.110.131' ([Errno 11001] getaddrinfo failed)")
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2024-09-02 11:44:12 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-02 11:44:12 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 11:44:12 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-02 11:44:12 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 11:44:12 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-02 11:44:12 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 11:44:12 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 11:44:12 - sqlalchemy.engine.Engine - INFO - USE `mategen`;
+2024-09-02 11:44:12 - sqlalchemy.engine.Engine - INFO - [generated in 0.00019s] {}
+2024-09-02 11:44:12 - sqlalchemy.engine.Engine - INFO - SHOW TABLES;
+2024-09-02 11:44:12 - sqlalchemy.engine.Engine - INFO - [generated in 0.00013s] {}
+2024-09-02 11:44:12 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-02 11:50:08 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-02 11:50:08 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 11:50:08 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-02 11:50:08 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 11:50:08 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-02 11:50:08 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 11:50:08 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 11:50:08 - sqlalchemy.engine.Engine - INFO - USE `mategen`;
+2024-09-02 11:50:08 - sqlalchemy.engine.Engine - INFO - [generated in 0.00016s] {}
+2024-09-02 11:50:08 - sqlalchemy.engine.Engine - INFO - SHOW TABLES;
+2024-09-02 11:50:08 - sqlalchemy.engine.Engine - INFO - [generated in 0.00010s] {}
+2024-09-02 11:50:08 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-02 11:53:30 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-02 11:53:30 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 11:53:30 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-02 11:53:30 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 11:53:30 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-02 11:53:30 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 11:53:30 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 11:53:30 - sqlalchemy.engine.Engine - INFO - USE `mategen`;
+2024-09-02 11:53:30 - sqlalchemy.engine.Engine - INFO - [generated in 0.00021s] {}
+2024-09-02 11:53:30 - sqlalchemy.engine.Engine - INFO - SHOW TABLES;
+2024-09-02 11:53:30 - sqlalchemy.engine.Engine - INFO - [generated in 0.00009s] {}
+2024-09-02 11:53:30 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-02 11:53:30 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-02 11:53:30 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 11:53:30 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-02 11:53:30 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 11:53:30 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-02 11:53:30 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 11:53:30 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 11:53:30 - sqlalchemy.engine.Engine - INFO - INSERT INTO db_configs (id, hostname, port, username, password, database_name) VALUES (%(id)s, %(hostname)s, %(port)s, %(username)s, %(password)s, %(database_name)s)
+2024-09-02 11:53:30 - sqlalchemy.engine.Engine - INFO - [generated in 0.00017s] {'id': '7e7a3195-15f0-406a-bd2b-ffeca892ae3a', 'hostname': '192.168.110.131', 'port': '3306', 'username': 'root', 'password': 'snowball950123', 'database_name': 'mategen'}
+2024-09-02 11:53:30 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-02 11:53:30 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 11:53:30 - sqlalchemy.engine.Engine - INFO - SELECT db_configs.id AS db_configs_id, db_configs.hostname AS db_configs_hostname, db_configs.port AS db_configs_port, db_configs.username AS db_configs_username, db_configs.password AS db_configs_password, db_configs.database_name AS db_configs_database_name 
+FROM db_configs 
+WHERE db_configs.id = %(pk_1)s
+2024-09-02 11:53:30 - sqlalchemy.engine.Engine - INFO - [generated in 0.00014s] {'pk_1': '7e7a3195-15f0-406a-bd2b-ffeca892ae3a'}
+2024-09-02 12:00:47 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-02 12:00:47 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:00:47 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-02 12:00:47 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:00:47 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-02 12:00:47 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:00:47 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 12:00:47 - sqlalchemy.engine.Engine - INFO - USE `mategen`;
+2024-09-02 12:00:47 - sqlalchemy.engine.Engine - INFO - [generated in 0.00023s] {}
+2024-09-02 12:00:47 - sqlalchemy.engine.Engine - INFO - SHOW TABLES;
+2024-09-02 12:00:47 - sqlalchemy.engine.Engine - INFO - [generated in 0.00011s] {}
+2024-09-02 12:00:47 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-02 12:00:47 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-02 12:00:47 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:00:47 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-02 12:00:47 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:00:47 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-02 12:00:47 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:00:47 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 12:00:47 - sqlalchemy.engine.Engine - INFO - SELECT db_configs.id AS db_configs_id, db_configs.hostname AS db_configs_hostname, db_configs.port AS db_configs_port, db_configs.username AS db_configs_username, db_configs.password AS db_configs_password, db_configs.database_name AS db_configs_database_name 
+FROM db_configs 
+WHERE db_configs.id = %(id_1)s 
+ LIMIT %(param_1)s
+2024-09-02 12:00:47 - sqlalchemy.engine.Engine - INFO - [generated in 0.00015s] {'id_1': '7e7a3195-15f0-406a-bd2b-ffeca892ae3a', 'param_1': 1}
+2024-09-02 12:00:47 - sqlalchemy.engine.Engine - INFO - UPDATE db_configs SET port=%(port)s WHERE db_configs.id = %(db_configs_id)s
+2024-09-02 12:00:47 - sqlalchemy.engine.Engine - INFO - [generated in 0.00014s] {'port': '3306', 'db_configs_id': '7e7a3195-15f0-406a-bd2b-ffeca892ae3a'}
+2024-09-02 12:00:47 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-02 12:01:13 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-02 12:01:13 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:01:13 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-02 12:01:13 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:01:13 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-02 12:01:13 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:01:13 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 12:01:13 - sqlalchemy.engine.Engine - INFO - USE `fufanapi`;
+2024-09-02 12:01:13 - sqlalchemy.engine.Engine - INFO - [generated in 0.00023s] {}
+2024-09-02 12:01:13 - sqlalchemy.engine.Engine - INFO - SHOW TABLES;
+2024-09-02 12:01:13 - sqlalchemy.engine.Engine - INFO - [generated in 0.00013s] {}
+2024-09-02 12:01:13 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-02 12:01:13 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-02 12:01:13 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:01:13 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-02 12:01:13 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:01:13 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-02 12:01:13 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:01:13 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 12:01:13 - sqlalchemy.engine.Engine - INFO - SELECT db_configs.id AS db_configs_id, db_configs.hostname AS db_configs_hostname, db_configs.port AS db_configs_port, db_configs.username AS db_configs_username, db_configs.password AS db_configs_password, db_configs.database_name AS db_configs_database_name 
+FROM db_configs 
+WHERE db_configs.id = %(id_1)s 
+ LIMIT %(param_1)s
+2024-09-02 12:01:13 - sqlalchemy.engine.Engine - INFO - [generated in 0.00012s] {'id_1': '7e7a3195-15f0-406a-bd2b-ffeca892ae3a', 'param_1': 1}
+2024-09-02 12:01:13 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-02 12:01:55 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-02 12:01:55 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:01:55 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-02 12:01:55 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:01:55 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-02 12:01:55 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:01:55 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 12:01:55 - sqlalchemy.engine.Engine - INFO - USE `muyu_test`;
+2024-09-02 12:01:55 - sqlalchemy.engine.Engine - INFO - [generated in 0.00024s] {}
+2024-09-02 12:01:55 - sqlalchemy.engine.Engine - INFO - SHOW TABLES;
+2024-09-02 12:01:55 - sqlalchemy.engine.Engine - INFO - [generated in 0.00009s] {}
+2024-09-02 12:01:55 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-02 12:01:55 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-02 12:01:55 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:01:55 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-02 12:01:55 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:01:55 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-02 12:01:55 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:01:55 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 12:01:55 - sqlalchemy.engine.Engine - INFO - SELECT db_configs.id AS db_configs_id, db_configs.hostname AS db_configs_hostname, db_configs.port AS db_configs_port, db_configs.username AS db_configs_username, db_configs.password AS db_configs_password, db_configs.database_name AS db_configs_database_name 
+FROM db_configs 
+WHERE db_configs.id = %(id_1)s 
+ LIMIT %(param_1)s
+2024-09-02 12:01:55 - sqlalchemy.engine.Engine - INFO - [generated in 0.00019s] {'id_1': '7e7a3195-15f0-406a-bd2b-ffeca892ae3a', 'param_1': 1}
+2024-09-02 12:01:55 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-02 12:02:14 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-02 12:02:14 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:02:14 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-02 12:02:14 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:02:14 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-02 12:02:14 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:02:14 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 12:02:14 - sqlalchemy.engine.Engine - INFO - USE `muyu_test`;
+2024-09-02 12:02:14 - sqlalchemy.engine.Engine - INFO - [generated in 0.00014s] {}
+2024-09-02 12:02:14 - sqlalchemy.engine.Engine - INFO - SHOW TABLES;
+2024-09-02 12:02:14 - sqlalchemy.engine.Engine - INFO - [generated in 0.00007s] {}
+2024-09-02 12:02:14 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-02 12:02:28 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-02 12:02:28 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:02:28 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-02 12:02:28 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:02:28 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-02 12:02:28 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:02:28 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 12:02:28 - sqlalchemy.engine.Engine - INFO - USE `muyu_test`;
+2024-09-02 12:02:28 - sqlalchemy.engine.Engine - INFO - [generated in 0.00020s] {}
+2024-09-02 12:02:28 - sqlalchemy.engine.Engine - INFO - SHOW TABLES;
+2024-09-02 12:02:28 - sqlalchemy.engine.Engine - INFO - [generated in 0.00017s] {}
+2024-09-02 12:02:28 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-02 12:02:28 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-02 12:02:28 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:02:28 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-02 12:02:28 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:02:28 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-02 12:02:28 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:02:28 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 12:02:28 - sqlalchemy.engine.Engine - INFO - SELECT db_configs.id AS db_configs_id, db_configs.hostname AS db_configs_hostname, db_configs.port AS db_configs_port, db_configs.username AS db_configs_username, db_configs.password AS db_configs_password, db_configs.database_name AS db_configs_database_name 
+FROM db_configs 
+WHERE db_configs.id = %(id_1)s 
+ LIMIT %(param_1)s
+2024-09-02 12:02:28 - sqlalchemy.engine.Engine - INFO - [generated in 0.00025s] {'id_1': '7e7a3195-15f0-406a-bd2b-ffeca892ae3a', 'param_1': 1}
+2024-09-02 12:02:28 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-02 12:02:50 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-02 12:02:50 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:02:50 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-02 12:02:50 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:02:50 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-02 12:02:50 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:02:50 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 12:02:50 - sqlalchemy.engine.Engine - INFO - USE `mategen`;
+2024-09-02 12:02:50 - sqlalchemy.engine.Engine - INFO - [generated in 0.00014s] {}
+2024-09-02 12:02:50 - sqlalchemy.engine.Engine - INFO - SHOW TABLES;
+2024-09-02 12:02:50 - sqlalchemy.engine.Engine - INFO - [generated in 0.00010s] {}
+2024-09-02 12:02:50 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-02 12:02:50 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-02 12:02:50 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:02:50 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-02 12:02:50 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:02:50 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-02 12:02:50 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:02:50 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 12:02:50 - sqlalchemy.engine.Engine - INFO - SELECT db_configs.id AS db_configs_id, db_configs.hostname AS db_configs_hostname, db_configs.port AS db_configs_port, db_configs.username AS db_configs_username, db_configs.password AS db_configs_password, db_configs.database_name AS db_configs_database_name 
+FROM db_configs 
+WHERE db_configs.id = %(id_1)s 
+ LIMIT %(param_1)s
+2024-09-02 12:02:50 - sqlalchemy.engine.Engine - INFO - [generated in 0.00017s] {'id_1': '7e7a3195-15f0-406a-bd2b-ffeca892ae3a', 'param_1': 1}
+2024-09-02 12:02:50 - sqlalchemy.engine.Engine - INFO - UPDATE db_configs SET port=%(port)s WHERE db_configs.id = %(db_configs_id)s
+2024-09-02 12:02:50 - sqlalchemy.engine.Engine - INFO - [generated in 0.00025s] {'port': '3306', 'db_configs_id': '7e7a3195-15f0-406a-bd2b-ffeca892ae3a'}
+2024-09-02 12:02:50 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-02 12:03:07 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-02 12:03:07 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:03:07 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-02 12:03:07 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:03:07 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-02 12:03:07 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:03:07 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 12:03:07 - sqlalchemy.engine.Engine - INFO - USE `muyu_test`;
+2024-09-02 12:03:07 - sqlalchemy.engine.Engine - INFO - [generated in 0.00033s] {}
+2024-09-02 12:03:07 - sqlalchemy.engine.Engine - INFO - SHOW TABLES;
+2024-09-02 12:03:07 - sqlalchemy.engine.Engine - INFO - [generated in 0.00019s] {}
+2024-09-02 12:03:07 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-02 12:03:07 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-02 12:03:07 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:03:07 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-02 12:03:07 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:03:07 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-02 12:03:07 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:03:07 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 12:03:07 - sqlalchemy.engine.Engine - INFO - SELECT db_configs.id AS db_configs_id, db_configs.hostname AS db_configs_hostname, db_configs.port AS db_configs_port, db_configs.username AS db_configs_username, db_configs.password AS db_configs_password, db_configs.database_name AS db_configs_database_name 
+FROM db_configs 
+WHERE db_configs.id = %(id_1)s 
+ LIMIT %(param_1)s
+2024-09-02 12:03:07 - sqlalchemy.engine.Engine - INFO - [generated in 0.00010s] {'id_1': '7e7a3195-15f0-406a-bd2b-ffeca892ae3a', 'param_1': 1}
+2024-09-02 12:03:07 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-02 12:04:16 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-02 12:04:16 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:04:16 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-02 12:04:16 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:04:16 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-02 12:04:16 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:04:16 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 12:04:16 - sqlalchemy.engine.Engine - INFO - USE `muyu_test`;
+2024-09-02 12:04:16 - sqlalchemy.engine.Engine - INFO - [generated in 0.00015s] {}
+2024-09-02 12:04:16 - sqlalchemy.engine.Engine - INFO - SHOW TABLES;
+2024-09-02 12:04:16 - sqlalchemy.engine.Engine - INFO - [generated in 0.00009s] {}
+2024-09-02 12:04:16 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-02 12:04:16 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-02 12:04:16 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:04:16 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-02 12:04:16 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:04:16 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-02 12:04:16 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:04:16 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 12:04:16 - sqlalchemy.engine.Engine - INFO - INSERT INTO db_configs (id, hostname, port, username, password, database_name) VALUES (%(id)s, %(hostname)s, %(port)s, %(username)s, %(password)s, %(database_name)s)
+2024-09-02 12:04:16 - sqlalchemy.engine.Engine - INFO - [generated in 0.00014s] {'id': '2f01a4a3-a5a0-47d7-b088-2ba7a8d8e1b5', 'hostname': '192.168.110.131', 'port': '3306', 'username': 'root', 'password': 'snowball950123', 'database_name': 'muyu_test'}
+2024-09-02 12:04:16 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-02 12:04:26 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-02 12:04:26 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:04:26 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-02 12:04:26 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:04:26 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-02 12:04:26 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:04:26 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 12:04:26 - sqlalchemy.engine.Engine - INFO - USE `muyu_test`;
+2024-09-02 12:04:26 - sqlalchemy.engine.Engine - INFO - [generated in 0.00017s] {}
+2024-09-02 12:04:26 - sqlalchemy.engine.Engine - INFO - SHOW TABLES;
+2024-09-02 12:04:26 - sqlalchemy.engine.Engine - INFO - [generated in 0.00010s] {}
+2024-09-02 12:04:26 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-02 12:04:35 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-02 12:04:35 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:04:35 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-02 12:04:35 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:04:35 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-02 12:04:35 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:04:35 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 12:04:35 - sqlalchemy.engine.Engine - INFO - USE `muyu_test`;
+2024-09-02 12:04:35 - sqlalchemy.engine.Engine - INFO - [generated in 0.00017s] {}
+2024-09-02 12:04:35 - sqlalchemy.engine.Engine - INFO - SHOW TABLES;
+2024-09-02 12:04:35 - sqlalchemy.engine.Engine - INFO - [generated in 0.00007s] {}
+2024-09-02 12:04:35 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-02 12:04:35 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-02 12:04:35 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:04:35 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-02 12:04:35 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:04:35 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-02 12:04:35 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:04:35 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 12:04:35 - sqlalchemy.engine.Engine - INFO - INSERT INTO db_configs (id, hostname, port, username, password, database_name) VALUES (%(id)s, %(hostname)s, %(port)s, %(username)s, %(password)s, %(database_name)s)
+2024-09-02 12:04:35 - sqlalchemy.engine.Engine - INFO - [generated in 0.00011s] {'id': '9ee4d225-fa3c-4adf-b54d-5111fe228132', 'hostname': '192.168.110.131', 'port': '3306', 'username': 'root', 'password': 'snowball950123', 'database_name': 'muyu_test'}
+2024-09-02 12:04:35 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-02 12:05:00 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-02 12:05:00 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:05:00 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-02 12:05:00 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:05:00 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-02 12:05:00 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:05:00 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 12:05:00 - sqlalchemy.engine.Engine - INFO - USE `muyu_test`;
+2024-09-02 12:05:00 - sqlalchemy.engine.Engine - INFO - [generated in 0.00031s] {}
+2024-09-02 12:05:00 - sqlalchemy.engine.Engine - INFO - SHOW TABLES;
+2024-09-02 12:05:00 - sqlalchemy.engine.Engine - INFO - [generated in 0.00037s] {}
+2024-09-02 12:05:00 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-02 12:05:39 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-02 12:05:39 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:05:39 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-02 12:05:39 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:05:39 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-02 12:05:39 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:05:39 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 12:05:39 - sqlalchemy.engine.Engine - INFO - USE `muyu_test`;
+2024-09-02 12:05:39 - sqlalchemy.engine.Engine - INFO - [generated in 0.00017s] {}
+2024-09-02 12:05:39 - sqlalchemy.engine.Engine - INFO - SHOW TABLES;
+2024-09-02 12:05:39 - sqlalchemy.engine.Engine - INFO - [generated in 0.00010s] {}
+2024-09-02 12:05:39 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-02 12:05:46 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-02 12:05:46 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:05:46 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-02 12:05:46 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:05:46 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-02 12:05:46 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:05:46 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 12:05:46 - sqlalchemy.engine.Engine - INFO - USE `muyu_test`;
+2024-09-02 12:05:46 - sqlalchemy.engine.Engine - INFO - [generated in 0.00026s] {}
+2024-09-02 12:05:46 - sqlalchemy.engine.Engine - INFO - SHOW TABLES;
+2024-09-02 12:05:46 - sqlalchemy.engine.Engine - INFO - [generated in 0.00010s] {}
+2024-09-02 12:05:46 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-02 12:05:46 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-02 12:05:46 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:05:46 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-02 12:05:46 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:05:46 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-02 12:05:46 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:05:46 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 12:05:46 - sqlalchemy.engine.Engine - INFO - INSERT INTO db_configs (id, hostname, port, username, password, database_name) VALUES (%(id)s, %(hostname)s, %(port)s, %(username)s, %(password)s, %(database_name)s)
+2024-09-02 12:05:46 - sqlalchemy.engine.Engine - INFO - [generated in 0.00016s] {'id': '8c24800d-8cda-4526-ac3f-c351b7aed5db', 'hostname': '192.168.110.131', 'port': '3306', 'username': 'root', 'password': 'snowball950123', 'database_name': 'muyu_test'}
+2024-09-02 12:05:46 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-02 12:56:29 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-02 12:56:29 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:56:29 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-02 12:56:29 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:56:29 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-02 12:56:29 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:56:29 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 12:56:29 - sqlalchemy.engine.Engine - INFO - USE `muyu_test`;
+2024-09-02 12:56:29 - sqlalchemy.engine.Engine - INFO - [generated in 0.00020s] {}
+2024-09-02 12:56:29 - sqlalchemy.engine.Engine - INFO - SHOW TABLES;
+2024-09-02 12:56:29 - sqlalchemy.engine.Engine - INFO - [generated in 0.00013s] {}
+2024-09-02 12:56:29 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-02 12:56:45 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-02 12:56:45 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:56:45 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-02 12:56:45 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:56:45 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-02 12:56:45 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:56:45 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 12:56:45 - sqlalchemy.engine.Engine - INFO - USE `muyu_test`;
+2024-09-02 12:56:45 - sqlalchemy.engine.Engine - INFO - [generated in 0.00015s] {}
+2024-09-02 12:56:45 - sqlalchemy.engine.Engine - INFO - SHOW TABLES;
+2024-09-02 12:56:45 - sqlalchemy.engine.Engine - INFO - [generated in 0.00011s] {}
+2024-09-02 12:56:45 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-02 12:56:45 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-02 12:56:45 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:56:45 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-02 12:56:45 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:56:45 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-02 12:56:45 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:56:45 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 12:56:45 - sqlalchemy.engine.Engine - INFO - INSERT INTO db_configs (id, hostname, port, username, password, database_name) VALUES (%(id)s, %(hostname)s, %(port)s, %(username)s, %(password)s, %(database_name)s)
+2024-09-02 12:56:45 - sqlalchemy.engine.Engine - INFO - [generated in 0.00014s] {'id': '2eb28c95-a645-4046-a4fc-0f3caa0fc10a', 'hostname': '192.168.110.131', 'port': '3306', 'username': 'root', 'password': 'snowball950123', 'database_name': 'muyu_test'}
+2024-09-02 12:56:45 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-02 12:59:40 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-02 12:59:40 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:59:40 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-02 12:59:40 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:59:40 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-02 12:59:40 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:59:40 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 12:59:40 - sqlalchemy.engine.Engine - INFO - USE `muyu_test`;
+2024-09-02 12:59:40 - sqlalchemy.engine.Engine - INFO - [generated in 0.00015s] {}
+2024-09-02 12:59:40 - sqlalchemy.engine.Engine - INFO - SHOW TABLES;
+2024-09-02 12:59:40 - sqlalchemy.engine.Engine - INFO - [generated in 0.00012s] {}
+2024-09-02 12:59:40 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-02 12:59:50 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-02 12:59:50 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:59:50 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-02 12:59:50 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:59:50 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-02 12:59:50 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:59:50 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 12:59:50 - sqlalchemy.engine.Engine - INFO - USE `mategen`;
+2024-09-02 12:59:50 - sqlalchemy.engine.Engine - INFO - [generated in 0.00015s] {}
+2024-09-02 12:59:50 - sqlalchemy.engine.Engine - INFO - SHOW TABLES;
+2024-09-02 12:59:50 - sqlalchemy.engine.Engine - INFO - [generated in 0.00010s] {}
+2024-09-02 12:59:50 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-02 12:59:58 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-02 12:59:58 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:59:58 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-02 12:59:58 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:59:58 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-02 12:59:58 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:59:58 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 12:59:58 - sqlalchemy.engine.Engine - INFO - USE `muyu_test`;
+2024-09-02 12:59:58 - sqlalchemy.engine.Engine - INFO - [generated in 0.00016s] {}
+2024-09-02 12:59:58 - sqlalchemy.engine.Engine - INFO - SHOW TABLES;
+2024-09-02 12:59:58 - sqlalchemy.engine.Engine - INFO - [generated in 0.00016s] {}
+2024-09-02 12:59:58 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-02 12:59:58 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-02 12:59:58 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:59:58 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-02 12:59:58 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:59:58 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-02 12:59:58 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 12:59:58 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 12:59:58 - sqlalchemy.engine.Engine - INFO - INSERT INTO db_configs (id, hostname, port, username, password, database_name) VALUES (%(id)s, %(hostname)s, %(port)s, %(username)s, %(password)s, %(database_name)s)
+2024-09-02 12:59:58 - sqlalchemy.engine.Engine - INFO - [generated in 0.00020s] {'id': 'ad1be115-4e0c-4b74-a42c-5185eed94e80', 'hostname': '192.168.110.131', 'port': '3306', 'username': 'root', 'password': 'snowball950123', 'database_name': 'muyu_test'}
+2024-09-02 12:59:58 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-02 12:59:58 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 12:59:58 - sqlalchemy.engine.Engine - INFO - SELECT db_configs.id AS db_configs_id, db_configs.hostname AS db_configs_hostname, db_configs.port AS db_configs_port, db_configs.username AS db_configs_username, db_configs.password AS db_configs_password, db_configs.database_name AS db_configs_database_name 
+FROM db_configs 
+WHERE db_configs.id = %(pk_1)s
+2024-09-02 12:59:58 - sqlalchemy.engine.Engine - INFO - [generated in 0.00014s] {'pk_1': 'ad1be115-4e0c-4b74-a42c-5185eed94e80'}
+2024-09-02 13:00:11 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-02 13:00:11 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 13:00:11 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-02 13:00:11 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 13:00:11 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-02 13:00:11 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 13:00:11 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 13:00:11 - sqlalchemy.engine.Engine - INFO - USE `mategen`;
+2024-09-02 13:00:11 - sqlalchemy.engine.Engine - INFO - [generated in 0.00033s] {}
+2024-09-02 13:00:11 - sqlalchemy.engine.Engine - INFO - SHOW TABLES;
+2024-09-02 13:00:11 - sqlalchemy.engine.Engine - INFO - [generated in 0.00014s] {}
+2024-09-02 13:00:11 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-02 13:00:11 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-02 13:00:11 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 13:00:11 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-02 13:00:11 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 13:00:11 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-02 13:00:11 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 13:00:11 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 13:00:11 - sqlalchemy.engine.Engine - INFO - INSERT INTO db_configs (id, hostname, port, username, password, database_name) VALUES (%(id)s, %(hostname)s, %(port)s, %(username)s, %(password)s, %(database_name)s)
+2024-09-02 13:00:11 - sqlalchemy.engine.Engine - INFO - [generated in 0.00013s] {'id': '390fabee-709c-4dd0-8abe-70d68abc0047', 'hostname': '192.168.110.131', 'port': '3306', 'username': 'root', 'password': 'snowball950123', 'database_name': 'mategen'}
+2024-09-02 13:00:11 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-02 13:00:11 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 13:00:11 - sqlalchemy.engine.Engine - INFO - SELECT db_configs.id AS db_configs_id, db_configs.hostname AS db_configs_hostname, db_configs.port AS db_configs_port, db_configs.username AS db_configs_username, db_configs.password AS db_configs_password, db_configs.database_name AS db_configs_database_name 
+FROM db_configs 
+WHERE db_configs.id = %(pk_1)s
+2024-09-02 13:00:11 - sqlalchemy.engine.Engine - INFO - [generated in 0.00010s] {'pk_1': '390fabee-709c-4dd0-8abe-70d68abc0047'}
+2024-09-02 13:00:26 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-02 13:00:26 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 13:00:26 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-02 13:00:26 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 13:00:26 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-02 13:00:26 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 13:00:26 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 13:00:26 - sqlalchemy.engine.Engine - INFO - USE `mategen`;
+2024-09-02 13:00:26 - sqlalchemy.engine.Engine - INFO - [generated in 0.00043s] {}
+2024-09-02 13:00:26 - sqlalchemy.engine.Engine - INFO - SHOW TABLES;
+2024-09-02 13:00:26 - sqlalchemy.engine.Engine - INFO - [generated in 0.00027s] {}
+2024-09-02 13:00:26 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-02 13:00:26 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-02 13:00:26 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 13:00:26 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-02 13:00:26 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 13:00:26 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-02 13:00:26 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 13:00:26 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 13:00:26 - sqlalchemy.engine.Engine - INFO - INSERT INTO db_configs (id, hostname, port, username, password, database_name) VALUES (%(id)s, %(hostname)s, %(port)s, %(username)s, %(password)s, %(database_name)s)
+2024-09-02 13:00:26 - sqlalchemy.engine.Engine - INFO - [generated in 0.00028s] {'id': '19c371de-1b72-43d4-a6d2-f502b80a79dc', 'hostname': '192.168.110.131', 'port': '3306', 'username': 'root', 'password': 'snowball950123', 'database_name': 'mategen'}
+2024-09-02 13:00:26 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-02 13:00:26 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 13:00:26 - sqlalchemy.engine.Engine - INFO - SELECT db_configs.id AS db_configs_id, db_configs.hostname AS db_configs_hostname, db_configs.port AS db_configs_port, db_configs.username AS db_configs_username, db_configs.password AS db_configs_password, db_configs.database_name AS db_configs_database_name 
+FROM db_configs 
+WHERE db_configs.id = %(pk_1)s
+2024-09-02 13:00:26 - sqlalchemy.engine.Engine - INFO - [generated in 0.00029s] {'pk_1': '19c371de-1b72-43d4-a6d2-f502b80a79dc'}
+2024-09-02 13:02:48 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-02 13:02:48 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 13:02:48 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-02 13:02:48 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 13:02:48 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-02 13:02:48 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 13:02:48 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 13:02:48 - sqlalchemy.engine.Engine - INFO - USE `mategen`;
+2024-09-02 13:02:48 - sqlalchemy.engine.Engine - INFO - [generated in 0.00016s] {}
+2024-09-02 13:02:48 - sqlalchemy.engine.Engine - INFO - SHOW TABLES;
+2024-09-02 13:02:48 - sqlalchemy.engine.Engine - INFO - [generated in 0.00011s] {}
+2024-09-02 13:02:48 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-02 13:02:48 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-02 13:02:48 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 13:02:48 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-02 13:02:48 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 13:02:48 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-02 13:02:48 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 13:02:48 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 13:02:48 - sqlalchemy.engine.Engine - INFO - SELECT db_configs.id AS db_configs_id, db_configs.hostname AS db_configs_hostname, db_configs.port AS db_configs_port, db_configs.username AS db_configs_username, db_configs.password AS db_configs_password, db_configs.database_name AS db_configs_database_name 
+FROM db_configs 
+WHERE db_configs.hostname = %(hostname_1)s AND db_configs.port = %(port_1)s AND db_configs.username = %(username_1)s AND db_configs.password = %(password_1)s AND db_configs.database_name = %(database_name_1)s 
+ LIMIT %(param_1)s
+2024-09-02 13:02:48 - sqlalchemy.engine.Engine - INFO - [generated in 0.00012s] {'hostname_1': '192.168.110.131', 'port_1': '3306', 'username_1': 'root', 'password_1': 'snowball950123', 'database_name_1': 'mategen', 'param_1': 1}
+2024-09-02 13:02:48 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-02 13:03:34 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-02 13:03:34 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 13:03:34 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-02 13:03:34 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 13:03:34 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-02 13:03:34 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 13:03:34 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 13:03:34 - sqlalchemy.engine.Engine - INFO - USE `muyu_test`;
+2024-09-02 13:03:34 - sqlalchemy.engine.Engine - INFO - [generated in 0.00016s] {}
+2024-09-02 13:03:34 - sqlalchemy.engine.Engine - INFO - SHOW TABLES;
+2024-09-02 13:03:34 - sqlalchemy.engine.Engine - INFO - [generated in 0.00009s] {}
+2024-09-02 13:03:34 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-02 13:03:34 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-02 13:03:34 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 13:03:34 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-02 13:03:34 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 13:03:34 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-02 13:03:34 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 13:03:34 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 13:03:34 - sqlalchemy.engine.Engine - INFO - SELECT db_configs.id AS db_configs_id, db_configs.hostname AS db_configs_hostname, db_configs.port AS db_configs_port, db_configs.username AS db_configs_username, db_configs.password AS db_configs_password, db_configs.database_name AS db_configs_database_name 
+FROM db_configs 
+WHERE db_configs.id = %(id_1)s 
+ LIMIT %(param_1)s
+2024-09-02 13:03:34 - sqlalchemy.engine.Engine - INFO - [generated in 0.00013s] {'id_1': '390fabee-709c-4dd0-8abe-70d68abc0047', 'param_1': 1}
+2024-09-02 13:03:34 - sqlalchemy.engine.Engine - INFO - UPDATE db_configs SET port=%(port)s, database_name=%(database_name)s WHERE db_configs.id = %(db_configs_id)s
+2024-09-02 13:03:34 - sqlalchemy.engine.Engine - INFO - [generated in 0.00015s] {'port': '3306', 'database_name': 'muyu_test', 'db_configs_id': '390fabee-709c-4dd0-8abe-70d68abc0047'}
+2024-09-02 13:03:34 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-02 13:04:21 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-02 13:04:21 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 13:04:21 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-02 13:04:21 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 13:04:21 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-02 13:04:21 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 13:04:21 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 13:04:21 - sqlalchemy.engine.Engine - INFO - USE `mategen`;
+2024-09-02 13:04:21 - sqlalchemy.engine.Engine - INFO - [generated in 0.00014s] {}
+2024-09-02 13:04:21 - sqlalchemy.engine.Engine - INFO - SHOW TABLES;
+2024-09-02 13:04:21 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-02 13:04:21 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-02 13:04:21 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-02 13:04:21 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 13:04:21 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-02 13:04:21 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 13:04:21 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-02 13:04:21 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 13:04:21 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 13:04:21 - sqlalchemy.engine.Engine - INFO - SELECT db_configs.id AS db_configs_id, db_configs.hostname AS db_configs_hostname, db_configs.port AS db_configs_port, db_configs.username AS db_configs_username, db_configs.password AS db_configs_password, db_configs.database_name AS db_configs_database_name 
+FROM db_configs 
+WHERE db_configs.hostname = %(hostname_1)s AND db_configs.port = %(port_1)s AND db_configs.username = %(username_1)s AND db_configs.password = %(password_1)s AND db_configs.database_name = %(database_name_1)s 
+ LIMIT %(param_1)s
+2024-09-02 13:04:21 - sqlalchemy.engine.Engine - INFO - [generated in 0.00019s] {'hostname_1': '192.168.110.131', 'port_1': '3306', 'username_1': 'root', 'password_1': 'snowball950123', 'database_name_1': 'mategen', 'param_1': 1}
+2024-09-02 13:04:21 - sqlalchemy.engine.Engine - INFO - INSERT INTO db_configs (id, hostname, port, username, password, database_name) VALUES (%(id)s, %(hostname)s, %(port)s, %(username)s, %(password)s, %(database_name)s)
+2024-09-02 13:04:21 - sqlalchemy.engine.Engine - INFO - [generated in 0.00018s] {'id': '264b3423-90d3-4d7f-aab3-b8427b12c69e', 'hostname': '192.168.110.131', 'port': '3306', 'username': 'root', 'password': 'snowball950123', 'database_name': 'mategen'}
+2024-09-02 13:04:21 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-02 13:04:21 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 13:04:21 - sqlalchemy.engine.Engine - INFO - SELECT db_configs.id AS db_configs_id, db_configs.hostname AS db_configs_hostname, db_configs.port AS db_configs_port, db_configs.username AS db_configs_username, db_configs.password AS db_configs_password, db_configs.database_name AS db_configs_database_name 
+FROM db_configs 
+WHERE db_configs.id = %(pk_1)s
+2024-09-02 13:04:21 - sqlalchemy.engine.Engine - INFO - [generated in 0.00010s] {'pk_1': '264b3423-90d3-4d7f-aab3-b8427b12c69e'}
+2024-09-02 13:07:28 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-02 13:07:28 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 13:07:28 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-02 13:07:28 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 13:07:28 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-02 13:07:28 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 13:07:28 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 13:07:28 - sqlalchemy.engine.Engine - INFO - SELECT db_configs.id AS db_configs_id, db_configs.database_name AS db_configs_database_name 
+FROM db_configs
+2024-09-02 13:07:28 - sqlalchemy.engine.Engine - INFO - [generated in 0.00013s] {}
+2024-09-02 13:07:28 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-02 13:08:56 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-02 13:08:56 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 13:08:56 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-02 13:08:56 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 13:08:56 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-02 13:08:56 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 13:08:56 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 13:08:56 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-09-02 13:08:56 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 13:08:56 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-09-02 13:08:56 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 13:08:56 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`knowledge_bases`
+2024-09-02 13:08:56 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 13:08:56 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`db_configs`
+2024-09-02 13:08:56 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 13:08:56 - sqlalchemy.engine.Engine - INFO - 
+CREATE TABLE db_configs (
+	id VARCHAR(36) NOT NULL, 
+	hostname VARCHAR(255) NOT NULL, 
+	port INTEGER NOT NULL, 
+	username VARCHAR(255) NOT NULL, 
+	password VARCHAR(255) NOT NULL, 
+	database_name VARCHAR(255) NOT NULL, 
+	created_at DATETIME, 
+	PRIMARY KEY (id)
+)
+
+
+2024-09-02 13:08:56 - sqlalchemy.engine.Engine - INFO - [no key 0.00009s] {}
+2024-09-02 13:08:56 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-02 13:08:56 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 13:08:56 - sqlalchemy.engine.Engine - INFO - ALTER DATABASE mategen CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci
+2024-09-02 13:08:56 - sqlalchemy.engine.Engine - INFO - [generated in 0.00011s] {}
+2024-09-02 13:08:56 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-02 13:08:56 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 13:08:56 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`knowledge_bases`
+2024-09-02 13:08:56 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 13:08:56 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-02 13:08:56 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 13:08:56 - sqlalchemy.engine.Engine - INFO - ALTER TABLE knowledge_bases DROP FOREIGN KEY knowledge_bases_ibfk_1
+2024-09-02 13:08:56 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-02 13:08:56 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-02 13:08:56 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 13:08:56 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-09-02 13:08:56 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 13:08:56 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-02 13:08:56 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 13:08:56 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads DROP FOREIGN KEY threads_ibfk_1
+2024-09-02 13:08:56 - sqlalchemy.engine.Engine - INFO - [generated in 0.00035s] {}
+2024-09-02 13:08:56 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-02 13:08:56 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 13:08:56 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-02 13:08:56 - sqlalchemy.engine.Engine - INFO - [generated in 0.00020s] {}
+2024-09-02 13:08:56 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-02 13:08:56 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 13:08:56 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-09-02 13:08:56 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 13:08:56 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-02 13:08:56 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 13:08:56 - sqlalchemy.engine.Engine - INFO - ALTER TABLE agents CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-02 13:08:56 - sqlalchemy.engine.Engine - INFO - [generated in 0.00011s] {}
+2024-09-02 13:08:56 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-02 13:08:56 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 13:08:56 - sqlalchemy.engine.Engine - INFO - ALTER TABLE knowledge_bases CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-02 13:08:56 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-02 13:08:56 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-02 13:08:56 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 13:08:56 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`db_configs`
+2024-09-02 13:08:56 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 13:08:56 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-02 13:08:56 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 13:08:56 - sqlalchemy.engine.Engine - INFO - ALTER TABLE db_configs CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-02 13:08:56 - sqlalchemy.engine.Engine - INFO - [generated in 0.00065s] {}
+2024-09-02 13:08:56 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-02 13:08:56 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 13:08:56 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads ADD CONSTRAINT threads_ibfk_1 FOREIGN KEY (agent_id) REFERENCES agents(id)
+2024-09-02 13:08:56 - sqlalchemy.engine.Engine - INFO - [generated in 0.00009s] {}
+2024-09-02 13:08:56 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-02 13:08:56 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 13:08:56 - sqlalchemy.engine.Engine - INFO - ALTER TABLE knowledge_bases ADD CONSTRAINT knowledge_bases_ibfk_1 FOREIGN KEY (thread_id) REFERENCES threads(id)
+2024-09-02 13:08:56 - sqlalchemy.engine.Engine - INFO - [generated in 0.00033s] {}
+2024-09-02 13:08:56 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-02 13:09:03 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-02 13:09:03 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 13:09:03 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-02 13:09:03 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 13:09:03 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-02 13:09:03 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 13:09:03 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 13:09:03 - sqlalchemy.engine.Engine - INFO - USE `mategen`;
+2024-09-02 13:09:03 - sqlalchemy.engine.Engine - INFO - [generated in 0.00017s] {}
+2024-09-02 13:09:03 - sqlalchemy.engine.Engine - INFO - SHOW TABLES;
+2024-09-02 13:09:03 - sqlalchemy.engine.Engine - INFO - [generated in 0.00011s] {}
+2024-09-02 13:09:03 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-02 13:09:06 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-02 13:09:06 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 13:09:06 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-02 13:09:06 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 13:09:06 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-02 13:09:06 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 13:09:06 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 13:09:06 - sqlalchemy.engine.Engine - INFO - USE `mategen`;
+2024-09-02 13:09:06 - sqlalchemy.engine.Engine - INFO - [generated in 0.00018s] {}
+2024-09-02 13:09:06 - sqlalchemy.engine.Engine - INFO - SHOW TABLES;
+2024-09-02 13:09:06 - sqlalchemy.engine.Engine - INFO - [generated in 0.00014s] {}
+2024-09-02 13:09:06 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-02 13:09:06 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-02 13:09:06 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 13:09:06 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-02 13:09:06 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 13:09:06 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-02 13:09:06 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 13:09:06 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 13:09:06 - sqlalchemy.engine.Engine - INFO - SELECT db_configs.id AS db_configs_id, db_configs.hostname AS db_configs_hostname, db_configs.port AS db_configs_port, db_configs.username AS db_configs_username, db_configs.password AS db_configs_password, db_configs.database_name AS db_configs_database_name, db_configs.created_at AS db_configs_created_at 
+FROM db_configs 
+WHERE db_configs.hostname = %(hostname_1)s AND db_configs.port = %(port_1)s AND db_configs.username = %(username_1)s AND db_configs.password = %(password_1)s AND db_configs.database_name = %(database_name_1)s 
+ LIMIT %(param_1)s
+2024-09-02 13:09:06 - sqlalchemy.engine.Engine - INFO - [generated in 0.00017s] {'hostname_1': '192.168.110.131', 'port_1': '3306', 'username_1': 'root', 'password_1': 'snowball950123', 'database_name_1': 'mategen', 'param_1': 1}
+2024-09-02 13:09:06 - sqlalchemy.engine.Engine - INFO - INSERT INTO db_configs (id, hostname, port, username, password, database_name, created_at) VALUES (%(id)s, %(hostname)s, %(port)s, %(username)s, %(password)s, %(database_name)s, now())
+2024-09-02 13:09:06 - sqlalchemy.engine.Engine - INFO - [generated in 0.00014s] {'id': '9703a366-7463-4c80-ac66-b837e5ed8823', 'hostname': '192.168.110.131', 'port': '3306', 'username': 'root', 'password': 'snowball950123', 'database_name': 'mategen'}
+2024-09-02 13:09:06 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-02 13:09:06 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 13:09:06 - sqlalchemy.engine.Engine - INFO - SELECT db_configs.id AS db_configs_id, db_configs.hostname AS db_configs_hostname, db_configs.port AS db_configs_port, db_configs.username AS db_configs_username, db_configs.password AS db_configs_password, db_configs.database_name AS db_configs_database_name, db_configs.created_at AS db_configs_created_at 
+FROM db_configs 
+WHERE db_configs.id = %(pk_1)s
+2024-09-02 13:09:06 - sqlalchemy.engine.Engine - INFO - [generated in 0.00011s] {'pk_1': '9703a366-7463-4c80-ac66-b837e5ed8823'}
+2024-09-02 13:09:13 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-02 13:09:13 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 13:09:13 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-02 13:09:13 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 13:09:13 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-02 13:09:13 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 13:09:13 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 13:09:13 - sqlalchemy.engine.Engine - INFO - USE `muyu_test`;
+2024-09-02 13:09:13 - sqlalchemy.engine.Engine - INFO - [generated in 0.00016s] {}
+2024-09-02 13:09:13 - sqlalchemy.engine.Engine - INFO - SHOW TABLES;
+2024-09-02 13:09:13 - sqlalchemy.engine.Engine - INFO - [generated in 0.00010s] {}
+2024-09-02 13:09:13 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-02 13:09:13 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-02 13:09:13 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 13:09:13 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-02 13:09:13 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 13:09:13 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-02 13:09:13 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 13:09:13 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 13:09:13 - sqlalchemy.engine.Engine - INFO - SELECT db_configs.id AS db_configs_id, db_configs.hostname AS db_configs_hostname, db_configs.port AS db_configs_port, db_configs.username AS db_configs_username, db_configs.password AS db_configs_password, db_configs.database_name AS db_configs_database_name, db_configs.created_at AS db_configs_created_at 
+FROM db_configs 
+WHERE db_configs.hostname = %(hostname_1)s AND db_configs.port = %(port_1)s AND db_configs.username = %(username_1)s AND db_configs.password = %(password_1)s AND db_configs.database_name = %(database_name_1)s 
+ LIMIT %(param_1)s
+2024-09-02 13:09:13 - sqlalchemy.engine.Engine - INFO - [generated in 0.00011s] {'hostname_1': '192.168.110.131', 'port_1': '3306', 'username_1': 'root', 'password_1': 'snowball950123', 'database_name_1': 'muyu_test', 'param_1': 1}
+2024-09-02 13:09:13 - sqlalchemy.engine.Engine - INFO - INSERT INTO db_configs (id, hostname, port, username, password, database_name, created_at) VALUES (%(id)s, %(hostname)s, %(port)s, %(username)s, %(password)s, %(database_name)s, now())
+2024-09-02 13:09:13 - sqlalchemy.engine.Engine - INFO - [generated in 0.00013s] {'id': '060f76fe-e4e4-400f-a006-116d4b3a5a50', 'hostname': '192.168.110.131', 'port': '3306', 'username': 'root', 'password': 'snowball950123', 'database_name': 'muyu_test'}
+2024-09-02 13:09:13 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-02 13:09:13 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 13:09:13 - sqlalchemy.engine.Engine - INFO - SELECT db_configs.id AS db_configs_id, db_configs.hostname AS db_configs_hostname, db_configs.port AS db_configs_port, db_configs.username AS db_configs_username, db_configs.password AS db_configs_password, db_configs.database_name AS db_configs_database_name, db_configs.created_at AS db_configs_created_at 
+FROM db_configs 
+WHERE db_configs.id = %(pk_1)s
+2024-09-02 13:09:13 - sqlalchemy.engine.Engine - INFO - [generated in 0.00010s] {'pk_1': '060f76fe-e4e4-400f-a006-116d4b3a5a50'}
+2024-09-02 13:09:18 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-02 13:09:18 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 13:09:18 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-02 13:09:18 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 13:09:18 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-02 13:09:18 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 13:09:18 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 13:09:18 - sqlalchemy.engine.Engine - INFO - SELECT db_configs.id AS db_configs_id, db_configs.database_name AS db_configs_database_name 
+FROM db_configs ORDER BY db_configs.created_at DESC
+2024-09-02 13:09:18 - sqlalchemy.engine.Engine - INFO - [generated in 0.00009s] {}
+2024-09-02 13:09:18 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-02 13:12:44 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-02 13:12:44 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 13:12:44 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-02 13:12:44 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 13:12:44 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-02 13:12:44 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 13:12:44 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 13:12:44 - sqlalchemy.engine.Engine - INFO - SELECT db_configs.id AS db_configs_id, db_configs.hostname AS db_configs_hostname, db_configs.port AS db_configs_port, db_configs.username AS db_configs_username, db_configs.password AS db_configs_password, db_configs.database_name AS db_configs_database_name, db_configs.created_at AS db_configs_created_at 
+FROM db_configs 
+WHERE db_configs.id = %(id_1)s 
+ LIMIT %(param_1)s
+2024-09-02 13:12:44 - sqlalchemy.engine.Engine - INFO - [generated in 0.00012s] {'id_1': '060f76fe-e4e4-400f-a006-116d4b3a5a50', 'param_1': 1}
+2024-09-02 13:12:44 - sqlalchemy.engine.Engine - INFO - DELETE FROM db_configs WHERE db_configs.id = %(id)s
+2024-09-02 13:12:44 - sqlalchemy.engine.Engine - INFO - [generated in 0.00011s] {'id': '060f76fe-e4e4-400f-a006-116d4b3a5a50'}
+2024-09-02 13:12:44 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-02 13:12:53 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-02 13:12:53 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 13:12:53 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-02 13:12:53 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 13:12:53 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-02 13:12:53 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-02 13:12:53 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-02 13:12:53 - sqlalchemy.engine.Engine - INFO - SELECT db_configs.id AS db_configs_id, db_configs.hostname AS db_configs_hostname, db_configs.port AS db_configs_port, db_configs.username AS db_configs_username, db_configs.password AS db_configs_password, db_configs.database_name AS db_configs_database_name, db_configs.created_at AS db_configs_created_at 
+FROM db_configs 
+WHERE db_configs.id = %(id_1)s 
+ LIMIT %(param_1)s
+2024-09-02 13:12:53 - sqlalchemy.engine.Engine - INFO - [generated in 0.00012s] {'id_1': '060f76fe-e4e4-400f-a006-116d4b323', 'param_1': 1}
+2024-09-02 13:12:53 - sqlalchemy.engine.Engine - INFO - ROLLBACK

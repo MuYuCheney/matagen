@@ -88,6 +88,7 @@ def create_app():
 
 
 import os
+
 # 获取当前文件所在目录的上一级目录
 # 获取当前文件所在目录的上一级目录
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -99,6 +100,7 @@ from fastapi import FastAPI, File, UploadFile, Form
 from typing import List
 
 import shutil
+
 
 def mount_app_routes(app: FastAPI):
     """
@@ -249,8 +251,7 @@ def mount_app_routes(app: FastAPI):
         finally:
             db_session.close()
 
-
-    @app.post("/api/upload", tags=["Knowledge"],  summary="上传文件,在进行知识库解析前,先调用此函数上传全部文件")
+    @app.post("/api/upload", tags=["Knowledge"], summary="上传文件,在进行知识库解析前,先调用此函数上传全部文件")
     async def upload_files(
             folderName: str = Form(...),  # 接收文件夹名称
             files: List[UploadFile] = File(...)  # 接收多个文件
@@ -356,7 +357,8 @@ def mount_app_routes(app: FastAPI):
                     {"text": text},
                     ensure_ascii=False)
 
-    @app.post("/api/chat", tags=["Chat"], summary="问答的通用对话接口, 参数chat_stream默认为False,如果设置为True 为流式输出, 采用SSE传输", )
+    @app.post("/api/chat", tags=["Chat"],
+              summary="问答的通用对话接口, 参数chat_stream默认为False,如果设置为True 为流式输出, 采用SSE传输", )
     async def chat(request: ChatRequest):
         try:
             if request.chat_stream:
@@ -368,7 +370,6 @@ def mount_app_routes(app: FastAPI):
                 return {"status": 200, "data": {"message": response['data']}}
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))
-
 
     @app.get("/api/agent_id", tags=["Chat"], summary="获取系统唯一的Assis id")
     def get_conversation():
@@ -453,15 +454,64 @@ def mount_app_routes(app: FastAPI):
         finally:
             db_session.close()
 
-    from db_interface import create_database_connection, DBConfig
-    @app.post("/api/create_db_connection", tags=["Database"],
-              summary="创建数据库连接，如果连接成功，返回所有数据库及对应的表名")
+    from db_interface import test_database_connection, DBConfig, insert_db_config, update_db_config, get_all_databases, delete_db_config
+
+    @app.post("/api/test_db_connection", tags=["Database"],
+              summary="创建数据库连接，如果连接成功，返回对应数据库中的所有表名")
     def db_connection(db_config: DBConfig = Body(...)):
         try:
-            result = create_database_connection(db_config)
-            return {"status": 200, "data": {"message": result}}
+            table_name = test_database_connection(db_config)
+            return {"status": 200, "data": {"table_name": table_name}}
+        except HTTPException as http_ex:
+        # 直接抛出捕获的 HTTPException，这将保持异常中定义的状态码和错误信息
+            raise http_ex
+        except Exception as ex:
+            # 捕获未预料到的其他异常，并转化为 HTTPException
+            raise HTTPException(status_code=500, detail=f"未知错误: {str(ex)}")
+
+    @app.post("/api/create_db_connection", tags=["Database"],
+              summary="创建数据库连接，后端将进行连接存储")
+    def db_create(db_config: DBConfig = Body(...)):
+        try:
+            database_id = insert_db_config(db_config)
+            return {"status": 200, "data": {"message": "数据库连接信息正常",
+                                            "db_info_id": database_id}}
+        except Exception as e:
+            raise e
+
+    @app.get("/api/show_all_databases", tags=["Database"], summary="获取所有数据库连接信息")
+    def list_databases():
+        try:
+            databases = get_all_databases()
+            return {"status": 200, "data": databases}
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))
+
+    @app.put("/api/update_db_connection/{db_info_id}", tags=["Database"], summary="更新数据库连接配置")
+    def update_db_connection(db_info_id: str, db_config: DBConfig = Body(...)):
+        try:
+            updated = update_db_config(db_info_id, db_config)
+            if updated:
+                return {"status": 200, "data": {"message": "数据库连接信息已更新", "db_info_id": db_info_id}}
+            else:
+                raise HTTPException(status_code=404, detail="未找到指定的数据库配置")
+        except HTTPException as http_ex:
+            raise http_ex
+        except Exception as ex:
+            raise HTTPException(status_code=500, detail=f"更新失败: {str(ex)}")
+
+    @app.delete("/api/delete_db_connection/{db_info_id}", tags=["Database"], summary="删除数据库连接配置")
+    def delete_db_connection(db_info_id: str):
+        try:
+            success = delete_db_config(db_info_id)
+            if not success:
+                raise HTTPException(status_code=404, detail="Database configuration not found")
+            return {"status": 200, "data": {"message": "数据库配置信息已成功删除"}}
+        except HTTPException as http_ex:
+            raise http_ex
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))
+
 
     from python_interface import execute_python_code
     @app.post("/api/execute_code", tags=["Python Execution"],
