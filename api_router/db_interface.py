@@ -190,3 +190,22 @@ def delete_db_config(db_info_id: str):
         raise Exception(f"Failed to delete database configuration: {str(e)}")
     finally:
         session.close()
+
+
+def get_db_config_by_id(db_info_id: str):
+    """
+    从数据库中根据 ID 获取配置信息，并转换为 DBConfig 模型返回。
+    """
+
+    from config.config import SQLALCHEMY_DATABASE_URI
+    engine = create_engine(SQLALCHEMY_DATABASE_URI, echo=True)
+
+    SessionLocal.configure(bind=engine)
+    session = SessionLocal()
+
+    db_info = session.query(DbBase).filter(DbBase.id == db_info_id).first()
+
+    if db_info:
+        return {key: value for key, value in db_info.__dict__.items() if not key.startswith('_')}
+    else:
+        return None

@@ -9,6 +9,9 @@ import os
 from sqlalchemy import desc
 
 from config.config import SQLALCHEMY_DATABASE_URI
+import os
+import shutil
+
 
 engine = create_engine(
     SQLALCHEMY_DATABASE_URI
@@ -431,8 +434,6 @@ def get_all_files(folder_path):
     return file_dict
 
 
-import os
-import shutil
 
 
 def update_knowledge_base_name(session: Session, knowledge_base_id: str, new_name: str, init: bool) -> bool:
@@ -530,3 +531,5 @@ def delete_knowledge_base_by_id(session: Session, knowledge_base_id: str) -> boo
         session.rollback()
         logging.error(f"Failed to delete knowledge base due to: {e}")
         return False
+
+

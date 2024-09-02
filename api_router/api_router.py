@@ -458,7 +458,7 @@ def mount_app_routes(app: FastAPI):
         finally:
             db_session.close()
 
-    from db_interface import test_database_connection, DBConfig, insert_db_config, update_db_config, get_all_databases, \
+    from db_interface import DBConfig, insert_db_config, update_db_config, get_all_databases, \
         delete_db_config
 
     @app.post("/api/create_db_connection", tags=["Database"],
@@ -485,6 +485,21 @@ def mount_app_routes(app: FastAPI):
             updated = update_db_config(db_info_id, db_config)
             if updated:
                 return {"status": 200, "data": {"message": "数据库连接信息已更新", "db_info_id": db_info_id}}
+            else:
+                raise HTTPException(status_code=404, detail="未找到指定的数据库配置")
+        except HTTPException as http_ex:
+            raise http_ex
+        except Exception as ex:
+            raise HTTPException(status_code=500, detail=f"更新失败: {str(ex)}")
+
+    @app.get("/api/get_db_info", tags=["Database"], summary="获取数据库连接配置")
+    def get_db_connection(db_info_id: str = Query(..., description="数据库配置的 ID", embed=True)):
+
+        from db_interface import get_db_config_by_id
+        try:
+            db_config = get_db_config_by_id(db_info_id)
+            if db_config:
+                return {"status": 200, "data": {"db_info": db_config}}
             else:
                 raise HTTPException(status_code=404, detail="未找到指定的数据库配置")
         except HTTPException as http_ex:
