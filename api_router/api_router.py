@@ -454,20 +454,8 @@ def mount_app_routes(app: FastAPI):
         finally:
             db_session.close()
 
-    from db_interface import test_database_connection, DBConfig, insert_db_config, update_db_config, get_all_databases, delete_db_config
-
-    @app.post("/api/test_db_connection", tags=["Database"],
-              summary="创建数据库连接，如果连接成功，返回对应数据库中的所有表名")
-    def db_connection(db_config: DBConfig = Body(...)):
-        try:
-            table_name = test_database_connection(db_config)
-            return {"status": 200, "data": {"table_name": table_name}}
-        except HTTPException as http_ex:
-        # 直接抛出捕获的 HTTPException，这将保持异常中定义的状态码和错误信息
-            raise http_ex
-        except Exception as ex:
-            # 捕获未预料到的其他异常，并转化为 HTTPException
-            raise HTTPException(status_code=500, detail=f"未知错误: {str(ex)}")
+    from db_interface import test_database_connection, DBConfig, insert_db_config, update_db_config, get_all_databases, \
+        delete_db_config
 
     @app.post("/api/create_db_connection", tags=["Database"],
               summary="创建数据库连接，后端将进行连接存储")
@@ -511,7 +499,6 @@ def mount_app_routes(app: FastAPI):
             raise http_ex
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))
-
 
     from python_interface import execute_python_code
     @app.post("/api/execute_code", tags=["Python Execution"],
