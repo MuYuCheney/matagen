@@ -12,7 +12,6 @@ from config.config import SQLALCHEMY_DATABASE_URI
 import os
 import shutil
 
-
 engine = create_engine(
     SQLALCHEMY_DATABASE_URI
 )
@@ -39,27 +38,30 @@ def insert_agent_with_fixed_id(session: Session, api_key: str):
     :return: 插入操作的结果，成功或失败
     """
     try:
-        # 创建新的代理实例，id固定为"-1"
-        new_agent = SecretModel(id="-1", api_key=api_key)
-        session.add(new_agent)
-        session.commit()
-        return True
-    except Exception as e:
+        # 获取数据库中的代理记录
+        agent = session.query(SecretModel).first()
+
+        if agent:
+            # 检查现有api_key是否一致
+            if agent.api_key == api_key:
+                # 如果api_key一致，不进行任何操作
+                return True
+            else:
+                # 如果api_key不一致，更新api_key和id
+                agent.api_key = api_key
+                agent.id = "-1"
+                session.commit()
+                return True
+        else:
+            # 如果数据库为空，创建并添加新代理实例
+            new_agent = SecretModel(id="-1", api_key=api_key, initialized=False, agent_type="normal")
+            session.add(new_agent)
+            session.commit()
+            return True
+    except SQLAlchemyError as e:
         session.rollback()  # 出错时回滚以避免数据不一致
+        logging.error(f"Error during managing agent: {e}")
         return False
-
-
-def store_agent_info(session: Session, assis_id: str):
-    """
-    如果ID为-1，则更新代理的ID。如果传入的ID已存在且不为-1，则不执行任何操作。
-    """
-    # 查询数据库中ID为-1的代理
-    agent_with_id_negative_one = session.query(SecretModel).filter(SecretModel.id == "-1").one_or_none()
-    # 如果找到了ID为-1的代理，则更新其ID
-    if agent_with_id_negative_one:
-        agent_with_id_negative_one.id = assis_id
-        session.commit()
-        return
 
 
 def get_thread_from_db(session: Session, thread_id: str):
@@ -123,23 +125,6 @@ def delete_thread_by_id(session: Session, thread_id: str):
         return True
     return False
 
-
-def fetch_threads_by_agent(session: Session, agent_id: str) -> Dict[str, List[Dict[str, str]]]:
-    """
-    根据给定的agent_id从数据库中检索所有线程的ID和对应的会话名称。
-    :param session: SQLAlchemy Session 对象，用于数据库操作
-    :param agent_id: 用于筛选线程的代理ID
-    :return: 包含所有相关线程信息的列表，每个元素都是一个包含线程ID和会话名称的字典
-    """
-    # 根据agent_id查询所有相关的线程
-    threads = session.query(ThreadModel.id, ThreadModel.conversation_name).filter(
-        ThreadModel.agent_id == agent_id).all()
-
-    # 创建包含所有相关线程信息的列表
-    threads_list = [{"id": thread.id, "conversation_name": thread.conversation_name or ""} for thread in threads]
-
-    # 将结果打包成JSON格式
-    return threads_list
 
 
 def fetch_threads_mode(session: Session, thread_id: str) -> Dict[str, List[Dict[str, str]]]:
@@ -434,8 +419,6 @@ def get_all_files(folder_path):
     return file_dict
 
 
-
-
 def update_knowledge_base_name(session: Session, knowledge_base_id: str, new_name: str, init: bool) -> bool:
     """
     根据提供的 ID 更新 KnowledgeBase 表中的知识库名称。
@@ -533,3 +516,60 @@ def delete_knowledge_base_by_id(session: Session, knowledge_base_id: str) -> boo
         return False
 
 
+# MateGen Class
+def update_agent_type(api_key: str, agent_type: str) -> bool:
+    """
+    根据提供的 agent_id 更新 SecretModel 表中的 agent_type 字段。
+
+    参数:
+        agent_id (str): 需要更新的代理的 ID。
+        new_agent_type (str): 新的代理类型。
+
+    返回:
+        bool: 更新是否成功。
+    """
+    db_session = SessionLocal()  # 创建数据库会话
+    try:
+        # 查询指定 ID 的代理
+        agent = db_session.query(SecretModel).filter(SecretModel.id == api_key).one_or_none()
+
+        if agent:
+            # 更新 agent_type
+            agent.agent_type = agent_type
+            db_session.commit()  # 提交更改
+            return True
+        else:
+            return False  # 如果没有找到指定的代理，返回 False
+    except SQLAlchemyError as e:
+        db_session.rollback()  # 出错时回滚更改
+        logging.error(f"Failed to update agent type due to: {e}")
+        return False
+    finally:
+        db_session.close()  # 确保会话被正确关闭
+
+
+from db.thread_model import DbBase
+
+
+def get_db_connection_description(session: Session, db_name_id: str):
+    """
+    根据给定的数据库配置ID获取所有相关信息，并拼接成描述性的文本。
+
+    :param session: SQLAlchemy Session 对象，用于数据库操作
+    :param db_name_id: 数据库配置的ID
+    :return: 拼接好的描述文本
+    """
+    # 查询指定ID的数据库配置
+    db_connection = session.query(DbBase).filter(DbBase.id == db_name_id).one_or_none()
+
+    if db_connection:
+        # 拼接描述文本
+        description = f"这是你能够连接到的MySQL信息：" \
+                      f"host: {db_connection.hostname}," \
+                      f"port: {db_connection.port}," \
+                      f"user: {db_connection.username}," \
+                      f"passwd: {db_connection.password}," \
+                      f"db: {db_connection.database_name},"
+        return description
+    else:
+        return "没有找到指定的数据库配置信息。"

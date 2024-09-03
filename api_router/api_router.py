@@ -129,7 +129,7 @@ def mount_app_routes(app: FastAPI):
         return {"status": 200, "data": {"message": "项目已完成过初始化配置，可直接进行对话"}}
 
     @app.post("/api/set_default_mysql", tags=["Initialization"],
-              summary="初始化数据库，项目启动时直接后台调用，参数即Swapper中的默认参数 ")
+              summary="(前端无需理会此接口，用于测试阶段)初始化数据库，项目启动时直接后台调用，参数即Swapper中的默认参数 ")
     def default_mysql(
             username: str = Body('root', embed=True),
             password: str = Body('snowball950123', embed=True),
@@ -163,9 +163,14 @@ def mount_app_routes(app: FastAPI):
 
     # 初始化MetaGen实例，保存在全局变量中，用于后续的子方法调用
     @app.post("/api/initialize", tags=["Initialization"],
-              summary="(新建对话)  MateGen 实例初始化 ")
+              summary="默认空参，是新建对话功能"
+                      "在当前会话页面下： "
+                      "1. 如果选择了知识库，重新调用该方法，传递参数为：thread_id, knowledge_base_chat：true，knowledge_base_name_id：xxx"
+                      "2. 如果选择了数据库，重新调用该方法，传递参数是：thread_id, db_name_id：xxx"
+                      "3. 如果知识库和数据库都选择了，重新调用该方法，同时传递上述四个参数")
     def initialize_mate_gen(mate_gen: MateGenClass = Depends(get_mate_gen),
-                            openai_ins: OpenAI = Depends(get_openai_instance)):
+                            openai_ins: OpenAI = Depends(get_openai_instance),
+                            thread: str = Body(None, description="会话id")):
         try:
             global global_instance, global_openai_instance
             global_instance = mate_gen
@@ -174,82 +179,6 @@ def mount_app_routes(app: FastAPI):
             return {"status": 200, "data": {"message": "MateGen 实例初始化成功"}}
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))
-
-    @app.post("/api/knowledge_initialize", tags=["Initialization"],
-              summary="用于开启知识库问答的 MateGen 实例初始化")
-    def initialize_knowledge_mate_gen(
-            knowledge_base_chat: bool = Body(..., description="Enable knowledge base chat"),
-            knowledge_base_name: str = Body(..., description="Name of the knowledge base if chat is enabled"),
-            openai_ins: OpenAI = Depends(get_openai_instance)
-    ):
-
-        global global_instance, global_openai_instance
-        from MateGen.utils import SessionLocal, fetch_latest_api_key
-        db_session = SessionLocal()
-
-        try:
-            api_key = fetch_latest_api_key(db_session)
-
-            mate_gen = get_mate_gen(api_key, None, False, knowledge_base_chat, False, None, knowledge_base_name)
-
-            global_instance = mate_gen
-            global_openai_instance = openai_ins
-            # 这里根据初始化结果返回相应的信息
-            return {"status": 200, "data": {"message": "MateGen 实例初始化成功", "kb_info": knowledge_base_name}}
-        except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
-        finally:
-            db_session.close()
-
-    # 定义知识库对话（即如果勾选了知识库对话按钮后，重新实例化 MateGen 实例）
-    @app.get("/api/reinitialize", tags=["Initialization"],
-             summary="重新实例化MateGen类 (基于特定线程ID)")
-    def reinitialize_mate_gen(
-            thread_id: str = Query(..., description="Thread ID required for reinitialization"),
-    ):
-
-        global global_instance, global_openai_instance
-
-        from MateGen.utils import SessionLocal, fetch_latest_api_key, fetch_run_mode_by_thread_id
-        db_session = SessionLocal()
-
-        # 根据运行模式，找到是 普通对话还是 知识库对话
-        # 普通对话直接返回线程ID，知识库对话需要额外返回默认的知识库
-        run_mode = fetch_run_mode_by_thread_id(db_session, thread_id)
-        try:
-            api_key = fetch_latest_api_key(db_session)
-
-            if run_mode == "normal":
-                mate_gen_instance = MateGenClass(
-                    thread=thread_id,
-                    api_key=api_key
-                )
-                global_instance = mate_gen_instance
-                return {"status": 200,
-                        "data": {"message": "当前会话状态的 MateGen 实例重新初始化成功", "thread_id": thread_id}}
-            else:
-
-                from MateGen.utils import SessionLocal, get_knowledge_base_info
-                db_session = SessionLocal()
-
-                knowledge_bases = get_knowledge_base_info(db_session)[-1]["knowledge_base_name"]
-
-                # 默认选择第一个知识库
-                mate_gen_instance = MateGenClass(
-                    thread=thread_id,
-                    api_key=api_key,
-                    knowledge_base_chat=True,
-                    knowledge_base_name=knowledge_bases
-                )
-
-                global_instance = mate_gen_instance
-                return {"status": 200,
-                        "data": {"message": "当前会话状态的 MateGen 实例重新初始化成功", "thread_id": thread_id,
-                                 "kb_info": {knowledge_bases}}}
-        except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
-        finally:
-            db_session.close()
 
     @app.post("/api/upload", tags=["Knowledge"], summary="上传文件,在进行知识库解析前,先调用此函数上传全部文件")
     async def upload_files(
@@ -334,13 +263,12 @@ def mount_app_routes(app: FastAPI):
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))
 
-
     @app.delete("/api/delete_knowledge/{knowledge_id}", tags=["Knowledge"], summary="删除指定知识库")
     def api_delete_all_files(knowledge_id: str):
         from MateGen.utils import SessionLocal, delete_knowledge_base_by_id
         db_session = SessionLocal()
         try:
-            if delete_knowledge_base_by_id(db_session, knowledge_id,):
+            if delete_knowledge_base_by_id(db_session, knowledge_id, ):
                 return {"status": 200, "data": {"已成功删除数据库。"}}
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))
@@ -348,7 +276,6 @@ def mount_app_routes(app: FastAPI):
     async def event_generator(question):
         from MateGen.mateGenClass import EventHandler
         response = global_instance.chat(question, chat_stream=True)  # 这个调用需要适应异步
-
         with global_openai_instance.beta.threads.runs.stream(
                 thread_id=response["data"][0],
                 assistant_id=response["data"][1],
@@ -361,38 +288,34 @@ def mount_app_routes(app: FastAPI):
                     {"text": text},
                     ensure_ascii=False)
 
-    @app.post("/api/chat", tags=["Chat"],
-              summary="问答的通用对话接口, 参数chat_stream默认为False,如果设置为True 为流式输出, 采用SSE传输", )
-    async def chat(request: ChatRequest):
+    @app.get("/api/chat", tags=["Chat"],
+              summary="问答的通用对话接口, 参数chat_stream默认为False,如果设置为True 为流式输出, 采用SSE传输"
+                      "注意：如果是用户切换窗户后的会话，当在输入框中输入内容点击发送时，先调用 /api/initialize接口（空参），再调用Chat")
+    async def chat(query: str = Query(..., description="用户会话框输入的问题"),
+                   chat_stream: str = Query(True, description="是否采用流式输出,默认流式，可不传此参数")):
         try:
-            if request.chat_stream:
+            if chat_stream:
                 from sse_starlette.sse import EventSourceResponse
                 # 使用SSE 流式处理
-                return EventSourceResponse(event_generator(request.question))
+                return EventSourceResponse(event_generator(query))
             else:
-                response = global_instance.chat(request.question, request.chat_stream)
+                response = global_instance.chat(query, chat_stream)
                 return {"status": 200, "data": {"message": response['data']}}
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))
 
-    @app.get("/api/agent_id", tags=["Chat"], summary="获取系统唯一的Assis id")
-    def get_conversation():
-        from MateGen.utils import SessionLocal, fetch_latest_agent_id
-
-        db_session = SessionLocal()
-        try:
-            data = fetch_latest_agent_id(db_session)
-            return {"status": 200, "data": {"message": data}}
-        except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
-
     @app.get("/api/conversation", tags=["Chat"], summary="获取指定代理的所有历史对话窗口")
-    def get_conversation(agent_id: str = Query(..., description="assis id")):
-        from MateGen.utils import SessionLocal, fetch_threads_by_agent
+    def get_conversation():
+        from MateGen.utils import SessionLocal
+        from db.thread_model import ThreadModel
 
         db_session = SessionLocal()
         try:
-            data = fetch_threads_by_agent(db_session, agent_id)
+            # 添加.filter(ThreadModel.conversation_name != "new_chat") 来过滤掉名为 "new_chat" 的对话
+            results = db_session.query(ThreadModel.id, ThreadModel.conversation_name) \
+                .filter(ThreadModel.conversation_name != "new_chat") \
+                .order_by(ThreadModel.created_at.desc()).all()
+            data = [{"id": result.id, "conversation_name": result.conversation_name} for result in results]
             return {"status": 200, "data": {"message": data}}
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))
@@ -405,18 +328,31 @@ def mount_app_routes(app: FastAPI):
         try:
             thread_messages = global_openai_instance.beta.threads.messages.list(thread_id).data
 
-            dialogues = []  # 用于存储当前线程的对话内容
+            dialogues = []
+            accumulated_assistant_messages = ""
+            last_role = None
 
-            # 遍历消息，按 role 提取文本内容
-            for message in reversed(thread_messages):  # 反转列表处理，直接在循环中反转
+            for message in reversed(thread_messages):
                 content_value = next((cb.text.value for cb in message.content if cb.type == 'text'), None)
                 if content_value:
                     if message.role == "assistant":
-                        dialogue = {"assistant": content_value}
+                        # 累积助手的消息
+                        if accumulated_assistant_messages:
+                            # 如果已有累积消息，添加换行符进行合并
+                            accumulated_assistant_messages += "\n" + content_value
+                        else:
+                            accumulated_assistant_messages = content_value
                     elif message.role == "user":
-                        dialogue = {"user": content_value}
+                        # 如果当前消息为用户，处理之前累积的助手消息
+                        if accumulated_assistant_messages:
+                            dialogues.append({"assistant": accumulated_assistant_messages})
+                            accumulated_assistant_messages = ""  # 重置累积消息
+                        dialogues.append({"user": content_value})
+                        last_role = "user"
 
-                    dialogues.append(dialogue)
+            # 如果对话列表以助手的消息结束，也需要添加它
+            if accumulated_assistant_messages:
+                dialogues.append({"assistant": accumulated_assistant_messages})
 
             return {"status": 200, "data": {"message": dialogues}}
 
@@ -437,7 +373,7 @@ def mount_app_routes(app: FastAPI):
         finally:
             db_session.close()
 
-    @app.delete("/api/delete_thread", tags=["Chat"], summary="删除指定的会话窗口")
+    @app.delete("/api/delete_conversation", tags=["Chat"], summary="删除指定的会话窗口")
     def delete_thread(thread_id: str = Body(..., description="需要删除的线程ID", embed=True)):
         """
         根据提供的thread_id删除数据库中的线程记录。
@@ -446,7 +382,6 @@ def mount_app_routes(app: FastAPI):
 
         db_session = SessionLocal()
 
-        print(f"thread_id: {thread_id}")
         try:
             success = delete_thread_by_id(db_session, thread_id)
             if success:

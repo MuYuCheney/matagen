@@ -15,9 +15,8 @@ def get_mate_gen(
         thread: str = Body(None, description="Name of the Kaggle competition if guidance is enabled"),
         enhanced_mode: bool = Body(False, description="Enable enhanced mode"),
         knowledge_base_chat: bool = Body(False, description="Enable knowledge base chat"),
-        kaggle_competition_guidance: bool = Body(False, description="Enable Kaggle competition guidance"),
-        competition_name: str = Body(None, description="Name of the Kaggle competition if guidance is enabled"),
-        knowledge_base_name: str = Body(None, description="Name of the knowledge_base_chat is enabled"),
+        knowledge_base_name_id: str = Body(None, description="id of the knowledge_base_chat is enabled"),
+        db_name_id: str = Body(None, description="Database name"),
 ) -> MateGenClass:
     """
     用于生成 MateGen Class 的实例
@@ -32,22 +31,21 @@ def get_mate_gen(
     # 从数据库中获取 API_KEY
     from MateGen.utils import SessionLocal, fetch_latest_api_key
     db_session = SessionLocal()
-
     if api_key is None:
         api_key = fetch_latest_api_key(db_session)
 
-        if knowledge_base_chat and not knowledge_base_name:
+        if knowledge_base_chat and not knowledge_base_name_id:
             raise HTTPException(status_code=400,
                                 detail="knowledge_base_name is required when knowledge_base_chat is enabled.")
-
-        return MateGenClass(api_key, thread, enhanced_mode, knowledge_base_chat, kaggle_competition_guidance,
-                            competition_name,
-                            knowledge_base_name)
-
+        return MateGenClass(api_key=api_key,
+                            thread=thread,
+                            enhanced_mode=enhanced_mode,
+                            knowledge_base_chat=knowledge_base_chat,
+                            knowledge_base_name_id=knowledge_base_name_id,
+                            db_name_id=db_name_id
+                            )
     else:
-        return MateGenClass(api_key, thread, enhanced_mode, knowledge_base_chat, kaggle_competition_guidance,
-                            competition_name,
-                            knowledge_base_name)
+        return MateGenClass(api_key, thread, enhanced_mode, knowledge_base_chat, knowledge_base_name_id, db_name_id)
 
 
 def get_openai_instance(
@@ -107,7 +105,6 @@ def initialize_mate_gen(mate_gen: MateGenClass = Depends(get_mate_gen),
         raise HTTPException(status_code=500, detail=str(e))
 
 
-
 def get_key_valid(api_key):
     try:
         original_string = decrypt_string(api_key, key=b'YAboQcXx376HSUKqzkTz8LK1GKs19Skg4JoZH4QUCJc=')
@@ -144,4 +141,3 @@ def get_key_valid(api_key):
 
     except Exception:
         return False
-

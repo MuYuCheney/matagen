@@ -40,13 +40,15 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 # print(f"BASE_DIR: {BASE_DIR}")
 dotenv_path = os.path.join(BASE_DIR, '.env')
 load_dotenv(dotenv_path)
-
+from MateGen.utils import SessionLocal
 from typing_extensions import override
 from openai import AssistantEventHandler
 from typing_extensions import override
 from openai import AssistantEventHandler, OpenAI
 from openai.types.beta.threads import Text, TextDelta
 from openai.types.beta.threads.runs import ToolCall, ToolCallDelta
+from MateGen.utils import SessionLocal
+from db.thread_model import SecretModel
 
 
 # print(f"dotenv_path: {dotenv_path}")
@@ -191,7 +193,6 @@ def create_knowledge_base(client,
 
         from MateGen.utils import (SessionLocal, add_knowledge_base)
 
-
         db_session = SessionLocal()
         add_knowledge_base(db_session,
                            vector_store_id=vector_id,
@@ -209,15 +210,74 @@ def create_knowledge_base(client,
     return vector_id
 
 
+def create_omla(client, vector_id, enhanced_mode, api_key):
+    ag_base_key = os.getenv('AG_BASE_KEY')
+    ag_base = decrypt_string(ag_base_key, b'YAboQcXx376HSUKqzkTz8LK1GKs19Skg4JoZH4QUCJc=')
+
+    db_session = SessionLocal()
+    agent = db_session.query(SecretModel).filter(SecretModel.api_key == api_key).one_or_none()
+    kb_name = agent.agent_type
+    u1 = ag_base + f'/{kb_name}/{kb_name}_agent.py'
+
+    response = requests.get(u1)
+    response.raise_for_status()
+    file_content = response.text
+    exec_namespace = {}
+
+    exec(file_content, exec_namespace)
+    coml = exec_namespace.get('coml')
+
+    if vector_id == '-1':
+        asid = coml(client=client, enhanced_mode=enhanced_mode)
+    else:
+        asid = coml(client=client, vs_id=vector_id, enhanced_mode=enhanced_mode)
+
+    return asid
+
+
+def get_omlf(client, api_key):
+    vector_id = "-1"
+    db_session = SessionLocal()
+    if db_session.query(SecretModel).filter(SecretModel.api_key == api_key,
+                                            SecretModel.agent_type == "normal").one_or_none():
+
+        return vector_id
+
+    else:
+        kb_base_key = os.getenv('KB_BASE_KEY')
+        kb_base = decrypt_string(kb_base_key, b'YAboQcXx376HSUKqzkTz8LK1GKs19Skg4JoZH4QUCJc=')
+        db_session = SessionLocal()
+        agent = db_session.query(SecretModel).filter(SecretModel.api_key == api_key).one_or_none()
+        kb_name = agent.agent_type
+        u1 = kb_base + f'/{kb_name}/{kb_name}_kb.py'
+
+        response = requests.get(u1)
+        response.raise_for_status()
+        file_content = response.text
+        exec_namespace = {}
+
+        exec(file_content, exec_namespace)
+        file_info = exec_namespace.get('file_info')
+        file_info_json = file_info()
+        vector_id = download_files_and_create_kb(client, file_info_json)
+
+        return vector_id
+
+
+def cre_ct(client, enhanced_mode, api_key):
+    vector_id = get_omlf(client, api_key)
+    asid = create_omla(client, vector_id, enhanced_mode, api_key)
+    return asid
+
+
 class MateGenClass:
     def __init__(self,
                  api_key,
                  thread=None,
                  enhanced_mode=False,
                  knowledge_base_chat=False,
-                 kaggle_competition_guidance=False,
-                 competition_name=None,
-                 knowledge_base_name=None):
+                 knowledge_base_name_id=None,
+                 db_name_id=None):
 
         """
         初始参数解释：
@@ -237,9 +297,8 @@ class MateGenClass:
         self.api_key = api_key
         self.enhanced_mode = enhanced_mode
         self.knowledge_base_chat = knowledge_base_chat
-        self.kaggle_competition_guidance = kaggle_competition_guidance
-        self.knowledge_base_name = knowledge_base_name
-        self.competition_name = None
+        self.knowledge_base_name_id = knowledge_base_name_id
+        self.db_name_id = db_name_id
         self.vector_id = None
         self.base_path = None
         self.knowledge_base_description = ''
@@ -248,14 +307,21 @@ class MateGenClass:
         split_strings = original_string.split(' ')
         s1 = split_strings[0]
         s2 = split_strings[1]
-        initialize_agent_info(api_key=self.api_key, agent_type=s2)
+
+        # # 存储s1和s3到本地mysql数据库中，其中s3 用来 外联 多个 thread_id 作为多会话窗口的映射
+        from MateGen.utils import SessionLocal
+        from db.thread_model import KnowledgeBase
+
+        if knowledge_base_chat:
+            db_session = SessionLocal()
+            real_kb_name = db_session.query(KnowledgeBase).filter(
+                KnowledgeBase.id == self.knowledge_base_name_id).one_or_none()
+            self.knowledge_base_name = real_kb_name.knowledge_base_name
 
         base_url = os.getenv('BASE_URL')
-
         self.client = OpenAI(api_key=s1,
                              base_url=base_url)
         client = self.client
-
         logging.info("正在初始化MateGen，请稍后...")
 
         try:
@@ -263,30 +329,28 @@ class MateGenClass:
 
             if self.models:
                 logging.info("成功连接服务器，API-KEY通过验证！")
-                if get_agent_info()['api_key'] != self.api_key:
-                    logging.info("检测到API-KEY发生变化，正在重新创建Agent...")
-
-                    # TODO : 后续优化需要考虑 针对每个 api_key 建立对应的 配置文件 映射关系
-                    shutil.rmtree(log_dir)
-                    make_hl()
-                    initialize_agent_info(api_key=self.api_key, agent_type=s2)
-                    self.s3 = cre_ct(client, enhanced_mode)
-
-                    set_agent_initialized(if_initialized=True)
-                    set_agent_id(asid=self.s3)
-
-                elif not get_agent_info()['initialized']:
+                from MateGen.utils import SessionLocal, fetch_latest_api_key, update_agent_type
+                from db.thread_model import SecretModel
+                db_session = SessionLocal()
+                # 去数据库中获取API_KEY
+                api_key = fetch_latest_api_key(db_session)
+                # 判断是否进行过初始化
+                agent = db_session.query(SecretModel).filter(SecretModel.api_key == api_key).one_or_none()
+                if not agent.initialized:
                     logging.info("首次使用MateGen，正在进行Agent基础设置...")
-                    self.s3 = cre_ct(client, enhanced_mode)
-                    set_agent_initialized(if_initialized=True)
-                    set_agent_id(asid=self.s3)
-                else:
-                    self.s3 = get_agent_info()['asid']
+                    self.s3 = cre_ct(client, enhanced_mode, api_key)
+                    # 如果找到代理，设置initialized为True
+                    agent.initialized = True
+                    agent.id = self.s3
+                    db_session.commit()
+                    db_session.close()
 
-                # 存储s1和s3到本地mysql数据库中，其中s3 用来 外联 多个 thread_id 作为多会话窗口的映射
+                else:
+                    agent = db_session.query(SecretModel).filter(SecretModel.api_key == api_key).one_or_none()
+                    self.s3 = agent.id
+                # # 存储s1和s3到本地mysql数据库中，其中s3 用来 外联 多个 thread_id 作为多会话窗口的映射
                 from MateGen.utils import (SessionLocal,
                                            get_thread_from_db,
-                                           store_agent_info,
                                            store_thread_info,
                                            update_conversation_name,
                                            find_vector_store_id_by_name,
@@ -294,38 +358,37 @@ class MateGenClass:
                                            )
 
                 db_session = SessionLocal()
-                store_agent_info(db_session, self.s3)
 
                 if thread is None:
                     # 新建一个会话
                     thread = client.beta.threads.create()
-                    convastaion_name = 'new_chat'
-
                     # 根据是否启用了知识库对话功能来决定运行模式
                     run_mode = "kb" if self.knowledge_base_chat else "normal"
-                    store_thread_info(db_session, self.s3, thread.id, convastaion_name, run_mode)
-
+                    store_thread_info(db_session, self.s3, thread.id, 'new_chat', run_mode)
                     self.thread_id = thread.id
-                    log_token_usage(self.thread_id, 0)
+                    # log_token_usage(self.thread_id, 0)
                     db_session.close()
 
                 else:
                     self.thread_id = thread
-                    log_token_usage(self.thread_id, 0)
-
-                # # 获取线程ID
-                # self.thread = get_latest_thread(self.client)
-                # self.thread_id = self.thread.id
-                # log_token_usage(self.thread_id, 0)
+                    # log_token_usage(self.thread_id, 0)
 
                 if self.knowledge_base_chat:
+                    # Win和Linux系统的路径命令存在差异
+                    if os.name == 'posix':  # Unix/Linux/MacOS
+                        file_path = f'/app/uploads/{self.knowledge_base_name}'
+                        file_paths = get_specific_files(file_path)
+                    elif os.name == 'nt':  # Windows
+                        base_path = os.path.join('..', 'uploads', self.knowledge_base_name)
+                        file_paths = get_specific_files(base_path)
+
                     # 找到文件夹路径
-                    target_folder = os.path.join('..', 'uploads', knowledge_base_name)
-                    self.base_path = target_folder
+                    self.base_path = file_paths
 
                     db_session = SessionLocal()
                     self.vector_id = find_vector_store_id_by_name(db_session, self.knowledge_base_name)
                     db_session.close()
+
                     # else:
                     if enhanced_mode:
                         model = 'gpt-4o'
@@ -333,31 +396,30 @@ class MateGenClass:
                         model = 'gpt-4o-mini'
 
                     asi = self.client.beta.assistants.retrieve(self.s3)
+
                     instructions = asi.instructions
+
                     instructions = remove_knowledge_base_info(instructions)
-                    asi = self.client.beta.assistants.update(
-                        self.s3,
-                        model=model,
-                        instructions=instructions
-                    )
 
-                if self.knowledge_base_chat == True and self.vector_id != None:
-                    if wait_for_vector_store_ready(vs_id=self.vector_id, client=self.client):
-                        asi = self.client.beta.assistants.retrieve(self.s3)
-                        instructions = asi.instructions
-                        instructions = remove_knowledge_base_info(instructions)
-
+                    if self.vector_id != None:
                         db_session = SessionLocal()
                         knowledge_base_description = find_kb_name_by_description(db_session, self.knowledge_base_name)
                         db_session.close()
 
-                        new_instructions = instructions + knowledge_base_description
-                        asi = self.client.beta.assistants.update(
-                            self.s3,
-                            instructions=new_instructions,
-                            tool_resources={"file_search": {"vector_store_ids": [self.vector_id]}}
-                        )
+                        instructions = instructions + knowledge_base_description
 
+                    if self.db_name_id != None:
+                        from MateGen.utils import get_db_connection_description
+                        db_session = SessionLocal()
+                        db_description = get_db_connection_description(db_session, self.db_name_id)
+                        instructions = instructions + "\n" + "    " + db_description
+
+                    self.client.beta.assistants.update(
+                        self.s3,
+                        model=model,
+                        instructions=instructions,
+                        tool_resources={"file_search": {"vector_store_ids": [self.vector_id]}}
+                    )
                 logging.info("已完成初始化，MateGen可随时调用！")
                 return
             else:
@@ -378,41 +440,9 @@ class MateGenClass:
              question=None,
              chat_stream=False):
 
-        if self.knowledge_base_chat == True and self.vector_id != None:
-
-            if wait_for_vector_store_ready(vs_id=self.vector_id, client=self.client):
-                asi = self.client.beta.assistants.retrieve(self.s3)
-                instructions = asi.instructions
-                instructions = remove_knowledge_base_info(instructions)
-
-                from MateGen.utils import (SessionLocal,
-                                           get_thread_from_db,
-                                           store_agent_info,
-                                           store_thread_info,
-                                           update_conversation_name,
-                                           find_vector_store_id_by_name,
-                                           find_kb_name_by_description
-                                           )
-
-                db_session = SessionLocal()
-
-                knowledge_base_description = find_kb_name_by_description(db_session, self.knowledge_base_name)
-                db_session.close()
-
-                new_instructions = instructions + knowledge_base_description
-                asi = self.client.beta.assistants.update(
-                    self.s3,
-                    instructions=new_instructions,
-                    tool_resources={"file_search": {"vector_store_ids": [self.vector_id]}}
-                )
-            else:
-                return {"data": "知识库调取失败"}
-
         if question != None:
             from MateGen.utils import update_conversation_name
             from MateGen.utils import (SessionLocal,
-                                       get_thread_from_db,
-                                       store_agent_info,
                                        store_thread_info,
                                        update_conversation_name
                                        )
@@ -757,56 +787,6 @@ def print_token_usage():
     print(f"总共消耗的 token 数量：{total_tokens}")
 
 
-def initialize_agent_info(api_key, agent_type):
-    global agent_info_file
-    agent_info = {
-        "api_key": api_key,
-        "initialized": False,
-        "agent_type": agent_type,
-        'asid': None
-    }
-
-    # 检查文件是否存在
-    if not os.path.exists(agent_info_file):
-        # 如果文件不存在，创建文件并写入信息
-        with open(agent_info_file, "w") as file:
-            json.dump(agent_info, file)
-        # print(f"Agent info file created and initialized at {agent_info_file}")
-    else:
-        # print(f"Agent info file already exists at {agent_info_file}, initialization skipped.")
-        pass
-
-
-def set_agent_initialized(if_initialized=True):
-    global agent_info_file
-    try:
-        with open(agent_info_file, "r") as file:
-            agent_info = json.load(file)
-    except FileNotFoundError:
-        print("Agent信息日志文件不存在。请先初始化Agent信息。")
-        return None
-
-    agent_info["initialized"] = if_initialized
-
-    with open(agent_info_file, "w") as file:
-        json.dump(agent_info, file)
-
-
-def set_agent_id(asid):
-    global agent_info_file
-    try:
-        with open(agent_info_file, "r") as file:
-            agent_info = json.load(file)
-    except FileNotFoundError:
-        print("Agent信息日志文件不存在。请先初始化Agent信息。")
-        return None
-
-    agent_info["asid"] = asid
-
-    with open(agent_info_file, "w") as file:
-        json.dump(agent_info, file)
-
-
 def get_agent_info():
     global agent_info_file
     try:
@@ -864,57 +844,6 @@ def download_files_and_create_kb(client, file_info_json):
                                       folder_path_base=storage_path)
 
     return vector_id
-
-
-def get_omlf(client):
-    vector_id = '-1'
-    if get_agent_info()['agent_type'] == 'normal':
-        return vector_id
-
-    else:
-        kb_base_key = os.getenv('KB_BASE_KEY')
-        kb_base = decrypt_string(kb_base_key, b'YAboQcXx376HSUKqzkTz8LK1GKs19Skg4JoZH4QUCJc=')
-        kb_name = get_agent_info()['agent_type']
-        u1 = kb_base + f'/{kb_name}/{kb_name}_kb.py'
-
-        response = requests.get(u1)
-        response.raise_for_status()
-        file_content = response.text
-        exec_namespace = {}
-
-        exec(file_content, exec_namespace)
-        file_info = exec_namespace.get('file_info')
-        file_info_json = file_info()
-        vector_id = download_files_and_create_kb(client, file_info_json)
-
-        return vector_id
-
-
-def create_omla(client, vector_id, enhanced_mode):
-    ag_base_key = os.getenv('AG_BASE_KEY')
-    ag_base = decrypt_string(ag_base_key, b'YAboQcXx376HSUKqzkTz8LK1GKs19Skg4JoZH4QUCJc=')
-    kb_name = get_agent_info()['agent_type']
-    u1 = ag_base + f'/{kb_name}/{kb_name}_agent.py'
-
-    response = requests.get(u1)
-    response.raise_for_status()
-    file_content = response.text
-    exec_namespace = {}
-
-    exec(file_content, exec_namespace)
-    coml = exec_namespace.get('coml')
-    if vector_id == '-1':
-        asid = coml(client=client, enhanced_mode=enhanced_mode)
-    else:
-        asid = coml(client=client, vs_id=vector_id, enhanced_mode=enhanced_mode)
-
-    return asid
-
-
-def cre_ct(client, enhanced_mode):
-    vector_id = get_omlf(client)
-    asid = create_omla(client, vector_id, enhanced_mode)
-    return asid
 
 
 def function_to_call(run_details, client, thread_id, run_id):
@@ -1149,6 +1078,8 @@ def chat_base(user_input,
               first_input=True,
               tool_outputs=None,
               ):
+
+
     # 创建消息
     if first_input:
         message = client.beta.threads.messages.create(
@@ -1819,7 +1750,6 @@ def get_specific_files(folder_path):
 
 
 def get_formatted_file_list(folder_path):
-
     # 检测操作系统
     if os.name == 'posix':  # Unix/Linux/MacOS
         file_path = f'/app/uploads/{folder_path}'
@@ -1987,24 +1917,28 @@ def sql_inter(sql_query, host, user, password, database, port, g=globals()):
     :param g: g，字符串形式变量，表示环境变量，无需设置，保持默认参数即可
     :return：sql_query在MySQL中的运行结果。
     """
-    connection = pymysql.connect(
-        host=host,
-        user=user,
-        passwd=password,
-        db=database,
-        port=int(port),
-        charset='utf8',
-    )
+    from sqlalchemy import create_engine
+    from sqlalchemy.orm import sessionmaker
+    SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{user}:{password}@{host}:{port}/{database}?charset=utf8mb4"
+    # 创建数据库引擎
+    engine = create_engine(SQLALCHEMY_DATABASE_URI)
+    # 创建会话
+    SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+    db_session = SessionLocal()
 
     try:
-        with connection.cursor() as cursor:
-            sql = sql_query
-            cursor.execute(sql)
-            results = cursor.fetchall()
+        # 执行SQL查询
+        result = db_session.execute(sql_query)
+        results = result.fetchall()
+        # 将结果转换为字典列表
+        keys = result.keys()
+        results_list = [dict(zip(keys, row)) for row in results]
     finally:
-        connection.close()
+        db_session.close()  # 确保关闭会话
 
-    return json.dumps(results)
+    # 返回 JSON 格式的查询结果
+    import json
+    return json.dumps(results_list)
 
 
 def extract_data(sql_query, df_name, host, user, password, database, port, g=globals()):
@@ -2020,16 +1954,14 @@ def extract_data(sql_query, df_name, host, user, password, database, port, g=glo
     :param g: g，字符串形式变量，表示环境变量，无需设置，保持默认参数即可
     :return：表格读取和保存结果
     """
-    connection = pymysql.connect(
-        host=host,
-        user=user,
-        passwd=password,
-        db=database,
-        port=int(port),
-        charset='utf8',
-    )
 
-    g[df_name] = pd.read_sql(sql_query, connection)
+    from sqlalchemy import create_engine
+    from sqlalchemy.orm import sessionmaker
+    SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{user}:{password}@{host}:{port}/{database}?charset=utf8mb4"
+    # 创建数据库引擎
+    engine = create_engine(SQLALCHEMY_DATABASE_URI)
+
+    g[df_name] = pd.read_sql(sql_query, engine)
 
     return "已成功完成%s变量创建" % df_name
 
