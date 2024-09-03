@@ -293,6 +293,8 @@ def mount_app_routes(app: FastAPI):
                       "注意：如果是用户切换窗户后的会话，当在输入框中输入内容点击发送时，先调用 /api/initialize接口（空参），再调用Chat")
     async def chat(query: str = Query(..., description="用户会话框输入的问题"),
                    chat_stream: str = Query(True, description="是否采用流式输出,默认流式，可不传此参数")):
+        if query == -1:
+            return {"status": 200, "data": {"message": "无操作"}}
         try:
             if chat_stream:
                 from sse_starlette.sse import EventSourceResponse
