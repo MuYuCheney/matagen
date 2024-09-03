@@ -326,33 +326,20 @@ def mount_app_routes(app: FastAPI):
     def get_messages(thread_id: str = Query(..., description="thread_id")):
 
         try:
-            thread_messages = global_openai_instance.beta.threads.messages.list(thread_id).data
+            thread_messages = global_openai_instance.beta.threads.messages.list(thread_id=thread_id, order="desc").data
 
-            dialogues = []
-            accumulated_assistant_messages = ""
-            last_role = None
+            dialogues = []  # 用于存储当前线程的对话内容
 
-            for message in reversed(thread_messages):
+            # 遍历消息，按 role 提取文本内容
+            for message in reversed(thread_messages):  # 反转列表处理，直接在循环中反转
                 content_value = next((cb.text.value for cb in message.content if cb.type == 'text'), None)
                 if content_value:
                     if message.role == "assistant":
-                        # 累积助手的消息
-                        if accumulated_assistant_messages:
-                            # 如果已有累积消息，添加换行符进行合并
-                            accumulated_assistant_messages += "\n" + content_value
-                        else:
-                            accumulated_assistant_messages = content_value
+                        dialogue = {"assistant": content_value}
                     elif message.role == "user":
-                        # 如果当前消息为用户，处理之前累积的助手消息
-                        if accumulated_assistant_messages:
-                            dialogues.append({"assistant": accumulated_assistant_messages})
-                            accumulated_assistant_messages = ""  # 重置累积消息
-                        dialogues.append({"user": content_value})
-                        last_role = "user"
+                        dialogue = {"user": content_value}
 
-            # 如果对话列表以助手的消息结束，也需要添加它
-            if accumulated_assistant_messages:
-                dialogues.append({"assistant": accumulated_assistant_messages})
+                    dialogues.append(dialogue)
 
             return {"status": 200, "data": {"message": dialogues}}
 

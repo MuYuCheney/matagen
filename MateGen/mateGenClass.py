@@ -1115,6 +1115,7 @@ def chat_base(user_input,
 
     # 若消息创建完成，则返回模型返回信息
     elif run_details.status == 'completed':
+
         if chat_stream:
             return {"data": (thread_id, assistant_id)}
         else:
