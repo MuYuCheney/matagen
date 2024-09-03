@@ -8317,3 +8317,66 @@ WHERE db_configs.id = %(pk_1)s
 2024-09-03 19:37:06 - root - INFO - Updated thread thread_tBvWvFFCNbveATYXENBr8vsr with new conversation name: ÄãºÃ£¬ÎÒÊÇÄ¾Óð
 2024-09-03 19:37:08 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads/thread_tBvWvFFCNbveATYXENBr8vsr/runs "HTTP/1.1 200 OK"
 2024-09-03 19:37:55 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/threads/thread_tBvWvFFCNbveATYXENBr8vsr/messages?order=desc "HTTP/1.1 200 OK"
+2024-09-03 22:08:44 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-03 22:08:44 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-03 22:08:44 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-03 22:08:44 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-03 22:08:44 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-03 22:08:44 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-03 22:08:44 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-03 22:08:44 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-09-03 22:08:44 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-03 22:08:44 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-09-03 22:08:44 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-03 22:08:44 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`knowledge_bases`
+2024-09-03 22:08:44 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-03 22:08:44 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`db_configs`
+2024-09-03 22:08:44 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-03 22:08:44 - sqlalchemy.engine.Engine - INFO - 
+CREATE TABLE threads (
+	id VARCHAR(255) NOT NULL, 
+	agent_id VARCHAR(255), 
+	conversation_name VARCHAR(255), 
+	run_mode VARCHAR(255), 
+	created_at DATETIME DEFAULT now(), 
+	PRIMARY KEY (id), 
+	FOREIGN KEY(agent_id) REFERENCES agents (id)
+)
+
+
+2024-09-03 22:08:44 - sqlalchemy.engine.Engine - INFO - [no key 0.00016s] {}
+2024-09-03 22:08:44 - sqlalchemy.engine.Engine - INFO - 
+CREATE TABLE db_configs (
+	id VARCHAR(36) NOT NULL, 
+	hostname VARCHAR(255) NOT NULL, 
+	port INTEGER NOT NULL, 
+	username VARCHAR(255) NOT NULL, 
+	password VARCHAR(255) NOT NULL, 
+	database_name VARCHAR(255) NOT NULL, 
+	created_at DATETIME, 
+	PRIMARY KEY (id)
+)
+
+
+2024-09-03 22:08:44 - sqlalchemy.engine.Engine - INFO - [no key 0.00016s] {}
+2024-09-03 22:08:44 - sqlalchemy.engine.Engine - INFO - 
+CREATE TABLE knowledge_bases (
+	id VARCHAR(36) NOT NULL, 
+	vector_store_id VARCHAR(255) NOT NULL, 
+	chunking_strategy VARCHAR(255), 
+	max_chunk_size_tokens INTEGER, 
+	chunk_overlap_tokens INTEGER, 
+	knowledge_base_name VARCHAR(255) NOT NULL, 
+	display_knowledge_base_name VARCHAR(255) NOT NULL, 
+	knowledge_base_description TEXT, 
+	thread_id VARCHAR(255), 
+	PRIMARY KEY (id, vector_store_id), 
+	FOREIGN KEY(thread_id) REFERENCES threads (id)
+)
+
+
+2024-09-03 22:08:44 - sqlalchemy.engine.Engine - INFO - [no key 0.00016s] {}
+2024-09-03 22:08:44 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-03 22:08:44 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-03 22:08:44 - sqlalchemy.engine.Engine - INFO - ALTER DATABASE mategen CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci
+2024-09-03 22:08:44 - sqlalchemy.engine.Engine - INFO - [generated in 0.00012s] {}
