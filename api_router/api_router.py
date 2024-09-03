@@ -293,13 +293,12 @@ def mount_app_routes(app: FastAPI):
                       "注意：如果是用户切换窗户后的会话，当在输入框中输入内容点击发送时，先调用 /api/initialize接口（空参），再调用Chat")
     async def chat(query: str = Query(..., description="用户会话框输入的问题"),
                    chat_stream: str = Query(True, description="是否采用流式输出,默认流式，可不传此参数"),
-                   query_code: str = Query(None, description="Python或者SQL运行文本"),
                    code_type: str = Query(None, description="类型：Python或SQL"),
                    run_result: str = Query(None, description="Python或者SQL运行结果"),):
         if query == "init":
             return {"status": 200, "data": {"message": "无操作"}}
 
-        if query_code:
+        if code_type:
             if code_type == "python":
                 # TODO
                 return {"status": 200, "data": {"message": "成功接收Python代码和运行结果"}}
