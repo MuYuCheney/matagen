@@ -9391,3 +9391,402 @@ WHERE db_configs.hostname = %(hostname_1)s AND db_configs.port = %(port_1)s AND 
 FROM db_configs 
 WHERE db_configs.id = %(pk_1)s
 2024-09-04 14:21:54 - sqlalchemy.engine.Engine - INFO - [generated in 0.00011s] {'pk_1': '83ef8d41-3b45-4818-a370-61c8ef9f0e65'}
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`knowledge_bases`
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`db_configs`
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`messages`
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - 
+CREATE TABLE agents (
+	id VARCHAR(255) NOT NULL, 
+	api_key VARCHAR(768) NOT NULL, 
+	initialized BOOL, 
+	agent_type VARCHAR(255), 
+	created_at DATETIME DEFAULT now(), 
+	PRIMARY KEY (id), 
+	UNIQUE (api_key)
+)
+
+
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - [no key 0.00008s] {}
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - 
+CREATE TABLE db_configs (
+	id VARCHAR(36) NOT NULL, 
+	hostname VARCHAR(255) NOT NULL, 
+	port INTEGER NOT NULL, 
+	username VARCHAR(255) NOT NULL, 
+	password VARCHAR(255) NOT NULL, 
+	database_name VARCHAR(255) NOT NULL, 
+	created_at DATETIME, 
+	PRIMARY KEY (id)
+)
+
+
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - [no key 0.00013s] {}
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - 
+CREATE TABLE threads (
+	id VARCHAR(255) NOT NULL, 
+	agent_id VARCHAR(255), 
+	conversation_name VARCHAR(255), 
+	run_mode VARCHAR(255), 
+	created_at DATETIME DEFAULT now(), 
+	PRIMARY KEY (id), 
+	FOREIGN KEY(agent_id) REFERENCES agents (id)
+)
+
+
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - [no key 0.00025s] {}
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - 
+CREATE TABLE knowledge_bases (
+	id VARCHAR(36) NOT NULL, 
+	vector_store_id VARCHAR(255) NOT NULL, 
+	chunking_strategy VARCHAR(255), 
+	max_chunk_size_tokens INTEGER, 
+	chunk_overlap_tokens INTEGER, 
+	knowledge_base_name VARCHAR(255) NOT NULL, 
+	display_knowledge_base_name VARCHAR(255) NOT NULL, 
+	knowledge_base_description TEXT, 
+	thread_id VARCHAR(255), 
+	PRIMARY KEY (id, vector_store_id), 
+	FOREIGN KEY(thread_id) REFERENCES threads (id)
+)
+
+
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - [no key 0.00040s] {}
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - 
+CREATE TABLE messages (
+	id VARCHAR(36) NOT NULL, 
+	thread_id VARCHAR(255), 
+	question VARCHAR(1024), 
+	response TEXT, 
+	created_at DATETIME DEFAULT now(), 
+	message_type VARCHAR(255), 
+	run_result TEXT, 
+	PRIMARY KEY (id), 
+	FOREIGN KEY(thread_id) REFERENCES threads (id)
+)
+
+
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - [no key 0.00015s] {}
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - ALTER DATABASE mategen CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - [generated in 0.00009s] {}
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`knowledge_bases`
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - ALTER TABLE knowledge_bases DROP FOREIGN KEY knowledge_bases_ibfk_1
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - [generated in 0.00007s] {}
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads DROP FOREIGN KEY threads_ibfk_1
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - ALTER TABLE agents CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - ALTER TABLE knowledge_bases CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - [generated in 0.00011s] {}
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`db_configs`
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - ALTER TABLE db_configs CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - [generated in 0.00007s] {}
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads ADD CONSTRAINT threads_ibfk_1 FOREIGN KEY (agent_id) REFERENCES agents(id)
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - ALTER TABLE knowledge_bases ADD CONSTRAINT knowledge_bases_ibfk_1 FOREIGN KEY (thread_id) REFERENCES threads(id)
+2024-09-04 17:36:11 - sqlalchemy.engine.Engine - INFO - [generated in 0.00007s] {}
+2024-09-04 17:36:12 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-04 17:37:02 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-04 17:37:02 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-04 17:37:02 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-04 17:37:02 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-04 17:37:02 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-04 17:37:02 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-04 17:37:02 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-04 17:37:02 - sqlalchemy.engine.Engine - INFO - SELECT db_configs.id AS db_configs_id, db_configs.database_name AS db_configs_database_name 
+FROM db_configs ORDER BY db_configs.created_at DESC
+2024-09-04 17:37:02 - sqlalchemy.engine.Engine - INFO - [generated in 0.00011s] {}
+2024-09-04 17:37:02 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-04 17:37:11 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/assistants "HTTP/1.1 200 OK"
+2024-09-04 17:37:11 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-04 17:37:11 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-04 17:37:11 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-04 17:37:11 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-04 17:37:11 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-04 17:37:11 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-04 17:37:11 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-04 17:37:11 - sqlalchemy.engine.Engine - INFO - SELECT db_configs.id AS db_configs_id, db_configs.database_name AS db_configs_database_name 
+FROM db_configs ORDER BY db_configs.created_at DESC
+2024-09-04 17:37:11 - sqlalchemy.engine.Engine - INFO - [generated in 0.00009s] {}
+2024-09-04 17:37:11 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-04 17:38:00 - root - INFO - 正在创建知识库，请稍后...
+2024-09-04 17:38:00 - root - INFO - 当前知识库的本地路径是：..\uploads\muyu_test123
+2024-09-04 17:38:15 - root - INFO - 正在初始化MateGen，请稍后...
+2024-09-04 17:38:17 - root - INFO - 正在初始化MateGen，请稍后...
+2024-09-04 17:38:20 - openai._base_client - INFO - Retrying request to /models in 0.825495 seconds
+2024-09-04 17:38:22 - openai._base_client - INFO - Retrying request to /models in 0.940918 seconds
+2024-09-04 17:38:23 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-09-04 17:38:24 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-09-04 17:38:24 - root - INFO - 首次使用MateGen，正在进行Agent基础设置...
+2024-09-04 17:38:28 - openai._base_client - INFO - Retrying request to /models in 1.798413 seconds
+2024-09-04 17:38:29 - openai._base_client - INFO - Retrying request to /assistants in 0.896896 seconds
+2024-09-04 17:38:33 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-09-04 17:38:33 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-09-04 17:38:33 - root - INFO - 首次使用MateGen，正在进行Agent基础设置...
+2024-09-04 17:38:33 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/assistants "HTTP/1.1 200 OK"
+2024-09-04 17:38:34 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/assistants "HTTP/1.1 200 OK"
+2024-09-04 17:38:35 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads "HTTP/1.1 200 OK"
+2024-09-04 17:38:35 - root - INFO - 已完成初始化，MateGen可随时调用！
+2024-09-04 17:39:15 - root - INFO - 正在创建知识库，请稍后...
+2024-09-04 17:39:15 - root - INFO - 当前知识库的本地路径是：..\uploads\muyu_test123
+2024-09-04 17:39:17 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/vector_stores "HTTP/1.1 200 OK"
+2024-09-04 17:39:17 - root - INFO - 正在创建知识库的向量存储，请稍后...
+2024-09-04 17:39:17 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/vector_stores "HTTP/1.1 200 OK"
+2024-09-04 17:39:17 - root - INFO - file_paths ： ['..\\uploads\\muyu_test123\\第14节课程资料 20240321-llama介绍&微调.pdf']
+2024-09-04 17:39:28 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/files "HTTP/1.1 200 OK"
+2024-09-04 17:39:29 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/vector_stores/vs_w8bcF290rGcLWcKydxMuYGp8/file_batches "HTTP/1.1 200 OK"
+2024-09-04 17:39:29 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/vector_stores/vs_w8bcF290rGcLWcKydxMuYGp8/file_batches/vsfb_177a70e656434defb54075dc41047b55 "HTTP/1.1 200 OK"
+2024-09-04 17:39:30 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/vector_stores/vs_w8bcF290rGcLWcKydxMuYGp8/file_batches/vsfb_177a70e656434defb54075dc41047b55 "HTTP/1.1 200 OK"
+2024-09-04 17:39:32 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/vector_stores/vs_w8bcF290rGcLWcKydxMuYGp8/file_batches/vsfb_177a70e656434defb54075dc41047b55 "HTTP/1.1 200 OK"
+2024-09-04 17:39:32 - root - ERROR - Failed to add knowledge base due to: (pymysql.err.IntegrityError) (1452, 'Cannot add or update a child row: a foreign key constraint fails (`mategen`.`knowledge_bases`, CONSTRAINT `knowledge_bases_ibfk_1` FOREIGN KEY (`thread_id`) REFERENCES `threads` (`id`))')
+[SQL: INSERT INTO knowledge_bases (id, vector_store_id, chunking_strategy, max_chunk_size_tokens, chunk_overlap_tokens, knowledge_base_name, display_knowledge_base_name, knowledge_base_description, thread_id) VALUES (%(id)s, %(vector_store_id)s, %(chunking_strategy)s, %(max_chunk_size_tokens)s, %(chunk_overlap_tokens)s, %(knowledge_base_name)s, %(display_knowledge_base_name)s, %(knowledge_base_description)s, %(thread_id)s)]
+[parameters: {'id': '437e0428-74e3-4aee-a9fe-3a6ba59b652b', 'vector_store_id': 'vs_w8bcF290rGcLWcKydxMuYGp8', 'chunking_strategy': 'auto', 'max_chunk_size_tokens': 0, 'chunk_overlap_tokens': 0, 'knowledge_base_name': 'muyu_test123', 'display_knowledge_base_name': 'muyu_test123', 'knowledge_base_description': '当前你的知识库包含文档标题如下：第14节课程资料 20240321-llama介绍&微调。当用户所提出的问题和你的知识库文档内容相关时，请先检索你的知识库再进行回答。', 'thread_id': 'thread_jXjE1uyD6xjTcttz2TgudkO0'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2024-09-04 17:39:32 - root - INFO - 知识库创建完成！
+2024-09-04 17:39:52 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-04 17:39:52 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-04 17:39:52 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-04 17:39:52 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-04 17:39:52 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-04 17:39:52 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-04 17:39:52 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-04 17:39:52 - sqlalchemy.engine.Engine - INFO - SELECT db_configs.id AS db_configs_id, db_configs.database_name AS db_configs_database_name 
+FROM db_configs ORDER BY db_configs.created_at DESC
+2024-09-04 17:39:52 - sqlalchemy.engine.Engine - INFO - [generated in 0.00012s] {}
+2024-09-04 17:39:52 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-04 17:40:00 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-04 17:40:00 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-04 17:40:00 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-04 17:40:00 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-04 17:40:00 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-04 17:40:00 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-04 17:40:00 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-04 17:40:00 - sqlalchemy.engine.Engine - INFO - SELECT db_configs.id AS db_configs_id, db_configs.database_name AS db_configs_database_name 
+FROM db_configs ORDER BY db_configs.created_at DESC
+2024-09-04 17:40:00 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-04 17:40:00 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-04 17:40:26 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-04 17:40:26 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-04 17:40:26 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-04 17:40:26 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-04 17:40:26 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-04 17:40:26 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-04 17:40:26 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-04 17:40:26 - sqlalchemy.engine.Engine - INFO - SELECT db_configs.id AS db_configs_id, db_configs.database_name AS db_configs_database_name 
+FROM db_configs ORDER BY db_configs.created_at DESC
+2024-09-04 17:40:26 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-04 17:40:26 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-04 17:41:00 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-04 17:41:00 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-04 17:41:00 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-04 17:41:00 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-04 17:41:00 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-04 17:41:00 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-04 17:41:00 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-04 17:41:00 - sqlalchemy.engine.Engine - INFO - USE `mategen`;
+2024-09-04 17:41:00 - sqlalchemy.engine.Engine - INFO - [generated in 0.00016s] {}
+2024-09-04 17:41:00 - sqlalchemy.engine.Engine - INFO - SHOW TABLES;
+2024-09-04 17:41:00 - sqlalchemy.engine.Engine - INFO - [generated in 0.00006s] {}
+2024-09-04 17:41:00 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-04 17:41:00 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-04 17:41:00 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-04 17:41:00 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-04 17:41:00 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-04 17:41:00 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-04 17:41:00 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-04 17:41:00 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-04 17:41:00 - sqlalchemy.engine.Engine - INFO - SELECT db_configs.id AS db_configs_id, db_configs.hostname AS db_configs_hostname, db_configs.port AS db_configs_port, db_configs.username AS db_configs_username, db_configs.password AS db_configs_password, db_configs.database_name AS db_configs_database_name, db_configs.created_at AS db_configs_created_at 
+FROM db_configs 
+WHERE db_configs.hostname = %(hostname_1)s AND db_configs.port = %(port_1)s AND db_configs.username = %(username_1)s AND db_configs.password = %(password_1)s AND db_configs.database_name = %(database_name_1)s 
+ LIMIT %(param_1)s
+2024-09-04 17:41:00 - sqlalchemy.engine.Engine - INFO - [generated in 0.00012s] {'hostname_1': '192.168.110.131', 'port_1': '3306', 'username_1': 'root', 'password_1': 'snowball950123', 'database_name_1': 'mategen', 'param_1': 1}
+2024-09-04 17:41:00 - sqlalchemy.engine.Engine - INFO - INSERT INTO db_configs (id, hostname, port, username, password, database_name, created_at) VALUES (%(id)s, %(hostname)s, %(port)s, %(username)s, %(password)s, %(database_name)s, now())
+2024-09-04 17:41:00 - sqlalchemy.engine.Engine - INFO - [generated in 0.00016s] {'id': '235663e7-13ab-4702-a4f0-91e6232e2d8c', 'hostname': '192.168.110.131', 'port': '3306', 'username': 'root', 'password': 'snowball950123', 'database_name': 'mategen'}
+2024-09-04 17:41:00 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-04 17:41:00 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-04 17:41:00 - sqlalchemy.engine.Engine - INFO - SELECT db_configs.id AS db_configs_id, db_configs.hostname AS db_configs_hostname, db_configs.port AS db_configs_port, db_configs.username AS db_configs_username, db_configs.password AS db_configs_password, db_configs.database_name AS db_configs_database_name, db_configs.created_at AS db_configs_created_at 
+FROM db_configs 
+WHERE db_configs.id = %(pk_1)s
+2024-09-04 17:41:00 - sqlalchemy.engine.Engine - INFO - [generated in 0.00009s] {'pk_1': '235663e7-13ab-4702-a4f0-91e6232e2d8c'}
+2024-09-04 17:41:00 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-04 17:41:00 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-04 17:41:00 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-04 17:41:00 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-04 17:41:00 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-04 17:41:00 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-04 17:41:00 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-04 17:41:00 - sqlalchemy.engine.Engine - INFO - SELECT db_configs.id AS db_configs_id, db_configs.database_name AS db_configs_database_name 
+FROM db_configs ORDER BY db_configs.created_at DESC
+2024-09-04 17:41:00 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-04 17:41:00 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-04 17:41:03 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-04 17:41:03 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-04 17:41:03 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-04 17:41:03 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-04 17:41:03 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-04 17:41:03 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-04 17:41:03 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-04 17:41:03 - sqlalchemy.engine.Engine - INFO - SELECT db_configs.id AS db_configs_id, db_configs.hostname AS db_configs_hostname, db_configs.port AS db_configs_port, db_configs.username AS db_configs_username, db_configs.password AS db_configs_password, db_configs.database_name AS db_configs_database_name, db_configs.created_at AS db_configs_created_at 
+FROM db_configs 
+WHERE db_configs.id = %(id_1)s 
+ LIMIT %(param_1)s
+2024-09-04 17:41:03 - sqlalchemy.engine.Engine - INFO - [generated in 0.00011s] {'id_1': '235663e7-13ab-4702-a4f0-91e6232e2d8c', 'param_1': 1}
+2024-09-04 17:42:04 - root - INFO - 正在创建知识库，请稍后...
+2024-09-04 17:42:04 - root - INFO - 当前知识库的本地路径是：..\uploads\muyu1234565
+2024-09-04 17:42:06 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/vector_stores "HTTP/1.1 200 OK"
+2024-09-04 17:42:06 - root - INFO - 正在创建知识库的向量存储，请稍后...
+2024-09-04 17:42:07 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/vector_stores "HTTP/1.1 200 OK"
+2024-09-04 17:42:07 - root - INFO - file_paths ： ['..\\uploads\\muyu1234565\\第14节课程资料 20240321-llama介绍&微调.pdf']
+2024-09-04 17:43:20 - root - INFO - 正在创建知识库，请稍后...
+2024-09-04 17:43:20 - root - INFO - 当前知识库的本地路径是：..\uploads\muyu_info
+2024-09-04 17:43:21 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/vector_stores "HTTP/1.1 200 OK"
+2024-09-04 17:43:22 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/vector_stores/vs_5ZbaLONETSIoKwdtk7niVsWc/files "HTTP/1.1 200 OK"
+2024-09-04 17:43:23 - httpx - INFO - HTTP Request: DELETE https://ai.devtool.tech/proxy/v1/vector_stores/vs_5ZbaLONETSIoKwdtk7niVsWc/files/file-hUpmmTtFIl4SZw01QHOyiKah "HTTP/1.1 200 OK"
+2024-09-04 17:43:24 - httpx - INFO - HTTP Request: DELETE https://ai.devtool.tech/proxy/v1/files/file-hUpmmTtFIl4SZw01QHOyiKah "HTTP/1.1 200 OK"
+2024-09-04 17:43:24 - root - INFO - 正在创建知识库的向量存储，请稍后...
+2024-09-04 17:43:24 - root - INFO - file_paths ： ['..\\uploads\\muyu_info\\我是木羽.md']
+2024-09-04 17:43:25 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/files "HTTP/1.1 200 OK"
+2024-09-04 17:43:26 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/vector_stores/vs_5ZbaLONETSIoKwdtk7niVsWc/file_batches "HTTP/1.1 200 OK"
+2024-09-04 17:43:27 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/vector_stores/vs_5ZbaLONETSIoKwdtk7niVsWc/file_batches/vsfb_09af4e12e39f4da18631580a824d31fb "HTTP/1.1 200 OK"
+2024-09-04 17:43:27 - root - INFO - 知识库创建完成！
+2024-09-04 17:43:48 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-04 17:43:48 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-04 17:43:48 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-04 17:43:48 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-04 17:43:48 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-04 17:43:48 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-04 17:43:48 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-04 17:43:48 - sqlalchemy.engine.Engine - INFO - SELECT db_configs.id AS db_configs_id, db_configs.database_name AS db_configs_database_name 
+FROM db_configs ORDER BY db_configs.created_at DESC
+2024-09-04 17:43:48 - sqlalchemy.engine.Engine - INFO - [generated in 0.00009s] {}
+2024-09-04 17:43:48 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-04 17:43:57 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-04 17:43:57 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-04 17:43:57 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-04 17:43:57 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-04 17:43:57 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-04 17:43:57 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-04 17:43:57 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-04 17:43:57 - sqlalchemy.engine.Engine - INFO - SELECT db_configs.id AS db_configs_id, db_configs.database_name AS db_configs_database_name 
+FROM db_configs ORDER BY db_configs.created_at DESC
+2024-09-04 17:43:57 - sqlalchemy.engine.Engine - INFO - [generated in 0.00009s] {}
+2024-09-04 17:43:57 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-04 17:43:58 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-04 17:43:58 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-04 17:43:58 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-04 17:43:58 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-04 17:43:58 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-04 17:43:58 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-04 17:43:58 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-04 17:43:58 - sqlalchemy.engine.Engine - INFO - SELECT db_configs.id AS db_configs_id, db_configs.hostname AS db_configs_hostname, db_configs.port AS db_configs_port, db_configs.username AS db_configs_username, db_configs.password AS db_configs_password, db_configs.database_name AS db_configs_database_name, db_configs.created_at AS db_configs_created_at 
+FROM db_configs 
+WHERE db_configs.id = %(id_1)s 
+ LIMIT %(param_1)s
+2024-09-04 17:43:58 - sqlalchemy.engine.Engine - INFO - [generated in 0.00012s] {'id_1': '235663e7-13ab-4702-a4f0-91e6232e2d8c', 'param_1': 1}
+2024-09-04 17:45:04 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/files "HTTP/1.1 200 OK"
+2024-09-04 17:45:05 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/vector_stores/vs_lL4RfLbgoW7MTXZjArZ6CtVs/file_batches "HTTP/1.1 200 OK"
+2024-09-04 17:45:05 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/vector_stores/vs_lL4RfLbgoW7MTXZjArZ6CtVs/file_batches/vsfb_9509e704dcf44ff2adc0bb525b81c0d4 "HTTP/1.1 200 OK"
+2024-09-04 17:45:06 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/vector_stores/vs_lL4RfLbgoW7MTXZjArZ6CtVs/file_batches/vsfb_9509e704dcf44ff2adc0bb525b81c0d4 "HTTP/1.1 200 OK"
+2024-09-04 17:45:08 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/vector_stores/vs_lL4RfLbgoW7MTXZjArZ6CtVs/file_batches/vsfb_9509e704dcf44ff2adc0bb525b81c0d4 "HTTP/1.1 200 OK"
+2024-09-04 17:45:08 - root - ERROR - Failed to add knowledge base due to: (pymysql.err.IntegrityError) (1452, 'Cannot add or update a child row: a foreign key constraint fails (`mategen`.`knowledge_bases`, CONSTRAINT `knowledge_bases_ibfk_1` FOREIGN KEY (`thread_id`) REFERENCES `threads` (`id`))')
+[SQL: INSERT INTO knowledge_bases (id, vector_store_id, chunking_strategy, max_chunk_size_tokens, chunk_overlap_tokens, knowledge_base_name, display_knowledge_base_name, knowledge_base_description, thread_id) VALUES (%(id)s, %(vector_store_id)s, %(chunking_strategy)s, %(max_chunk_size_tokens)s, %(chunk_overlap_tokens)s, %(knowledge_base_name)s, %(display_knowledge_base_name)s, %(knowledge_base_description)s, %(thread_id)s)]
+[parameters: {'id': '2ab72586-143f-4e69-9a6e-8692ff71a4ae', 'vector_store_id': 'vs_lL4RfLbgoW7MTXZjArZ6CtVs', 'chunking_strategy': 'auto', 'max_chunk_size_tokens': 0, 'chunk_overlap_tokens': 0, 'knowledge_base_name': 'muyu1234565', 'display_knowledge_base_name': 'muyu1234565', 'knowledge_base_description': '当前你的知识库包含文档标题如下：第14节课程资料 20240321-llama介绍&微调。当用户所提出的问题和你的知识库文档内容相关时，请先检索你的知识库再进行回答。', 'thread_id': 'thread_jXjE1uyD6xjTcttz2TgudkO0'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2024-09-04 17:45:08 - root - INFO - 知识库创建完成！
+2024-09-04 17:46:31 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-04 17:46:31 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-04 17:46:31 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-04 17:46:31 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-04 17:46:31 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-04 17:46:31 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-04 17:46:31 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-04 17:46:31 - sqlalchemy.engine.Engine - INFO - SELECT db_configs.id AS db_configs_id, db_configs.database_name AS db_configs_database_name 
+FROM db_configs ORDER BY db_configs.created_at DESC
+2024-09-04 17:46:31 - sqlalchemy.engine.Engine - INFO - [generated in 0.00009s] {}
+2024-09-04 17:46:31 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-04 17:46:37 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-04 17:46:37 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-04 17:46:37 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-04 17:46:37 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-04 17:46:37 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-04 17:46:37 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-04 17:46:37 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-04 17:46:37 - sqlalchemy.engine.Engine - INFO - SELECT db_configs.id AS db_configs_id, db_configs.database_name AS db_configs_database_name 
+FROM db_configs ORDER BY db_configs.created_at DESC
+2024-09-04 17:46:37 - sqlalchemy.engine.Engine - INFO - [generated in 0.00007s] {}
+2024-09-04 17:46:37 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-04 17:46:40 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-04 17:46:40 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-04 17:46:40 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-04 17:46:40 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-04 17:46:40 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-04 17:46:40 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-04 17:46:40 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-04 17:46:40 - sqlalchemy.engine.Engine - INFO - SELECT db_configs.id AS db_configs_id, db_configs.database_name AS db_configs_database_name 
+FROM db_configs ORDER BY db_configs.created_at DESC
+2024-09-04 17:46:40 - sqlalchemy.engine.Engine - INFO - [generated in 0.00009s] {}
+2024-09-04 17:46:40 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-04 17:46:41 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-04 17:46:41 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-04 17:46:41 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-04 17:46:41 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-04 17:46:41 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-04 17:46:41 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-04 17:46:41 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-04 17:46:41 - sqlalchemy.engine.Engine - INFO - SELECT db_configs.id AS db_configs_id, db_configs.hostname AS db_configs_hostname, db_configs.port AS db_configs_port, db_configs.username AS db_configs_username, db_configs.password AS db_configs_password, db_configs.database_name AS db_configs_database_name, db_configs.created_at AS db_configs_created_at 
+FROM db_configs 
+WHERE db_configs.id = %(id_1)s 
+ LIMIT %(param_1)s
+2024-09-04 17:46:41 - sqlalchemy.engine.Engine - INFO - [generated in 0.00012s] {'id_1': '235663e7-13ab-4702-a4f0-91e6232e2d8c', 'param_1': 1}
+2024-09-04 17:46:50 - root - INFO - 正在初始化MateGen，请稍后...
+2024-09-04 17:46:52 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-09-04 17:46:52 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-09-04 17:46:52 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads "HTTP/1.1 200 OK"
+2024-09-04 17:46:52 - root - INFO - 已完成初始化，MateGen可随时调用！

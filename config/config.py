@@ -27,12 +27,12 @@ username = 'root'
 database_name = 'mategen'
 password = "snowball950123"
 # #
-# # # # 开发模式
+# # # 开发模式
 # hostname = '192.168.110.131'
 # SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{username}:{password}@{hostname}/{database_name}?charset=utf8mb4"
 
 #
-# # Docker Compose 中定义的 MySQL 服务名称
+# # # Docker Compose 中定义的 MySQL 服务名称
 hostname = 'db'  # Docker Compose 中定义的 MySQL 服务名称
 SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{username}:{password}@{hostname}/{database_name}?charset=utf8mb4"
 

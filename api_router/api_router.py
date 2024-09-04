@@ -82,8 +82,8 @@ def create_app():
     # 挂载路由
     mount_app_routes(app)
 
-    # # 挂载 前端 项目构建的前端静态文件夹 (对接前端静态文件的入口)
-    # app.mount("/", StaticFiles(directory="static/dist"), name="static")
+    # 挂载 前端 项目构建的前端静态文件夹 (对接前端静态文件的入口)
+    app.mount("/", StaticFiles(directory="../static/dist"), name="static")
 
     return app
 
@@ -128,21 +128,6 @@ def mount_app_routes(app: FastAPI):
                     "data": {"message": "当前用户初次启动项目，请跳转项目初始化页面，引导用户完成项目初始化工作"}}
 
         return {"status": 200, "data": {"message": "项目已完成过初始化配置，可直接进行对话"}}
-
-    @app.post("/api/set_default_mysql", tags=["Initialization"],
-              summary="(前端无需理会此接口，用于测试阶段)初始化数据库，项目启动时直接后台调用，参数即Swapper中的默认参数 ")
-    def default_mysql(
-            username: str = Body('root', embed=True),
-            password: str = Body('snowball950123', embed=True),
-            hostname: str = Body('db', embed=True),
-            database_name: str = Body('mategen', embed=True)
-    ):
-        from db.thread_model import initialize_database
-        # 尝试初始化数据库
-        if initialize_database(username, password, hostname, database_name):
-            return {"status": 200, "data": {"message": "数据库初始化成功"}}
-        else:
-            raise HTTPException(status_code=500, detail="数据库初始化失败")
 
     # 初始化API，单独做以解决 API_KEY 加密问题
     @app.post("/api/set_api_key", tags=["Initialization"], summary="授权有效的API Key，需要让用户手动填入")
