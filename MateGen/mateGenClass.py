@@ -439,7 +439,6 @@ class MateGenClass:
             from db.thread_model import ThreadModel
             from MateGen.utils import (SessionLocal,
                                        store_thread_info,
-                                       update_conversation_name
                                        )
 
             db_session = SessionLocal()

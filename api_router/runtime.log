@@ -9359,3 +9359,35 @@ CREATE TABLE messages (
 2024-09-04 14:15:21 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads/thread_ah6kq4x4DtVDNbDIvofcO3To/runs "HTTP/1.1 200 OK"
 2024-09-04 14:15:37 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads/thread_ah6kq4x4DtVDNbDIvofcO3To/messages "HTTP/1.1 200 OK"
 2024-09-04 14:15:38 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads/thread_ah6kq4x4DtVDNbDIvofcO3To/runs "HTTP/1.1 200 OK"
+2024-09-04 14:21:54 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-04 14:21:54 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-04 14:21:54 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-04 14:21:54 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-04 14:21:54 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-04 14:21:54 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-04 14:21:54 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-04 14:21:54 - sqlalchemy.engine.Engine - INFO - USE `mategen`;
+2024-09-04 14:21:54 - sqlalchemy.engine.Engine - INFO - [generated in 0.00015s] {}
+2024-09-04 14:21:54 - sqlalchemy.engine.Engine - INFO - SHOW TABLES;
+2024-09-04 14:21:54 - sqlalchemy.engine.Engine - INFO - [generated in 0.00011s] {}
+2024-09-04 14:21:54 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-04 14:21:54 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-04 14:21:54 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-04 14:21:54 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-04 14:21:54 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-04 14:21:54 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-04 14:21:54 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-04 14:21:54 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-04 14:21:54 - sqlalchemy.engine.Engine - INFO - SELECT db_configs.id AS db_configs_id, db_configs.hostname AS db_configs_hostname, db_configs.port AS db_configs_port, db_configs.username AS db_configs_username, db_configs.password AS db_configs_password, db_configs.database_name AS db_configs_database_name, db_configs.created_at AS db_configs_created_at 
+FROM db_configs 
+WHERE db_configs.hostname = %(hostname_1)s AND db_configs.port = %(port_1)s AND db_configs.username = %(username_1)s AND db_configs.password = %(password_1)s AND db_configs.database_name = %(database_name_1)s 
+ LIMIT %(param_1)s
+2024-09-04 14:21:54 - sqlalchemy.engine.Engine - INFO - [generated in 0.00019s] {'hostname_1': '192.168.110.131', 'port_1': '3306', 'username_1': 'root', 'password_1': 'snowball950123', 'database_name_1': 'mategen', 'param_1': 1}
+2024-09-04 14:21:54 - sqlalchemy.engine.Engine - INFO - INSERT INTO db_configs (id, hostname, port, username, password, database_name, created_at) VALUES (%(id)s, %(hostname)s, %(port)s, %(username)s, %(password)s, %(database_name)s, now())
+2024-09-04 14:21:54 - sqlalchemy.engine.Engine - INFO - [generated in 0.00016s] {'id': '83ef8d41-3b45-4818-a370-61c8ef9f0e65', 'hostname': '192.168.110.131', 'port': '3306', 'username': 'root', 'password': 'snowball950123', 'database_name': 'mategen'}
+2024-09-04 14:21:54 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-04 14:21:54 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-04 14:21:54 - sqlalchemy.engine.Engine - INFO - SELECT db_configs.id AS db_configs_id, db_configs.hostname AS db_configs_hostname, db_configs.port AS db_configs_port, db_configs.username AS db_configs_username, db_configs.password AS db_configs_password, db_configs.database_name AS db_configs_database_name, db_configs.created_at AS db_configs_created_at 
+FROM db_configs 
+WHERE db_configs.id = %(pk_1)s
+2024-09-04 14:21:54 - sqlalchemy.engine.Engine - INFO - [generated in 0.00011s] {'pk_1': '83ef8d41-3b45-4818-a370-61c8ef9f0e65'}

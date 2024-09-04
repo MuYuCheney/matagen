@@ -61,8 +61,9 @@ class CodeExecutionRequest(BaseModel):
 
 
 class SQLExecutionRequest(BaseModel):
-    sql_query: str
     thread_id: str
+    db_info_id: str
+    sql_query: str
 
 
 def create_app():
@@ -294,9 +295,9 @@ def mount_app_routes(app: FastAPI):
             )
 
             response[1].beta.threads.messages.create(
-                    thread_id=response[2],
-                    role="user",
-                    content=message,
+                thread_id=response[2],
+                role="user",
+                content=message,
             )
 
             with response[1].beta.threads.runs.stream(
@@ -322,9 +323,9 @@ def mount_app_routes(app: FastAPI):
 
         else:
             response[1].beta.threads.messages.create(
-                    thread_id=response[2],
-                    role="user",
-                    content=question,
+                thread_id=response[2],
+                role="user",
+                content=question,
             )
 
             with response[1].beta.threads.runs.stream(
@@ -348,12 +349,12 @@ def mount_app_routes(app: FastAPI):
                 db_session.close()
 
     @app.get("/api/chat", tags=["Chat"],
-              summary="问答的通用对话接口, 参数chat_stream默认为False,如果设置为True 为流式输出, 采用SSE传输"
-                      "注意：如果是用户切换窗户后的会话，当在输入框中输入内容点击发送时，先调用 /api/initialize接口（空参），再调用Chat")
+             summary="问答的通用对话接口, 参数chat_stream默认为False,如果设置为True 为流式输出, 采用SSE传输"
+                     "注意：如果是用户切换窗户后的会话，当在输入框中输入内容点击发送时，先调用 /api/initialize接口（空参），再调用Chat")
     async def chat(query: str = Query(..., description="用户会话框输入的问题"),
                    chat_stream: bool = Query(True, description="是否采用流式输出,默认流式，可不传此参数"),
                    code_type: str = Query(None, description="类型：Python或SQL"),
-                   run_result: str = Query(None, description="Python或者SQL运行结果"),):
+                   run_result: str = Query(None, description="Python或者SQL运行结果"), ):
         if query == "init":
             return {"status": 200, "data": {"message": "无操作"}}
 
@@ -367,7 +368,6 @@ def mount_app_routes(app: FastAPI):
                 return {"status": 200, "data": {"message": response['data']}}
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))
-
 
     @app.get("/api/conversation", tags=["Chat"], summary="获取指定代理的所有历史对话窗口")
     def get_conversation():
@@ -542,15 +542,41 @@ def mount_app_routes(app: FastAPI):
 
         try:
             from MateGen.utils import SessionLocal
+            from sqlalchemy import create_engine
+            from sqlalchemy.orm import sessionmaker
+            from db.thread_model import DbBase
+            from sqlalchemy.exc import OperationalError
 
             db_session = SessionLocal()
+            db_info = db_session.query(DbBase).filter(DbBase.id == request.db_info_id).one_or_none()
+            db_session.close()
 
             # 确保只执行SELECT查询
             if not request.sql_query.lower().startswith("select"):
                 raise HTTPException(status_code=400, detail="Only SELECT queries are allowed.")
 
-            result = db_session.execute(text(request.sql_query))
+            LOCAL_SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{db_info.username}:{db_info.password}@{db_info.hostname}:{db_info.port}/{db_info.database_name}?charset=utf8mb4"
+
+            # 创建数据库引擎
+            local_engine = create_engine(LOCAL_SQLALCHEMY_DATABASE_URI)
+
+            # 尝试连接并执行一个简单的查询来检查连接
+            try:
+                # 创建会话
+                Local_SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=local_engine)
+                local_db_session = Local_SessionLocal()
+                # 测试数据库连接
+                connection_test = local_db_session.execute(text("SELECT 1"))
+                connection_test.fetchone()  # 尝试获取查询结果
+                local_db_session.close()  # 正常则关闭会话
+            except OperationalError as e:
+                raise HTTPException(status_code=500, detail=f"连接数据库失败，请检查数据库是否处于正常运行状态: {str(e)}")
+
+            # 如果连接测试通过，继续执行原来的查询
+            local_db_session = Local_SessionLocal()
+            result = local_db_session.execute(text(request.sql_query))
             results = result.fetchall()
+            local_db_session.close()  # 执行完查询后关闭会话
 
             # 转换结果为字典列表
             output = []
@@ -566,7 +592,7 @@ def mount_app_routes(app: FastAPI):
 
             return {"results": output}
         except Exception as e:
-            raise HTTPException(status_code=500, detail=f"An error occurred while executing SQL: {str(e)}")
+            raise HTTPException(status_code=500, detail=f"无法查询到该数据库的连接信息: {str(e)}")
 
 
 def run_api(host, port, **kwargs):
