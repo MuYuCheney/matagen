@@ -339,16 +339,17 @@ def find_kb_name_by_description(session: Session, knowledge_base_name: str) -> s
 def get_knowledge_base_info(session: Session):
     # 查询 KnowledgeBase 表中所有的记录，包括新增字段
     knowledge_base_info = session.query(
+        KnowledgeBase.id,
         KnowledgeBase.display_knowledge_base_name,
         KnowledgeBase.vector_store_id,
         KnowledgeBase.chunking_strategy,
         KnowledgeBase.max_chunk_size_tokens,
         KnowledgeBase.chunk_overlap_tokens,
-        KnowledgeBase.knowledge_base_description  # 包括描述字段
     ).all()
 
     # 返回一个包含字典的列表，每个字典包含全部字段
     return [{
+        'knowledge_base_id': info.id,
         'knowledge_base_name': info.display_knowledge_base_name,
         'vector_store_id': info.vector_store_id,
         'chunking_strategy': info.chunking_strategy,
