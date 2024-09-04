@@ -151,7 +151,15 @@ def initialize_database(username: str, password: str, hostname: str, database_na
 
 if __name__ == '__main__':
     # 开发环境
-    from config.config import SQLALCHEMY_DATABASE_URI
+
+    from config.config import SQLALCHEMY_DATABASE_URI, username, password, hostname, database_name
 
     engine = create_engine(SQLALCHEMY_DATABASE_URI, echo=True)
-    Base.metadata.create_all(engine)
+
+    # # 删除所有表
+    # Base.metadata.drop_all(engine)
+    # # 初始化操作
+    initialize_database(username="root",
+                        password="snowball950123",
+                        hostname="db",
+                        database_name="mategen")

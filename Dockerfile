@@ -1,5 +1,5 @@
 # 选择基础镜像
-FROM python:3.11
+FROM python:3.10
 
 # 设置工作目录
 WORKDIR /app
@@ -14,8 +14,10 @@ RUN pip install --no-cache-dir -r requirements.txt
 # 复制项目文件到工作目录
 COPY . /app
 
+
 # 暴露端口
-EXPOSE 8000
+EXPOSE 9000
+
 
 # 运行应用
 CMD ["python", "api_router/api_router.py", "--host", "0.0.0.0", "--port", "9000"]

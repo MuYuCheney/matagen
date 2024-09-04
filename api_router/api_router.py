@@ -596,6 +596,16 @@ def mount_app_routes(app: FastAPI):
 
 
 def run_api(host, port, **kwargs):
+    from config.config import username, password, hostname, database_name
+    from db.thread_model import initialize_database
+
+    # # 删除所有表
+    # Base.metadata.drop_all(engine)
+    # # 初始化操作
+    initialize_database(username=username,
+                        password=password,
+                        hostname=hostname,
+                        database_name=database_name)
     if kwargs.get("ssl_keyfile") and kwargs.get("ssl_certfile"):
         uvicorn.run(app,
                     host=host,
