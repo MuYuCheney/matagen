@@ -14,6 +14,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # 复制项目文件到工作目录
 COPY . /app
 
+# 复制静态文件到容器内的指定位置
+COPY static/dist /app/static/dist
 
 # 暴露端口
 EXPOSE 9000

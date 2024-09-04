@@ -83,7 +83,11 @@ def create_app():
     mount_app_routes(app)
 
     # 挂载 前端 项目构建的前端静态文件夹 (对接前端静态文件的入口)
+    # Windows
     app.mount("/", StaticFiles(directory="../static/dist"), name="static")
+
+    # # Docker
+    # app.mount("/", StaticFiles(directory="/app/static/dist"), name="static")
 
     return app
 
@@ -276,7 +280,7 @@ def mount_app_routes(app: FastAPI):
                 f"{question}\n"
                 "运行结果如下所示：\n"
                 f"{run_result}\n\n"
-                "现在我将发送给你，你进行参考，同时基于上述内容做出更详细的分析和判断。"
+                "现在我将发送给你，请仅仅回复：您的代码/语句和运行结果已记录"
             )
 
             response[1].beta.threads.messages.create(
