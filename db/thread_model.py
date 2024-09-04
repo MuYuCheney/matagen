@@ -25,17 +25,19 @@ class SecretModel(Base):
 
 class ThreadModel(Base):
     __tablename__ = 'threads'
-    id = Column(String(255), primary_key=True)  # 这作为 'thread_id'
+    id = Column(String(255), primary_key=True)
     agent_id = Column(String(255), ForeignKey('agents.id'))
     conversation_name = Column(String(255))
     run_mode = Column(String(255))
-    created_at = Column(DateTime(timezone=True), server_default=func.now())  # 自动生成创建时间
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
 
-    # 添加与 KnowledgeBase 的反向关系
+    # 反向关系到 MessageModel
+    messages = relationship("MessageModel", back_populates="thread", order_by="MessageModel.created_at")
+
+    # 其他的关系定义
     knowledge_bases = relationship("KnowledgeBase", back_populates="thread")
-
-    # 假设还有一个 SecretModel 类定义
     agent = relationship("SecretModel", back_populates="threads")
+
 
 class KnowledgeBase(Base):
     __tablename__ = 'knowledge_bases'
@@ -71,6 +73,22 @@ class DbBase(Base):
     password = Column(String(255), nullable=False)
     database_name = Column(String(255), nullable=False)
     created_at = Column(DateTime, default=func.now())  # 自动生成创建时间
+
+
+class MessageModel(Base):
+    __tablename__ = 'messages'
+
+    id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
+    thread_id = Column(String(255), ForeignKey('threads.id'))  # 外键关联到 ThreadModel
+    question = Column(String(1024))  # 消息发送者的标识（例如 'user', 'agent' 等）
+    response = Column(Text)  # 消息内容
+    created_at = Column(DateTime(timezone=True), server_default=func.now())  # 消息创建时间自动生成
+    message_type = Column(String(255))  # 消息类型，例如 'chat', 'python', 'sql'等
+    run_result = Column(Text, nullable=True)  # 执行结果，可用于存储代码执行或命令的输出，此字段可以为空
+
+    # 反向关系，可以通过 ThreadModel 直接访问其所有消息
+    thread = relationship("ThreadModel", back_populates="messages")
+
 
 # 定义数据库模型初始化函数
 def initialize_database(username: str, password: str, hostname: str, database_name: str):
@@ -129,6 +147,7 @@ def initialize_database(username: str, password: str, hostname: str, database_na
         return False
     finally:
         session.close()
+
 
 if __name__ == '__main__':
     # 开发环境

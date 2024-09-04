@@ -273,49 +273,101 @@ def mount_app_routes(app: FastAPI):
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))
 
-    async def event_generator(question):
+    async def event_generator(question, code_type, run_result):
         from MateGen.mateGenClass import EventHandler
-        response = global_instance.chat(question, chat_stream=True)  # 这个调用需要适应异步
-        with global_openai_instance.beta.threads.runs.stream(
-                thread_id=response["data"][0],
-                assistant_id=response["data"][1],
-                event_handler=EventHandler()
-        ) as stream:
-            # stream.until_done()
-            # print(stream.text_deltas)
-            for text in stream.text_deltas:
-                yield json.dumps(
-                    {"text": text},
-                    ensure_ascii=False)
+        response = global_instance.chat(question, chat_stream=True)
+
+        from MateGen.utils import SessionLocal
+        from db.thread_model import MessageModel
+        db_session = SessionLocal()
+
+        # 用来保留完整的模型回答
+        full_text = ''
+        if code_type != None:
+            # 创建格式化的消息字符串
+            message = (
+                f"基于历史的聊天信息，这是我调试好的{code_type} 执行代码/语句，如下所示：\n"
+                f"{question}\n"
+                "运行结果如下所示：\n"
+                f"{run_result}\n\n"
+                "现在我将发送给你，你进行参考，同时基于上述内容做出更详细的分析和判断。"
+            )
+
+            response[1].beta.threads.messages.create(
+                    thread_id=response[2],
+                    role="user",
+                    content=message,
+            )
+
+            with response[1].beta.threads.runs.stream(
+                    thread_id=response[2],
+                    assistant_id=response[0],
+                    event_handler=EventHandler(),
+            ) as stream:
+                for text in stream.text_deltas:
+                    full_text += text
+                    yield json.dumps({"text": text}, ensure_ascii=False)
+
+                new_message = MessageModel(
+                    thread_id=response[2],
+                    question=question,
+                    response=full_text,
+                    message_type=code_type,
+                    run_result=run_result,
+                )
+
+                db_session.add(new_message)
+                db_session.commit()  # 提交事务
+                db_session.close()
+
+        else:
+            response[1].beta.threads.messages.create(
+                    thread_id=response[2],
+                    role="user",
+                    content=question,
+            )
+
+            with response[1].beta.threads.runs.stream(
+                    thread_id=response[2],
+                    assistant_id=response[0],
+                    event_handler=EventHandler(),
+            ) as stream:
+
+                for text in stream.text_deltas:
+                    full_text += text
+                    yield json.dumps({"text": text}, ensure_ascii=False)
+                # 插入消息到数据库
+                new_message = MessageModel(
+                    thread_id=response[2],
+                    question=question,
+                    response=full_text,
+                    message_type='chat',
+                )
+                db_session.add(new_message)
+                db_session.commit()  # 提交事务
+                db_session.close()
 
     @app.get("/api/chat", tags=["Chat"],
               summary="问答的通用对话接口, 参数chat_stream默认为False,如果设置为True 为流式输出, 采用SSE传输"
                       "注意：如果是用户切换窗户后的会话，当在输入框中输入内容点击发送时，先调用 /api/initialize接口（空参），再调用Chat")
     async def chat(query: str = Query(..., description="用户会话框输入的问题"),
-                   chat_stream: str = Query(True, description="是否采用流式输出,默认流式，可不传此参数"),
+                   chat_stream: bool = Query(True, description="是否采用流式输出,默认流式，可不传此参数"),
                    code_type: str = Query(None, description="类型：Python或SQL"),
                    run_result: str = Query(None, description="Python或者SQL运行结果"),):
         if query == "init":
             return {"status": 200, "data": {"message": "无操作"}}
 
-        if code_type:
-            if code_type == "python":
-                # TODO
-                return {"status": 200, "data": {"message": "成功接收Python代码和运行结果"}}
-
-            if code_type == "sql":
-                # TODO
-                return {"status": 200, "data": {"message": "成功接收Sql指令和运行结果"}}
         try:
             if chat_stream:
                 from sse_starlette.sse import EventSourceResponse
                 # 使用SSE 流式处理
-                return EventSourceResponse(event_generator(query))
+                return EventSourceResponse(event_generator(query, code_type, run_result))
             else:
                 response = global_instance.chat(query, chat_stream)
                 return {"status": 200, "data": {"message": response['data']}}
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))
+
 
     @app.get("/api/conversation", tags=["Chat"], summary="获取指定代理的所有历史对话窗口")
     def get_conversation():
@@ -337,24 +389,37 @@ def mount_app_routes(app: FastAPI):
 
     @app.get("/api/messages", tags=["Chat"], summary="根据thread_id获取指定的会话历史信息")
     def get_messages(thread_id: str = Query(..., description="thread_id")):
-
         try:
-            thread_messages = global_openai_instance.beta.threads.messages.list(thread_id=thread_id, order="desc").data
+            from db.thread_model import MessageModel
+            from MateGen.utils import SessionLocal
+            from db.thread_model import ThreadModel
+            from sqlalchemy import desc
 
-            dialogues = []  # 用于存储当前线程的对话内容
+            db_session = SessionLocal()
 
-            # 遍历消息，按 role 提取文本内容
-            for message in reversed(thread_messages):  # 反转列表处理，直接在循环中反转
-                content_value = next((cb.text.value for cb in message.content if cb.type == 'text'), None)
-                if content_value:
-                    if message.role == "assistant":
-                        dialogue = {"assistant": content_value}
-                    elif message.role == "user":
-                        dialogue = {"user": content_value}
+            messages = db_session.query(MessageModel).filter(MessageModel.thread_id == thread_id).order_by(
+                desc(MessageModel.created_at)).all()
 
-                    dialogues.append(dialogue)
+            # 封装数据
+            chat_records = []
+            for msg in messages:
+                if msg.message_type != 'chat':
+                    # 对非 chat 类型消息进一步提取 run_result
+                    chat_record = {
+                        'user': msg.question,
+                        'assistant': msg.response,
+                        'chat_type': msg.message_type,
+                        'run_result': msg.run_result  # 这里添加 run_result 字段
+                    }
+                else:
+                    chat_record = {
+                        'user': msg.question,
+                        'assistant': msg.response,
+                        'chat_type': msg.message_type
+                    }
+                chat_records.append(chat_record)
 
-            return {"status": 200, "data": {"message": dialogues}}
+            return {"status": 200, "data": {"message": chat_records}}
 
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))

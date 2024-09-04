@@ -8,6 +8,6 @@ __pycache__/
 venv/
 .env
 .uploads
-.config
+.config/config.py
 .docker-compose.yml
 .Dockerfile

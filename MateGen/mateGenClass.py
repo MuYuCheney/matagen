@@ -1,3 +1,4 @@
+from __future__ import annotations
 from IPython.display import display, Markdown
 from IPython import get_ipython
 import time
@@ -50,35 +51,29 @@ from openai.types.beta.threads.runs import ToolCall, ToolCallDelta
 from MateGen.utils import SessionLocal
 from db.thread_model import SecretModel
 
+from typing_extensions import override
+
+import openai
+from openai import AssistantEventHandler
+from openai.types.beta import AssistantStreamEvent
+from openai.types.beta.threads import Text, TextDelta
+from openai.types.beta.threads.runs import RunStep, RunStepDelta
 
 # print(f"dotenv_path: {dotenv_path}")
 class EventHandler(AssistantEventHandler):
     @override
-    def on_text_created(self, text: Text) -> None:
+    def on_event(self, event: AssistantStreamEvent) -> None:
         pass
-        # print(f"\nassistant > ", end="", flush=True)
 
     @override
-    def on_text_delta(self, delta: TextDelta, snapshot: Text):
+    def on_text_delta(self, delta: TextDelta, snapshot: Text) -> None:
         pass
-        # print(delta.value, end="", flush=True)
 
     @override
-    def on_tool_call_created(self, tool_call: ToolCall):
+    def on_run_step_done(self, run_step: RunStep) -> None:
         pass
-        # print(f"\nassistant > {tool_call.type}\n", flush=True)
 
-    @override
-    def on_tool_call_delta(self, delta: ToolCallDelta, snapshot: ToolCall):
-        pass
-        # if delta.type == "code_interpreter" and delta.code_interpreter:
-        #     if delta.code_interpreter.input:
-        #         print(delta.code_interpreter.input, end="", flush=True)
-        #     if delta.code_interpreter.outputs:
-        #         print(f"\n\noutput >", flush=True)
-        #         for output in delta.code_interpreter.outputs:
-        #             if output.type == "logs":
-        #                 print(f"\n{output.logs}", flush=True)
+
 
 
 def create_knowledge_base_folder(sub_folder_name=None):
@@ -441,15 +436,22 @@ class MateGenClass:
              chat_stream=False):
 
         if question != None:
-            from MateGen.utils import update_conversation_name
+            from db.thread_model import ThreadModel
             from MateGen.utils import (SessionLocal,
                                        store_thread_info,
                                        update_conversation_name
                                        )
 
             db_session = SessionLocal()
-            update_conversation_name(db_session, self.thread_id, question)
-            db_session.close()
+
+            local_conversation_name = db_session.query(ThreadModel).filter(ThreadModel.id == self.thread_id).one_or_none()
+            if local_conversation_name.conversation_name == "new_chat":
+                local_conversation_name.conversation_name = question[:7] if len(question) > 7 else question
+                db_session.commit()
+                db_session.close()
+
+            if chat_stream:
+                return (self.s3, self.client, self.thread_id)
 
             return chat_base_auto_cancel(user_input=question,
                                          assistant_id=self.s3,
@@ -1064,10 +1066,6 @@ def run_status(assistant_id, client, thread_id, run_id):
     return None
 
 
-def event_stream(event_handler):
-    while True:
-        yield event_handler.queue.get()
-
 
 def chat_base(user_input,
               assistant_id,
@@ -1078,7 +1076,6 @@ def chat_base(user_input,
               first_input=True,
               tool_outputs=None,
               ):
-
 
     # 创建消息
     if first_input:
@@ -1115,14 +1112,9 @@ def chat_base(user_input,
 
     # 若消息创建完成，则返回模型返回信息
     elif run_details.status == 'completed':
-
-        if chat_stream:
-            return {"data": (thread_id, assistant_id)}
-        else:
-            messages_check = client.beta.threads.messages.list(thread_id=thread_id)
-
-            chat_res = messages_check.data[0].content[0].text.value
-            return {"data": chat_res}
+        messages_check = client.beta.threads.messages.list(thread_id=thread_id)
+        chat_res = messages_check.data[0].content[0].text.value
+        return {"data": chat_res}
 
     # 若外部函数响应超时，则根据用户反馈制定执行流程
     elif run_details.status == 'expired' or run_details.status == 'cancelled':
@@ -1177,6 +1169,21 @@ def extract_run_id(text):
     else:
         return None
 
+async def stream_chat_base(user_input, assistant_id, client, thread_id, event_handler):
+    await client.beta.threads.messages.create(
+        thread_id=thread_id,
+        role="user",
+        content=user_input,
+    )
+
+    async with client.beta.threads.runs.stream(
+        thread_id=thread_id,
+        assistant_id=assistant_id,
+        event_handler=event_handler,
+    ) as stream:
+        await stream.until_done()
+        async for text in stream.text_deltas:
+            yield json.dumps({"text": text}, ensure_ascii=False)
 
 def chat_base_auto_cancel(user_input,
                           assistant_id,
@@ -1192,7 +1199,6 @@ def chat_base_auto_cancel(user_input,
 
     while now_attempt < max_attempt:
         try:
-
             res = chat_base(user_input=user_input,
                             assistant_id=assistant_id,
                             client=client,
