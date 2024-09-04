@@ -239,7 +239,7 @@ def mount_app_routes(app: FastAPI):
 
     @app.get("/api/all_knowledge_base", tags=["Knowledge"],
              summary="根据知识库的id获取到上传的所有本地文件")
-    def get_knowledge_detail(knowledge_id: str = Query(..., description="thread_id")):
+    def get_knowledge_detail(knowledge_id: str = Query(..., description="知识库的id")):
         from MateGen.utils import SessionLocal, get_knowledge_base_name_by_id
         db_session = SessionLocal()
         try:
