@@ -277,7 +277,7 @@ def mount_app_routes(app: FastAPI):
         response = global_instance.chat(question, chat_stream=True)
 
         from MateGen.utils import SessionLocal
-        from db.thread_model import MessageModel
+        from db.thread_model import MessageModel, KnowledgeBase, DbBase
         db_session = SessionLocal()
 
         # 用来保留完整的模型回答
@@ -310,12 +310,35 @@ def mount_app_routes(app: FastAPI):
                     yield f"data: {json.dumps({'text': text}, ensure_ascii=False)}\n\n"
                 yield "event: end\n\n"
 
+                kb_info = None
+                db_info = None
+                knowledge_name = None
+                database_name = None
+
+                # 检查是否存在 knowledge_base_name_id
+                if global_instance.knowledge_base_name_id:
+                    kb_info = db_session.query(KnowledgeBase).filter(
+                        KnowledgeBase.id == global_instance.knowledge_base_name_id).one_or_none()
+                    if kb_info:
+                        knowledge_name = kb_info.display_knowledge_base_name
+
+                # 检查是否存在 db_name_id
+                if global_instance.db_name_id:
+                    db_info = db_session.query(DbBase).filter(
+                        DbBase.id == global_instance.db_name_id).one_or_none()
+                    if db_info:
+                        database_name = db_info.database_name
+
                 new_message = MessageModel(
                     thread_id=response[2],
                     question=question,
                     response=full_text,
                     message_type=code_type,
                     run_result=run_result,
+                    knowledge_id=global_instance.knowledge_base_name_id if global_instance.knowledge_base_name_id else None,
+                    knowledge_name=knowledge_name,
+                    db_id=global_instance.db_name_id if global_instance.db_name_id else None,
+                    db_name=database_name,
                 )
 
                 db_session.add(new_message)
@@ -340,12 +363,37 @@ def mount_app_routes(app: FastAPI):
                     yield f"data: {json.dumps({'text': text}, ensure_ascii=False)}\n\n"
                 yield "event: end\n\n"
                 # 插入消息到数据库
+                kb_info = None
+                db_info = None
+                knowledge_name = None
+                database_name = None
+
+                # 检查是否存在 knowledge_base_name_id
+                if global_instance.knowledge_base_name_id:
+                    kb_info = db_session.query(KnowledgeBase).filter(
+                        KnowledgeBase.id == global_instance.knowledge_base_name_id).one_or_none()
+                    if kb_info:
+                        knowledge_name = kb_info.display_knowledge_base_name
+
+                # 检查是否存在 db_name_id
+                if global_instance.db_name_id:
+                    db_info = db_session.query(DbBase).filter(
+                        DbBase.id == global_instance.db_name_id).one_or_none()
+                    if db_info:
+                        database_name = db_info.database_name
+
                 new_message = MessageModel(
                     thread_id=response[2],
                     question=question,
                     response=full_text,
                     message_type='chat',
+                    run_result=run_result,
+                    knowledge_id=global_instance.knowledge_base_name_id if global_instance.knowledge_base_name_id else None,
+                    knowledge_name=knowledge_name,
+                    db_id=global_instance.db_name_id if global_instance.db_name_id else None,
+                    db_name=database_name,
                 )
+
                 db_session.add(new_message)
                 db_session.commit()  # 提交事务
                 db_session.close()
@@ -360,6 +408,7 @@ def mount_app_routes(app: FastAPI):
                    run_result: str = Query(None, description="Python或者SQL运行结果"), ):
         if query == "init":
             return {"status": 200, "data": {"message": "无操作"}}
+
         try:
             if chat_stream:
                 from sse_starlette.sse import EventSourceResponse
@@ -404,23 +453,41 @@ def mount_app_routes(app: FastAPI):
             messages = db_session.query(MessageModel).filter(MessageModel.thread_id == thread_id).order_by(
                 desc(MessageModel.created_at)).all()
 
-            # 封装数据
             chat_records = []
+            # 初始化上一条消息的知识库和数据库ID为空
+            last_knowledge_id, last_db_id = None, None
+
             for msg in messages:
+                # 基本聊天记录结构
+                chat_record = {
+                    'user': msg.question,
+                    'assistant': msg.response,
+                    'chat_type': msg.message_type,
+                }
+
+                # 针对 chat 类型消息进行特别处理
+                if msg.message_type == 'chat':
+                    # 检查知识库或数据库是否有变化
+                    knowledge_changed = (msg.knowledge_id is not None and msg.knowledge_id != last_knowledge_id)
+                    db_changed = (msg.db_id is not None and msg.db_id != last_db_id)
+
+                    # 如果有变化，则记录新的状态，并在消息中标记
+                    if knowledge_changed or db_changed:
+                        chat_record.update({
+                            'knowledge_id': msg.knowledge_id,
+                            'knowledge_name': msg.knowledge_name,
+                            'db_id': msg.db_id,
+                            'db_name': msg.db_name,
+                        })
+
+                    # 更新上一条消息的状态
+                    last_knowledge_id = msg.knowledge_id if knowledge_changed else last_knowledge_id
+                    last_db_id = msg.db_id if db_changed else last_db_id
+
+                # 如果是非 chat 类型的消息，添加 run_result 字段
                 if msg.message_type != 'chat':
-                    # 对非 chat 类型消息进一步提取 run_result
-                    chat_record = {
-                        'user': msg.question,
-                        'assistant': msg.response,
-                        'chat_type': msg.message_type,
-                        'run_result': msg.run_result  # 这里添加 run_result 字段
-                    }
-                else:
-                    chat_record = {
-                        'user': msg.question,
-                        'assistant': msg.response,
-                        'chat_type': msg.message_type
-                    }
+                    chat_record['run_result'] = msg.run_result
+
                 chat_records.append(chat_record)
 
             return {"status": 200, "data": {"message": chat_records}}

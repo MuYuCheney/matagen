@@ -86,6 +86,11 @@ class MessageModel(Base):
     message_type = Column(String(255))  # 消息类型，例如 'chat', 'python', 'sql'等
     run_result = Column(Text, nullable=True)  # 执行结果，可用于存储代码执行或命令的输出，此字段可以为空
 
+    knowledge_id = Column(String(36))
+    knowledge_name = Column(String(255))
+    db_id = Column(String(255))
+    db_name = Column(String(255))
+
     # 反向关系，可以通过 ThreadModel 直接访问其所有消息
     thread = relationship("ThreadModel", back_populates="messages")
 
@@ -121,7 +126,7 @@ def initialize_database(username: str, password: str, hostname: str, database_na
             session.commit()
 
         # 修改表字符集
-        tables_to_modify = ['threads', 'agents', 'knowledge_bases', "db_configs"]
+        tables_to_modify = ['threads', 'agents', 'knowledge_bases', "db_configs", ""]
         for table_name in tables_to_modify:
             if inspector.has_table(table_name, schema="mategen"):
                 session.execute(
@@ -159,7 +164,7 @@ if __name__ == '__main__':
     # # 删除所有表
     # Base.metadata.drop_all(engine)
     # # 初始化操作
-    initialize_database(username="root",
-                        password="snowball950123",
-                        hostname="db",
-                        database_name="mategen")
+    initialize_database(username=username,
+                        password=password,
+                        hostname=hostname,
+                        database_name=database_name)
