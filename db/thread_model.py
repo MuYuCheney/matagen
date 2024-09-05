@@ -44,7 +44,7 @@ class KnowledgeBase(Base):
 
     id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     # 主键字段
-    vector_store_id = Column(String(255), primary_key=True)
+    vector_store_id = Column(String(255), nullable=True)
     # 添加关于文本分块的策略
     chunking_strategy = Column(String(255), default="auto")
     max_chunk_size_tokens = Column(Integer, default=800)
@@ -61,6 +61,20 @@ class KnowledgeBase(Base):
     thread_id = Column(String(255), ForeignKey('threads.id'))
     # 建立与 ThreadModel 的关系
     thread = relationship("ThreadModel", back_populates="knowledge_bases")
+    files = relationship("FileInfo", back_populates="knowledge_base")  # 文件关系
+
+class FileInfo(Base):
+    __tablename__ = 'file_info'
+
+    id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))  # 文件的唯一标识符
+    filename = Column(String(255), nullable=False)  # 文件名
+    folder_path = Column(String(255), nullable=False)  # 文件存储路径
+    file_extension = Column(String(10), nullable=False)  # 存储文件后缀，长度自行设定
+    upload_time = Column(DateTime(timezone=True), server_default=func.now())  # 上传时间
+    knowledge_base_id = Column(String(36), ForeignKey('knowledge_bases.id', ondelete="SET NULL"), nullable=True)  # 可选外键关联到KnowledgeBase
+
+    # 建立与KnowledgeBase的关系
+    knowledge_base = relationship("KnowledgeBase", back_populates="files")
 
 
 class DbBase(Base):

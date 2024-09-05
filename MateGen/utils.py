@@ -380,43 +380,26 @@ def get_knowledge_base_name_by_id(session: Session, knowledge_base_id: str):
     返回:
         str: 查询到的 KnowledgeBase 的名称，如果没有找到则返回 None。
     """
-    # 使用 query 方法选择指定的字段，filter 方法来筛选特定的 ID
-    knowledge_base_name = session.query(KnowledgeBase.knowledge_base_name).filter(
-        KnowledgeBase.id == knowledge_base_id
-    ).scalar()  # 使用 scalar，如果没有找到结果会返回 None
+    from db.thread_model import FileInfo
+    # 查询所有关联的文件
+    files = session.query(FileInfo).filter(FileInfo.knowledge_base_id == knowledge_base_id).all()
 
-    if os.name == 'nt':
-        base_path = os.path.join('..', 'uploads', knowledge_base_name)
-        file_paths = get_all_files(base_path)
-        return file_paths
+    # 分类存储文件，根据文件后缀
+    categorized_files = {}
+    for file in files:
+        ext = file.file_extension.lower()  # 获取文件扩展名，并转化为小写以保证一致性
+        if ext not in categorized_files:
+            categorized_files[ext] = []
+        # 将文件ID和名称作为字典添加到列表中
+        categorized_files[ext].append({
+            "id": file.id,
+            "filename": file.filename
+        })
 
-    if os.name == 'posix':  # Unix/Linux/MacOS
-        file_path = f'/app/uploads/{knowledge_base_name}'
-        file_paths = get_all_files(file_path)
-        return file_paths
+    # 准备返回结果，包括所有类型的文件
+    data = {"data": categorized_files}
 
-
-def get_all_files(folder_path):
-    # 指定需要过滤的文件扩展名
-    file_extensions = ['.md', '.pdf', '.doc', '.docx', '.ppt', '.pptx']
-
-    # 初始化一个字典，用于存储每种扩展名的文件名称列表
-    file_dict = {ext.strip('.'): [] for ext in file_extensions}
-
-    # 遍历文件夹中的所有文件
-    for file in os.listdir(folder_path):
-        full_path = os.path.join(folder_path, file)
-        if os.path.isfile(full_path):
-            # 检查文件扩展名，并添加到相应的列表中
-            for ext in file_extensions:
-                if file.endswith(ext):
-                    file_name = os.path.basename(full_path)  # 提取文件名
-                    file_dict[ext.strip('.')].append(file_name)  # 将文件名添加到字典
-
-    # 移除字典中空的列表
-    file_dict = {key: value for key, value in file_dict.items() if value}
-
-    return file_dict
+    return data
 
 
 def update_knowledge_base_name(session: Session, knowledge_base_id: str, new_name: str, init: bool) -> bool:

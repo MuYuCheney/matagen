@@ -59,6 +59,7 @@ from openai.types.beta import AssistantStreamEvent
 from openai.types.beta.threads import Text, TextDelta
 from openai.types.beta.threads.runs import RunStep, RunStepDelta
 
+
 # print(f"dotenv_path: {dotenv_path}")
 class EventHandler(AssistantEventHandler):
     @override
@@ -72,8 +73,6 @@ class EventHandler(AssistantEventHandler):
     @override
     def on_run_step_done(self, run_step: RunStep) -> None:
         pass
-
-
 
 
 def create_knowledge_base_folder(sub_folder_name=None):
@@ -114,14 +113,14 @@ def create_knowledge_base_folder(sub_folder_name=None):
 
 
 def create_knowledge_base(client,
+                          kb_id,
                           knowledge_base_name,
                           chunking_strategy="auto",
                           max_chunk_size_tokens=800,
                           chunk_overlap_tokens=400,
                           thread_id=None):
+
     logging.info("正在创建知识库，请稍后...")
-    base_path = os.path.join('..', 'uploads', knowledge_base_name)
-    logging.info(f"当前知识库的本地路径是：{base_path}")
 
     vector_stores = client.beta.vector_stores.list()
 
@@ -143,11 +142,20 @@ def create_knowledge_base(client,
 
     logging.info("正在创建知识库的向量存储，请稍后...")
 
+    from MateGen.utils import SessionLocal
+    from db.thread_model import KnowledgeBase
+    db_session = SessionLocal()
+
+    # 这里用来存储展示的知识库名称
+    display_knowledge_base_name = knowledge_base_name
+    knowledge_base_info = db_session.query(KnowledgeBase).filter(KnowledgeBase.id == kb_id).one_or_none()
+
+    knowledge_base_name = knowledge_base_info.knowledge_base_name
+
     if vector_id == None:
         if chunking_strategy == "auto":
             vector_store = client.beta.vector_stores.create(name=knowledge_base_name)
         else:
-
             vector_store = client.beta.vector_stores.create(
                 name=knowledge_base_name,  # 你提供的向量存储名称
                 chunking_strategy={
@@ -162,21 +170,19 @@ def create_knowledge_base(client,
         vector_id = vector_store.id
 
     try:
-        # # Docker
-        # file_path = f'/app/uploads/{knowledge_base_name}'
-        # file_paths = get_specific_files(file_path)
-        # # # windows
-        # # file_paths = get_specific_files(base_path)
 
         # 检测操作系统
         if os.name == 'posix':  # Unix/Linux/MacOS
             file_path = f'/app/uploads/{knowledge_base_name}'
             file_paths = get_specific_files(file_path)
         elif os.name == 'nt':  # Windows
+            base_path = os.path.join('..', 'uploads', knowledge_base_name)
             file_paths = get_specific_files(base_path)
+
 
         logging.info(f"file_paths ： {file_paths}")
         file_streams = [open(path, "rb") for path in file_paths]
+
         client.beta.vector_stores.file_batches.upload_and_poll(
             vector_store_id=vector_id, files=file_streams
         )
@@ -186,20 +192,28 @@ def create_knowledge_base(client,
         elif os.name == 'nt':  # Windows
             knowledge_base_description = get_formatted_file_list(base_path)
 
-        from MateGen.utils import (SessionLocal, add_knowledge_base)
 
-        db_session = SessionLocal()
-        add_knowledge_base(db_session,
-                           vector_store_id=vector_id,
-                           knowledge_base_name=knowledge_base_name,
-                           knowledge_base_description=knowledge_base_description,
-                           thread_id=thread_id,
-                           chunking_strategy=chunking_strategy,
-                           max_chunk_size_tokens=max_chunk_size_tokens,
-                           chunk_overlap_tokens=chunk_overlap_tokens
-                           )
+        knowledge_base = db_session.query(KnowledgeBase).filter(
+            KnowledgeBase.id == kb_id
+        ).one_or_none()
+
+        if knowledge_base is None:
+            # 如果没有找到知识库，可以选择抛出异常或返回一个错误消息
+            return None
+
+        # 更新各个字段并打印状态
+        knowledge_base.vector_store_id = vector_id
+        knowledge_base.display_knowledge_base_name = display_knowledge_base_name
+        knowledge_base.knowledge_base_description = knowledge_base_description
+        knowledge_base.thread_id = thread_id
+        knowledge_base.chunking_strategy = chunking_strategy
+        knowledge_base.max_chunk_size_tokens = max_chunk_size_tokens
+        knowledge_base.chunk_overlap_tokens = chunk_overlap_tokens
+
+        db_session.commit()  # 提交更改
+
     except Exception as e:
-        return None
+        print(e)
 
     logging.info("知识库创建完成！")
     return vector_id
@@ -443,7 +457,8 @@ class MateGenClass:
 
             db_session = SessionLocal()
 
-            local_conversation_name = db_session.query(ThreadModel).filter(ThreadModel.id == self.thread_id).one_or_none()
+            local_conversation_name = db_session.query(ThreadModel).filter(
+                ThreadModel.id == self.thread_id).one_or_none()
             if local_conversation_name.conversation_name == "new_chat":
                 local_conversation_name.conversation_name = question[:7] if len(question) > 7 else question
                 db_session.commit()
@@ -1065,7 +1080,6 @@ def run_status(assistant_id, client, thread_id, run_id):
     return None
 
 
-
 def chat_base(user_input,
               assistant_id,
               client,
@@ -1075,7 +1089,6 @@ def chat_base(user_input,
               first_input=True,
               tool_outputs=None,
               ):
-
     # 创建消息
     if first_input:
         message = client.beta.threads.messages.create(
@@ -1168,6 +1181,7 @@ def extract_run_id(text):
     else:
         return None
 
+
 async def stream_chat_base(user_input, assistant_id, client, thread_id, event_handler):
     await client.beta.threads.messages.create(
         thread_id=thread_id,
@@ -1176,13 +1190,14 @@ async def stream_chat_base(user_input, assistant_id, client, thread_id, event_ha
     )
 
     async with client.beta.threads.runs.stream(
-        thread_id=thread_id,
-        assistant_id=assistant_id,
-        event_handler=event_handler,
+            thread_id=thread_id,
+            assistant_id=assistant_id,
+            event_handler=event_handler,
     ) as stream:
         await stream.until_done()
         async for text in stream.text_deltas:
             yield json.dumps({"text": text}, ensure_ascii=False)
+
 
 def chat_base_auto_cancel(user_input,
                           assistant_id,

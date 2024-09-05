@@ -13,6 +13,7 @@ from pydantic import BaseModel
 from fastapi import Depends, Query
 from fastapi.security import APIKeyHeader
 from openai import OpenAI
+from typing import List
 
 from MateGen.mateGenClass import (MateGenClass,
                                   get_vector_db_id,
@@ -43,6 +44,7 @@ class UrlModel(BaseModel):
 
 
 class KnowledgeBaseCreateRequest(BaseModel):
+    kb_id: str = Body(..., embed=True, description="知识库的id")
     knowledge_base_name: str = Body(..., embed=True, description="知识库的名称")
     chunking_strategy: str = Body("auto", embed=True, description="参数类型，自动参数为auto，手动参数为 static")
     max_chunk_size_tokens: int = Body(800, embed=True)
@@ -149,7 +151,7 @@ def mount_app_routes(app: FastAPI):
                 return {"status": 500, "data": {"message": "您输入的 API Key 无效或已过期。"}}
 
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail="服务器内部异常，请稍后重试。")
 
     # 初始化MetaGen实例，保存在全局变量中，用于后续的子方法调用
     @app.post("/api/initialize", tags=["Initialization"],
@@ -171,7 +173,7 @@ def mount_app_routes(app: FastAPI):
             return {"status": 200, "data": {"message": "MateGen 实例初始化成功",
                                             "thread_id": global_instance.thread_id}}
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail="服务器内部异常，请稍后重试。")
 
     @app.post("/api/upload", tags=["Knowledge"], summary="上传文件功能。\n"
                                                          "进行知识库解析操作前,先调用此函数，确保文件全部上传后，再进行/api/create_knowledge")
@@ -179,34 +181,93 @@ def mount_app_routes(app: FastAPI):
             folderName: str = Form(...),  # 接收文件夹名称
             files: List[UploadFile] = File(...)  # 接收多个文件
     ):
+        from uuid import uuid4
+        from MateGen.utils import SessionLocal
+        from db.thread_model import FileInfo, KnowledgeBase
+        db_session = SessionLocal()
+
+        unsupported_files = []
         uploaded_files = []
 
         try:
+            existing_kb = db_session.query(KnowledgeBase).filter(
+                KnowledgeBase.knowledge_base_name == folderName,
+                KnowledgeBase.vector_store_id.isnot(None)  # 确保vector_store_id不为空
+            ).one_or_none()
+
+            if existing_kb:
+                # 如果找到已存在的知识库，返回错误信息
+                return {"status": 400, "data": {"message": "该知识库已存在，请更换知识库名称"}}
+
             # 生成指定文件夹路径
             folder_path = os.path.join(UPLOAD_FOLDER, folderName)
             os.makedirs(folder_path, exist_ok=True)
+            # 创建知识库条目
+            new_kb = KnowledgeBase(
+                knowledge_base_name=folderName,
+                display_knowledge_base_name=folderName,
+            )
+            db_session.add(new_kb)
+            db_session.commit()
 
             for file in files:
+                file_extension = os.path.splitext(file.filename)[1].lower()
+                if file_extension not in {".md", ".pdf", ".doc", ".docx", ".ppt", ".pptx"}:
+                    unsupported_files.append(file.filename)
+                    continue
+                # 为每个文件生成唯一标识符
+                file_id = str(uuid4())
                 # 文件存储路径
                 file_location = os.path.join(folder_path, file.filename)
-
+                # 保存或覆盖文件
                 with open(file_location, "wb") as buffer:
                     shutil.copyfileobj(file.file, buffer)
+                # 检查数据库中是否已有记录
+                from sqlalchemy import func
+                existing_file = db_session.query(FileInfo).filter_by(folder_path=file_location).first()
+                if existing_file:
+                    existing_file.upload_time = func.now()  # 更新上传时间
+                    db_session.commit()
 
-                uploaded_files.append(file.filename)
-            return {"status": 200, "data": {"message": "所有文件上传服务器成功",
-                                            "files": uploaded_files,
-                                            "folder": folderName}}
+                else:
+                    # 创建新文件记录
+                    new_file = FileInfo(
+                        id=str(uuid4()),  # 为新文件生成唯一标识符
+                        filename=file.filename,
+                        file_extension=file_extension,  # Store file extension
+                        folder_path=file_location,
+                        knowledge_base_id=new_kb.id  # 关联到新创建的知识库
+                    )
+
+                    db_session.add(new_file)
+                    db_session.commit()
+
+                uploaded_files.append({
+                    "file_id": file_id,
+                    "filename": file.filename,
+                })
+
+            if unsupported_files:
+                return {"status": 200, "data": {"message": "支持的文件类型已上传成功",
+                                                "faild_files": unsupported_files}}
+            else:
+                return {"status": 200, "data": {"message": "所有文件上传服务器成功",
+                                                "kb_id": new_kb.id,
+                                                "folder": folderName,
+                                                "files": uploaded_files}}
 
         except Exception as e:
-            return JSONResponse(content={"message": str(e)}, status_code=500)
+            raise HTTPException(status_code=500, detail=str(e))
 
     @app.post("/api/create_knowledge", tags=["Knowledge"],
               summary="知识库解析")
-    def create_knowledge(request: KnowledgeBaseCreateRequest, thread_id: str = Query(...,
-                                                                                     description="传递当前会话状态下的thread_id")):
+    def create_knowledge(request: KnowledgeBaseCreateRequest,
+                         thread_id: str = Query(..., description="传递当前会话状态下的thread_id"),
+                         ):
+
         # 这里要根据chunking_strategy策略设定RAG的切分策略，默认是自动
         vector_id = create_knowledge_base(client=global_openai_instance,
+                                          kb_id=request.kb_id,
                                           knowledge_base_name=request.knowledge_base_name,
                                           chunking_strategy=request.chunking_strategy,
                                           max_chunk_size_tokens=request.max_chunk_size_tokens,
@@ -219,6 +280,30 @@ def mount_app_routes(app: FastAPI):
             raise HTTPException(status_code=400, detail="知识库无法创建，请确认知识库文件夹中均为格式合规的文件，"
                                                         "目前仅支持 .md, .pdf, .doc, .docx, .ppt, .pptx 文件类型")
 
+    @app.delete("/api/files/{file_id}", tags=["Knowledge"], summary="根据文件id 删除某个文件")
+    async def delete_file(file_id: str):
+
+        from MateGen.utils import SessionLocal
+        from db.thread_model import FileInfo
+        db_session = SessionLocal()
+
+        # 查询数据库找到文件
+        file_to_delete = db_session.query(FileInfo).filter(FileInfo.id == file_id).first()
+
+        if file_to_delete:
+            try:
+                # 删除文件系统中的文件
+                os.remove(file_to_delete.folder_path)
+                # 从数据库中删除文件记录
+                db_session.delete(file_to_delete)
+                db_session.commit()
+                return {"status": 200, "message": f"{file_to_delete.filename}文件已删除"}
+            except Exception as e:
+                db_session.rollback()
+                raise HTTPException(status_code=500, detail="服务器内部异常，请稍后重试。")
+        else:
+            raise HTTPException(status_code=404, detail="删除失败，建议重新尝试。")
+
     @app.get("/api/get_all_knowledge", tags=["Knowledge"],
              summary="获取所有已解析成功的知识库名称列表")
     def get_all_knowledge():
@@ -230,7 +315,7 @@ def mount_app_routes(app: FastAPI):
                 return {"status": 404, "data": [], "message": "没有找到知识库，请先进行创建"}
             return {"status": 200, "data": knowledge_bases}
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500,  detail="服务器内部异常，请稍后重试。")
 
     @app.get("/api/all_knowledge_base", tags=["Knowledge"],
              summary="根据知识库ID获取到其内部所有的归属文件")
@@ -241,7 +326,7 @@ def mount_app_routes(app: FastAPI):
             knowledge_bases = get_knowledge_base_name_by_id(db_session, knowledge_id)
             return {"status": 200, "data": knowledge_bases}
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail="服务器内部异常，请稍后重试。")
 
     @app.post("/api/update_knowledge_base", tags=["Knowledge"],
               summary="目前先仅允许更改知识库名称，需要设置 init参数为false")
@@ -255,7 +340,7 @@ def mount_app_routes(app: FastAPI):
             if update_knowledge_base_name(db_session, knowledge_id, knowledge_new_name, init):
                 return {"status": 200, "data": {"后台知识库已更新"}}
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail="服务器内部异常，请稍后重试。")
 
     @app.delete("/api/delete_knowledge/{knowledge_id}", tags=["Knowledge"], summary="根据知识库ID，删除指定知识库")
     def api_delete_all_files(knowledge_id: str):
@@ -270,7 +355,7 @@ def mount_app_routes(app: FastAPI):
                 )
                 return {"status": 200, "data": {"message": "知识库删除成功。"}}
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail="服务器内部异常，请稍后重试。")
 
     async def event_generator(question, code_type, run_result):
         from MateGen.mateGenClass import EventHandler
@@ -421,7 +506,7 @@ def mount_app_routes(app: FastAPI):
                 response = global_instance.chat(query, chat_stream)
                 return {"status": 200, "data": {"message": response['data']}}
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail="服务器内部异常，请稍后重试。")
 
     @app.get("/api/conversation", tags=["Chat"], summary="获取所有聊天会话窗口名称")
     def get_conversation():
@@ -436,7 +521,7 @@ def mount_app_routes(app: FastAPI):
             data = [{"id": result.id, "conversation_name": result.conversation_name} for result in results]
             return {"status": 200, "data": {"message": data}}
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail="服务器内部异常，请稍后重试。")
         finally:
             db_session.close()
 
@@ -493,7 +578,7 @@ def mount_app_routes(app: FastAPI):
             return {"status": 200, "data": {"message": chat_records}}
 
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail="服务器内部异常，请稍后重试。")
 
     @app.put("/api/update_conversation_name", tags=["Chat"], summary="根据thread_id更新会话框的显示名称")
     def update_conversation_name(thread_id: str = Body(..., description="thread_id"),
@@ -505,7 +590,7 @@ def mount_app_routes(app: FastAPI):
             update_conversation_name(db_session, thread_id, new_conversation_name)
             return {"status": 200, "data": {"message": "已更新"}}
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail="服务器内部异常，请稍后重试。")
         finally:
             db_session.close()
 
@@ -528,7 +613,7 @@ def mount_app_routes(app: FastAPI):
             else:
                 raise HTTPException(status_code=404, detail="未找到指定的会话ID")
         except Exception as e:
-            raise HTTPException(status_code=500, detail=f"删除会话ID发生错误: {str(e)}")
+            raise HTTPException(status_code=500, detail="服务器内部异常，请稍后重试。")
         finally:
             db_session.close()
 
@@ -543,7 +628,7 @@ def mount_app_routes(app: FastAPI):
             return {"status": 200, "data": {"message": "数据库连接信息正常",
                                             "db_info_id": database_id}}
         except Exception as e:
-            raise e
+            raise HTTPException(status_code=500, detail="服务器内部异常，请稍后重试。")
 
     @app.get("/api/show_all_databases", tags=["Database"], summary="获取所有数据库连接信息")
     def list_databases():
@@ -551,7 +636,7 @@ def mount_app_routes(app: FastAPI):
             databases = get_all_databases()
             return {"status": 200, "data": databases}
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail="服务器内部异常，请稍后重试。")
 
     @app.put("/api/update_db_connection/{db_info_id}", tags=["Database"], summary="更新数据库连接配置")
     def update_db_connection(db_info_id: str, db_config: DBConfig = Body(...)):
@@ -564,7 +649,7 @@ def mount_app_routes(app: FastAPI):
         except HTTPException as http_ex:
             raise http_ex
         except Exception as ex:
-            raise HTTPException(status_code=500, detail=f"更新失败: {str(ex)}")
+            raise HTTPException(status_code=500, detail="服务器内部异常，请稍后重试。")
 
     @app.get("/api/get_db_info", tags=["Database"], summary="获取数据库连接配置")
     def get_db_connection(db_info_id: str = Query(..., description="数据库配置的 ID", embed=True)):
@@ -579,7 +664,7 @@ def mount_app_routes(app: FastAPI):
         except HTTPException as http_ex:
             raise http_ex
         except Exception as ex:
-            raise HTTPException(status_code=500, detail=f"更新失败: {str(ex)}")
+            raise HTTPException(status_code=500, detail="服务器内部异常，请稍后重试。")
 
     @app.delete("/api/delete_db_connection/{db_info_id}", tags=["Database"], summary="删除数据库连接配置")
     def delete_db_connection(db_info_id: str):
@@ -591,7 +676,7 @@ def mount_app_routes(app: FastAPI):
         except HTTPException as http_ex:
             raise http_ex
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail="服务器内部异常，请稍后重试。")
 
     from python_interface import execute_python_code
     @app.post("/api/execute_code", tags=["Python Execution"],
@@ -599,19 +684,19 @@ def mount_app_routes(app: FastAPI):
     def execute_code(request: CodeExecutionRequest = Body(...)):
         # 检查thread_id是否提供
         if not request.thread_id:
-            raise HTTPException(status_code=400, detail="thread_id is required to execute the code.")
+            raise HTTPException(status_code=400, detail="服务器内部异常，请稍后重试。")
 
         try:
             result = execute_python_code(request.python_code)
             return {"status": 200, "data": {"thread_id": request.thread_id, "message": result}}
         except Exception as e:
-            raise HTTPException(status_code=500, detail=f"An error occurred while executing the code: {str(e)}")
+            raise HTTPException(status_code=500, detail="服务器内部异常，请稍后重试。")
 
     @app.post("/api/execute_sql", tags=["SQL Execution"], summary="执行SQL语句并返回最终的结果")
     def execute_sql(request: SQLExecutionRequest = Body(...)):
 
         if not request.thread_id:
-            raise HTTPException(status_code=400, detail="thread_id is required to execute the code.")
+            raise HTTPException(status_code=400, detail="服务器内部异常，请稍后重试。")
 
         try:
             from MateGen.utils import SessionLocal
@@ -626,7 +711,7 @@ def mount_app_routes(app: FastAPI):
 
             # 确保只执行SELECT查询
             if not request.sql_query.lower().startswith("select"):
-                raise HTTPException(status_code=400, detail="Only SELECT queries are allowed.")
+                raise HTTPException(status_code=400, detail="服务器内部异常，请稍后重试。")
 
             LOCAL_SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{db_info.username}:{db_info.password}@{db_info.hostname}:{db_info.port}/{db_info.database_name}?charset=utf8mb4"
 
@@ -643,7 +728,7 @@ def mount_app_routes(app: FastAPI):
                 connection_test.fetchone()  # 尝试获取查询结果
                 local_db_session.close()  # 正常则关闭会话
             except OperationalError as e:
-                raise HTTPException(status_code=500, detail=f"连接数据库失败，请检查数据库是否处于正常运行状态: {str(e)}")
+                raise HTTPException(status_code=500, detail="服务器内部异常，请稍后重试。")
 
             # 如果连接测试通过，继续执行原来的查询
             local_db_session = Local_SessionLocal()
@@ -665,7 +750,7 @@ def mount_app_routes(app: FastAPI):
 
             return {"results": output}
         except Exception as e:
-            raise HTTPException(status_code=500, detail=f"无法查询到该数据库的连接信息: {str(e)}")
+            raise HTTPException(status_code=500, detail="服务器内部异常，请稍后重试。")
 
 
 def run_api(host, port, **kwargs):
