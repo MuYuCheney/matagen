@@ -122,9 +122,8 @@ def delete_thread_by_id(session: Session, thread_id: str):
     if thread:
         session.delete(thread)
         session.commit()
-        return True
+        return thread.id
     return False
-
 
 
 def fetch_threads_mode(session: Session, thread_id: str) -> Dict[str, List[Dict[str, str]]]:
@@ -506,7 +505,7 @@ def delete_knowledge_base_by_id(session: Session, knowledge_base_id: str) -> boo
             if os.path.exists(old_path):
                 shutil.rmtree(old_path)
 
-            return True
+            return knowledge_base.vector_store_id
         else:
             # 如果没有找到记录，返回 False
             return False
