@@ -316,7 +316,7 @@ class MateGenClass:
         split_strings = original_string.split(' ')
         s1 = split_strings[0]
         s2 = split_strings[1]
-
+        print(f's1 = {s1}')
         # # 存储s1和s3到本地mysql数据库中，其中s3 用来 外联 多个 thread_id 作为多会话窗口的映射
         from MateGen.utils import SessionLocal
         from db.thread_model import KnowledgeBase
