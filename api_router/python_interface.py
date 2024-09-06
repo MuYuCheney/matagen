@@ -1,15 +1,19 @@
 
 import sys
 from io import StringIO
+import traceback
 
 def execute_python_code(code: str) -> str:
+    redirected_output = StringIO()
+    old_stdout = sys.stdout
+    sys.stdout = redirected_output
     try:
-        # 重定向标准输出
-        old_stdout = sys.stdout
-        redirected_output = sys.stdout = StringIO()
-        exec(code)  # 执行代码，不限制内建函数
+        # 设置 __name__ 为 "__main__" 来模拟直接执行脚本的效果
+        exec(code, {"__builtins__": __builtins__, "__name__": "__main__"})
+    except Exception:
+        traceback.print_exc()  # 将错误信息打印到重定向的输出中
+    finally:
         sys.stdout = old_stdout
-        return redirected_output.getvalue()
-    except Exception as e:
-        sys.stdout = old_stdout
-        return str(e)
+        result = redirected_output.getvalue()
+        redirected_output.close()
+    return result

@@ -14305,3 +14305,1697 @@ FROM db_configs ORDER BY db_configs.created_at DESC
 2024-09-06 15:36:46 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/vector_stores/vs_xu6vLxPcNpEQt8Igo2PTEcMs/file_batches/vsfb_b47edff1ab6e41e5b0aa125738e7df6e "HTTP/1.1 200 OK"
 2024-09-06 15:36:50 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/vector_stores/vs_xu6vLxPcNpEQt8Igo2PTEcMs/file_batches/vsfb_b47edff1ab6e41e5b0aa125738e7df6e "HTTP/1.1 200 OK"
 2024-09-06 15:36:50 - root - INFO - 知识库创建完成！
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`knowledge_bases`
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`file_info`
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`db_configs`
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`messages`
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - ALTER DATABASE mategen CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - [generated in 0.00011s] {}
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads DROP FOREIGN KEY threads_ibfk_1
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - [generated in 0.00018s] {}
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`messages`
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - ALTER TABLE messages DROP FOREIGN KEY messages_ibfk_1
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - [generated in 0.00019s] {}
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - ALTER TABLE agents CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`knowledge_bases`
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - ALTER TABLE knowledge_bases CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - [generated in 0.00011s] {}
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`db_configs`
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - ALTER TABLE db_configs CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - [generated in 0.00007s] {}
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - ALTER TABLE messages CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - [generated in 0.00009s] {}
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads ADD CONSTRAINT threads_ibfk_1 FOREIGN KEY (agent_id) REFERENCES agents(id)
+2024-09-06 18:33:29 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-06 18:33:30 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:33:30 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:33:30 - sqlalchemy.engine.Engine - INFO - ALTER TABLE messages ADD CONSTRAINT messages_ibfk_1 FOREIGN KEY (thread_id) REFERENCES threads(id)
+2024-09-06 18:33:30 - sqlalchemy.engine.Engine - INFO - [generated in 0.00031s] {}
+2024-09-06 18:33:30 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:33:42 - root - INFO - 正在初始化MateGen，请稍后...
+2024-09-06 18:33:47 - openai._base_client - INFO - Retrying request to /models in 0.856399 seconds
+2024-09-06 18:33:49 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-09-06 18:33:49 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-09-06 18:33:49 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads "HTTP/1.1 200 OK"
+2024-09-06 18:33:49 - root - INFO - 已完成初始化，MateGen可随时调用！
+2024-09-06 18:37:21 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-06 18:37:21 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:37:21 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-06 18:37:21 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:37:21 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-06 18:37:21 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:37:21 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:37:21 - sqlalchemy.engine.Engine - INFO - SELECT db_configs.id AS db_configs_id, db_configs.database_name AS db_configs_database_name 
+FROM db_configs ORDER BY db_configs.created_at DESC
+2024-09-06 18:37:21 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-06 18:37:21 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 18:37:22 - root - INFO - 正在初始化MateGen，请稍后...
+2024-09-06 18:37:23 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-09-06 18:37:23 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-09-06 18:37:23 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads "HTTP/1.1 200 OK"
+2024-09-06 18:37:23 - root - INFO - 已完成初始化，MateGen可随时调用！
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`knowledge_bases`
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`file_info`
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`db_configs`
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`messages`
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - ALTER DATABASE mategen CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - [generated in 0.00009s] {}
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads DROP FOREIGN KEY threads_ibfk_1
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - [generated in 0.00018s] {}
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`messages`
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - ALTER TABLE messages DROP FOREIGN KEY messages_ibfk_1
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - [generated in 0.00013s] {}
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - ALTER TABLE agents CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - [generated in 0.00012s] {}
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`knowledge_bases`
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - ALTER TABLE knowledge_bases CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`db_configs`
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - ALTER TABLE db_configs CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - ALTER TABLE messages CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads ADD CONSTRAINT threads_ibfk_1 FOREIGN KEY (agent_id) REFERENCES agents(id)
+2024-09-06 18:38:29 - sqlalchemy.engine.Engine - INFO - [generated in 0.00009s] {}
+2024-09-06 18:38:30 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:38:30 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:38:30 - sqlalchemy.engine.Engine - INFO - ALTER TABLE messages ADD CONSTRAINT messages_ibfk_1 FOREIGN KEY (thread_id) REFERENCES threads(id)
+2024-09-06 18:38:30 - sqlalchemy.engine.Engine - INFO - [generated in 0.00012s] {}
+2024-09-06 18:38:30 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:38:34 - root - INFO - 正在初始化MateGen，请稍后...
+2024-09-06 18:38:35 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-09-06 18:38:35 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-09-06 18:38:35 - root - INFO - 已完成初始化，MateGen可随时调用！
+2024-09-06 18:38:55 - root - INFO - 正在初始化MateGen，请稍后...
+2024-09-06 18:38:57 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-09-06 18:38:57 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-09-06 18:38:58 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads "HTTP/1.1 200 OK"
+2024-09-06 18:38:58 - root - INFO - 已完成初始化，MateGen可随时调用！
+2024-09-06 18:39:33 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-06 18:39:33 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:39:33 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-06 18:39:33 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:39:33 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-06 18:39:33 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:39:33 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:39:33 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-09-06 18:39:33 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:39:33 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-09-06 18:39:33 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:39:33 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`knowledge_bases`
+2024-09-06 18:39:33 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:39:33 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`file_info`
+2024-09-06 18:39:33 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:39:33 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`db_configs`
+2024-09-06 18:39:33 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:39:33 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`messages`
+2024-09-06 18:39:33 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:39:33 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:39:33 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:39:33 - sqlalchemy.engine.Engine - INFO - ALTER DATABASE mategen CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci
+2024-09-06 18:39:33 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-06 18:39:33 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:39:33 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:39:33 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-09-06 18:39:33 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:39:33 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 18:39:33 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:39:33 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads DROP FOREIGN KEY threads_ibfk_1
+2024-09-06 18:39:33 - sqlalchemy.engine.Engine - INFO - [generated in 0.00014s] {}
+2024-09-06 18:39:33 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:39:33 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:39:33 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`messages`
+2024-09-06 18:39:33 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:39:33 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 18:39:33 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:39:33 - sqlalchemy.engine.Engine - INFO - ALTER TABLE messages DROP FOREIGN KEY messages_ibfk_1
+2024-09-06 18:39:33 - sqlalchemy.engine.Engine - INFO - [generated in 0.00016s] {}
+2024-09-06 18:39:33 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:39:33 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:39:33 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 18:39:33 - sqlalchemy.engine.Engine - INFO - [generated in 0.00023s] {}
+2024-09-06 18:39:33 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:39:33 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:39:33 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-09-06 18:39:33 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:39:33 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 18:39:33 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:39:33 - sqlalchemy.engine.Engine - INFO - ALTER TABLE agents CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 18:39:33 - sqlalchemy.engine.Engine - INFO - [generated in 0.00012s] {}
+2024-09-06 18:39:33 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:39:33 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:39:33 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`knowledge_bases`
+2024-09-06 18:39:33 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:39:33 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 18:39:33 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:39:33 - sqlalchemy.engine.Engine - INFO - ALTER TABLE knowledge_bases CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 18:39:33 - sqlalchemy.engine.Engine - INFO - [generated in 0.00007s] {}
+2024-09-06 18:39:33 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:39:33 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:39:33 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`db_configs`
+2024-09-06 18:39:33 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:39:33 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 18:39:33 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:39:33 - sqlalchemy.engine.Engine - INFO - ALTER TABLE db_configs CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 18:39:33 - sqlalchemy.engine.Engine - INFO - [generated in 0.00013s] {}
+2024-09-06 18:39:33 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:39:34 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:39:34 - sqlalchemy.engine.Engine - INFO - ALTER TABLE messages CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 18:39:34 - sqlalchemy.engine.Engine - INFO - [generated in 0.00010s] {}
+2024-09-06 18:39:34 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:39:34 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:39:34 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads ADD CONSTRAINT threads_ibfk_1 FOREIGN KEY (agent_id) REFERENCES agents(id)
+2024-09-06 18:39:34 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-06 18:39:34 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:39:34 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:39:34 - sqlalchemy.engine.Engine - INFO - ALTER TABLE messages ADD CONSTRAINT messages_ibfk_1 FOREIGN KEY (thread_id) REFERENCES threads(id)
+2024-09-06 18:39:34 - sqlalchemy.engine.Engine - INFO - [generated in 0.00007s] {}
+2024-09-06 18:39:34 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`knowledge_bases`
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`file_info`
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`db_configs`
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`messages`
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - ALTER DATABASE mategen CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads DROP FOREIGN KEY threads_ibfk_1
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - [generated in 0.00007s] {}
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`messages`
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - ALTER TABLE messages DROP FOREIGN KEY messages_ibfk_1
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - ALTER TABLE agents CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`knowledge_bases`
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - ALTER TABLE knowledge_bases CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`db_configs`
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - ALTER TABLE db_configs CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - [generated in 0.00007s] {}
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - ALTER TABLE messages CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads ADD CONSTRAINT threads_ibfk_1 FOREIGN KEY (agent_id) REFERENCES agents(id)
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - ALTER TABLE messages ADD CONSTRAINT messages_ibfk_1 FOREIGN KEY (thread_id) REFERENCES threads(id)
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - [generated in 0.00007s] {}
+2024-09-06 18:41:13 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`knowledge_bases`
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`file_info`
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`db_configs`
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`messages`
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - ALTER DATABASE mategen CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - [generated in 0.00009s] {}
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads DROP FOREIGN KEY threads_ibfk_1
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - [generated in 0.00012s] {}
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`messages`
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - ALTER TABLE messages DROP FOREIGN KEY messages_ibfk_1
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - [generated in 0.00007s] {}
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - ALTER TABLE agents CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - [generated in 0.00007s] {}
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`knowledge_bases`
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - ALTER TABLE knowledge_bases CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - [generated in 0.00009s] {}
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`db_configs`
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - ALTER TABLE db_configs CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - ALTER TABLE messages CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - [generated in 0.00009s] {}
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads ADD CONSTRAINT threads_ibfk_1 FOREIGN KEY (agent_id) REFERENCES agents(id)
+2024-09-06 18:42:03 - sqlalchemy.engine.Engine - INFO - [generated in 0.00007s] {}
+2024-09-06 18:42:04 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:42:04 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:42:04 - sqlalchemy.engine.Engine - INFO - ALTER TABLE messages ADD CONSTRAINT messages_ibfk_1 FOREIGN KEY (thread_id) REFERENCES threads(id)
+2024-09-06 18:42:04 - sqlalchemy.engine.Engine - INFO - [generated in 0.00013s] {}
+2024-09-06 18:42:04 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:42:07 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-06 18:42:07 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:42:07 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-06 18:42:07 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:42:07 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-06 18:42:07 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:42:07 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:42:07 - sqlalchemy.engine.Engine - INFO - SELECT db_configs.id AS db_configs_id, db_configs.database_name AS db_configs_database_name 
+FROM db_configs ORDER BY db_configs.created_at DESC
+2024-09-06 18:42:07 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-06 18:42:07 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 18:42:07 - root - INFO - 正在初始化MateGen，请稍后...
+2024-09-06 18:42:07 - root - INFO - 正在初始化MateGen，请稍后...
+2024-09-06 18:42:08 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-09-06 18:42:08 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-09-06 18:42:08 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-09-06 18:42:08 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-09-06 18:42:09 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads "HTTP/1.1 200 OK"
+2024-09-06 18:42:09 - root - INFO - 已完成初始化，MateGen可随时调用！
+2024-09-06 18:42:09 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads "HTTP/1.1 200 OK"
+2024-09-06 18:42:09 - root - INFO - 已完成初始化，MateGen可随时调用！
+2024-09-06 18:42:27 - root - INFO - 正在初始化MateGen，请稍后...
+2024-09-06 18:42:29 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-09-06 18:42:29 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-09-06 18:42:29 - root - INFO - 已完成初始化，MateGen可随时调用！
+2024-09-06 18:42:35 - root - INFO - 正在初始化MateGen，请稍后...
+2024-09-06 18:42:37 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-09-06 18:42:37 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-09-06 18:42:38 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads "HTTP/1.1 200 OK"
+2024-09-06 18:42:38 - root - INFO - 已完成初始化，MateGen可随时调用！
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`knowledge_bases`
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`file_info`
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`db_configs`
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`messages`
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - ALTER DATABASE mategen CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - [generated in 0.00011s] {}
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads DROP FOREIGN KEY threads_ibfk_1
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - [generated in 0.00012s] {}
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`messages`
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - ALTER TABLE messages DROP FOREIGN KEY messages_ibfk_1
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - [generated in 0.00015s] {}
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - [generated in 0.00028s] {}
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - ALTER TABLE agents CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - [generated in 0.00021s] {}
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`knowledge_bases`
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - ALTER TABLE knowledge_bases CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`db_configs`
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - ALTER TABLE db_configs CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - ALTER TABLE messages CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - [generated in 0.00010s] {}
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads ADD CONSTRAINT threads_ibfk_1 FOREIGN KEY (agent_id) REFERENCES agents(id)
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - [generated in 0.00020s] {}
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - ALTER TABLE messages ADD CONSTRAINT messages_ibfk_1 FOREIGN KEY (thread_id) REFERENCES threads(id)
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - [generated in 0.00007s] {}
+2024-09-06 18:42:51 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`knowledge_bases`
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`file_info`
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`db_configs`
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`messages`
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - ALTER DATABASE mategen CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads DROP FOREIGN KEY threads_ibfk_1
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - [generated in 0.00007s] {}
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`messages`
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - ALTER TABLE messages DROP FOREIGN KEY messages_ibfk_1
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - [generated in 0.00011s] {}
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - [generated in 0.00009s] {}
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - ALTER TABLE agents CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - [generated in 0.00027s] {}
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`knowledge_bases`
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - ALTER TABLE knowledge_bases CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - [generated in 0.00018s] {}
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`db_configs`
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - ALTER TABLE db_configs CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - ALTER TABLE messages CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads ADD CONSTRAINT threads_ibfk_1 FOREIGN KEY (agent_id) REFERENCES agents(id)
+2024-09-06 18:43:10 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-06 18:43:11 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:43:11 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:43:11 - sqlalchemy.engine.Engine - INFO - ALTER TABLE messages ADD CONSTRAINT messages_ibfk_1 FOREIGN KEY (thread_id) REFERENCES threads(id)
+2024-09-06 18:43:11 - sqlalchemy.engine.Engine - INFO - [generated in 0.00009s] {}
+2024-09-06 18:43:11 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:43:19 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-06 18:43:19 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:43:19 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-06 18:43:19 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:43:19 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-06 18:43:19 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:43:19 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:43:19 - sqlalchemy.engine.Engine - INFO - SELECT db_configs.id AS db_configs_id, db_configs.database_name AS db_configs_database_name 
+FROM db_configs ORDER BY db_configs.created_at DESC
+2024-09-06 18:43:19 - sqlalchemy.engine.Engine - INFO - [generated in 0.00010s] {}
+2024-09-06 18:43:19 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 18:43:19 - root - INFO - 正在初始化MateGen，请稍后...
+2024-09-06 18:43:19 - root - INFO - 正在初始化MateGen，请稍后...
+2024-09-06 18:43:21 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-09-06 18:43:21 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-09-06 18:43:21 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-09-06 18:43:21 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-09-06 18:43:21 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads "HTTP/1.1 200 OK"
+2024-09-06 18:43:21 - root - INFO - 已完成初始化，MateGen可随时调用！
+2024-09-06 18:43:22 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads "HTTP/1.1 200 OK"
+2024-09-06 18:43:22 - root - INFO - 已完成初始化，MateGen可随时调用！
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`knowledge_bases`
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`file_info`
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`db_configs`
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`messages`
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - ALTER DATABASE mategen CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - [generated in 0.00016s] {}
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads DROP FOREIGN KEY threads_ibfk_1
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - [generated in 0.00018s] {}
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`messages`
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - ALTER TABLE messages DROP FOREIGN KEY messages_ibfk_1
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - [generated in 0.00015s] {}
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - [generated in 0.00009s] {}
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - ALTER TABLE agents CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - [generated in 0.00018s] {}
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`knowledge_bases`
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - ALTER TABLE knowledge_bases CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`db_configs`
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - ALTER TABLE db_configs CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - [generated in 0.00020s] {}
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - ALTER TABLE messages CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - [generated in 0.00013s] {}
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads ADD CONSTRAINT threads_ibfk_1 FOREIGN KEY (agent_id) REFERENCES agents(id)
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - [generated in 0.00012s] {}
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - ALTER TABLE messages ADD CONSTRAINT messages_ibfk_1 FOREIGN KEY (thread_id) REFERENCES threads(id)
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-06 18:44:51 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:44:59 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-06 18:44:59 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:44:59 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-06 18:44:59 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:44:59 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-06 18:44:59 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:44:59 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:44:59 - sqlalchemy.engine.Engine - INFO - SELECT db_configs.id AS db_configs_id, db_configs.database_name AS db_configs_database_name 
+FROM db_configs ORDER BY db_configs.created_at DESC
+2024-09-06 18:44:59 - sqlalchemy.engine.Engine - INFO - [generated in 0.00031s] {}
+2024-09-06 18:44:59 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 18:45:00 - root - INFO - 正在初始化MateGen，请稍后...
+2024-09-06 18:45:01 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-09-06 18:45:01 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-09-06 18:45:01 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads "HTTP/1.1 200 OK"
+2024-09-06 18:45:01 - root - INFO - 已完成初始化，MateGen可随时调用！
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`knowledge_bases`
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`file_info`
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`db_configs`
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`messages`
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - ALTER DATABASE mategen CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads DROP FOREIGN KEY threads_ibfk_1
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - [generated in 0.00007s] {}
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`messages`
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - ALTER TABLE messages DROP FOREIGN KEY messages_ibfk_1
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - [generated in 0.00009s] {}
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - ALTER TABLE agents CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - [generated in 0.00015s] {}
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`knowledge_bases`
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - ALTER TABLE knowledge_bases CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - [generated in 0.00007s] {}
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`db_configs`
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - ALTER TABLE db_configs CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - [generated in 0.00007s] {}
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - ALTER TABLE messages CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - [generated in 0.00013s] {}
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads ADD CONSTRAINT threads_ibfk_1 FOREIGN KEY (agent_id) REFERENCES agents(id)
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - ALTER TABLE messages ADD CONSTRAINT messages_ibfk_1 FOREIGN KEY (thread_id) REFERENCES threads(id)
+2024-09-06 18:46:11 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-06 18:46:12 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`knowledge_bases`
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`file_info`
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`db_configs`
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`messages`
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - ALTER DATABASE mategen CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - [generated in 0.00009s] {}
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads DROP FOREIGN KEY threads_ibfk_1
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - [generated in 0.00010s] {}
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`messages`
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - ALTER TABLE messages DROP FOREIGN KEY messages_ibfk_1
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - [generated in 0.00017s] {}
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - [generated in 0.00012s] {}
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - ALTER TABLE agents CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - [generated in 0.00012s] {}
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`knowledge_bases`
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - ALTER TABLE knowledge_bases CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - [generated in 0.00012s] {}
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`db_configs`
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - ALTER TABLE db_configs CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - ALTER TABLE messages CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads ADD CONSTRAINT threads_ibfk_1 FOREIGN KEY (agent_id) REFERENCES agents(id)
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - ALTER TABLE messages ADD CONSTRAINT messages_ibfk_1 FOREIGN KEY (thread_id) REFERENCES threads(id)
+2024-09-06 18:51:45 - sqlalchemy.engine.Engine - INFO - [generated in 0.00009s] {}
+2024-09-06 18:51:46 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:51:47 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-06 18:51:47 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:51:47 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-06 18:51:47 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:51:47 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-06 18:51:47 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:51:47 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:51:47 - sqlalchemy.engine.Engine - INFO - SELECT db_configs.id AS db_configs_id, db_configs.database_name AS db_configs_database_name 
+FROM db_configs ORDER BY db_configs.created_at DESC
+2024-09-06 18:51:47 - sqlalchemy.engine.Engine - INFO - [generated in 0.00015s] {}
+2024-09-06 18:51:48 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 18:52:12 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-06 18:52:12 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:52:12 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-06 18:52:12 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:52:12 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-06 18:52:12 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:52:12 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:52:12 - sqlalchemy.engine.Engine - INFO - USE `mategen`;
+2024-09-06 18:52:12 - sqlalchemy.engine.Engine - INFO - [generated in 0.00016s] {}
+2024-09-06 18:52:12 - sqlalchemy.engine.Engine - INFO - SHOW TABLES;
+2024-09-06 18:52:12 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-06 18:52:12 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 18:52:12 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-06 18:52:12 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:52:12 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-06 18:52:12 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:52:12 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-06 18:52:12 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:52:12 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:52:12 - sqlalchemy.engine.Engine - INFO - SELECT db_configs.id AS db_configs_id, db_configs.hostname AS db_configs_hostname, db_configs.port AS db_configs_port, db_configs.username AS db_configs_username, db_configs.password AS db_configs_password, db_configs.database_name AS db_configs_database_name, db_configs.created_at AS db_configs_created_at 
+FROM db_configs 
+WHERE db_configs.hostname = %(hostname_1)s AND db_configs.port = %(port_1)s AND db_configs.username = %(username_1)s AND db_configs.password = %(password_1)s AND db_configs.database_name = %(database_name_1)s 
+ LIMIT %(param_1)s
+2024-09-06 18:52:12 - sqlalchemy.engine.Engine - INFO - [generated in 0.00012s] {'hostname_1': '192.168.110.131', 'port_1': '3306', 'username_1': 'root', 'password_1': 'snowball950123', 'database_name_1': 'mategen', 'param_1': 1}
+2024-09-06 18:52:12 - sqlalchemy.engine.Engine - INFO - INSERT INTO db_configs (id, hostname, port, username, password, database_name, created_at) VALUES (%(id)s, %(hostname)s, %(port)s, %(username)s, %(password)s, %(database_name)s, now())
+2024-09-06 18:52:12 - sqlalchemy.engine.Engine - INFO - [generated in 0.00017s] {'id': 'a2133027-ad57-42c9-b1a4-748a96efc855', 'hostname': '192.168.110.131', 'port': '3306', 'username': 'root', 'password': 'snowball950123', 'database_name': 'mategen'}
+2024-09-06 18:52:12 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:52:12 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:52:12 - sqlalchemy.engine.Engine - INFO - SELECT db_configs.id AS db_configs_id, db_configs.hostname AS db_configs_hostname, db_configs.port AS db_configs_port, db_configs.username AS db_configs_username, db_configs.password AS db_configs_password, db_configs.database_name AS db_configs_database_name, db_configs.created_at AS db_configs_created_at 
+FROM db_configs 
+WHERE db_configs.id = %(pk_1)s
+2024-09-06 18:52:12 - sqlalchemy.engine.Engine - INFO - [generated in 0.00013s] {'pk_1': 'a2133027-ad57-42c9-b1a4-748a96efc855'}
+2024-09-06 18:52:16 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-06 18:52:16 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:52:16 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-06 18:52:16 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:52:16 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-06 18:52:16 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:52:16 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:52:16 - sqlalchemy.engine.Engine - INFO - SELECT db_configs.id AS db_configs_id, db_configs.database_name AS db_configs_database_name 
+FROM db_configs ORDER BY db_configs.created_at DESC
+2024-09-06 18:52:16 - sqlalchemy.engine.Engine - INFO - [generated in 0.00009s] {}
+2024-09-06 18:52:16 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 18:52:17 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-06 18:52:17 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:52:17 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-06 18:52:17 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:52:17 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-06 18:52:17 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:52:17 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:52:17 - sqlalchemy.engine.Engine - INFO - SELECT db_configs.id AS db_configs_id, db_configs.hostname AS db_configs_hostname, db_configs.port AS db_configs_port, db_configs.username AS db_configs_username, db_configs.password AS db_configs_password, db_configs.database_name AS db_configs_database_name, db_configs.created_at AS db_configs_created_at 
+FROM db_configs 
+WHERE db_configs.id = %(id_1)s 
+ LIMIT %(param_1)s
+2024-09-06 18:52:17 - sqlalchemy.engine.Engine - INFO - [generated in 0.00011s] {'id_1': 'a2133027-ad57-42c9-b1a4-748a96efc855', 'param_1': 1}
+2024-09-06 18:52:19 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-06 18:52:19 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:52:19 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-06 18:52:19 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:52:19 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-06 18:52:19 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:52:19 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:52:19 - sqlalchemy.engine.Engine - INFO - SELECT db_configs.id AS db_configs_id, db_configs.database_name AS db_configs_database_name 
+FROM db_configs ORDER BY db_configs.created_at DESC
+2024-09-06 18:52:19 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-06 18:52:19 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 18:52:19 - root - INFO - 正在初始化MateGen，请稍后...
+2024-09-06 18:52:19 - root - INFO - 正在初始化MateGen，请稍后...
+2024-09-06 18:52:20 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-09-06 18:52:20 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-09-06 18:52:20 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-09-06 18:52:20 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-09-06 18:52:21 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads "HTTP/1.1 200 OK"
+2024-09-06 18:52:21 - root - INFO - 已完成初始化，MateGen可随时调用！
+2024-09-06 18:52:22 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads "HTTP/1.1 200 OK"
+2024-09-06 18:52:23 - root - INFO - 已完成初始化，MateGen可随时调用！
+2024-09-06 18:54:09 - root - INFO - 正在初始化MateGen，请稍后...
+2024-09-06 18:54:12 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-09-06 18:54:12 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-09-06 18:54:13 - root - INFO - 已完成初始化，MateGen可随时调用！
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`knowledge_bases`
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`file_info`
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`db_configs`
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`messages`
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - ALTER DATABASE mategen CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads DROP FOREIGN KEY threads_ibfk_1
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - [generated in 0.00020s] {}
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`messages`
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - ALTER TABLE messages DROP FOREIGN KEY messages_ibfk_1
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - [generated in 0.00014s] {}
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - [generated in 0.00025s] {}
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - ALTER TABLE agents CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - [generated in 0.00016s] {}
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`knowledge_bases`
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - ALTER TABLE knowledge_bases CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - [generated in 0.00013s] {}
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`db_configs`
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - ALTER TABLE db_configs CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - ALTER TABLE messages CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads ADD CONSTRAINT threads_ibfk_1 FOREIGN KEY (agent_id) REFERENCES agents(id)
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - [generated in 0.00012s] {}
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - ALTER TABLE messages ADD CONSTRAINT messages_ibfk_1 FOREIGN KEY (thread_id) REFERENCES threads(id)
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - [generated in 0.00010s] {}
+2024-09-06 18:59:32 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:00:50 - root - INFO - 正在初始化MateGen，请稍后...
+2024-09-06 19:00:50 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-09-06 19:00:50 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-09-06 19:00:50 - root - INFO - 已完成初始化，MateGen可随时调用！
+2024-09-06 19:01:14 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads/thread_VLjePlXJFqtGwDshvhu2xgrd/messages "HTTP/1.1 200 OK"
+2024-09-06 19:01:14 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads/thread_VLjePlXJFqtGwDshvhu2xgrd/runs "HTTP/1.1 200 OK"
+2024-09-06 19:01:44 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads/thread_VLjePlXJFqtGwDshvhu2xgrd/messages "HTTP/1.1 200 OK"
+2024-09-06 19:01:45 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads/thread_VLjePlXJFqtGwDshvhu2xgrd/runs "HTTP/1.1 200 OK"
+2024-09-06 19:01:58 - root - INFO - 正在初始化MateGen，请稍后...
+2024-09-06 19:02:01 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-09-06 19:02:01 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-09-06 19:02:01 - root - INFO - 已完成初始化，MateGen可随时调用！
+2024-09-06 19:02:25 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads/thread_VLjePlXJFqtGwDshvhu2xgrd/messages "HTTP/1.1 200 OK"
+2024-09-06 19:02:26 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads/thread_VLjePlXJFqtGwDshvhu2xgrd/runs "HTTP/1.1 200 OK"
+2024-09-06 19:02:55 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-06 19:02:55 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:02:55 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-06 19:02:55 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:02:55 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-06 19:02:55 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:02:55 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:02:55 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-09-06 19:02:55 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:02:55 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-09-06 19:02:55 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:02:55 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`knowledge_bases`
+2024-09-06 19:02:55 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:02:55 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`file_info`
+2024-09-06 19:02:55 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:02:55 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`db_configs`
+2024-09-06 19:02:55 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:02:55 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`messages`
+2024-09-06 19:02:55 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:02:55 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:02:55 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:02:55 - sqlalchemy.engine.Engine - INFO - ALTER DATABASE mategen CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci
+2024-09-06 19:02:55 - sqlalchemy.engine.Engine - INFO - [generated in 0.00009s] {}
+2024-09-06 19:02:55 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:02:55 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:02:55 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-09-06 19:02:55 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:02:55 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 19:02:55 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:02:55 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads DROP FOREIGN KEY threads_ibfk_1
+2024-09-06 19:02:55 - sqlalchemy.engine.Engine - INFO - [generated in 0.00016s] {}
+2024-09-06 19:02:56 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:02:56 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:02:56 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`messages`
+2024-09-06 19:02:56 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:02:56 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 19:02:56 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:02:56 - sqlalchemy.engine.Engine - INFO - ALTER TABLE messages DROP FOREIGN KEY messages_ibfk_1
+2024-09-06 19:02:56 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-06 19:02:56 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:02:56 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:02:56 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 19:02:56 - sqlalchemy.engine.Engine - INFO - [generated in 0.00015s] {}
+2024-09-06 19:02:56 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:02:56 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:02:56 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-09-06 19:02:56 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:02:56 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 19:02:56 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:02:56 - sqlalchemy.engine.Engine - INFO - ALTER TABLE agents CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 19:02:56 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-06 19:02:56 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:02:56 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:02:56 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`knowledge_bases`
+2024-09-06 19:02:56 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:02:56 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 19:02:56 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:02:56 - sqlalchemy.engine.Engine - INFO - ALTER TABLE knowledge_bases CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 19:02:56 - sqlalchemy.engine.Engine - INFO - [generated in 0.00007s] {}
+2024-09-06 19:02:56 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:02:56 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:02:56 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`db_configs`
+2024-09-06 19:02:56 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:02:56 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 19:02:56 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:02:56 - sqlalchemy.engine.Engine - INFO - ALTER TABLE db_configs CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 19:02:56 - sqlalchemy.engine.Engine - INFO - [generated in 0.00009s] {}
+2024-09-06 19:02:56 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:02:56 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:02:56 - sqlalchemy.engine.Engine - INFO - ALTER TABLE messages CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 19:02:56 - sqlalchemy.engine.Engine - INFO - [generated in 0.00014s] {}
+2024-09-06 19:02:56 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:02:56 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:02:56 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads ADD CONSTRAINT threads_ibfk_1 FOREIGN KEY (agent_id) REFERENCES agents(id)
+2024-09-06 19:02:56 - sqlalchemy.engine.Engine - INFO - [generated in 0.00024s] {}
+2024-09-06 19:02:56 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:02:56 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:02:56 - sqlalchemy.engine.Engine - INFO - ALTER TABLE messages ADD CONSTRAINT messages_ibfk_1 FOREIGN KEY (thread_id) REFERENCES threads(id)
+2024-09-06 19:02:56 - sqlalchemy.engine.Engine - INFO - [generated in 0.00007s] {}
+2024-09-06 19:02:56 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:03:01 - root - INFO - 正在初始化MateGen，请稍后...
+2024-09-06 19:03:02 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-09-06 19:03:02 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-09-06 19:03:02 - root - INFO - 已完成初始化，MateGen可随时调用！
+2024-09-06 19:03:06 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads/thread_VLjePlXJFqtGwDshvhu2xgrd/messages "HTTP/1.1 200 OK"
+2024-09-06 19:03:07 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads/thread_VLjePlXJFqtGwDshvhu2xgrd/runs "HTTP/1.1 200 OK"
+2024-09-06 19:04:03 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-06 19:04:03 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:04:03 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-06 19:04:03 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:04:03 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-06 19:04:03 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:04:03 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:04:03 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-09-06 19:04:03 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:04:03 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-09-06 19:04:03 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:04:03 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`knowledge_bases`
+2024-09-06 19:04:03 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:04:03 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`file_info`
+2024-09-06 19:04:03 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:04:03 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`db_configs`
+2024-09-06 19:04:03 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:04:03 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`messages`
+2024-09-06 19:04:03 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:04:03 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:04:04 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:04:04 - sqlalchemy.engine.Engine - INFO - ALTER DATABASE mategen CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci
+2024-09-06 19:04:04 - sqlalchemy.engine.Engine - INFO - [generated in 0.00011s] {}
+2024-09-06 19:04:04 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:04:04 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:04:04 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-09-06 19:04:04 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:04:04 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 19:04:04 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:04:04 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads DROP FOREIGN KEY threads_ibfk_1
+2024-09-06 19:04:04 - sqlalchemy.engine.Engine - INFO - [generated in 0.00022s] {}
+2024-09-06 19:04:04 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:04:04 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:04:04 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`messages`
+2024-09-06 19:04:04 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:04:04 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 19:04:04 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:04:04 - sqlalchemy.engine.Engine - INFO - ALTER TABLE messages DROP FOREIGN KEY messages_ibfk_1
+2024-09-06 19:04:04 - sqlalchemy.engine.Engine - INFO - [generated in 0.00019s] {}
+2024-09-06 19:04:04 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:04:04 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:04:04 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 19:04:04 - sqlalchemy.engine.Engine - INFO - [generated in 0.00016s] {}
+2024-09-06 19:04:04 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:04:04 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:04:04 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-09-06 19:04:04 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:04:04 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 19:04:04 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:04:04 - sqlalchemy.engine.Engine - INFO - ALTER TABLE agents CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 19:04:04 - sqlalchemy.engine.Engine - INFO - [generated in 0.00009s] {}
+2024-09-06 19:04:04 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:04:04 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:04:04 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`knowledge_bases`
+2024-09-06 19:04:04 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:04:04 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 19:04:04 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:04:04 - sqlalchemy.engine.Engine - INFO - ALTER TABLE knowledge_bases CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 19:04:04 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-06 19:04:04 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:04:04 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:04:04 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`db_configs`
+2024-09-06 19:04:04 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:04:04 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 19:04:04 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:04:04 - sqlalchemy.engine.Engine - INFO - ALTER TABLE db_configs CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 19:04:04 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-06 19:04:04 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:04:04 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:04:04 - sqlalchemy.engine.Engine - INFO - ALTER TABLE messages CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 19:04:04 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-06 19:04:04 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:04:04 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:04:04 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads ADD CONSTRAINT threads_ibfk_1 FOREIGN KEY (agent_id) REFERENCES agents(id)
+2024-09-06 19:04:04 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-06 19:04:04 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:04:04 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:04:04 - sqlalchemy.engine.Engine - INFO - ALTER TABLE messages ADD CONSTRAINT messages_ibfk_1 FOREIGN KEY (thread_id) REFERENCES threads(id)
+2024-09-06 19:04:04 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-06 19:04:04 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:04:07 - root - INFO - 正在初始化MateGen，请稍后...
+2024-09-06 19:04:10 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-09-06 19:04:10 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-09-06 19:04:10 - root - INFO - 已完成初始化，MateGen可随时调用！
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`knowledge_bases`
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`file_info`
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`db_configs`
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`messages`
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - ALTER DATABASE mategen CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - [generated in 0.00010s] {}
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads DROP FOREIGN KEY threads_ibfk_1
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - [generated in 0.00013s] {}
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`messages`
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - ALTER TABLE messages DROP FOREIGN KEY messages_ibfk_1
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - [generated in 0.00012s] {}
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - [generated in 0.00021s] {}
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - ALTER TABLE agents CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - [generated in 0.00016s] {}
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`knowledge_bases`
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - ALTER TABLE knowledge_bases CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`db_configs`
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - ALTER TABLE db_configs CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - [generated in 0.00010s] {}
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - ALTER TABLE messages CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - [generated in 0.00012s] {}
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads ADD CONSTRAINT threads_ibfk_1 FOREIGN KEY (agent_id) REFERENCES agents(id)
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - ALTER TABLE messages ADD CONSTRAINT messages_ibfk_1 FOREIGN KEY (thread_id) REFERENCES threads(id)
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-06 19:04:57 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:05:13 - root - INFO - 正在初始化MateGen，请稍后...
+2024-09-06 19:05:16 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-09-06 19:05:16 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`knowledge_bases`
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`file_info`
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`db_configs`
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`messages`
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - ALTER DATABASE mategen CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - [generated in 0.00011s] {}
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads DROP FOREIGN KEY threads_ibfk_1
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - [generated in 0.00007s] {}
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`messages`
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - ALTER TABLE messages DROP FOREIGN KEY messages_ibfk_1
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - ALTER TABLE agents CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - [generated in 0.00009s] {}
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`knowledge_bases`
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - ALTER TABLE knowledge_bases CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - [generated in 0.00009s] {}
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`db_configs`
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - ALTER TABLE db_configs CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - [generated in 0.00007s] {}
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - ALTER TABLE messages CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads ADD CONSTRAINT threads_ibfk_1 FOREIGN KEY (agent_id) REFERENCES agents(id)
+2024-09-06 19:08:41 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-06 19:08:42 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:08:42 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:08:42 - sqlalchemy.engine.Engine - INFO - ALTER TABLE messages ADD CONSTRAINT messages_ibfk_1 FOREIGN KEY (thread_id) REFERENCES threads(id)
+2024-09-06 19:08:42 - sqlalchemy.engine.Engine - INFO - [generated in 0.00007s] {}
+2024-09-06 19:08:42 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:08:44 - root - INFO - 正在初始化MateGen，请稍后...
+2024-09-06 19:08:46 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-09-06 19:08:46 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-09-06 19:08:46 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/assistants/asst_LX66lQLIzSn2Zc2gJJDskcpu "HTTP/1.1 200 OK"
+2024-09-06 19:08:49 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/assistants/asst_LX66lQLIzSn2Zc2gJJDskcpu "HTTP/1.1 400 Bad Request"
+2024-09-06 19:08:49 - root - INFO - An error occurred: Error code: 400 - {'error': {'message': "Invalid type for 'tool_resources.file_search.vector_store_ids[0]': expected a string, but got null instead.", 'type': 'invalid_request_error', 'param': 'tool_resources.file_search.vector_store_ids[0]', 'code': 'invalid_type'}}
+2024-09-06 19:09:00 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads/thread_VLjePlXJFqtGwDshvhu2xgrd/messages "HTTP/1.1 200 OK"
+2024-09-06 19:09:01 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads/thread_VLjePlXJFqtGwDshvhu2xgrd/runs "HTTP/1.1 200 OK"
+2024-09-06 19:09:47 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads/thread_VLjePlXJFqtGwDshvhu2xgrd/messages "HTTP/1.1 200 OK"
+2024-09-06 19:09:48 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads/thread_VLjePlXJFqtGwDshvhu2xgrd/runs "HTTP/1.1 200 OK"
+2024-09-06 19:15:46 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-06 19:15:46 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:15:46 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-06 19:15:46 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:15:46 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-06 19:15:46 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:15:46 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:15:46 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-09-06 19:15:46 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:15:46 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-09-06 19:15:46 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:15:46 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`knowledge_bases`
+2024-09-06 19:15:46 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:15:46 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`file_info`
+2024-09-06 19:15:46 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:15:46 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`db_configs`
+2024-09-06 19:15:46 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:15:46 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`messages`
+2024-09-06 19:15:46 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:15:46 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:15:46 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:15:46 - sqlalchemy.engine.Engine - INFO - ALTER DATABASE mategen CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci
+2024-09-06 19:15:46 - sqlalchemy.engine.Engine - INFO - [generated in 0.00011s] {}
+2024-09-06 19:15:46 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:15:46 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:15:46 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-09-06 19:15:46 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:15:46 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 19:15:46 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:15:46 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads DROP FOREIGN KEY threads_ibfk_1
+2024-09-06 19:15:46 - sqlalchemy.engine.Engine - INFO - [generated in 0.00010s] {}
+2024-09-06 19:15:46 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:15:46 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:15:46 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`messages`
+2024-09-06 19:15:46 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:15:46 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 19:15:46 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:15:46 - sqlalchemy.engine.Engine - INFO - ALTER TABLE messages DROP FOREIGN KEY messages_ibfk_1
+2024-09-06 19:15:46 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-06 19:15:46 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:15:46 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:15:46 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 19:15:46 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-06 19:15:46 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:15:46 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:15:46 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-09-06 19:15:46 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:15:46 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 19:15:46 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:15:46 - sqlalchemy.engine.Engine - INFO - ALTER TABLE agents CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 19:15:46 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-06 19:15:47 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:15:47 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:15:47 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`knowledge_bases`
+2024-09-06 19:15:47 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:15:47 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 19:15:47 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:15:47 - sqlalchemy.engine.Engine - INFO - ALTER TABLE knowledge_bases CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 19:15:47 - sqlalchemy.engine.Engine - INFO - [generated in 0.00009s] {}
+2024-09-06 19:15:47 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:15:47 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:15:47 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`db_configs`
+2024-09-06 19:15:47 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:15:47 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 19:15:47 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:15:47 - sqlalchemy.engine.Engine - INFO - ALTER TABLE db_configs CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 19:15:47 - sqlalchemy.engine.Engine - INFO - [generated in 0.00011s] {}
+2024-09-06 19:15:47 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:15:47 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:15:47 - sqlalchemy.engine.Engine - INFO - ALTER TABLE messages CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 19:15:47 - sqlalchemy.engine.Engine - INFO - [generated in 0.00025s] {}
+2024-09-06 19:15:47 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:15:47 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:15:47 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads ADD CONSTRAINT threads_ibfk_1 FOREIGN KEY (agent_id) REFERENCES agents(id)
+2024-09-06 19:15:47 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-06 19:15:47 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:15:47 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:15:47 - sqlalchemy.engine.Engine - INFO - ALTER TABLE messages ADD CONSTRAINT messages_ibfk_1 FOREIGN KEY (thread_id) REFERENCES threads(id)
+2024-09-06 19:15:47 - sqlalchemy.engine.Engine - INFO - [generated in 0.00007s] {}
+2024-09-06 19:15:47 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:15:57 - root - INFO - 正在初始化MateGen，请稍后...
+2024-09-06 19:15:59 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-09-06 19:15:59 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-09-06 19:15:59 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/assistants/asst_LX66lQLIzSn2Zc2gJJDskcpu "HTTP/1.1 200 OK"
+2024-09-06 19:16:00 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/assistants/asst_LX66lQLIzSn2Zc2gJJDskcpu "HTTP/1.1 200 OK"
+2024-09-06 19:16:00 - root - INFO - 已完成初始化，MateGen可随时调用！
+2024-09-06 19:16:23 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-06 19:16:23 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:16:23 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-06 19:16:23 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:16:23 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-06 19:16:23 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:16:23 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:16:23 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-09-06 19:16:23 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:16:23 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-09-06 19:16:23 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:16:23 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`knowledge_bases`
+2024-09-06 19:16:23 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:16:23 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`file_info`
+2024-09-06 19:16:23 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:16:23 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`db_configs`
+2024-09-06 19:16:23 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:16:23 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`messages`
+2024-09-06 19:16:23 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:16:23 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:16:23 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:16:23 - sqlalchemy.engine.Engine - INFO - ALTER DATABASE mategen CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci
+2024-09-06 19:16:23 - sqlalchemy.engine.Engine - INFO - [generated in 0.00019s] {}
+2024-09-06 19:16:23 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:16:23 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:16:23 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-09-06 19:16:23 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:16:23 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 19:16:23 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:16:23 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads DROP FOREIGN KEY threads_ibfk_1
+2024-09-06 19:16:23 - sqlalchemy.engine.Engine - INFO - [generated in 0.00029s] {}
+2024-09-06 19:16:23 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:16:23 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:16:23 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`messages`
+2024-09-06 19:16:23 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:16:23 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 19:16:23 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:16:23 - sqlalchemy.engine.Engine - INFO - ALTER TABLE messages DROP FOREIGN KEY messages_ibfk_1
+2024-09-06 19:16:23 - sqlalchemy.engine.Engine - INFO - [generated in 0.00007s] {}
+2024-09-06 19:16:24 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:16:24 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:16:24 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 19:16:24 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-06 19:16:24 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:16:24 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:16:24 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-09-06 19:16:24 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:16:24 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 19:16:24 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:16:24 - sqlalchemy.engine.Engine - INFO - ALTER TABLE agents CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 19:16:24 - sqlalchemy.engine.Engine - INFO - [generated in 0.00028s] {}
+2024-09-06 19:16:24 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:16:24 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:16:24 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`knowledge_bases`
+2024-09-06 19:16:24 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:16:24 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 19:16:24 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:16:24 - sqlalchemy.engine.Engine - INFO - ALTER TABLE knowledge_bases CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 19:16:24 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-06 19:16:24 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:16:24 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:16:24 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`db_configs`
+2024-09-06 19:16:24 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:16:24 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 19:16:24 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:16:24 - sqlalchemy.engine.Engine - INFO - ALTER TABLE db_configs CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 19:16:24 - sqlalchemy.engine.Engine - INFO - [generated in 0.00014s] {}
+2024-09-06 19:16:24 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:16:24 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:16:24 - sqlalchemy.engine.Engine - INFO - ALTER TABLE messages CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 19:16:24 - sqlalchemy.engine.Engine - INFO - [generated in 0.00009s] {}
+2024-09-06 19:16:24 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:16:24 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:16:24 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads ADD CONSTRAINT threads_ibfk_1 FOREIGN KEY (agent_id) REFERENCES agents(id)
+2024-09-06 19:16:24 - sqlalchemy.engine.Engine - INFO - [generated in 0.00009s] {}
+2024-09-06 19:16:24 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:16:24 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:16:24 - sqlalchemy.engine.Engine - INFO - ALTER TABLE messages ADD CONSTRAINT messages_ibfk_1 FOREIGN KEY (thread_id) REFERENCES threads(id)
+2024-09-06 19:16:24 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-06 19:16:24 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:16:27 - root - INFO - 正在初始化MateGen，请稍后...
+2024-09-06 19:16:32 - openai._base_client - INFO - Retrying request to /models in 0.753222 seconds
+2024-09-06 19:16:34 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-09-06 19:16:34 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-09-06 19:16:34 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/assistants/asst_LX66lQLIzSn2Zc2gJJDskcpu "HTTP/1.1 200 OK"
+2024-09-06 19:16:35 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/assistants/asst_LX66lQLIzSn2Zc2gJJDskcpu "HTTP/1.1 200 OK"
+2024-09-06 19:16:35 - root - INFO - 已完成初始化，MateGen可随时调用！
+2024-09-06 19:17:38 - openai._base_client - INFO - Retrying request to /threads/thread_VLjePlXJFqtGwDshvhu2xgrd/messages in 0.933438 seconds
+2024-09-06 19:17:41 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads/thread_VLjePlXJFqtGwDshvhu2xgrd/messages "HTTP/1.1 200 OK"
+2024-09-06 19:17:42 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads/thread_VLjePlXJFqtGwDshvhu2xgrd/runs "HTTP/1.1 200 OK"
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`knowledge_bases`
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`file_info`
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`db_configs`
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`messages`
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - ALTER DATABASE mategen CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`threads`
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads DROP FOREIGN KEY threads_ibfk_1
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - [generated in 0.00007s] {}
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`messages`
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - ALTER TABLE messages DROP FOREIGN KEY messages_ibfk_1
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - [generated in 0.00007s] {}
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`agents`
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - ALTER TABLE agents CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`knowledge_bases`
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - ALTER TABLE knowledge_bases CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - DESCRIBE `mategen`.`db_configs`
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - ALTER TABLE db_configs CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - ALTER TABLE messages CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - [generated in 0.00013s] {}
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - ALTER TABLE threads ADD CONSTRAINT threads_ibfk_1 FOREIGN KEY (agent_id) REFERENCES agents(id)
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - ALTER TABLE messages ADD CONSTRAINT messages_ibfk_1 FOREIGN KEY (thread_id) REFERENCES threads(id)
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - [generated in 0.00008s] {}
+2024-09-06 19:18:54 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-09-06 19:18:58 - root - INFO - 正在初始化MateGen，请稍后...
+2024-09-06 19:19:01 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/models "HTTP/1.1 200 OK"
+2024-09-06 19:19:01 - root - INFO - 成功连接服务器，API-KEY通过验证！
+2024-09-06 19:19:01 - httpx - INFO - HTTP Request: GET https://ai.devtool.tech/proxy/v1/assistants/asst_LX66lQLIzSn2Zc2gJJDskcpu "HTTP/1.1 200 OK"
+2024-09-06 19:19:02 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/assistants/asst_LX66lQLIzSn2Zc2gJJDskcpu "HTTP/1.1 200 OK"
+2024-09-06 19:19:03 - root - INFO - 已完成初始化，MateGen可随时调用！
+2024-09-06 19:19:30 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads/thread_VLjePlXJFqtGwDshvhu2xgrd/messages "HTTP/1.1 200 OK"
+2024-09-06 19:19:31 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads/thread_VLjePlXJFqtGwDshvhu2xgrd/runs "HTTP/1.1 200 OK"
+2024-09-06 19:20:38 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads/thread_VLjePlXJFqtGwDshvhu2xgrd/messages "HTTP/1.1 200 OK"
+2024-09-06 19:20:40 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads/thread_VLjePlXJFqtGwDshvhu2xgrd/runs "HTTP/1.1 200 OK"
+2024-09-06 19:21:07 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads/thread_VLjePlXJFqtGwDshvhu2xgrd/messages "HTTP/1.1 400 Bad Request"
+2024-09-06 19:21:31 - httpx - INFO - HTTP Request: POST https://ai.devtool.tech/proxy/v1/threads/thread_VLjePlXJFqtGwDshvhu2xgrd/messages "HTTP/1.1 400 Bad Request"

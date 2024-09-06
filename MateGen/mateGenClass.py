@@ -382,6 +382,18 @@ class MateGenClass:
                     self.thread_id = thread_id
                     # log_token_usage(self.thread_id, 0)
 
+                # else:
+                if enhanced_mode:
+                    model = 'gpt-4o'
+                else:
+                    model = 'gpt-4o'
+
+                asi = self.client.beta.assistants.retrieve(self.s3)
+
+                instructions = asi.instructions
+
+                instructions = remove_knowledge_base_info(instructions)
+
                 if self.knowledge_base_chat:
                     # Win和Linux系统的路径命令存在差异
                     if os.name == 'posix':  # Unix/Linux/MacOS
@@ -398,18 +410,6 @@ class MateGenClass:
                     self.vector_id = find_vector_store_id_by_name(db_session, self.knowledge_base_name)
                     db_session.close()
 
-                    # else:
-                    if enhanced_mode:
-                        model = 'gpt-4o'
-                    else:
-                        model = 'gpt-4o-mini'
-
-                    asi = self.client.beta.assistants.retrieve(self.s3)
-
-                    instructions = asi.instructions
-
-                    instructions = remove_knowledge_base_info(instructions)
-
                     if self.vector_id != None:
                         db_session = SessionLocal()
                         knowledge_base_description = find_kb_name_by_description(db_session, self.knowledge_base_name)
@@ -418,6 +418,7 @@ class MateGenClass:
                         instructions = instructions + knowledge_base_description
 
                     if self.db_name_id != None:
+
                         from MateGen.utils import get_db_connection_description
                         db_session = SessionLocal()
                         db_description = get_db_connection_description(db_session, self.db_name_id)
@@ -429,6 +430,18 @@ class MateGenClass:
                         instructions=instructions,
                         tool_resources={"file_search": {"vector_store_ids": [self.vector_id]}}
                     )
+
+                if not self.knowledge_base_chat and self.db_name_id != None:
+                    from MateGen.utils import get_db_connection_description
+                    db_session = SessionLocal()
+                    db_description = get_db_connection_description(db_session, self.db_name_id)
+                    instructions = instructions + "\n" + "    " + db_description
+                    self.client.beta.assistants.update(
+                        self.s3,
+                        model=model,
+                        instructions=instructions
+                    )
+
                 logging.info("已完成初始化，MateGen可随时调用！")
                 return
             else:

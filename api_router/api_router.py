@@ -709,7 +709,6 @@ def mount_app_routes(app: FastAPI):
         # 检查thread_id是否提供
         if not request.thread_id:
             raise HTTPException(status_code=400, detail="服务器内部异常，请稍后重试。")
-
         try:
             result = execute_python_code(request.python_code)
             return {"status": 200, "data": {"thread_id": request.thread_id, "message": result}}
