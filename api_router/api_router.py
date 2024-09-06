@@ -169,9 +169,7 @@ def mount_app_routes(app: FastAPI):
             global_instance = mate_gen
             global_openai_instance = openai_ins
 
-            print(f"这是我拿到的：thread_id: {thread_id}")
             # 这里根据初始化结果返回相应的信息
-            print(f"这是我返回的 global_instance: {global_instance.thread_id}")
             return {"status": 200, "data": {"message": "MateGen 实例初始化成功",
                                             "thread_id": global_instance.thread_id}}
         except Exception as e:
