@@ -63,6 +63,9 @@ class KnowledgeBase(Base):
     thread = relationship("ThreadModel", back_populates="knowledge_bases")
     files = relationship("FileInfo", back_populates="knowledge_base")  # 文件关系
 
+    # 新增字段：记录创建时间
+    created_at = Column(DateTime, default=func.now())
+
 class FileInfo(Base):
     __tablename__ = 'file_info'
 

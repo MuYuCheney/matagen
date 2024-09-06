@@ -337,14 +337,15 @@ def find_kb_name_by_description(session: Session, knowledge_base_name: str) -> s
 
 def get_knowledge_base_info(session: Session):
     # 查询 KnowledgeBase 表中所有的记录，包括新增字段
-    knowledge_base_info = session.query(
+    knowledge_base_info = (session.query(
         KnowledgeBase.id,
         KnowledgeBase.display_knowledge_base_name,
         KnowledgeBase.vector_store_id,
         KnowledgeBase.chunking_strategy,
         KnowledgeBase.max_chunk_size_tokens,
         KnowledgeBase.chunk_overlap_tokens,
-    ).filter(KnowledgeBase.vector_store_id != None).all()
+    ).filter(KnowledgeBase.vector_store_id != None)
+                           .order_by(KnowledgeBase.created_at.desc()).all())
 
     # 返回一个包含字典的列表，每个字典包含全部字段
     return [{
@@ -382,7 +383,9 @@ def get_knowledge_base_name_by_id(session: Session, knowledge_base_id: str):
     """
     from db.thread_model import FileInfo
     # 查询所有关联的文件
-    files = session.query(FileInfo).filter(FileInfo.knowledge_base_id == knowledge_base_id).all()
+    files = (session.query(FileInfo)
+             .filter(FileInfo.knowledge_base_id == knowledge_base_id)
+             .order_by(FileInfo.upload_time.desc()).all())
 
     # 分类存储文件，根据文件后缀
     categorized_files = {}
