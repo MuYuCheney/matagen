@@ -53,6 +53,8 @@ class KnowledgeBase(Base):
     # 知识库的名称
     knowledge_base_name = Column(String(255), nullable=False)
 
+    # 新增字段：记录创建时间
+    created_at = Column(DateTime, default=func.now())
     # 显示的知识库名称
     display_knowledge_base_name = Column(String(255), nullable=False)
     # 知识库描述
@@ -63,8 +65,7 @@ class KnowledgeBase(Base):
     thread = relationship("ThreadModel", back_populates="knowledge_bases")
     files = relationship("FileInfo", back_populates="knowledge_base")  # 文件关系
 
-    # 新增字段：记录创建时间
-    created_at = Column(DateTime, default=func.now())
+
 
 class FileInfo(Base):
     __tablename__ = 'file_info'

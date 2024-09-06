@@ -111,19 +111,26 @@ def update_conversation_name(session: Session, thread_id: str, new_conversation_
         logging.info("No thread found with the given ID.")
 
 
-def delete_thread_by_id(session: Session, thread_id: str):
+def delete_thread_by_id(session: Session, thread_id: str) -> bool:
     """
     删除数据库中指定ID的线程记录。
     :param session: 数据库会话对象
     :param thread_id: 要删除的线程ID
     :return: 成功删除返回True，未找到记录返回False
     """
+    from db.thread_model import MessageModel
+
     thread = session.query(ThreadModel).filter(ThreadModel.id == thread_id).first()
+
     if thread:
+        # 首先删除所有关联的消息
+        session.query(MessageModel).filter(MessageModel.thread_id == thread_id).delete()
+        # 然后删除线程本身
         session.delete(thread)
         session.commit()
-        return thread.id
-    return False
+        return True
+    else:
+        return False
 
 
 def fetch_threads_mode(session: Session, thread_id: str) -> Dict[str, List[Dict[str, str]]]:

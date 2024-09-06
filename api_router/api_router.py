@@ -179,7 +179,8 @@ def mount_app_routes(app: FastAPI):
                                                          "进行知识库解析操作前,先调用此函数，确保文件全部上传后，再进行/api/create_knowledge")
     async def upload_files(
             folderName: str = Form(...),  # 接收文件夹名称
-            files: List[UploadFile] = File(...)  # 接收多个文件
+            files: List[UploadFile] = File(...),  # 接收多个文件
+            kb_id: str = Form(None, description="如果是知识库编辑页面传递此参数")
     ):
         from uuid import uuid4
         from MateGen.utils import SessionLocal
@@ -191,30 +192,42 @@ def mount_app_routes(app: FastAPI):
         uploaded_files = []
 
         knowledge_base_info_id = None
-
         try:
-
-            existing_kb = db_session.query(KnowledgeBase).filter(
-                KnowledgeBase.knowledge_base_name == folderName,
-            ).one_or_none()
-
-            if existing_kb and existing_kb.vector_store_id != None:
-                return {"status": 400, "data": {"message": "该知识库已存在，请更换知识库名称"}}
-
-            if not existing_kb:
-                # 如果没有，说明 没上传过文件，也没解析过，需要新建初始记录，并记录知识库id
-                new_kb = KnowledgeBase(
-                    knowledge_base_name=folderName,
-                    display_knowledge_base_name=folderName,
-                )
-                db_session.add(new_kb)
+            if kb_id:
+                local_kb_info = db_session.query(KnowledgeBase).filter(KnowledgeBase.id == kb_id).first()
+                local_kb_info.display_knowledge_base_name = folderName
+                db_session.add(local_kb_info)
                 db_session.commit()
 
-                knowledge_base_info_id = new_kb.id
+                knowledge_base_info_id = kb_id
+
+            else:
+                existing_kb = db_session.query(KnowledgeBase).filter(
+                    KnowledgeBase.knowledge_base_name == folderName,
+                ).one_or_none()
+
+                # 如果本地目录存在，且已经被解析过，则不允许上传
+                if existing_kb and existing_kb.vector_store_id != None:
+                    return {"status": 400, "data": {"message": "该知识库已存在，请更换知识库名称"}}
+
+                if not existing_kb:
+                    # 如果没有，说明 没上传过文件，也没解析过，需要新建初始记录，并记录知识库id
+                    new_kb = KnowledgeBase(
+                        knowledge_base_name=folderName,
+                        display_knowledge_base_name=folderName,
+                    )
+                    db_session.add(new_kb)
+                    db_session.commit()
+
+                    knowledge_base_info_id = new_kb.id
 
             # 生成指定文件夹路径
-            folder_path = os.path.join(UPLOAD_FOLDER, folderName)
-            os.makedirs(folder_path, exist_ok=True)
+            if kb_id:
+                folder_path = os.path.join(UPLOAD_FOLDER, local_kb_info.knowledge_base_name)
+                os.makedirs(folder_path, exist_ok=True)
+            else:
+                folder_path = os.path.join(UPLOAD_FOLDER, folderName)
+                os.makedirs(folder_path, exist_ok=True)
 
             for file in files:
                 file_extension = os.path.splitext(file.filename)[1].lower()
@@ -237,10 +250,11 @@ def mount_app_routes(app: FastAPI):
                     existing_file.upload_time = func.now()  # 更新上传时间
                     db_session.commit()
                     knowledge_base_info_id = existing_file.knowledge_base_id
+
                 else:
                     # 如果没有的话，说明该文件是第一次上传
                     knowledge_base_info = (db_session.query(KnowledgeBase)
-                                           .filter(KnowledgeBase.knowledge_base_name == folderName)).one_or_none()
+                                           .filter(KnowledgeBase.display_knowledge_base_name == folderName)).one_or_none()
                     # 创建新文件记录
                     new_file = FileInfo(
                         id=file_id,  # 为新文件生成唯一标识符
@@ -269,14 +283,13 @@ def mount_app_routes(app: FastAPI):
                                                 "files": uploaded_files}}
 
         except Exception as e:
-            raise HTTPException(status_code=500, detail="服务器内部异常，请稍后重试。")
+            raise HTTPException(status_code=500, detail=e)
 
     @app.post("/api/create_knowledge", tags=["Knowledge"],
               summary="知识库解析")
     def create_knowledge(request: KnowledgeBaseCreateRequest,
                          thread_id: str = Query(..., description="传递当前会话状态下的thread_id"),
                          ):
-
 
         from MateGen.utils import SessionLocal
         from db.thread_model import KnowledgeBase
@@ -626,16 +639,13 @@ def mount_app_routes(app: FastAPI):
         from MateGen.utils import SessionLocal, delete_thread_by_id
 
         db_session = SessionLocal()
-
         try:
             # 删除数据库信息
-            delete_thread_id = delete_thread_by_id(db_session, thread_id)
-            if delete_thread_id is not None:
+            delete_thread_by_id(db_session, thread_id)
                 # 服务器端进行删除
-                global_openai_instance.beta.threads.delete(delete_thread_id)
-                return {"status": 200, "data": {"message": f"会话 {thread_id} 已被删除"}}
-            else:
-                raise HTTPException(status_code=404, detail="未找到指定的会话ID")
+            global_openai_instance.beta.threads.delete(thread_id)
+            return {"status": 200, "data": {"message": f"会话 {thread_id} 已被删除"}}
+
         except Exception as e:
             raise HTTPException(status_code=500, detail="服务器内部异常，请稍后重试。")
         finally:
