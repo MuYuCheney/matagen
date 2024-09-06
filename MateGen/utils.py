@@ -415,40 +415,15 @@ def update_knowledge_base_name(session: Session, knowledge_base_id: str, new_nam
         bool: 更新是否成功。
     """
     try:
-        if not init:
-            # 找到对应的 KnowledgeBase 条目
-            knowledge_base = session.query(KnowledgeBase).filter(KnowledgeBase.id == knowledge_base_id).one_or_none()
-            if knowledge_base:
-                # 更新名称
-                knowledge_base.display_knowledge_base_name = new_name
-                session.commit()
-                return True
-            else:
-                # 如果找不到对应的条目，返回 False
-                return False
-        else:
-            knowledge_base = session.query(KnowledgeBase).filter(KnowledgeBase.id == knowledge_base_id).one_or_none()
-            root_path = knowledge_base.knowledge_base_name
 
-            if os.name == 'nt':
-                old_path = os.path.join('..', 'uploads', root_path)
-
-            if os.name == 'posix':  # Unix/Linux/MacOS
-                old_path = f'/app/uploads/{root_path}'
-
-            # 删除旧文件夹及其内容
-            if os.path.exists(old_path):
-                shutil.rmtree(old_path)
-
-                # 创建新文件夹
-            new_path = os.path.join('..', 'uploads', new_name) if os.name == 'nt' else f'/app/uploads/{new_name}'
-            os.makedirs(new_path, exist_ok=True)
-
-            # 更新数据库中的名称
-            knowledge_base.knowledge_base_name = new_name
+        # 找到对应的 KnowledgeBase 条目
+        knowledge_base = session.query(KnowledgeBase).filter(KnowledgeBase.id == knowledge_base_id).one_or_none()
+        if knowledge_base:
+            # 更新名称
+            knowledge_base.display_knowledge_base_name = new_name
             session.commit()
-
             return True
+
     except SQLAlchemyError as e:
         # 如果在过程中发生异常，回滚并记录错误
         session.rollback()

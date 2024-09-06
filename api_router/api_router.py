@@ -98,8 +98,8 @@ import os
 
 # 获取当前文件所在目录的上一级目录
 # 获取当前文件所在目录的上一级目录
-current_dir = os.path.dirname(os.path.abspath(__file__))
-UPLOAD_FOLDER = os.path.join(current_dir, '..', 'uploads')
+current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+UPLOAD_FOLDER = os.path.join(current_dir, 'uploads')
 
 # 创建上传文件夹（如果不存在）
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
@@ -184,13 +184,17 @@ def mount_app_routes(app: FastAPI):
     ):
         from uuid import uuid4
         from MateGen.utils import SessionLocal
+        from sqlalchemy import func
         from db.thread_model import FileInfo, KnowledgeBase
         db_session = SessionLocal()
 
         unsupported_files = []
         uploaded_files = []
+
         knowledge_base_info_id = None
+
         try:
+
             existing_kb = db_session.query(KnowledgeBase).filter(
                 KnowledgeBase.knowledge_base_name == folderName,
             ).one_or_none()
@@ -199,17 +203,16 @@ def mount_app_routes(app: FastAPI):
                 return {"status": 400, "data": {"message": "该知识库已存在，请更换知识库名称"}}
 
             if not existing_kb:
-                # 创建知识库条目
+                # 如果没有，说明 没上传过文件，也没解析过，需要新建初始记录，并记录知识库id
                 new_kb = KnowledgeBase(
                     knowledge_base_name=folderName,
                     display_knowledge_base_name=folderName,
                 )
-
-
                 db_session.add(new_kb)
                 db_session.commit()
 
                 knowledge_base_info_id = new_kb.id
+
             # 生成指定文件夹路径
             folder_path = os.path.join(UPLOAD_FOLDER, folderName)
             os.makedirs(folder_path, exist_ok=True)
@@ -227,8 +230,8 @@ def mount_app_routes(app: FastAPI):
                 # 保存或覆盖文件
                 with open(file_location, "wb") as buffer:
                     shutil.copyfileobj(file.file, buffer)
+
                 # 检查数据库中是否已有记录
-                from sqlalchemy import func
                 existing_file = db_session.query(FileInfo).filter_by(folder_path=file_location).first()
 
                 if existing_file:
@@ -236,11 +239,12 @@ def mount_app_routes(app: FastAPI):
                     db_session.commit()
                     knowledge_base_info_id = existing_file.knowledge_base_id
                 else:
+                    # 如果没有的话，说明该文件是第一次上传
                     knowledge_base_info = (db_session.query(KnowledgeBase)
-                                           .filter(KnowledgeBase.display_knowledge_base_name==folderName)).one_or_none()
+                                           .filter(KnowledgeBase.knowledge_base_name == folderName)).one_or_none()
                     # 创建新文件记录
                     new_file = FileInfo(
-                        id=file_id, # 为新文件生成唯一标识符
+                        id=file_id,  # 为新文件生成唯一标识符
                         filename=file.filename,
                         file_extension=file_extension,  # Store file extension
                         folder_path=file_location,
@@ -250,6 +254,7 @@ def mount_app_routes(app: FastAPI):
                     db_session.add(new_file)
                     db_session.commit()
                     knowledge_base_info_id = knowledge_base_info.id
+
                 uploaded_files.append({
                     "file_id": file_id,
                     "filename": file.filename,
@@ -265,13 +270,26 @@ def mount_app_routes(app: FastAPI):
                                                 "files": uploaded_files}}
 
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail="服务器内部异常，请稍后重试。")
 
     @app.post("/api/create_knowledge", tags=["Knowledge"],
               summary="知识库解析")
     def create_knowledge(request: KnowledgeBaseCreateRequest,
                          thread_id: str = Query(..., description="传递当前会话状态下的thread_id"),
                          ):
+
+
+        from MateGen.utils import SessionLocal
+        from db.thread_model import KnowledgeBase
+        db_session = SessionLocal()
+
+        kb_check = (db_session.query(KnowledgeBase)
+                    .filter(KnowledgeBase.knowledge_base_name == request.knowledge_base_name
+                            or KnowledgeBase.display_knowledge_base_name == request.knowledge_base_name)
+                    .filter(KnowledgeBase.id != request.kb_id)
+                    .first())
+        if kb_check:
+            return {"status": 400, "data": {"message": "系统已存在该知识库名称的存储文件，请更换其他数据库名称"}}
 
         # 这里要根据chunking_strategy策略设定RAG的切分策略，默认是自动
         vector_id = create_knowledge_base(client=global_openai_instance,
@@ -297,7 +315,6 @@ def mount_app_routes(app: FastAPI):
 
         # 查询数据库找到文件
         file_to_delete = db_session.query(FileInfo).filter(FileInfo.id == file_id).first()
-        print(f"file_id: {file_to_delete.folder_path}")
         if file_to_delete:
             try:
                 # 删除文件系统中的文件
@@ -346,7 +363,7 @@ def mount_app_routes(app: FastAPI):
         db_session = SessionLocal()
         try:
             if update_knowledge_base_name(db_session, knowledge_id, knowledge_new_name, init):
-                return {"status": 200, "data": {"后台知识库已更新"}}
+                return {"status": 200, "data": {"message": "知识库名称已更新"}}
         except Exception as e:
             raise HTTPException(status_code=500, detail="服务器内部异常，请稍后重试。")
 
