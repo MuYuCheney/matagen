@@ -12,7 +12,7 @@ from MateGen.mateGenClass import decrypt_string
 
 def get_mate_gen(
         api_key: str = Body(None, description="API key required for operation"),
-        thread: str = Body(None, description="Name of the Kaggle competition if guidance is enabled"),
+        thread_id: str = Body(None, description="conversation id"),
         enhanced_mode: bool = Body(False, description="Enable enhanced mode"),
         knowledge_base_chat: bool = Body(False, description="Enable knowledge base chat"),
         knowledge_base_name_id: str = Body(None, description="id of the knowledge_base_chat is enabled"),
@@ -38,14 +38,14 @@ def get_mate_gen(
             raise HTTPException(status_code=400,
                                 detail="knowledge_base_name is required when knowledge_base_chat is enabled.")
         return MateGenClass(api_key=api_key,
-                            thread=thread,
+                            thread_id=thread_id,
                             enhanced_mode=enhanced_mode,
                             knowledge_base_chat=knowledge_base_chat,
                             knowledge_base_name_id=knowledge_base_name_id,
                             db_name_id=db_name_id
                             )
     else:
-        return MateGenClass(api_key, thread, enhanced_mode, knowledge_base_chat, knowledge_base_name_id, db_name_id)
+        return MateGenClass(api_key, thread_id, enhanced_mode, knowledge_base_chat, knowledge_base_name_id, db_name_id)
 
 
 def get_openai_instance(

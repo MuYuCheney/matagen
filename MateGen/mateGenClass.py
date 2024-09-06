@@ -281,7 +281,7 @@ def cre_ct(client, enhanced_mode, api_key):
 class MateGenClass:
     def __init__(self,
                  api_key,
-                 thread=None,
+                 thread_id=None,
                  enhanced_mode=False,
                  knowledge_base_chat=False,
                  knowledge_base_name_id=None,
@@ -367,7 +367,7 @@ class MateGenClass:
 
                 db_session = SessionLocal()
 
-                if thread is None:
+                if thread_id is None:
                     # 新建一个会话
                     thread = client.beta.threads.create()
                     # 根据是否启用了知识库对话功能来决定运行模式
@@ -378,7 +378,7 @@ class MateGenClass:
                     db_session.close()
 
                 else:
-                    self.thread_id = thread
+                    self.thread_id = thread_id
                     # log_token_usage(self.thread_id, 0)
 
                 if self.knowledge_base_chat:

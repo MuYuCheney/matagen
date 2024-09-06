@@ -163,14 +163,15 @@ def mount_app_routes(app: FastAPI):
                       "thread_id, knowledge_base_chat：true, knowledge_base_name_id, db_name_id \n")
     def initialize_mate_gen(mate_gen: MateGenClass = Depends(get_mate_gen),
                             openai_ins: OpenAI = Depends(get_openai_instance),
-                            thread: str = Body(None, description="会话id")):
+                            thread_id: str = Body(None, description="会话id")):
         try:
             global global_instance, global_openai_instance
             global_instance = mate_gen
             global_openai_instance = openai_ins
 
+            print(f"这是我拿到的：thread_id: {thread_id}")
             # 这里根据初始化结果返回相应的信息
-
+            print(f"这是我返回的 global_instance: {global_instance.thread_id}")
             return {"status": 200, "data": {"message": "MateGen 实例初始化成功",
                                             "thread_id": global_instance.thread_id}}
         except Exception as e:
