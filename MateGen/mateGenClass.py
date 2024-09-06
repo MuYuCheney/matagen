@@ -211,11 +211,12 @@ def create_knowledge_base(client,
 
         db_session.commit()  # 提交更改
 
-    except Exception as e:
-        print(e)
+        logging.info("知识库创建完成！")
+        return vector_id
 
-    logging.info("知识库创建完成！")
-    return vector_id
+    except Exception as e:
+        logging.info(e)
+
 
 
 def create_omla(client, vector_id, enhanced_mode, api_key):

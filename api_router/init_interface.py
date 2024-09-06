@@ -28,6 +28,7 @@ def get_mate_gen(
     :param knowledge_base_name:
     :return:
     """
+
     # 从数据库中获取 API_KEY
     from MateGen.utils import SessionLocal, fetch_latest_api_key
     db_session = SessionLocal()
