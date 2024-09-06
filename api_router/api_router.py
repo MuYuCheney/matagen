@@ -170,6 +170,7 @@ def mount_app_routes(app: FastAPI):
             global_openai_instance = openai_ins
 
             # 这里根据初始化结果返回相应的信息
+
             return {"status": 200, "data": {"message": "MateGen 实例初始化成功",
                                             "thread_id": global_instance.thread_id}}
         except Exception as e:
@@ -188,27 +189,30 @@ def mount_app_routes(app: FastAPI):
 
         unsupported_files = []
         uploaded_files = []
-
+        knowledge_base_info_id = None
         try:
             existing_kb = db_session.query(KnowledgeBase).filter(
                 KnowledgeBase.knowledge_base_name == folderName,
-                KnowledgeBase.vector_store_id.isnot(None)  # 确保vector_store_id不为空
             ).one_or_none()
 
-            if existing_kb:
-                # 如果找到已存在的知识库，返回错误信息
+            if existing_kb and existing_kb.vector_store_id != None:
                 return {"status": 400, "data": {"message": "该知识库已存在，请更换知识库名称"}}
 
+            if not existing_kb:
+                # 创建知识库条目
+                new_kb = KnowledgeBase(
+                    knowledge_base_name=folderName,
+                    display_knowledge_base_name=folderName,
+                )
+
+
+                db_session.add(new_kb)
+                db_session.commit()
+
+                knowledge_base_info_id = new_kb.id
             # 生成指定文件夹路径
             folder_path = os.path.join(UPLOAD_FOLDER, folderName)
             os.makedirs(folder_path, exist_ok=True)
-            # 创建知识库条目
-            new_kb = KnowledgeBase(
-                knowledge_base_name=folderName,
-                display_knowledge_base_name=folderName,
-            )
-            db_session.add(new_kb)
-            db_session.commit()
 
             for file in files:
                 file_extension = os.path.splitext(file.filename)[1].lower()
@@ -219,29 +223,33 @@ def mount_app_routes(app: FastAPI):
                 file_id = str(uuid4())
                 # 文件存储路径
                 file_location = os.path.join(folder_path, file.filename)
+
                 # 保存或覆盖文件
                 with open(file_location, "wb") as buffer:
                     shutil.copyfileobj(file.file, buffer)
                 # 检查数据库中是否已有记录
                 from sqlalchemy import func
                 existing_file = db_session.query(FileInfo).filter_by(folder_path=file_location).first()
+
                 if existing_file:
                     existing_file.upload_time = func.now()  # 更新上传时间
                     db_session.commit()
-
+                    knowledge_base_info_id = existing_file.knowledge_base_id
                 else:
+                    knowledge_base_info = (db_session.query(KnowledgeBase)
+                                           .filter(KnowledgeBase.display_knowledge_base_name==folderName)).one_or_none()
                     # 创建新文件记录
                     new_file = FileInfo(
-                        id=str(uuid4()),  # 为新文件生成唯一标识符
+                        id=file_id, # 为新文件生成唯一标识符
                         filename=file.filename,
                         file_extension=file_extension,  # Store file extension
                         folder_path=file_location,
-                        knowledge_base_id=new_kb.id  # 关联到新创建的知识库
+                        knowledge_base_id=knowledge_base_info.id  # 关联到新创建的知识库
                     )
 
                     db_session.add(new_file)
                     db_session.commit()
-
+                    knowledge_base_info_id = knowledge_base_info.id
                 uploaded_files.append({
                     "file_id": file_id,
                     "filename": file.filename,
@@ -252,7 +260,7 @@ def mount_app_routes(app: FastAPI):
                                                 "faild_files": unsupported_files}}
             else:
                 return {"status": 200, "data": {"message": "所有文件上传服务器成功",
-                                                "kb_id": new_kb.id,
+                                                "kb_id": knowledge_base_info_id,
                                                 "folder": folderName,
                                                 "files": uploaded_files}}
 
@@ -289,7 +297,7 @@ def mount_app_routes(app: FastAPI):
 
         # 查询数据库找到文件
         file_to_delete = db_session.query(FileInfo).filter(FileInfo.id == file_id).first()
-
+        print(f"file_id: {file_to_delete.folder_path}")
         if file_to_delete:
             try:
                 # 删除文件系统中的文件
@@ -300,7 +308,7 @@ def mount_app_routes(app: FastAPI):
                 return {"status": 200, "message": f"{file_to_delete.filename}文件已删除"}
             except Exception as e:
                 db_session.rollback()
-                raise HTTPException(status_code=500, detail="服务器内部异常，请稍后重试。")
+                raise HTTPException(status_code=500, detail="e")
         else:
             raise HTTPException(status_code=404, detail="删除失败，建议重新尝试。")
 

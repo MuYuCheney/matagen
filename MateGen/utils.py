@@ -344,7 +344,7 @@ def get_knowledge_base_info(session: Session):
         KnowledgeBase.chunking_strategy,
         KnowledgeBase.max_chunk_size_tokens,
         KnowledgeBase.chunk_overlap_tokens,
-    ).all()
+    ).filter(KnowledgeBase.vector_store_id != None).all()
 
     # 返回一个包含字典的列表，每个字典包含全部字段
     return [{
@@ -392,7 +392,7 @@ def get_knowledge_base_name_by_id(session: Session, knowledge_base_id: str):
             categorized_files[ext] = []
         # 将文件ID和名称作为字典添加到列表中
         categorized_files[ext].append({
-            "id": file.id,
+            "file_id": file.id,
             "filename": file.filename
         })
 

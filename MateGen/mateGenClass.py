@@ -149,7 +149,6 @@ def create_knowledge_base(client,
     # 这里用来存储展示的知识库名称
     display_knowledge_base_name = knowledge_base_name
     knowledge_base_info = db_session.query(KnowledgeBase).filter(KnowledgeBase.id == kb_id).one_or_none()
-
     knowledge_base_name = knowledge_base_info.knowledge_base_name
 
     if vector_id == None:
