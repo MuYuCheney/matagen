@@ -427,98 +427,113 @@ def mount_app_routes(app: FastAPI):
             ) as stream:
                 for text in stream.text_deltas:
                     full_text += text
-                    if not text:  # 如果text为空，结束生成器
-                        break
                     yield f"data: {json.dumps({'text': text}, ensure_ascii=False)}\n\n"
+
+                stream.until_done()
+            if full_text == '':
+                text = global_openai_instance.beta.threads.messages.list(thread_id=response[2])
+                for text in text.data[0].content[0].text.value:
+                    full_text += text
+                    yield f"data: {json.dumps({'text': text}, ensure_ascii=False)}\n\n"
+
                 yield "event: end\n\n"
 
-                kb_info = None
-                db_info = None
-                knowledge_name = None
-                database_name = None
+            kb_info = None
+            db_info = None
+            knowledge_name = None
+            database_name = None
 
-                # 检查是否存在 knowledge_base_name_id
-                if global_instance.knowledge_base_name_id:
-                    kb_info = db_session.query(KnowledgeBase).filter(
-                        KnowledgeBase.id == global_instance.knowledge_base_name_id).one_or_none()
-                    if kb_info:
-                        knowledge_name = kb_info.display_knowledge_base_name
+            # 检查是否存在 knowledge_base_name_id
+            if global_instance.knowledge_base_name_id:
+                kb_info = db_session.query(KnowledgeBase).filter(
+                    KnowledgeBase.id == global_instance.knowledge_base_name_id).one_or_none()
+                if kb_info:
+                    knowledge_name = kb_info.display_knowledge_base_name
 
-                # 检查是否存在 db_name_id
-                if global_instance.db_name_id:
-                    db_info = db_session.query(DbBase).filter(
-                        DbBase.id == global_instance.db_name_id).one_or_none()
-                    if db_info:
-                        database_name = db_info.database_name
+            # 检查是否存在 db_name_id
+            if global_instance.db_name_id:
+                db_info = db_session.query(DbBase).filter(
+                    DbBase.id == global_instance.db_name_id).one_or_none()
+                if db_info:
+                    database_name = db_info.database_name
 
-                new_message = MessageModel(
-                    thread_id=response[2],
-                    question=question,
-                    response=full_text,
-                    message_type=code_type,
-                    run_result=run_result,
-                    knowledge_id=global_instance.knowledge_base_name_id if global_instance.knowledge_base_name_id else None,
-                    knowledge_name=knowledge_name,
-                    db_id=global_instance.db_name_id if global_instance.db_name_id else None,
-                    db_name=database_name,
-                )
+            new_message = MessageModel(
+                thread_id=response[2],
+                question=question,
+                response=full_text,
+                message_type=code_type,
+                run_result=run_result,
+                knowledge_id=global_instance.knowledge_base_name_id if global_instance.knowledge_base_name_id else None,
+                knowledge_name=knowledge_name,
+                db_id=global_instance.db_name_id if global_instance.db_name_id else None,
+                db_name=database_name,
+            )
 
-                db_session.add(new_message)
-                db_session.commit()  # 提交事务
-                db_session.close()
+            db_session.add(new_message)
+            db_session.commit()  # 提交事务
+            db_session.close()
 
         else:
+
             response[1].beta.threads.messages.create(
                 thread_id=response[2],
                 role="user",
                 content=question,
             )
+
             with response[1].beta.threads.runs.stream(
                     thread_id=response[2],
                     assistant_id=response[0],
                     event_handler=EventHandler(),
             ) as stream:
-                for text in stream.text_deltas:
+                    for text in stream.text_deltas:
+                        full_text += text
+                        yield f"data: {json.dumps({'text': text}, ensure_ascii=False)}\n\n"
+
+                    stream.until_done()
+            if full_text == '':
+                text = global_openai_instance.beta.threads.messages.list(thread_id=response[2])
+                for text in text.data[0].content[0].text.value:
                     full_text += text
-                    if not text:  # 如果text为空，结束生成器
-                        break
                     yield f"data: {json.dumps({'text': text}, ensure_ascii=False)}\n\n"
+
                 yield "event: end\n\n"
-                # 插入消息到数据库
-                kb_info = None
-                db_info = None
-                knowledge_name = None
-                database_name = None
 
-                # 检查是否存在 knowledge_base_name_id
-                if global_instance.knowledge_base_name_id:
-                    kb_info = db_session.query(KnowledgeBase).filter(
-                        KnowledgeBase.id == global_instance.knowledge_base_name_id).one_or_none()
-                    if kb_info:
-                        knowledge_name = kb_info.display_knowledge_base_name
+            # 插入消息到数据库
+            kb_info = None
+            db_info = None
+            knowledge_name = None
+            database_name = None
 
-                # 检查是否存在 db_name_id
-                if global_instance.db_name_id:
-                    db_info = db_session.query(DbBase).filter(
-                        DbBase.id == global_instance.db_name_id).one_or_none()
-                    if db_info:
-                        database_name = db_info.database_name
+            # 检查是否存在 knowledge_base_name_id
+            if global_instance.knowledge_base_name_id:
+                kb_info = db_session.query(KnowledgeBase).filter(
+                    KnowledgeBase.id == global_instance.knowledge_base_name_id).one_or_none()
+                if kb_info:
+                    knowledge_name = kb_info.display_knowledge_base_name
 
-                new_message = MessageModel(
-                    thread_id=response[2],
-                    question=question,
-                    response=full_text,
-                    message_type='chat',
-                    run_result=run_result,
-                    knowledge_id=global_instance.knowledge_base_name_id if global_instance.knowledge_base_name_id else None,
-                    knowledge_name=knowledge_name,
-                    db_id=global_instance.db_name_id if global_instance.db_name_id else None,
-                    db_name=database_name,
-                )
+            # 检查是否存在 db_name_id
+            if global_instance.db_name_id:
+                db_info = db_session.query(DbBase).filter(
+                    DbBase.id == global_instance.db_name_id).one_or_none()
+                if db_info:
+                    database_name = db_info.database_name
 
-                db_session.add(new_message)
-                db_session.commit()  # 提交事务
-                db_session.close()
+            new_message = MessageModel(
+                thread_id=response[2],
+                question=question,
+                response=full_text,
+                message_type='chat',
+                run_result=run_result,
+                knowledge_id=global_instance.knowledge_base_name_id if global_instance.knowledge_base_name_id else None,
+                knowledge_name=knowledge_name,
+                db_id=global_instance.db_name_id if global_instance.db_name_id else None,
+                db_name=database_name,
+            )
+
+            db_session.add(new_message)
+            db_session.commit()  # 提交事务
+            db_session.close()
 
     @app.get("/api/chat", tags=["Chat"],
              summary="用户输入框问答通用对话接口, 参数chat_stream默认为True 为流式输出, 采用SSE传输 \n"

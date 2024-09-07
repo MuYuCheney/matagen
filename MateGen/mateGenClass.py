@@ -60,19 +60,57 @@ from openai.types.beta.threads import Text, TextDelta
 from openai.types.beta.threads.runs import RunStep, RunStepDelta
 
 
+from tools.tool_fun import python_inter, sql_inter
+
+# 可以被回调的函数放入此字典
+available_functions = {
+    "python_inter": python_inter,
+    "sql_inter": sql_inter
+}
+
+
 # print(f"dotenv_path: {dotenv_path}")
 class EventHandler(AssistantEventHandler):
-    @override
-    def on_event(self, event: AssistantStreamEvent) -> None:
-        pass
 
     @override
-    def on_text_delta(self, delta: TextDelta, snapshot: Text) -> None:
-        pass
+    def on_text_created(self, text) -> None:
+        """响应回复创建事件"""
 
     @override
-    def on_run_step_done(self, run_step: RunStep) -> None:
-        pass
+    def on_text_delta(self, delta, snapshot) -> None:
+        """响应输出生成的流片段"""
+        # # yield f"data: {json.dumps({'text': delta.value}, ensure_ascii=False)}\n\n"
+        # print(delta.value, end='', flush=True)
+
+    @override
+    def on_event(self, event):
+        if event.event == 'thread.run.requires_action':
+            run_id = event.data.id
+            self.handle_requires_action(event.data, run_id)
+    def handle_requires_action(self, data, run_id):
+
+        tool_outputs = []
+        for tool in data.required_action.submit_tool_outputs.tool_calls:
+            arguments = json.loads(tool.function.arguments)
+            tool_outputs.append({
+                "tool_call_id": tool.id,
+                "output": available_functions[tool.function.name](**arguments)
+            })
+
+        self.submit_tool_outputs(tool_outputs, run_id)
+
+    def submit_tool_outputs(self, tool_outputs, run_id):
+
+        with client.beta.threads.runs.submit_tool_outputs_stream(
+                thread_id=self.current_run.thread_id,
+                run_id=self.current_run.id,
+                tool_outputs=tool_outputs,
+                event_handler=EventHandler(),
+        ) as stream:
+
+            stream.until_done()
+
+
 
 
 def create_knowledge_base_folder(sub_folder_name=None):
@@ -316,7 +354,6 @@ class MateGenClass:
         split_strings = original_string.split(' ')
         s1 = split_strings[0]
         s2 = split_strings[1]
-        print(f's1 = {s1}')
         # # 存储s1和s3到本地mysql数据库中，其中s3 用来 外联 多个 thread_id 作为多会话窗口的映射
         from MateGen.utils import SessionLocal
         from db.thread_model import KnowledgeBase
@@ -392,7 +429,9 @@ class MateGenClass:
 
                 instructions = asi.instructions
 
-                instructions = remove_knowledge_base_info(instructions)
+                from tools.tool_desc import instructions
+                instructions = instructions
+
 
                 if self.knowledge_base_chat:
                     # Win和Linux系统的路径命令存在差异
@@ -424,22 +463,38 @@ class MateGenClass:
                         db_description = get_db_connection_description(db_session, self.db_name_id)
                         instructions = instructions + "\n" + "    " + db_description
 
-                    self.client.beta.assistants.update(
-                        self.s3,
-                        model=model,
-                        instructions=instructions,
-                        tool_resources={"file_search": {"vector_store_ids": [self.vector_id]}}
-                    )
+                        from tools.tool_desc import python_tool_desc, sql_tool_desc
+
+                        self.client.beta.assistants.update(
+                            self.s3,
+                            model=model,
+                            instructions=instructions,
+                            tools=[python_tool_desc, sql_tool_desc],
+                            tool_resources={"file_search": {"vector_store_ids": [self.vector_id]}}
+                        )
+                    else:
+                        self.client.beta.assistants.update(
+                            self.s3,
+                            model=model,
+                            instructions=instructions,
+                            tool_resources={"file_search": {"vector_store_ids": [self.vector_id]}}
+                        )
+
 
                 if not self.knowledge_base_chat and self.db_name_id != None:
                     from MateGen.utils import get_db_connection_description
                     db_session = SessionLocal()
                     db_description = get_db_connection_description(db_session, self.db_name_id)
                     instructions = instructions + "\n" + "    " + db_description
+
+                    from tools.tool_desc import python_tool_desc, sql_tool_desc
+
+
                     self.client.beta.assistants.update(
                         self.s3,
                         model=model,
-                        instructions=instructions
+                        instructions=instructions,
+                        tools=[python_tool_desc, sql_tool_desc],
                     )
 
                 logging.info("已完成初始化，MateGen可随时调用！")
@@ -1194,22 +1249,6 @@ def extract_run_id(text):
     else:
         return None
 
-
-async def stream_chat_base(user_input, assistant_id, client, thread_id, event_handler):
-    await client.beta.threads.messages.create(
-        thread_id=thread_id,
-        role="user",
-        content=user_input,
-    )
-
-    async with client.beta.threads.runs.stream(
-            thread_id=thread_id,
-            assistant_id=assistant_id,
-            event_handler=event_handler,
-    ) as stream:
-        await stream.until_done()
-        async for text in stream.text_deltas:
-            yield json.dumps({"text": text}, ensure_ascii=False)
 
 
 def chat_base_auto_cancel(user_input,
