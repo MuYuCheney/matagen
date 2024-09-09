@@ -86,10 +86,10 @@ def create_app():
 
     # 挂载 前端 项目构建的前端静态文件夹 (对接前端静态文件的入口)
     # Windows
-    app.mount("/", StaticFiles(directory="../static/dist"), name="static")
+    # app.mount("/", StaticFiles(directory="../static/dist"), name="static")
 
     # # Docker
-    # app.mount("/", StaticFiles(directory="/app/static/dist"), name="static")
+    app.mount("/", StaticFiles(directory="/app/static/dist"), name="static")
 
     return app
 

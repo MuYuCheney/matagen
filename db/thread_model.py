@@ -185,7 +185,7 @@ if __name__ == '__main__':
     engine = create_engine(SQLALCHEMY_DATABASE_URI, echo=True)
 
     # # 删除所有表
-    # Base.metadata.drop_all(engine)
+    Base.metadata.drop_all(engine)
     # # # 初始化操作
     initialize_database(username=username,
                         password=password,
