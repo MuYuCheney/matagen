@@ -98,7 +98,7 @@ class MessageModel(Base):
 
     id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     thread_id = Column(String(255), ForeignKey('threads.id'))  # 外键关联到 ThreadModel
-    question = Column(String(1024))  # 消息发送者的标识（例如 'user', 'agent' 等）
+    question = Column(Text)  # 消息发送者的标识（例如 'user', 'agent' 等）
     response = Column(Text)  # 消息内容
     created_at = Column(DateTime(timezone=True), server_default=func.now())  # 消息创建时间自动生成
     message_type = Column(String(255))  # 消息类型，例如 'chat', 'python', 'sql'等
@@ -186,7 +186,7 @@ if __name__ == '__main__':
 
     # # 删除所有表
     # Base.metadata.drop_all(engine)
-    # # 初始化操作
+    # # # 初始化操作
     initialize_database(username=username,
                         password=password,
                         hostname=hostname,

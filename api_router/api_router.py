@@ -44,7 +44,7 @@ class UrlModel(BaseModel):
 
 
 class KnowledgeBaseCreateRequest(BaseModel):
-    kb_id: str = Body(..., embed=True, description="知识库的id")
+    kb_id: str = Body(None, embed=True, description="知识库的id")
     knowledge_base_name: str = Body(..., embed=True, description="知识库的名称")
     chunking_strategy: str = Body("auto", embed=True, description="参数类型，自动参数为auto，手动参数为 static")
     max_chunk_size_tokens: int = Body(800, embed=True)
@@ -429,14 +429,13 @@ def mount_app_routes(app: FastAPI):
                     full_text += text
                     yield f"data: {json.dumps({'text': text}, ensure_ascii=False)}\n\n"
 
-                stream.until_done()
-            if full_text == '':
-                text = global_openai_instance.beta.threads.messages.list(thread_id=response[2])
-                for text in text.data[0].content[0].text.value:
-                    full_text += text
-                    yield f"data: {json.dumps({'text': text}, ensure_ascii=False)}\n\n"
-
+                if full_text == '':
+                    text = global_openai_instance.beta.threads.messages.list(thread_id=response[2])
+                    for text in text.data[0].content[0].text.value:
+                        full_text += text
+                        yield f"data: {json.dumps({'text': text}, ensure_ascii=False)}\n\n"
                 yield "event: end\n\n"
+                stream.until_done()
 
             kb_info = None
             db_info = None
@@ -474,7 +473,6 @@ def mount_app_routes(app: FastAPI):
             db_session.close()
 
         else:
-
             response[1].beta.threads.messages.create(
                 thread_id=response[2],
                 role="user",
@@ -486,18 +484,25 @@ def mount_app_routes(app: FastAPI):
                     assistant_id=response[0],
                     event_handler=EventHandler(),
             ) as stream:
-                    for text in stream.text_deltas:
-                        full_text += text
-                        yield f"data: {json.dumps({'text': text}, ensure_ascii=False)}\n\n"
-
-                    stream.until_done()
-            if full_text == '':
-                text = global_openai_instance.beta.threads.messages.list(thread_id=response[2])
-                for text in text.data[0].content[0].text.value:
+                for text in stream.text_deltas:
                     full_text += text
                     yield f"data: {json.dumps({'text': text}, ensure_ascii=False)}\n\n"
 
+                if full_text == '':
+                    text = global_openai_instance.beta.threads.messages.list(thread_id=response[2])
+                    for text in text.data[0].content[0].text.value:
+                        full_text += text
+                        yield f"data: {json.dumps({'text': text}, ensure_ascii=False)}\n\n"
                 yield "event: end\n\n"
+                stream.until_done()
+
+            # if full_text == '':
+            #     text = global_openai_instance.beta.threads.messages.list(thread_id=response[2])
+            #     for text in text.data[0].content[0].text.value:
+            #         full_text += text
+            #         yield f"data: {json.dumps({'text': text}, ensure_ascii=False)}\n\n"
+            #
+            #     yield "event: end\n\n"
 
             # 插入消息到数据库
             kb_info = None
@@ -518,6 +523,8 @@ def mount_app_routes(app: FastAPI):
                     DbBase.id == global_instance.db_name_id).one_or_none()
                 if db_info:
                     database_name = db_info.database_name
+
+
 
             new_message = MessageModel(
                 thread_id=response[2],
@@ -587,8 +594,8 @@ def mount_app_routes(app: FastAPI):
 
             db_session = SessionLocal()
 
-            messages = db_session.query(MessageModel).filter(MessageModel.thread_id == thread_id).order_by(
-                desc(MessageModel.created_at)).all()
+            messages = (db_session.query(MessageModel).filter(MessageModel.thread_id == thread_id)
+                        .order_by(MessageModel.created_at).all())
 
             chat_records = []
             # 初始化上一条消息的知识库和数据库ID为空
@@ -646,8 +653,8 @@ def mount_app_routes(app: FastAPI):
         finally:
             db_session.close()
 
-    @app.delete("/api/delete_conversation", tags=["Chat"], summary="根据thread_id删除指定的会话窗口")
-    def delete_thread(thread_id: str = Body(..., description="需要删除的thread_id", embed=True)):
+    @app.delete("/api/delete_conversation/{thread_id}", tags=["Chat"], summary="根据thread_id删除指定的会话窗口")
+    def delete_thread(thread_id: str):
         """
         根据提供的thread_id删除数据库中的线程记录。
         """
@@ -657,8 +664,8 @@ def mount_app_routes(app: FastAPI):
         try:
             # 删除数据库信息
             delete_thread_by_id(db_session, thread_id)
-                # 服务器端进行删除
-            global_openai_instance.beta.threads.delete(thread_id)
+            #     # 服务器端进行删除
+            # global_openai_instance.beta.threads.delete(thread_id)
             return {"status": 200, "data": {"message": f"会话 {thread_id} 已被删除"}}
 
         except Exception as e:
