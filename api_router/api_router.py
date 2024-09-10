@@ -86,10 +86,10 @@ def create_app():
 
     # 挂载 前端 项目构建的前端静态文件夹 (对接前端静态文件的入口)
     # Windows
-    # app.mount("/", StaticFiles(directory="../static/dist"), name="static")
+    app.mount("/", StaticFiles(directory="../static/dist"), name="static")
 
     # # Docker
-    app.mount("/", StaticFiles(directory="/app/static/dist"), name="static")
+    # app.mount("/", StaticFiles(directory="/app/static/dist"), name="static")
 
     return app
 
@@ -791,19 +791,18 @@ def mount_app_routes(app: FastAPI):
             results = result.fetchall()
             local_db_session.close()  # 执行完查询后关闭会话
 
-            # 转换结果为字典列表
-            output = []
-            column_names = [col[0] for col in result.keys()]
-            header = " | ".join(column_names)
-            output.append(header)  # 首先添加头部，即列名
-
+            # 转换结果为Markdown表格
+            column_names = result.keys()
+            header = "| " + " | ".join(column_names) + " |"
+            separator = "|---" * len(column_names) + "|"
+            output = [header, separator]
             for row in results:
-                row_str = " | ".join(str(value) for value in row)
+                row_str = "| " + " | ".join(str(value) for value in row) + " |"
                 output.append(row_str)
 
             db_session.close()
 
-            return {"results": output}
+            return {"results": "\n".join(output)}
         except Exception as e:
             raise HTTPException(status_code=500, detail="服务器内部异常，请稍后重试。")
 
