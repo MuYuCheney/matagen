@@ -30,6 +30,7 @@ class ThreadModel(Base):
     conversation_name = Column(String(255))
     run_mode = Column(String(255))
     created_at = Column(DateTime(timezone=True), server_default=func.now())
+    updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())  # 消息更新时间
 
     # 反向关系到 MessageModel
     messages = relationship("MessageModel", back_populates="thread", order_by="MessageModel.created_at")
@@ -101,6 +102,7 @@ class MessageModel(Base):
     question = Column(Text)  # 消息发送者的标识（例如 'user', 'agent' 等）
     response = Column(Text)  # 消息内容
     created_at = Column(DateTime(timezone=True), server_default=func.now())  # 消息创建时间自动生成
+
     message_type = Column(String(255))  # 消息类型，例如 'chat', 'python', 'sql'等
     run_result = Column(Text, nullable=True)  # 执行结果，可用于存储代码执行或命令的输出，此字段可以为空
 
@@ -186,7 +188,7 @@ if __name__ == '__main__':
 
     # # 删除所有表
     # Base.metadata.drop_all(engine)
-    # # # 初始化操作
+    # # # # 初始化操作
     initialize_database(username=username,
                         password=password,
                         hostname=hostname,

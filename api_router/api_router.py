@@ -14,6 +14,7 @@ from fastapi import Depends, Query
 from fastapi.security import APIKeyHeader
 from openai import OpenAI
 from typing import List
+from fastapi.responses import RedirectResponse
 
 from MateGen.mateGenClass import (MateGenClass,
                                   get_vector_db_id,
@@ -83,6 +84,11 @@ def create_app():
 
     # 挂载路由
     mount_app_routes(app)
+
+    # 重定向到 index.html
+    @app.get("/", include_in_schema=False)
+    def read_root():
+        return RedirectResponse(url='/index.html')
 
     # 挂载 前端 项目构建的前端静态文件夹 (对接前端静态文件的入口)
     # Windows
@@ -399,7 +405,9 @@ def mount_app_routes(app: FastAPI):
         response = global_instance.chat(question, chat_stream=True)
 
         from MateGen.utils import SessionLocal
-        from db.thread_model import MessageModel, KnowledgeBase, DbBase
+        from db.thread_model import MessageModel, KnowledgeBase, DbBase, ThreadModel
+        from sqlalchemy import func
+
         db_session = SessionLocal()
 
         # 用来保留完整的模型回答
@@ -469,6 +477,12 @@ def mount_app_routes(app: FastAPI):
             )
 
             db_session.add(new_message)
+
+            # 更新关联的线程更新时间
+            thread = db_session.query(ThreadModel).filter_by(id=response[2]).first()
+            if thread:
+                thread.updated_at = func.now()  # 使用 SQLAlchemy 的 func.now() 确保数据库时间一致性
+
             db_session.commit()  # 提交事务
             db_session.close()
 
@@ -539,6 +553,12 @@ def mount_app_routes(app: FastAPI):
             )
 
             db_session.add(new_message)
+
+            # 更新关联的线程更新时间
+            thread = db_session.query(ThreadModel).filter_by(id=response[2]).first()
+            if thread:
+                thread.updated_at = func.now()  # 使用 SQLAlchemy 的 func.now() 确保数据库时间一致性
+
             db_session.commit()  # 提交事务
             db_session.close()
 
@@ -576,7 +596,7 @@ def mount_app_routes(app: FastAPI):
             # 添加.filter(ThreadModel.conversation_name != "new_chat") 来过滤掉名为 "new_chat" 的对话
             results = db_session.query(ThreadModel.id, ThreadModel.conversation_name) \
                 .filter(ThreadModel.conversation_name != "new_chat") \
-                .order_by(ThreadModel.created_at.desc()).all()
+                .order_by(ThreadModel.updated_at.desc()).all()
             data = [{"id": result.id, "conversation_name": result.conversation_name} for result in results]
             return {"status": 200, "data": {"message": data}}
         except Exception as e:
