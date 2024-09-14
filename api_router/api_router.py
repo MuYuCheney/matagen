@@ -763,7 +763,10 @@ def mount_app_routes(app: FastAPI):
             raise HTTPException(status_code=400, detail="服务器内部异常，请稍后重试。")
         try:
             result = execute_python_code(request.python_code)
-            return {"status": 200, "data": {"thread_id": request.thread_id, "message": result}}
+            if result != '':
+                return {"status": 200, "data": {"thread_id": request.thread_id, "message": result}}
+            else:
+                return {"status": 200, "data": {"thread_id": request.thread_id, "message": "代码运行出错，请稍后尝试。"}}
         except Exception as e:
             raise HTTPException(status_code=500, detail="服务器内部异常，请稍后重试。")
 

@@ -16,4 +16,5 @@ def execute_python_code(code: str, output_directory="images") -> str:
         sys.stdout = old_stdout
         result = redirected_output.getvalue()
         redirected_output.close()
+
     return result
