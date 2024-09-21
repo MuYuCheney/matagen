@@ -130,8 +130,8 @@ def initialize_database(username: str, password: str, hostname: str, database_na
         Base.metadata.create_all(engine)
 
         try:
-            session.execute(
-                text("ALTER DATABASE {} CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci".format(database_name)))
+            # 修改数据库字符集
+            session.execute(text("ALTER DATABASE {} CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci".format(database_name)))
             session.commit()
 
             inspector = inspect(engine)
@@ -149,8 +149,7 @@ def initialize_database(username: str, password: str, hostname: str, database_na
             tables_to_modify = ['threads', 'agents', 'knowledge_bases', "db_configs", "messages"]
             for table_name in tables_to_modify:
                 if inspector.has_table(table_name, schema="mategen"):
-                    session.execute(
-                        text(f"ALTER TABLE {table_name} CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci"))
+                    session.execute(text(f"ALTER TABLE {table_name} CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci"))
                     session.commit()
 
             # 重新添加外键
@@ -179,6 +178,7 @@ def initialize_database(username: str, password: str, hostname: str, database_na
         session.close()
 
 
+
 if __name__ == '__main__':
     # 开发环境
 
@@ -187,7 +187,7 @@ if __name__ == '__main__':
     engine = create_engine(SQLALCHEMY_DATABASE_URI, echo=True)
 
     # # 删除所有表
-    # Base.metadata.drop_all(engine)
+    #  Base.metadata.drop_all(engine)
     # # # # 初始化操作
     initialize_database(username=username,
                         password=password,

@@ -528,7 +528,7 @@ class MateGenClass:
             local_conversation_name = db_session.query(ThreadModel).filter(
                 ThreadModel.id == self.thread_id).one_or_none()
             if local_conversation_name.conversation_name == "new_chat":
-                local_conversation_name.conversation_name = question[:7] if len(question) > 7 else question
+                local_conversation_name.conversation_name = question[:20] if len(question) > 20 else question
                 db_session.commit()
                 db_session.close()
 
