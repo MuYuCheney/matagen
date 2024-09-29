@@ -1,12 +1,12 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='MateGen',  
+    name='mategen',
     version='0.1.79',
     packages=find_packages(),
     include_package_data=True,
     package_data={
-        'MateGen': ['.env'],
+        'mategen': ['.env'],
     },    
     install_requires=[
         'IPython',
@@ -32,7 +32,7 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'mategen=MateGen.mateGenClass:main',
+            'mategen=mategen.mateGenClass:main',
         ],
     },
     author='Jiutian',

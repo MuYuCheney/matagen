@@ -24,4 +24,4 @@ EXPOSE 9000
 # 实时打印日志输出到控制台
 CMD ["python", "api_router/api_router.py", "--host", "0.0.0.0", "--port", "9000"]
 # 将所有输出重定向到/dev/null
-# CMD python api_router/api_router.py --host 0.0.0.0 --port 9000 > /dev/null 2>&1
+# CMD python api_server/api_server.py --host 0.0.0.0 --port 9000 > /dev/null 2>&1
